@@ -1,0 +1,466 @@
+<main>
+  <section class="p-app-secondary-padding xl:p-app-primary-padding">
+    <div class="relative max-w-[870px] mx-auto text-center">
+      <h1 class="font-bold text-app-primay-dark text-3xl lg:text-4xl">
+        Nos services
+      </h1>
+      <p
+        class="text-sm text-app-primay-dark leading-6 lg:leading-10 lg:text-lg pt-4 xl:pt-8"
+      >
+        Notre mission est de fournir une plateforme de gestion d'entreprise en
+        ligne qui transforme et simplifie la manière dont les entrepreneurs
+        gèrent et développent leurs activités.
+      </p>
+      <app-flying-plus type="normal" />
+      <app-flying-plus type="gradiant" />
+    </div>
+
+    <div
+      class="grid grid-cols-1 gap-8 mt-8 sm:mt-16 lg:mt-mt-24 lg:grid-cols-3 xl:mt-28"
+    >
+      <!-- left -->
+      <div
+        class="flex flex-col gap-8 lg:gap-12 xl:gap-20 lg:col-start-1 lg:col-end-2"
+      >
+        <!-- mobile -->
+
+        <ul
+          class="flex items-start justify-start flex-wrap gap-4 lg:hidden lg:pl-12 xl:pl-16"
+        >
+          @for (link of subLinks; track subLinks) {
+            <li>
+              <button
+                class="{{
+                  activatedQuerySection() === link.queryValue
+                    ? 'bg-app-accent-light'
+                    : 'bg-transparent'
+                }} border border-solid border-app-secondary-dark w-fit flex items-center justify-between gap-2 text-app-primay-dark capitalize font-medium rounded-xl px-2 py-1 text-lg transition-colors duration-300 ease-out hover:bg-app-accent-light"
+                role="link"
+                (click)="navigateWithQueryParams(link.queryValue)"
+              >
+                <img
+                  src="assets/icons/{{ link.icon }}"
+                  alt="{{ link.name }}"
+                  width="24"
+                  height="24"
+                />
+                <span class="block">{{ link.name }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+        <!-- mobile -->
+        <ul class="hidden flex-col lg:flex">
+          @for (link of subLinks; track subLinks) {
+            <li>
+              <button
+                class="w-full relative border-b border-solid border-[rgba(216,216,216,1)] flex items-center gap-6 text-app-primay-dark {{
+                  activatedQuerySection() === link.queryValue
+                    ? 'bg-[rgba(235,227,254,1)]'
+                    : 'bg-white'
+                }} px-5 py-9 transition-all duration-300 hover:bg-[rgba(235,227,254,1)]"
+                role="link"
+                (click)="navigateWithQueryParams(link.queryValue)"
+              >
+                <img
+                  src="assets/icons/{{ link.icon }}"
+                  alt="{{ link.name }}"
+                  width="35"
+                  height="35"
+                />
+
+                <span class="font-medium text-lg capitalize">{{
+                  link.name
+                }}</span>
+              </button>
+            </li>
+          }
+        </ul>
+        <div
+          class="flex flex-col gap-4 bg-app-accent-lighter rounded-lg px-6 py-4 lg:px-10 lg:py-8"
+        >
+          <h3 class="font-medium text-xl text-app-primay-dark sm:text-2xl">
+            Besoin d’aide ?
+          </h3>
+          <p
+            class="text-app-primay-dark text-sm leading-[27px] sm:text-lg lg:leading-[37px] lg:text-xl"
+          >
+            Contactez- nous par téléphone ou par email. Nous nous ferons la joie
+            de vous renseigner davantage sur Vendiiko.
+          </p>
+          <p
+            class="flex items-center gap-4 text-app-primay-dark leading-[27px] text-sm sm:text-lg lg:leading-[37px] lg:text-xl"
+          >
+            <span>
+              <svg
+                width="21"
+                height="21"
+                viewBox="0 0 21 21"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.76318 1.00986C6.44737 0.247008 5.61479 -0.159029 4.81912 0.0583441L1.20991 1.04268C0.496267 1.23954 0 1.88756 0 2.62581C0 12.7726 8.22737 21 18.3742 21C19.1124 21 19.7605 20.5037 19.9573 19.7901L20.9417 16.1809C21.159 15.3852 20.753 14.5526 19.9901 14.2368L16.0528 12.5963C15.3843 12.3174 14.6091 12.5101 14.1539 13.072L12.4969 15.094C9.60954 13.7283 7.27175 11.3905 5.90599 8.50309L7.92797 6.85023C8.48986 6.39088 8.68262 5.61982 8.40373 4.95129L6.76318 1.01397V1.00986Z"
+                  fill="#7263D8"
+                />
+              </svg>
+            </span>
+            +212 669 47 76 12
+          </p>
+          <p
+            class="flex items-center gap-4 text-app-primay-dark leading-[27px] text-sm sm:text-lg lg:leading-[37px] lg:text-xl"
+          >
+            <span>
+              <svg
+                width="21"
+                height="15"
+                viewBox="0 0 21 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2.375 0C1.33984 0 0.5 0.839844 0.5 1.875C0.5 2.46484 0.777344 3.01953 1.25 3.375L9.75 9.75C10.1953 10.082 10.8047 10.082 11.25 9.75L19.75 3.375C20.2227 3.01953 20.5 2.46484 20.5 1.875C20.5 0.839844 19.6602 0 18.625 0H2.375ZM0.5 4.375V12.5C0.5 13.8789 1.62109 15 3 15H18C19.3789 15 20.5 13.8789 20.5 12.5V4.375L12 10.75C11.1094 11.418 9.89062 11.418 9 10.75L0.5 4.375Z"
+                  fill="#7263D8"
+                />
+              </svg>
+            </span>
+            contact&#64;vendiiko.io
+          </p>
+        </div>
+      </div>
+      <!-- left -->
+      <!-- right -->
+      <div class="lg:col-start-2 lg:col-end-4">
+        <div>
+          <img
+            src="assets/images/{{
+              activatedSectionContent().presentationSection.image
+            }}"
+            alt="{{ activatedSectionContent().presentationSection.title }}"
+            width="768"
+            height="424"
+            class="w-full"
+          />
+        </div>
+        <h4
+          class="font-medium capitalize text-app-primay-dark text-xl pt-4 pb-4 sm:pb-6 lg:text-2xl lg:pt-6 lg:pb-8"
+        >
+          {{ activatedSectionContent().presentationSection.title }}
+        </h4>
+        <div class="flex flex-col gap-3 sm:gap-4 lg:gap-8">
+          @for (
+            part of activatedSectionContent().presentationSection.paragraph.split(
+              "."
+            );
+            track $index
+          ) {
+            <p
+              class="leading-[27px] text-app-primay-dark font-normal text-sm sm:text-lg lg:text-xl sm:leading-[37px]"
+            >
+              {{ part }}.
+            </p>
+          }
+        </div>
+      </div>
+      <!-- right -->
+    </div>
+  </section>
+  <section class="p-app-secondary-padding xl:p-app-primary-padding">
+    <div class="grid grid-cols-1 gap-8 xl:grid-cols-2">
+      <!-- left -->
+      <div>
+        <h1
+          class="text-app-primay-dark text-2xl leading-[42px] font-bold sm:leading-[52px] sm:text-3xl lg:leading-[62px] lg:text-4xl"
+        >
+          {{ activatedSectionContent().freeTrialSection.title }}
+        </h1>
+        <p
+          class="text-sm text-app-primay-dark leading-6 lg:leading-10 lg:text-lg pt-4 pb-8 xl:pt-8 xl:pb-14"
+        >
+          {{ activatedSectionContent().freeTrialSection.paragraph }}
+        </p>
+
+        <div
+          class="grid gap-4 w-fit text-sm grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:text-lg"
+        >
+          <div class="relative">
+            <!-- <app-secondary-button
+              [buttonData]="{
+                name: 'Demander une démo',
+                action: openDemoForm.bind(this),
+                behaviour: 'button'
+              }"
+            /> -->
+            <a
+              href="https://calendly.com/contact-vjuv/30min"
+              target="_blank"
+              class="block text-center bg-[rgba(235,227,254,1)] border border-solid border-[rgba(32,0,229,0.2)] relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-customInherit text-app-highlight-dark transition-colors duration-300 ease-out hover:text-white hover:bg-app-accent-light"
+            >Demander une démo</a>
+          </div>
+          <div>
+            <app-primary-button
+              [buttonData]="{
+                name: 'Essai gratuit',
+                href: '/register',
+                behaviour: 'link'
+              }"
+            />
+          </div>
+
+          <div class="relative hidden lg:block">
+            <span
+              class="absolute left-0 top-1/2 transform -translate-y-1/2 scale-x-[-1]"
+            >
+              <app-curved-arrow-v2 />
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- right -->
+      <div>
+        <div
+          class="w-[320px] h-[320px] sm:w-[600px] sm:h-[600px] mx-auto rounded-full"
+          style="
+            background-image: linear-gradient(
+              306.34deg,
+              rgba(205, 185, 253, 0.48) 13.9%,
+              rgba(205, 185, 253, 0) 93.52%
+            );
+          "
+        >
+          @defer (on viewport) {
+            <ul
+              class="grid grid-cols-[repeat(2,100px)] w-full h-full gap-4 content-center justify-center sm:grid-cols-[repeat(2,180px)]"
+            >
+              @for (
+                card of activatedSectionContent().freeTrialSection.smallCards;
+                track card
+              ) {
+                <li
+                  class="w-[100px] h-[100px] small-card bg-white p-4 rounded-[1rem] flex flex-col gap-2 items-center justify-center {{
+                    activatedSectionContent().freeTrialSection.smallCards
+                      .length === 3 &&
+                    $index ===
+                      activatedSectionContent().freeTrialSection.smallCards
+                        .length -
+                        1
+                      ? 'translate-x-1/2'
+                      : 'translate-x-0'
+                  }} sm:w-[180px] sm:h-[180px]"
+                  style="--card-index: {{ $index }}"
+                >
+                  <h4
+                    class="text-center font-medium text-app-primay-dark text-xs sm:text-sm"
+                  >
+                    {{ card.title }}
+                  </h4>
+                  <img
+                    src="assets/svg/{{ card.image }}"
+                    alt="{{ card.title }}"
+                    width="80"
+                    height="80"
+                    class="w-[40px] h-[40px] sm:w-[80px] sm:h-[80px]"
+                  />
+                </li>
+              }
+            </ul>
+          } @placeholder {
+            <ul></ul>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12">
+      @defer (on viewport) {
+        <ul
+          class="grid gap-6 items-center justify-center w-full h-full grid-cols-1 sm:grid-cols-[repeat(2,260px)] lg:grid-cols-[repeat(2,450px)] lg:gap-12"
+        >
+          @for (
+            card of activatedSectionContent().freeTrialSection.bigCards;
+            track card
+          ) {
+            <li
+              class="big-card bg-white py-4 px-5 rounded-xl flex items-center flex-col gap-4 h-full w-full transform {{
+                $index ===
+                activatedSectionContent().freeTrialSection.bigCards.length - 1
+                  ? 'sm:translate-x-1/2'
+                  : 'translate-x-0'
+              }} lg:py-6 lg:px-8"
+              style="
+              box-shadow:
+                0px 10px 20px -2px rgba(0, 0, 0, 0.04),
+                0px 2px 15px -3px rgba(0, 0, 0, 0.07);
+              --card-index:{{ $index }}
+            "
+            >
+              <h4
+                class="text-app-primay-dark font-semibold text-lg text-center lg:text-xl"
+              >
+                {{ card.title }}
+              </h4>
+              <div>
+                <img
+                  src="assets/svg/{{ card.icon }}"
+                  alt="{{ card.title }}"
+                  class="w-[60px] h-[60px] lg:w-[77px] lg:h-[77px]"
+                />
+              </div>
+              <p
+                class="font-normal text-sm text-center text-app-primay-dark leading-[22px] lg:text-xl lg:leading-[32px]"
+              >
+                {{ card.description }}
+              </p>
+            </li>
+          }
+        </ul>
+      } @placeholder {
+        <ul></ul>
+      }
+    </div>
+  </section>
+  <section
+    class="p-app-secondary-padding lg:pb-[5rem] xl:pt-app-primary-padding xl:px-app-primary-padding"
+  >
+    <h2
+      class="text-center font-bold text-app-primay-dark max-w-[740px] mx-auto text-xl leading-[30px] lg:text-2xl lg:leading-[50px]"
+    >
+      Vendiiko vous accompagne tout au long de votre croissance
+    </h2>
+    <table
+      class="w-fit mt-16 px-4 mx-auto rounded-md hidden lg:block"
+      style="
+        background-image: linear-gradient(
+          191.2deg,
+          rgba(245, 246, 255, 0.2) -114.56%,
+          rgba(255, 255, 255, 0.2) -114.56%,
+          rgba(175, 182, 229, 0.2) -66.05%,
+          rgba(200, 205, 241, 0.2) -38.69%,
+          rgba(197, 203, 240, 0.2) 7.33%,
+          rgba(182, 188, 232, 0.2) 39.67%,
+          rgba(229, 233, 255, 0.2) 76.99%,
+          rgba(255, 255, 255, 0.2) 134.2%
+        );
+        box-shadow:
+          0px 10px 20px 0px rgba(0, 0, 0, 0.04),
+          0px 4px 4px 0px rgba(0, 0, 0, 0.04);
+      "
+    >
+      <thead class="border-b border-dotted border-[rgba(54,46,117,0.5)]">
+        <tr>
+          <th class="p-5"></th>
+          @for (
+            plan of activatedSectionContent().plansSections.plans;
+            track plan
+          ) {
+            <th
+              class="p-5 text-app-primay-dark text-center font-medium text-2xl capitalize"
+            >
+              {{ plan.name }}
+              <sup>
+                @if (plan.isPopular) {
+                  <span
+                    class="font-medium text-white bg-[rgba(227,49,94,1)] rounded-3xl p-2 text-[10px] leading-4 tracking-[1px]"
+                    >Plus populaire</span
+                  >
+                }
+              </sup>
+            </th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td
+            class="pt-5 pb-8 px-5 text-app-primay-dark font-medium text-2xl capitalize flex items-center justify-center gap-8"
+          >
+            {{ activatedSectionContent().plansSections.title }}
+            <span class="text-app-primay-dark">
+              <svg
+                width="17"
+                height="15"
+                viewBox="0 0 17 15"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16.8288 2.21017L14.7348 0.11017C14.6644 0.0396391 14.5689 0 14.4693 0C14.3697 0 14.2741 0.0396391 14.2038 0.11017L5.3598 8.96017C5.28944 9.0307 5.19392 9.07034 5.0943 9.07034C4.99467 9.07034 4.89915 9.0307 4.82879 8.96017L2.73479 6.86017C2.66444 6.78964 2.56892 6.75 2.4693 6.75C2.36967 6.75 2.27415 6.78964 2.20379 6.86017L0.109795 8.96017C-0.0365983 9.10661 -0.0365983 9.34398 0.109795 9.49042L4.82879 14.2102C4.89915 14.2807 4.99467 14.3203 5.0943 14.3203C5.19392 14.3203 5.28944 14.2807 5.3598 14.2102L16.8288 2.73517C16.9717 2.58935 16.9717 2.35599 16.8288 2.21017Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </td>
+          @for (
+            plan of activatedSectionContent().plansSections.plans;
+            track plan
+          ) {
+            <td
+              class="pt-5 pb-8 px-5 text-app-primay-dark text-center font-medium text-2xl capitalize"
+            >
+              {{ plan.monthPrice }} MAD
+              <span
+                class="text-[rgba(132,129,153,1)] font-medium text-lg normal-case"
+                >/month</span
+              >
+            </td>
+          }
+        </tr>
+      </tbody>
+    </table>
+    <a
+      routerLink="/pricing"
+      class="mt-8 py-3 px-6 block w-fit mx-auto group rounded-lg text-app-primay-dark transition-colors duration-300 ease-out hover:text-white hover:bg-app-primay-dark"
+    >
+      <p
+        class="text-normal transition-all duration-300 ease-out text-center flex items-center gap-4 text-sm lg:text-lg"
+      >
+        Voir les tarifs détaillées
+        <span
+          class="transform transition-all duration-300 ease-out group-hover:translate-x-2"
+        >
+          <svg
+            width="8"
+            height="13"
+            viewBox="0 0 8 13"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.76052 6.72107C7.14931 6.32742 7.14536 5.69207 6.75171 5.30328L1.71293 0.326767C1.31928 -0.0620234 0.683932 -0.0580737 0.295142 0.335581C-0.0936481 0.729235 -0.0896983 1.36458 0.303956 1.75337L4.63101 6.02695L0.360554 10.354C-0.0282365 10.7476 -0.0242868 11.383 0.369368 11.7718C0.763022 12.1606 1.39837 12.1566 1.78716 11.763L6.76367 6.72418L6.76052 6.72107Z"
+              fill="currentColor"
+            />
+          </svg>
+        </span>
+      </p>
+    </a>
+  </section>
+
+  @if (isDemoFormOpen()) {
+    <div class="fixed top-0 left-0 w-full h-full bg-[rgba(0,0,0,0.8)] z-[999]">
+      <div
+        class="w-[600px] max-w-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 h-full sm:h-fit"
+      >
+        <button
+          class="text-white transition-colors ease-out duration-300 absolute top-3 right-3 hover:text-app-accent-light"
+          (click)="closeDemoForm()"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+            class="w-8 h-8"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M6 18 18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+        <app-demo-request-form />
+      </div>
+    </div>
+  }
+</main>

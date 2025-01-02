@@ -1,0 +1,48 @@
+<div class="relative w-full" [formGroup]="formGroup()">
+  @if (label(); as label) {
+  <label class="block text-sm font-medium">
+    {{ label }} <span class="text-red-600" *ngIf="required">*</span>
+  </label>
+  }
+  <div class="mt-1">
+    <!-- Bouton de sélection -->
+    <div
+      [class]="className()"
+      class="w-full p-3 border border-solid border-white  flex justify-between items-center cursor-pointer"
+      (click)="toggleDropdown()"
+    >
+      <span>{{ selectedOption?.title || placeholder() }}</span>
+      <svg
+        class="w-5 h-5 "
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          [attr.d]="!isOpen ? 'M19 9l-7 7-7-7' : 'M5 15l7-7 7 7'"
+        ></path>
+      </svg>
+    </div>
+    <!-- Liste des options -->
+    <div
+      *ngIf="isOpen"
+       [class]="className()"
+      class="absolute  z-50 w-full p-2  shadow-lg rounded-md mt-2"
+    >
+      <ul class="max-h-60 overflow-y-auto">
+        <li
+          *ngFor="let option of options()"
+          (click)="selectOption(option)"
+          class="px-4 py-2 hover:bg-[#786dce1e] cursor-pointer rounded-md"
+        >
+          {{ option.title }}
+        </li>
+      </ul>
+    </div>
+
+    <input type="hidden" [formControlName]="controlName()" />
+  </div>
+</div>

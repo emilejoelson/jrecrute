@@ -1,0 +1,19 @@
+<div [formGroup]="formGroup" class="relative">
+    <textarea
+      [id]="id"
+      [class]="classTextarea"
+      [formControlName]="id"
+      [rows]="rows"
+      [cols]="cols"
+      placeholder=" "
+    ></textarea>
+    <label [for]="id" class="absolute" [class]="classLabel">
+      {{ title }} *
+    </label>
+    @if(control?.touched && control?.errors?.['required']) {
+      <div class="text-red-500 text-sm mt-1">
+        Ce champ est requis
+      </div>
+    }
+  </div>
+  

@@ -1,0 +1,26 @@
+<div
+  class="lg:fixed top-0 left-0 lg:w-screen custom-650:px-5 custom-1024:transform custom-1024:-translate-y-[40%] lg:h-screen lg:bg-custom-opacity lg:bg-opacity-50 lg:backdrop-blur-sm flex justify-center items-center z-50"
+>
+  <div class="bg-white border lg:w-[35%] rounded-[16px]">
+    <div class="text-center rounded-t-[16px] w-full flex justify-center">
+      <img
+        [src]="congratulationData().congratulationImage"
+        alt="Congratulation"
+        class="w-[200px] h-[200px] mb-4"
+      />
+    </div>
+    <p
+      class="text-[36px] text-center font-black leading-[62px] text-app-primary-dark"
+    >
+      {{ congratulationData().title }}
+    </p>
+    <p class="text-app-primary-dark pb-10 text-center text-[20px] leading-10">
+      {{ congratulationData().message }}
+    </p>
+    <div class="w-full p-10 rounded-b-[16px] bg-app-primary-dark">
+      <p class="text-white text-center text-[16px]">
+        {{ congratulationData().invitation }}
+      </p>
+    </div>
+  </div>
+</div>

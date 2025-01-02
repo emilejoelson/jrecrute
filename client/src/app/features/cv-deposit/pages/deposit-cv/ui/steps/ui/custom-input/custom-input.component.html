@@ -1,0 +1,16 @@
+<div [formGroup]="formGroup" class="relative">
+  <input [id]="id" [formControlName]="id" type="text" [class]="classInput" placeholder=" " />
+  <label [for]="id" class="absolute" [class]="classLabel">
+    {{ title }} *
+  </label>
+  @if(control?.touched && control?.errors) {
+    <div class="text-red-500 text-sm mt-1">
+      @if(control?.errors?.['required']) {
+        Ce champ est requis
+      }
+      @if(control?.errors?.['email']) {
+        Email invalide
+      }
+    </div>
+  }
+</div>

@@ -1,0 +1,114 @@
+<div
+  [formGroup]="formGroup"
+  class="relative md:rounded-lg custom-650:px-5 custom-650:pt-0 p-10 bg-[#fff] grid md:mt-10 md:mx-1/8 md:gap-[50px] md:grid-cols-[1fr_2fr]"
+>
+  <div class="custom-650:hidden">
+    <!-- File Previews -->
+    @if(previewType === 'image') {
+    <div
+      class="aspect-w-16 file-preview-container aspect-h-9 overflow-hidden rounded-lg"
+    >
+      <img
+        [src]="previewUrl"
+        [alt]="selectedFile?.name"
+        class="h-full w-full object-contain"
+      />
+    </div>
+    }
+
+    <!-- PDF preview -->
+    @if(previewType === 'pdf') {
+    <div
+      class="h-[calc(100vh-350px)] file-preview-container sm:h-[calc(100vh-300px)] min-h-[300px] sm:min-h-[500px] w-full rounded-lg"
+    >
+      <embed
+        [src]="previewUrl"
+        type="application/pdf"
+        class="h-full w-full rounded-lg"
+      />
+    </div>
+    }
+  </div>
+  <div class="rounded-lg bg-[#fff] flex flex-col">
+    <!-- Main content container with padding-bottom to prevent content overlapping with buttons -->
+    <div class="flex-1 md:p-4">
+      <p
+        class="flex justify-center text-center custom-650:pt-0 p-4 mb-4 text-2xl font-bold text-gray-800"
+      >
+        Information Personnel
+      </p>
+      <div>
+        <div class="grid md:grid-cols-[2fr_1fr] gap-8">
+          <div class="flex flex-col gap-5">
+            <app-custom-select
+              [id]="civilityField.id"
+              [classSelect]="civilityField.classSelect"
+              [classLabel]="civilityField.classLabel"
+              [title]="civilityField.title"
+              [options]="civilities"
+              [control]="formGroup.get(civilityField.id)"
+              [formGroup]="formGroup"
+            />
+            @for(info of personalInformations;track info){
+            <app-custom-input
+              [id]="info.id"
+              [classInput]="info.classInput"
+              [classLabel]="info.classLabel"
+              [title]="info.title"
+              [control]="formGroup.get(info.id)"
+              [formGroup]="formGroup"
+            />
+            }
+          </div>
+          <div
+            class="md:border-l-2 md:border-dashed md:p-3 md:border-[#f6f6f6]"
+          >
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <p class="font-semibold text-[14px] text-gray-800">
+                CC Recrutement conseille :
+              </p>
+              <p class="text-gray-600 text-[12px] mt-2">
+                Nous vous recommandons de remplir attentivement ces informations
+                pour faciliter votre identification en lien avec le poste qui
+                vous intéresse !
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fixed button container at the bottom -->
+    <div class="bg-white mt-5">
+      <div class="flex justify-between items-center w-full md:px-6 py-4">
+        <!-- Back (Précédent) Button -->
+        <button (click)="onPrevClick()" type="button" class="flex items-center">
+          <svg
+            class="w-4 h-4 mr-1 text-blue-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span class="text-blue-400 text-sm">Précédent</span>
+        </button>
+
+        <!-- Validate Button -->
+        <button
+          type="button"
+          (click)="onProceedClick()"
+          class="bg-blue-400 hover:bg-app-primary-purple text-white custom-650:px-8 px-16 py-2 rounded-[4px] text-sm font-medium"
+        >
+          Continuer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

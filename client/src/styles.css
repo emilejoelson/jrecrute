@@ -1,0 +1,38 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer base {
+  html,
+  body {
+    height: 100%;
+  }
+  body {
+    font-family: "Roboto", sans-serif;
+    overflow-x: hidden;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+@layer utilities {
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+/* to hide recaptcha badge icon */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
+/* When you hide the badge icon, Google wants you to reference their service on your form by adding this: */
+/**/
+/* This site is protected by reCAPTCHA and the Google */
+/*     <a href="https://policies.google.com/privacy">Privacy Policy</a> and */
+/*     <a href="https://policies.google.com/terms">Terms of Service</a> apply. *//*# sourceMappingURL=styles.css.map */

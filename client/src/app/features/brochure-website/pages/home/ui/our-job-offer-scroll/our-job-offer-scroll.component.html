@@ -1,0 +1,62 @@
+<section
+  class="overflow-hidden px-4 py-4 md:bg-purple-50 text-white"
+  (mouseenter)="pauseInterval()"
+  (mouseleave)="resumeInterval()"
+>
+  <div
+    class="flex overflow-hidden py-4 border-y-2 border-gray-400 border-dashed mx-auto"
+    [style.maxWidth]="300 * jobOffers.length * 2 + 'px'"
+    [style.minWidth]="300 * jobOffers.length * 2 + 'px'"
+  >
+    <!-- List One -->
+    <ul
+      #jobOfferListOne
+      class="transition-transform ease-linear w-full flex justify-center items-stretch text-xl font-bold uppercase tracking-widest"
+      [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
+    >
+      @for (offer of jobOffers; track offer) {
+      <span
+        class="px-16 py-4 bg-white text-purple-700 text-center flex items-center shadow-md rounded-lg mx-2 hover:scale-110 transform transition duration-300"
+      >
+        {{ offer }}
+      </span>
+      <!-- Dash Oblique Separator -->
+      <span class="text-3xl text-gray-400 mx-4 flex items-center"> / </span>
+      }
+    </ul>
+
+    <!-- List Two -->
+    <ul
+      #jobOfferListTwo
+      class="transition-transform ease-linear w-full flex justify-center items-stretch text-xl font-bold uppercase tracking-widest"
+      [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
+    >
+      @for (offer of jobOffers; track offer) {
+      <span
+        class="px-16 py-4 bg-white text-center  text-purple-700 item flex items-center shadow-md rounded-lg mx-2 hover:scale-110 transform transition duration-300"
+      >
+        {{ offer }}
+      </span>
+      <!-- Dash Oblique Separator -->
+      <span class="text-3xl mx-4  flex text-gray-400 items-center"> / </span>
+      }
+    </ul>
+
+    <!-- List Three -->
+    <ul
+      #jobOfferListThree
+      class="transition-transform ease-linear w-full flex justify-center items-stretch text-xl font-bold uppercase tracking-widest"
+      [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
+    >
+      @for (offer of jobOffers; track offer) {
+      <span
+        class="px-16 py-4 bg-white text-center  text-purple-700 flex items-center shadow-md rounded-lg mx-2 hover:scale-110 transform transition duration-300"
+      >
+        {{ offer }}
+      </span>
+      <!-- Dash Oblique Separator -->
+      <span class="text-3xl  mx-4 text-gray-400 flex items-center"> / </span>
+      }
+    </ul>
+  </div>
+</section>

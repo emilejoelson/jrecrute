@@ -1,0 +1,123 @@
+<main class="z-10 min-h-[1200px]">
+  <div
+    class="absolute z-[-1] top-0 left-0 w-full h-[1200px] transform -translate-y-1/4"
+  >
+    <img
+      src="assets/svg/gradiant-oval-shape.svg"
+      alt="Gradiant oval shape"
+      class="w-full h-full object-cover"
+    />
+  </div>
+  <section
+    class="flex flex-col gap-4 p-app-secondary-padding lg:flex-row xl:p-app-primary-padding sm:gap-8"
+  >
+    <!-- left -->
+    <div class="flex-1">
+      <h1
+        class="font-bold text-app-primay-dark tracking-[1px] text-xl leading-[32px] sm:text-2xl sm:leading-[42px] lg:text-3xl lg:leading-[52px] xl:text-4xl xl:leading-[62px]"
+      >
+        Permettez-nous de mieux vous connaître
+      </h1>
+      <p
+        class="text-app-primay-dark tracking-[1px] font-medium mt-4 text-sm leading-[32px] sm:text-lg sm:leading-[42px] sm:mt-6 lg:text-xl lg:leading-[52px] lg:mt-8 xl:leading-[62px] xl:text-2xl"
+      >
+        Votre société a besoin d'une solution sur-mesure? Nous sommes là pour
+        vous aider. Partagez les détails de votre entreprise pour commencer une
+        discussion utile avec nos spécialistes qui vous accompagneront à chaque
+        étape.
+      </p>
+    </div>
+    <!-- right -->
+    <div class="flex-1">
+      <div
+        class="bg-white rounded-lg"
+        style="box-shadow: 18px 20px 22px 0px rgba(23, 18, 63, 0.12)"
+      >
+        <!-- forms -->
+        @switch (currentStep) {
+          @case ("stepOne") {
+            <app-contact-form-step-one-component
+              [fieldsData]="fieldsData.stepOneFields"
+              [oldData]="contactForm.value['stepOneInfo'] ?? null"
+              (changeStep)="changeStep('stepOne', 'next')"
+              (subSubmit)="subSubmit('stepOneInfo', $event)"
+            />
+          }
+          @case ("stepTwo") {
+            <app-contact-form-step-two-component
+              [fieldsData]="fieldsData.stepTwoFields"
+              [oldData]="contactForm.value['stepTwoInfo'] ?? null"
+              [countryNameFromPrevStep]="
+                contactForm.value['stepOneInfo']?.['countryField'] ?? null
+              "
+              (changeStep)="changeStep('stepTwo', $event)"
+              (subSubmit)="subSubmit('stepTwoInfo', $event)"
+              (finalSubmit)="onSubmit()"
+            />
+          }
+          @case ("thankyou") {
+            <div>
+              <div
+                class="flex flex-col items-center gap-4 p-6 sm:gap-6 sm:p-12"
+              >
+                <span
+                  class="rounded-full bg-app-secondary-dark flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14"
+                >
+                  <svg
+                    width="33"
+                    height="33"
+                    viewBox="0 0 33 33"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M0 19.5211C0 19.5211 3.8425 15.8028 6.10272 19.2887L9.04111 25.5633C9.04111 25.5633 17.1781 9.52814 32.3219 0L33 1.162C33 1.162 16.0479 15.1056 11.0753 30.4436L7.45889 33C7.45889 32.9999 4.74656 20.683 0 19.5211Z"
+                      fill="#D1CEF8"
+                    />
+                  </svg>
+                </span>
+                <h3
+                  class="font-bold text-app-primay-dark text-2xl sm:text-3xl lg:text-4xl"
+                >
+                  Merci !
+                </h3>
+                <p
+                  class="text-center font-normal text-lg leading-[26px] sm:leading-[36px] lg:leading-[46px] sm:text-xl lg:text-2xl"
+                >
+                  Nous vous contacterons dans un délai d’un jour ouvrable
+                </p>
+              </div>
+              <p
+                class="text-center w-full p-6 bg-[rgba(227,224,247,1)] text-app-primay-dark text-sm sm:text-lg"
+              >
+                Vous voulez commencez maintenant
+                <a class="text-app-secondary-dark" href="#">s’inscrire</a>
+              </p>
+            </div>
+          }
+        }
+
+        <!-- reCAPTCHA -->
+        @if (currentStep !== "thankyou") {
+          <p
+            class="text-app-primay-dark text-center py-6 px-8 text-sm sm:text-[1rem] sm:px-12 sm:py-8"
+          >
+            This site is protected by reCAPTCHA and the Google
+            <a
+              class="text-app-secondary-dark"
+              href="https://policies.google.com/privacy"
+              >Privacy Policy</a
+            >
+            and
+            <a
+              class="text-app-secondary-dark"
+              href="https://policies.google.com/terms"
+              >Terms of Service</a
+            >
+            apply.
+          </p>
+        }
+      </div>
+    </div>
+  </section>
+</main>

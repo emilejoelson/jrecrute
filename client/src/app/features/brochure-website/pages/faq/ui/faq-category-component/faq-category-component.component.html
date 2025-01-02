@@ -1,0 +1,125 @@
+<li>
+  <button
+    class="flex items-center {{
+      selectedCategories.has(category.id) ? 'border-b' : 'border rounded-lg'
+    }} border-solid border-app-secondary-dark px-4 py-3 cursor-pointer w-full sm:px-6 sm:py-5"
+    role="button"
+    (click)="selectCategoryEvent.emit(category.id)"
+  >
+    <!-- button -->
+    <div>
+      @if (selectedCategories.has(category.id)) {
+        <!-- minus -->
+        <span class="text-app-primay-dark">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-9 h-9"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14" />
+          </svg>
+        </span>
+      } @else {
+        <!-- plus -->
+        <span class="text-app-primay-dark">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            class="w-6 h-6 sm:w-8 sm:h-8 lg:w-9 lg:h-9"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+        </span>
+      }
+    </div>
+    <p
+      class="text-start ml-2 font-normal text-app-primay-dark text-sm sm:text-xl lg:text-2xl"
+    >
+      {{ category.categorieName }}
+    </p>
+    <!-- icon -->
+    <span class="ml-auto">
+      <svg
+        width="36"
+        height="35"
+        viewBox="0 0 36 35"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M35.002 14.3645H14.002V13.3645H35.002V14.3645Z"
+          stroke="#7263D8"
+          stroke-width="1"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M1.00129 20.8734L21.5441 20.9071L21.543 21.6155L1.00013 21.5818L1.00129 20.8734Z"
+          stroke="#7263D8"
+          stroke-width="1"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M15.002 13.3645L15.002 34.3645H14.002L14.002 13.3645H15.002Z"
+          stroke="#7263D8"
+          stroke-width="1"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M20.834 21.6134L20.8678 1.00006L21.5762 1.00122L21.5423 21.6146L20.834 21.6134Z"
+          stroke="#7263D8"
+          stroke-width="1"
+        />
+      </svg>
+    </span>
+  </button>
+  @if (selectedCategories.has(category.id)) {
+    <ul
+      class="flex flex-col overflow-hidden border-solid border-app-secondary-dark pt-2 mt-2 gap-2 sm:mt-6 sm:gap-4 lg:gap-6 lg:ml-16 lg:pl-8 lg:border-l-2"
+      [@showInOut]
+    >
+      @for (questionEntry of category.questions; track questionEntry.id) {
+        <li>
+          <button (click)="selectQuestionEvent.emit(questionEntry.id)">
+            <h4
+              class="text-start font-medium text-app-primay-dark flex items-center gap-2 text-sm sm:text-lg lg:text-[22px]"
+            >
+              <span>&#8226;</span>
+              @if (searchQuery) {
+                <span
+                  [innerHtml]="
+                    highlightText(questionEntry.question, searchQuery)
+                  "
+                ></span>
+              } @else {
+                {{ questionEntry.question }}
+              }
+            </h4>
+            @if (selectedQuestions.has(questionEntry.id)) {
+              <p
+                class="text-start mt-2 font-normal text-sm text-app-primay-dark pl-2 leading-[27px] sm:pl-4 sm:mt-4 lg:text-lg lg:leading-[37px]"
+                [@fadeInOut]
+              >
+                {{ questionEntry.answer }}
+              </p>
+            }
+          </button>
+        </li>
+      }
+    </ul>
+  }
+</li>

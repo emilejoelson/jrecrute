@@ -1,0 +1,25 @@
+/* faq.component.css */
+@keyframes showUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.faq-item {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.show-up-animation {
+  animation: showUp 1s ease-out forwards;
+  animation-delay: calc(var(--item-index) * 1s);
+}
+
+/* Optional: Add smooth transition for the answer panel */
+.bg-gray-50 {
+  transition: all 0.3s ease-in-out;
+}/*# sourceMappingURL=faq.component.css.map */

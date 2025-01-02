@@ -1,0 +1,93 @@
+<section
+  class="overflow-hidden px-app-secondary-padding xl:px-app-primary-padding"
+>
+  <div
+    class="flex overflow-hidden py-4 border-y-2 border-y-[rgba(205,185,253,0.5)] border-dashed mx-auto"
+    [style.maxWidth]="250 * images.length * 2 + 'px'"
+    [style.minWidth]="250 * images.length * 2 + 'px'"
+    (mouseenter)="pauseInterval()"
+    (mouseleave)="resumeInterval()"
+  >
+    <ul
+      #companiesListOne
+      class="transition-transform ease-linear w-full flex justify-center items-stretch"
+      [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
+    >
+      @for (imageEntry of images; track imageEntry) {
+        <li
+          class="customer-container relative w-[250px] flex items-center justify-center"
+        >
+          <div class="w-32">
+            <img
+              src="assets/icons/{{ imageEntry.src }}"
+              alt="Company logo"
+              class="max-w-full"
+            />
+          </div>
+        </li>
+      }
+    </ul>
+
+    <ul
+      #companiesListTwo
+      class="transition-transform ease-linear w-full flex justify-center items-stretch"
+      [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
+    >
+      @for (imageEntry of images; track imageEntry) {
+        <li
+          class="customer-container relative w-[250px] flex items-center justify-center"
+        >
+          <div class="w-32">
+            <img
+              src="assets/icons/{{ imageEntry.src }}"
+              alt="Company logo"
+              class="max-w-full"
+            />
+          </div>
+        </li>
+      }
+    </ul>
+
+    <ul
+      #companiesListThree
+      class="transition-transform ease-linear w-full flex justify-center items-stretch"
+      [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
+    >
+      @for (imageEntry of images; track imageEntry) {
+        <li
+          class="customer-container relative w-[250px] flex items-center justify-center"
+        >
+          <div class="w-32">
+            <img
+              src="assets/icons/{{ imageEntry.src }}"
+              alt="Company logo"
+              class="max-w-full"
+            />
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>
+
+<!-- <section class="px-app-secondary-padding xl:px-app-primary-padding"> -->
+<!--   <div -->
+<!--     class="max-w-full mx-auto py-4 border-y-2 border-y-[rgba(205,185,253,0.5)] border-dashed lg:max-w-[90%] xl:py-8" -->
+<!--   > -->
+<!--     <ul class="grid grid-cols-3"> -->
+<!--       @for (imageEntry of images; track imageEntry) { -->
+<!--         <li -->
+<!--           class="customer-container gap-2 relative flex items-center justify-center" -->
+<!--         > -->
+<!--           <div class="w-20 sm:w-36 lg:w-48"> -->
+<!--             <img -->
+<!--               src="assets/icons/{{ imageEntry.src }}" -->
+<!--               alt="Company logo" -->
+<!--               class="max-w-full" -->
+<!--             /> -->
+<!--           </div> -->
+<!--         </li> -->
+<!--       } -->
+<!--     </ul> -->
+<!--   </div> -->
+<!-- </section> -->
