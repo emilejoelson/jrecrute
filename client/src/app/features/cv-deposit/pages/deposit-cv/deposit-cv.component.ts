@@ -63,44 +63,44 @@ export class DepositCvComponent implements OnInit {
     this.mainForm = this.fb.group({
       personalInfo: this.fb.group({
         civility: ['M.', Validators.required],
-        firstName: ['John', Validators.required],
-        lastName: ['Doe', Validators.required],
-        email: ['nina@gmail.com', [Validators.required, Validators.email]],
-        telephone: ['123456789', Validators.required],
+        firstName: ['', Validators.required],
+        lastName: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        telephone: ['', Validators.required],
       }),
 
       professionalInfo: this.fb.group({
-        currentPosition: ['Software Engineer', Validators.required],
-        yearsOfExperience: ['3+ ans', Validators.required],
-        desiredPosition: ['Manager Community', Validators.required],
-        enterprise: ['Fitifash', Validators.required],
+        currentPosition: ['', Validators.required],
+        yearsOfExperience: ['', Validators.required],
+        desiredPosition: ['', Validators.required],
+        enterprise: ['', Validators.required],
         hasRemoteExperience: [false],
         experiences: this.fb.array([this.createExperienceFormGroup()]),
       }),
 
       academicInfo: this.fb.group({
         formation: this.fb.group({
-          level: ['M2', Validators.required],
+          level: ['', Validators.required],
           languages: this.fb.array([this.createLanguageFormGroup()]),
         }),
-        motivation: ['sdlflsdfqmsfsdflqm', Validators.required],
+        motivation: ['', Validators.required],
       }),
     });
   }
 
   createLanguageFormGroup(): FormGroup {
     return this.fb.group({
-      languageone: ['Anglais', Validators.required],
-      levelone: ['Très bien', Validators.required],
-      languagetwo: ['Anglais', Validators.required],
-      leveltwo: ['Très bien', Validators.required],
+      languageone: ['', Validators.required],
+      levelone: ['', Validators.required],
+      languagetwo: ['', Validators.required],
+      leveltwo: ['', Validators.required],
     });
   }
 
   createExperienceFormGroup(): FormGroup {
     return this.fb.group({
-      position: ['Java Dévéloppeur', Validators.required],
-      company: ['Fitifash', Validators.required],
+      position: ['', Validators.required],
+      company: ['', Validators.required],
       startMonth: ['', Validators.required],
       startYear: ['', Validators.required],
       endMonth: ['', Validators.required],

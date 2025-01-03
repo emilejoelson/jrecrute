@@ -151,8 +151,9 @@ export class StepTwoComponent implements OnInit {
   }
 
   onProceedClick() {
-    if (this.formGroup.valid) {
-      this.proceed.emit();
-    }
+    this.proceed.emit();
+    // if (this.formGroup.valid) {
+     
+    // }
   }
 }

@@ -51,7 +51,9 @@ export class HeaderComponent implements AfterViewInit {
       },
     ],
   };
+
   onDeposit() {
+    this.isNavOpen = false;
     this.router.navigate(['/deposer-un-cv']);
     window.scrollTo(0, 0);
   }
