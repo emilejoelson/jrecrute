@@ -16,7 +16,7 @@ type TNavLinks = {
     href?: string;
     behaviour: string;
   }[];
-  buttons: { name: string; href: string; behaviour: 'link' | 'button' }[];
+  buttons: { name: string }[];
 };
 
 @Component({
@@ -48,12 +48,13 @@ export class HeaderComponent implements AfterViewInit {
     buttons: [
       {
         name: 'Postuler maintenant',
-        href: '/deposer-un-cv',
-        behaviour: 'link',
       },
     ],
   };
-
+  onDeposit() {
+    this.router.navigate(['/deposer-un-cv']);
+    window.scrollTo(0, 0);
+  }
   ngAfterViewInit(): void {
     this.toggleHeaderBackground();
     this.updateProgressBar();

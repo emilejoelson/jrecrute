@@ -43,7 +43,7 @@ export class DepositCvComponent implements OnInit {
   previewUrl: SafeResourceUrl | null = null;
   previewType: string = '';
   currentStep: number = 1;
-
+  
   constructor(
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,

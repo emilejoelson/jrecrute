@@ -52,7 +52,7 @@ export class UserEffects {
       this.actions$.pipe(
         ofType(UserFormActions.submitUserFormSuccess),
         tap(() => {
-          this.isDepositConfirmationPopupOpen.set(true);
+          this.router.navigate(['/deposer-un-cv-avec-succes']);
         })
       ),
     { dispatch: false }

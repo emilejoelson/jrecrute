@@ -21,7 +21,6 @@ import { UserEffects } from './features/cv-deposit/store/effects/cv.effects';
     ToastComponent,
     LoadingSpinnerComponent,
     CommonModule,
-    DepositCvConfirmationPopupComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -30,7 +29,6 @@ export class AppComponent implements OnInit {
   showLoading!: Observable<boolean>;
 
   userEffect = inject(UserEffects);
-  isDepositConfirmatiionPopup = this.userEffect.isDepositConfirmationPopupOpen();
   
   congratulationData = signal<Congratulation>({
     congratulationImage: '../assets/images/congratulation.png',

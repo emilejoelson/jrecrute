@@ -23,5 +23,6 @@ export class PresentationSectionComponent {
 
   onDeposit() {
     this.router.navigate(['/deposer-un-cv']);
+    window.scrollTo(0, 0);
   }
 }

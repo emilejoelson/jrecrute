@@ -1,24 +1,51 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+
+type TNavLinks = {
+  links: {
+    name: string;
+    sectionId: string;
+    href?: string;
+    behaviour: string;
+  }[];
+};
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [
-    RouterModule,
-  ],
+  imports: [RouterModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
-  footerItems = {
-    jobSeekers: [
-      { name: 'Parcourir les offres' },
-      { name: 'Découvrir les étapes' },
-      { name: 'En savoir plus sur les avantages' },
-      { name: 'Accéder à la FAQ' },
+  @ViewChild('headerElement') headerElement!: ElementRef<HTMLElement>;
+  router = inject(Router);
+  navItems: TNavLinks = {
+    links: [
+      {
+        name: 'Parcourir les offres',
+        sectionId: 'offers-section',
+        behaviour: 'scroll',
+      },
+      {
+        name: 'Découvrir les étapes',
+        sectionId: 'steps-section',
+        behaviour: 'scroll',
+      },
+      {
+        name: 'En savoir plus sur les avantages',
+        sectionId: 'advantages-section',
+        behaviour: 'scroll',
+      },
+      {
+        name: 'Accéder à la FAQ',
+        sectionId: 'faq-section',
+        behaviour: 'scroll',
+      },
     ],
+  };
 
+  footerItems = {
     connects: [
       { name: 'À Propos' },
       { name: 'Contact' },
@@ -48,6 +75,35 @@ export class FooterComponent {
       },
     ],
   };
+
+  scrollToSection(sectionId: string) {
+    // First check if we're on the home page
+    if (this.router.url !== '/') {
+      // If not, navigate to home and then scroll
+      this.router.navigate(['/']).then(() => {
+        // Wait for navigation and DOM update
+        setTimeout(() => {
+          this.performScroll(sectionId);
+        }, 100);
+      });
+    } else {
+      // If already on home page, scroll directly
+      this.performScroll(sectionId);
+    }
+  }
+  private performScroll(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight = this.headerElement.nativeElement.offsetHeight;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
+  }
 
   currentYear = new Date().getFullYear();
 }

@@ -80,13 +80,13 @@
       <div
         class="flex items-start gap-x-8 gap-y-8 flex-col sm:flex-row xl:items-center xl:gap-x-12"
       >
-        <li class="text-sm">
-          <a
-            [href]="buttonEntry.href"
+        <div class="text-sm">
+          <button
+          (click)="onDeposit()"
             class="block cursor-pointer text-center bg-app-primary-purple text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-all transform hover:scale-105 transition-colors ease-out duration-300 relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-inherit text-[#fff] z-10 group bg-app-primay-dark hover:bg-app-secondary-dark"
-            >{{ buttonEntry.name }}</a
+            >{{ buttonEntry.name }}</button
           >
-        </li>
+        </div>
       </div>
       }
     </ul>

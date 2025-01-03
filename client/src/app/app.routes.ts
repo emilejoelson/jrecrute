@@ -9,6 +9,13 @@ export const routes: Routes = [
       ),
     children: [
       {
+        path: 'deposer-un-cv-avec-succes',
+        loadComponent: () =>
+          import(
+            './shared/receive-popup-confirmation/receive-popup-confirmation.component'
+          ).then((m) => m.ReceivePopupConfirmationComponent),
+      },
+      {
         path: '',
         loadComponent: () =>
           import('./features/brochure-website/pages/home/home.component').then(

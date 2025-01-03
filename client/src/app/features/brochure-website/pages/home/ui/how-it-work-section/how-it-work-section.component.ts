@@ -1,8 +1,7 @@
 import { AfterViewInit, Component, ElementRef, inject, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, ViewportScroller } from '@angular/common';
-import { PrimaryButtonComponent } from '../../../../../../common/components/buttons/primary-button/primary-button.component';
-import { SecondaryButtonComponent } from '../../../../../../common/components/buttons/secondary-button/secondary-button.component';
 import { HomeHowItWorkImageComponent } from '../../../../../../../assets/svg/templates/home-how-it-work-image/home-how-it-work-image.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-how-it-work-section',
@@ -15,7 +14,7 @@ import { HomeHowItWorkImageComponent } from '../../../../../../../assets/svg/tem
 })
 export class HowItWorkSectionComponent implements AfterViewInit {
   private viewportScroller = inject(ViewportScroller);
-
+router = inject(Router);
   elementRef = inject(ElementRef);
   isVisible = false;
 
@@ -38,5 +37,9 @@ export class HowItWorkSectionComponent implements AfterViewInit {
       );
       observer.observe(this.elementRef.nativeElement);
     }
+  }
+  onDeposit() {
+    this.router.navigate(['/deposer-un-cv']);
+    window.scrollTo(0, 0);
   }
 }
