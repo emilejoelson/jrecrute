@@ -1,7 +1,5 @@
 <app-toast></app-toast>
-
-@if(showLoading | async) {
+<ng-container *ngIf="(isSubmitting$ | async)">
   <app-loading-spinner />
-}
-
+</ng-container>
 <router-outlet></router-outlet>

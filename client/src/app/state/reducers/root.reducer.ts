@@ -1,10 +1,8 @@
 // root.reducer.ts
 import { ActionReducerMap } from '@ngrx/store';
-import { RootState } from '../root.state';
 import { userReducer } from '../../features/cv-deposit/store/reducers/cv.reducer';
-import { SharedReducer } from '../shared/shared.reducer';
+import { State } from '../root.state';
 
-export const rootReducer: ActionReducerMap<RootState> = {
+export const rootReducer: ActionReducerMap<State> = {
   user: userReducer,
-  shared: SharedReducer,
 };

@@ -1,6 +1,7 @@
 {
   "routes": {
     "/": {},
+    "/attente-de-reponse": {},
     "/deposer-un-cv": {},
     "/deposer-un-cv-avec-succes": {}
   }

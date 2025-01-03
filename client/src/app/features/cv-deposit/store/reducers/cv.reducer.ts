@@ -1,13 +1,12 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { User } from '../../data-access/models/user';
-import { UserFormActions, UsersActions } from '../actions/cv.actions';
-import { Congratulation } from '../../data-access/models/congratulation';
+import { UserFormActions } from '../actions/cv.actions';
 
 export interface UserState {
   user: Partial<User>;
   users: User[];
-  // showCongratulationPopup: boolean ;
-  // congratulationData: Congratulation | null;
+  loaded: boolean;
+  submitting: boolean;
 }
 
 export const initialUserState: UserState = {
@@ -36,35 +35,24 @@ export const initialUserState: UserState = {
     },
   },
   users: [],
-  // showCongratulationPopup: false,
-  // congratulationData: null,
+  loaded: false,
+  submitting: false,
 };
 
 export const userReducer = createReducer<UserState, Action>(
   initialUserState,
-  on(UsersActions.loadUsers, (state: UserState) => ({
-    ...state,
-  })),
-  on(UsersActions.loadUserSuccess, (state: UserState, props) => ({
-    ...state,
-    users: props.users,
-  })),
   on(UserFormActions.submitUserForm, (state: UserState) => ({
     ...state,
+    submitting: true,
   })),
   on(UserFormActions.submitUserFormSuccess, (state: UserState, { user }) => ({
     ...state,
     users: [...state.users, user],
+    loaded: true,
+    submitting: false, 
   })),
   on(UserFormActions.submitUserFormFailure, (state: UserState, { error }) => ({
     ...state,
+    submitting: false,
   }))
-  // on(
-  //   UserFormActions.displayCongratulationPopup,
-  //   (state : UserState, { congratulationData }) => ({
-  //     ...state,
-  //     showCongratulationPopup: true,
-  //     congratulationData,
-  //   })
-  // )
 );

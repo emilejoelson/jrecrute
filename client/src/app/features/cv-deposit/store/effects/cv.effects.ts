@@ -2,8 +2,7 @@ import { inject, Injectable, signal, WritableSignal } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, mergeMap, of, tap } from 'rxjs';
 import { UserService } from '../../data-access/services/user.service';
-import { UserFormActions, UsersActions } from '../actions/cv.actions';
-import { User } from '../../data-access/models/user';
+import { UserFormActions } from '../actions/cv.actions';
 import { Router } from '@angular/router';
 
 // import img from '../../../../../assets/images/congratulation.png';
@@ -29,11 +28,12 @@ export class UserEffects {
             };
 
             return this.userService.addUser(updatedUserPayload).pipe(
-              map((response) =>
-                UserFormActions.submitUserFormSuccess({
+              map((response) => {
+                // Navigate after successful submission
+                return UserFormActions.submitUserFormSuccess({
                   user: response.user,
-                })
-              ),
+                });
+              }),
               catchError((error) =>
                 of(UserFormActions.submitUserFormFailure({ error }))
               )

@@ -7,14 +7,7 @@ import {
 
 import { HttpErrorResponse } from '@angular/common/http';
 import { User } from '../../data-access/models/user';
-import { Congratulation } from '../../data-access/models/congratulation';
 
-export const RootActions = createActionGroup({
-  source: 'ROOT',
-  events: {
-    'Init app': emptyProps(),
-  },
-});
 
 export const UserFormActions = createActionGroup({
   source: 'User Form API',
@@ -27,17 +20,9 @@ export const UserFormActions = createActionGroup({
     'Submit user form failure': props<{
       error: { error: HttpErrorResponse | Error | string };
     }>(), 
-    // 'Display congratulation popup': props<{congratulationData: Congratulation}>(),
   },
 });
 
-export const UsersActions = createActionGroup({
-  source: 'User API',
-  events: {
-    'load users': emptyProps(),
-    'load user success': props<{ users: User[] }>(),
-    'load user failure': props<{ error: HttpErrorResponse | Error | string }>(),
-  },
-});
+
 
 

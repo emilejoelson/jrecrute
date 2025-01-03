@@ -1,9 +1,9 @@
 import { ActionReducer, MetaReducer } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorAction } from '../../core/models/error.action';
-import { RootState } from '../root.state';
+import { State } from '../root.state';
 
-export function log(reducer: ActionReducer<RootState>): ActionReducer<RootState> {
+export function log(reducer: ActionReducer<State>): ActionReducer<State> {
   return (state, action: ErrorAction) => {
     const currentState = reducer(state, action);
 
@@ -34,4 +34,4 @@ export function log(reducer: ActionReducer<RootState>): ActionReducer<RootState>
   };
 }
 
-export const metaReducers: MetaReducer<RootState>[] = [log];
+export const metaReducers: MetaReducer<State>[] = [log];

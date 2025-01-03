@@ -9,6 +9,13 @@ export const routes: Routes = [
       ),
     children: [
       {
+        path: 'attente-de-reponse',
+        loadComponent: () =>
+          import('./shared/loading-spinner/loading-spinner.component').then(
+            (m) => m.LoadingSpinnerComponent
+          ),
+      },
+      {
         path: 'deposer-un-cv-avec-succes',
         loadComponent: () =>
           import(
