@@ -71,7 +71,7 @@ export class FooterComponent {
       {
         name: 'Contact',
         icon: 'fa fa-envelope',
-        link: 'mailto:joelsonemile.andriamihaja@edu.uiz.ac.ma',
+        link: 'mailto:contact@consultcollab.com ',
       },
     ],
   };
