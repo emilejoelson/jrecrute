@@ -43,7 +43,7 @@ export class DepositCvComponent implements OnInit {
   previewUrl: SafeResourceUrl | null = null;
   previewType: string = '';
   currentStep: number = 1;
-  
+
   constructor(
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
@@ -71,7 +71,7 @@ export class DepositCvComponent implements OnInit {
 
       professionalInfo: this.fb.group({
         currentPosition: ['', Validators.required],
-        yearsOfExperience: ['', Validators.required],
+        yearsOfExperience: ['+3 ans', Validators.required],
         desiredPosition: ['', Validators.required],
         enterprise: ['', Validators.required],
         hasRemoteExperience: [false],
@@ -80,7 +80,7 @@ export class DepositCvComponent implements OnInit {
 
       academicInfo: this.fb.group({
         formation: this.fb.group({
-          level: ['', Validators.required],
+          level: ['M2', Validators.required],
           languages: this.fb.array([this.createLanguageFormGroup()]),
         }),
         motivation: ['', Validators.required],
@@ -99,8 +99,8 @@ export class DepositCvComponent implements OnInit {
 
   createExperienceFormGroup(): FormGroup {
     return this.fb.group({
-      position: ['', Validators.required],
-      company: ['', Validators.required],
+      position: ['Java Dévéloppeur', Validators.required],
+      company: ['Fitifash', Validators.required],
       startMonth: ['', Validators.required],
       startYear: ['', Validators.required],
       endMonth: ['', Validators.required],
@@ -184,20 +184,18 @@ export class DepositCvComponent implements OnInit {
   }
 
   onSubmit() {
-    if (this.mainForm.valid && this.uploadForm.valid) {
-      const formData = new FormData();
-      formData.append('cvFile', this.uploadForm.get('cvFile')?.value);
+    const formData = new FormData();
+    formData.append('cvFile', this.uploadForm.get('cvFile')?.value);
 
-      const payload = {
-        ...this.mainForm.value,
-      };
+    const payload = {
+      ...this.mainForm.value,
+    };
 
-      this.store.dispatch(
-        UserFormActions.submitUserForm({
-          formData,
-          userPayload: payload,
-        })
-      );
-    }
+    this.store.dispatch(
+      UserFormActions.submitUserForm({
+        formData,
+        userPayload: payload,
+      })
+    );
   }
 }
