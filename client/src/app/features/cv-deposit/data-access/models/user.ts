@@ -17,7 +17,6 @@ interface IPersonalInfo {
 // Professional information
 interface IProfessionalInfo {
   currentPosition: string;
-  yearsOfExperience: string;
   desiredPosition: string;
   enterprise: string;
   hasRemoteExperience: boolean;

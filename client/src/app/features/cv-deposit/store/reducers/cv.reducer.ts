@@ -1,9 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { User } from '../../data-access/models/user';
-import {
-  UserFormActions,
-  UsersActions,
-} from '../actions/cv.actions';
+import { UserFormActions, UsersActions } from '../actions/cv.actions';
 import { Congratulation } from '../../data-access/models/congratulation';
 
 export interface UserState {
@@ -25,7 +22,6 @@ export const initialUserState: UserState = {
     },
     professionalInfo: {
       currentPosition: '',
-      yearsOfExperience: '',
       desiredPosition: '',
       enterprise: '',
       hasRemoteExperience: false,
@@ -62,13 +58,13 @@ export const userReducer = createReducer<UserState, Action>(
   })),
   on(UserFormActions.submitUserFormFailure, (state: UserState, { error }) => ({
     ...state,
-  })),
+  }))
   // on(
   //   UserFormActions.displayCongratulationPopup,
   //   (state : UserState, { congratulationData }) => ({
   //     ...state,
   //     showCongratulationPopup: true,
-  //     congratulationData, 
+  //     congratulationData,
   //   })
   // )
 );

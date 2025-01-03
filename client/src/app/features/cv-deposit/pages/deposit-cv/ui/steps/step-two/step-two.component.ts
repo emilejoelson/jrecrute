@@ -1,7 +1,12 @@
 // step-two.component.ts
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormGroup, FormArray, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormArray,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { CustomInputComponent } from '../ui/custom-input/custom-input.component';
 import { CustomSelectComponent } from '../ui/custom-select/custom-select.component';
@@ -9,9 +14,15 @@ import { CustomSelectComponent } from '../ui/custom-select/custom-select.compone
 @Component({
   selector: 'app-step-two',
   standalone: true,
-  imports: [CustomInputComponent, CustomSelectComponent, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    CustomInputComponent,
+    CustomSelectComponent,
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   templateUrl: './step-two.component.html',
-  styleUrls: ['./step-two.component.scss']
+  styleUrls: ['./step-two.component.scss'],
 })
 export class StepTwoComponent implements OnInit {
   @Input() formGroup!: FormGroup;
@@ -37,7 +48,7 @@ export class StepTwoComponent implements OnInit {
     { value: '09', label: 'Septembre' },
     { value: '10', label: 'Octobre' },
     { value: '11', label: 'Novembre' },
-    { value: '12', label: 'Décembre' }
+    { value: '12', label: 'Décembre' },
   ];
 
   years = Array.from({ length: 25 }, (_, i) => {
@@ -48,59 +59,66 @@ export class StepTwoComponent implements OnInit {
   professionnalInformations = [
     {
       id: 'currentPosition',
-      classInput: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+      classInput:
+        'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
       title: 'Post occupé actuel',
     },
     {
       id: 'enterprise',
-      classInput: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+      classInput:
+        'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
       title: 'Entreprise',
     },
   ];
 
   postes = [
-    { value: 'dev', label: 'Développeur web' },
-    { value: 'cma', label: 'Community Manager' },
-    { value: 'sec', label: 'Secrétaire' },
-    { value: 'pbi', label: 'Profil bilingue' },
-    { value: 'cme', label: 'Commercial' },
+    { value: 'Développeur web', label: 'Développeur web' },
+    { value: 'Community Manager', label: 'Community Manager' },
+    { value: 'Secrétaire', label: 'Secrétaire' },
+    { value: 'Profil bilingue', label: 'Profil bilingue' },
+    { value: 'Commercial', label: 'Commercial' },
   ];
 
   postField = {
     id: 'desiredPosition',
-    classSelect: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+    classSelect:
+      'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
     title: 'Poste recherché',
   };
 
   startMonthField = {
     id: 'startMonth',
-    classSelect: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+    classSelect:
+      'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Mois'
+    title: 'Mois',
   };
 
   startYearField = {
     id: 'startYear',
-    classSelect: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+    classSelect:
+      'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Année'
+    title: 'Année',
   };
 
   endMonthField = {
     id: 'endMonth',
-    classSelect: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+    classSelect:
+      'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Mois'
+    title: 'Mois',
   };
 
   endYearField = {
     id: 'endYear',
-    classSelect: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+    classSelect:
+      'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Année'
+    title: 'Année',
   };
 
   ngOnInit() {
@@ -123,7 +141,7 @@ export class StepTwoComponent implements OnInit {
         startMonth: (today.getMonth() + 1).toString().padStart(2, '0'),
         startYear: today.getFullYear().toString(),
         endMonth: (today.getMonth() + 1).toString().padStart(2, '0'),
-        endYear: today.getFullYear().toString()
+        endYear: today.getFullYear().toString(),
       });
     }
   }
@@ -131,7 +149,7 @@ export class StepTwoComponent implements OnInit {
   onRemoteWorkChange(value: boolean) {
     this.hasWorkedRemotely = value;
     this.formGroup.get('professionalInfo')?.patchValue({
-      hasRemoteExperience: value
+      hasRemoteExperience: value,
     });
   }
 
@@ -141,11 +159,11 @@ export class StepTwoComponent implements OnInit {
       const today = new Date();
       this.currentExperience.patchValue({
         endMonth: (today.getMonth() + 1).toString().padStart(2, '0'),
-        endYear: today.getFullYear().toString()
+        endYear: today.getFullYear().toString(),
       });
     }
   }
-  
+
   onPrevClick() {
     this.prev.emit();
   }
@@ -153,7 +171,7 @@ export class StepTwoComponent implements OnInit {
   onProceedClick() {
     this.proceed.emit();
     // if (this.formGroup.valid) {
-     
+
     // }
   }
 }

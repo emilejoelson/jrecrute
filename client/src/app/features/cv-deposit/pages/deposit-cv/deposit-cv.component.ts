@@ -71,7 +71,6 @@ export class DepositCvComponent implements OnInit {
 
       professionalInfo: this.fb.group({
         currentPosition: ['', Validators.required],
-        yearsOfExperience: ['+3 ans', Validators.required],
         desiredPosition: ['', Validators.required],
         enterprise: ['', Validators.required],
         hasRemoteExperience: [false],

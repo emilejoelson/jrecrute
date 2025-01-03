@@ -213,12 +213,6 @@ const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo
                     <div class="info-label">Poste Recherché</div>
                     <div class="info-value">${professionalInfo.desiredPosition}</div>
                   </div>
-                  
-                  <div class="info-item">
-                    <div class="info-label">Expérience</div>
-                    <div class="info-value">${professionalInfo.yearsOfExperience}</div>
-                  </div>
-
                   <div class="info-item">
                     <div class="info-label">Expérience en Télétravail</div>
                     <div class="info-value">${professionalInfo.hasRemoteExperience ? 

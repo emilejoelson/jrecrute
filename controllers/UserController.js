@@ -1,5 +1,5 @@
 const { User } = require("../models/UserModel.js");
-const sendEmailToCompany = require("../models/MailService.js");
+const sendEmailToCompany = require("../utils/MailService.js");
 const fs = require("fs");
 const path = require("path");
 
