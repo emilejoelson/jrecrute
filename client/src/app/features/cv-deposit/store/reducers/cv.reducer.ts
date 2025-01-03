@@ -5,7 +5,6 @@ import { UserFormActions } from '../actions/cv.actions';
 export interface UserState {
   user: Partial<User>;
   users: User[];
-  loaded: boolean;
   submitting: boolean;
 }
 
@@ -35,7 +34,6 @@ export const initialUserState: UserState = {
     },
   },
   users: [],
-  loaded: false,
   submitting: false,
 };
 
@@ -48,7 +46,6 @@ export const userReducer = createReducer<UserState, Action>(
   on(UserFormActions.submitUserFormSuccess, (state: UserState, { user }) => ({
     ...state,
     users: [...state.users, user],
-    loaded: true,
     submitting: false, 
   })),
   on(UserFormActions.submitUserFormFailure, (state: UserState, { error }) => ({

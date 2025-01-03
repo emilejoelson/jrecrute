@@ -23,12 +23,12 @@ export default {
   }
 ],
   assets: {
-    'index.csr.html': {size: 9341, hash: '7691b1cfeb3ea3bf0e20c864f08fc75c9c935a3d191d810ab915e8c4713b9d7a', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 7696, hash: '057f5f3a27c72125ec2f882d75a2abe4eaeda2b1f1b660ab0aa86b73d68fa6eb', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'attente-de-reponse/index.html': {size: 32843, hash: '4d30119afa728b5c541aee74225b387bd6501f6793ca2ca0acaf053abaed7c66', text: () => import('./assets-chunks/attente-de-reponse_index_html.mjs').then(m => m.default)},
-    'index.html': {size: 61045, hash: '4060092fd267c7a9b5353a1dbe83e0ddeb6eddfc3806976cace31d4aa2f50d96', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
-    'deposer-un-cv-avec-succes/index.html': {size: 31845, hash: '5f2c46a9ff1e8755e7a86d56da82031f6ace3c03ba7a99b34ea2ca63a7f0823b', text: () => import('./assets-chunks/deposer-un-cv-avec-succes_index_html.mjs').then(m => m.default)},
-    'deposer-un-cv/index.html': {size: 33824, hash: '9fe41768eade7f61227a3f0ad757e6978b6146478aa3d7b114bd5e4a00fd8325', text: () => import('./assets-chunks/deposer-un-cv_index_html.mjs').then(m => m.default)},
+    'index.csr.html': {size: 9341, hash: 'f2148834965d58ec7a1c1fde999c2b6d054c5c10b0f6e3b60b1381a7685b2493', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 7696, hash: '267410ac5fd79a22d98cff0870494264794bdca2eeabe207daea8ffd9b3b16a1', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'attente-de-reponse/index.html': {size: 33190, hash: '5fd057d3c2145b2fb5b94026996e8de0e5b10a913c3ed20ca20fcdf2bc64114c', text: () => import('./assets-chunks/attente-de-reponse_index_html.mjs').then(m => m.default)},
+    'index.html': {size: 61045, hash: '5d06e7ce78d6c3a01d2c46638c7fa5a7edcf80fe29cb10dc1b6382c9975129a9', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
+    'deposer-un-cv/index.html': {size: 33824, hash: '458242cbe30c054aac731149b864a11cd80659171d1358faec5196aa5771f6b6', text: () => import('./assets-chunks/deposer-un-cv_index_html.mjs').then(m => m.default)},
+    'deposer-un-cv-avec-succes/index.html': {size: 31845, hash: '1d89c3bb97dbbcee2f37ebc82a7857a9ba1b8acd78f6bdc1bb770bd55ad91569', text: () => import('./assets-chunks/deposer-un-cv-avec-succes_index_html.mjs').then(m => m.default)},
     'styles-2EAGLGPP.css': {size: 81924, hash: '9iMF757PQIk', text: () => import('./assets-chunks/styles-2EAGLGPP_css.mjs').then(m => m.default)}
   },
 };

@@ -65,7 +65,7 @@
     <ul
       class="flex items-start gap-x-12 gap-y-8 flex-col xl:flex-row xl:items-center"
     >
-      @for (linkEntry of navItems.links; track linkEntry.href){
+      @for (linkEntry of navItems.links; track linkEntry){
       <li
         (click)="
           linkEntry.behaviour === 'scroll'
