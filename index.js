@@ -5,6 +5,9 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const cors = require("cors");
 const path = require("path");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const MongoStore = require("connect-mongo");
 
 // Local imports
 const db = require("./database/db.js");
@@ -13,28 +16,55 @@ const rout = require("./routes/UserRouter.js");
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
-
-// Attach io to the app
 app.io = io;
 
 // Middleware
-app.use(cors());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      scriptSrc: ["'self'", "https://apis.google.com"],
+      objectSrc: ["'none'"],
+      upgradeInsecureRequests: [],
+    },
+  },
+}));
+
+app.use(
+  cors({
+    origin: [
+      "https://www.consultcollab-recrutement.com",
+      "http://localhost:4200",
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 app.use(express.json({ limit: "10mb" }));
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: false }));
 
-app.use(
-  "/uploads/images",
-  express.static(path.join(__dirname, "uploads", "images"))
-);
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: "Too many requests, please try again later.",
+});
+app.use(limiter);
+
 app.use(
   session({
-    secret: "my secret key",
-    saveUninitialized: true,
-    resave: true,
+    secret: process.env.SESSION_SECRET || "fallback_secret",
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-      sameSite: "None",
-      secure: false,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Strict",
+      maxAge: 24 * 60 * 60 * 1000,
     },
   })
 );
@@ -68,7 +98,7 @@ io.on("connection", (socket) => {
   });
 });
 
-// Handle production setup
+// Production setup
 if (process.env.NODE_ENV === "production") {
   const staticPath = path.join(
     __dirname,
@@ -96,6 +126,12 @@ if (process.env.NODE_ENV === "production") {
     res.send("API running");
   });
 }
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: "Something went wrong!" });
+});
 
 // Server setup
 const port = process.env.PORT || 4000;

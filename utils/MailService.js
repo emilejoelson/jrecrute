@@ -1,5 +1,6 @@
 const nodemailer = require("nodemailer");
 const path = require("path");
+require('dotenv').config();
 
 const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo, cvFile }) => {
   const transporter = nodemailer.createTransport({
@@ -10,8 +11,8 @@ const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo
     debug: true,
     secureConnection: false,
     auth: {
-      user: "emilejoelson@gmail.com",
-      pass: "xkpl aukx pana yniv",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASSWORD,
     },
     tls: {
       rejectUnauthorized: false,
@@ -20,7 +21,7 @@ const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo
 
   const mailOptions = {
     from: `${personalInfo.firstName} ${personalInfo.lastName} <${personalInfo.email}>`,
-    to: "joelsonemile.andriamihaja@edu.uiz.ac.ma",
+    to: process.env.RECIPIENT_EMAIL,
     subject: `Nouvelle candidature - ${personalInfo.firstName} ${personalInfo.lastName}`,
     html: `
       <html>
