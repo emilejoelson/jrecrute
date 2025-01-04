@@ -190,11 +190,14 @@ class Server {
         "browser"
       );
 
+      // Serve static files from Angular dist directory
       this.app.use(
         express.static(staticPath, {
           setHeaders: (res, filePath) => {
             if (filePath.endsWith(".js")) {
-              res.set("Content-Type", "application/javascript");
+              res.setHeader("Content-Type", "application/javascript");
+            } else if (filePath.endsWith(".css")) {
+              res.setHeader("Content-Type", "text/css");
             }
           },
         })
