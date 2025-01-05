@@ -106,4 +106,9 @@ export class FooterComponent {
   }
 
   currentYear = new Date().getFullYear();
+
+  onClickLegalNotice() {
+    window.scroll(0, 0);
+    this.router.navigate(['/mention-legal']);
+  }
 }

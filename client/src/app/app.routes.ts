@@ -9,6 +9,14 @@ export const routes: Routes = [
       ),
     children: [
       {
+        title: 'Recrutement | Mentions légales',
+        path: 'mention-legal',
+        loadComponent: () =>
+          import(
+            './features/cv-deposit/pages/legal-notice/legal-notice.component'
+          ).then((m) => m.LegalNoticeComponent),
+      },
+      {
         path: 'attente-de-reponse',
         loadComponent: () =>
           import('./shared/loading-spinner/loading-spinner.component').then(
