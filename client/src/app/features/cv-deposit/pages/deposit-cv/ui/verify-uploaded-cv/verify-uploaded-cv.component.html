@@ -1,8 +1,11 @@
-<div class="grid mt-10 custom-650:mx-5 mx-1/8 gap-5 md:grid-cols-3">
-  <div class="relative file-preview-container">
+<div
+  class="grid mt-10 custom-650:mx-5 custom-650:bg-gray-800 custom-650:border-gray-50 custom-650:border-dashed custom-650:border-2 custom-650:pb-1 rounded-xl mx-1/8 gap-5 md:grid-cols-3"
+>
+  <div class="relative md:file-preview-container">
     <!-- Action Buttons -->
+     
     <div
-      class="absolute shadow-box-action-buttons text-gray-400 top-1/2 left-1/2 transform bg-gray-800 -space-x-10 flex -translate-x-1/2 -translate-y-1/2"
+      class="absolute  shadow-box-action-buttons text-gray-400 top-1/2 left-1/2 transform bg-gray-800 -space-x-10 flex -translate-x-1/2 -translate-y-1/2"
     >
       <!-- Edit/Reupload Button -->
       <button
@@ -47,7 +50,89 @@
     }
 
     <!-- PDF preview -->
-    @if(previewType === 'pdf') {
+    @if(previewType === 'pdf') { @if(isMobile()){
+    <div class="flex items-center justify-center">
+      <div
+        class="relative inline-block p-0.5 w-full -mb-1"
+        style="opacity: 1; transform: none; transform-origin: 50% 50% 0px"
+      >
+        <div class="absolute left-1 cursor-pointer top-1 z-10">
+          <button
+            (click)="onReuploadClick()"
+            class="border-0.5 border-border-200 text-white bg-red-400 hover:bg-red-500 -translate-x-1/2 -translate-y-1/2 rounded-full p-2 transition hover:scale-105"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="12"
+              height="12"
+              fill="currentColor"
+              viewBox="0 0 256 256"
+            >
+              <path
+                d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div></div>
+        <div>
+          <button
+            class="relative grid grid-rows-[1fr_auto] items-center h-[270px] w-full"
+          >
+            <div
+              class="pointer-events-none absolute inset-0 z-0 grid grid-rows-[auto_1fr] overflow-hidden transition transition-transform duration-100 group-active/thumbnail:scale-[0.99]"
+            >
+              <div class="relative z-[1] -mb-[0.5px] flex">
+                <div
+                  class="border-border-200/30 border-l-0.5 border-t-0.5 group-hover/thumbnail:border-border-200 bg-white h-full w-full transition-colors duration-100 rounded-tl-lg"
+                ></div>
+                <svg
+                  viewBox="0 0 16 16"
+                  fill="#000000"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="block flex-shrink-0 drop-shadow h-4 w-4"
+                >
+                  <path
+                    d="M0 0L16 16H0V0Z"
+                    class="stroke-border-300/10 fill-white"
+                    stroke-width="0.5"
+                  ></path>
+                  <path
+                    d="M-1 -1L17 17"
+                    class="group-hover/thumbnail:stroke-border-300 transition-colors duration-100"
+                    stroke-width="0.5"
+                  ></path>
+                </svg>
+              </div>
+              <div class="relative">
+                <div
+                  class="border-l-0.5 border-b-0.5 border-r-0.5 border-border-200/30 group-hover/thumbnail:border-border-200 absolute inset-0 bg-white bg-gradient-to-b from-white from-20% transition-colors duration-100 to-accent-secondary-200/10 rounded-b-lg"
+                ></div>
+              </div>
+            </div>
+            <div
+              class="text-violet-700 pointer-events-none relative z-[1] flex-1 break-words px-2.5 text-center leading-tight tracking-tight mb-1 line-clamp-3 px-2.5 text-xl font-semibold leading-[0.825rem] tracking-tighter"
+              style="transform: translate3d(0px, 0px, 0px)"
+            >
+              {{ nameFile }}
+            </div>
+            <div class="text-center text-white">
+              <div
+                type="button"
+                (click)="onProceedClick()"
+                class="flex cursor-pointer py-2 justify-center gap-x-1 w-20 hover:bg-purple-700 transition-all bg-app-primay-dark transition backdrop-blur border-border-200/30 border-0.5 shadow-sm inline-block rounded-full tracking-normal absolute left-1/2 top-full z-10 -mt-1 -translate-x-1/2 -translate-y-1/2"
+              >
+                <div class="uppercase font-bold line-clamp-1 truncate">pdf</div>
+                <div>
+                  <span class="">→</span>
+                </div>
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+    } @else {
     <div
       class="h-[calc(100vh-350px)] sm:h-[calc(100vh-300px)] min-h-[300px] sm:min-h-[500px] w-full rounded-lg"
     >
@@ -57,7 +142,7 @@
         class="h-full w-full rounded-lg"
       />
     </div>
-    }
+    } }
 
     <!-- Word preview -->
     @if(previewType === 'word') {

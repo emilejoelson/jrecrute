@@ -43,6 +43,7 @@ export class DepositCvComponent implements OnInit {
   previewUrl: SafeResourceUrl | null = null;
   previewType: string = '';
   currentStep: number = 1;
+  filename: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -147,7 +148,9 @@ export class DepositCvComponent implements OnInit {
     const file = event.file;
     this.uploadForm.patchValue({ cvFile: file });
     this.uploadForm.get('cvFile')?.updateValueAndValidity();
-
+    console.log('File name : ', file.name);
+    this.filename = file.name;
+    console.log('This file name : ', this.filename);
     if (file) {
       this.selectedFile = file;
       const fileType = file.type;
