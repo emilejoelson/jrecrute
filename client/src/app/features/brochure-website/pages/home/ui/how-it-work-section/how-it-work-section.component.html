@@ -25,7 +25,7 @@
 
     <div class="w-fit absolute custom-650:hidden text-sm xl:text-lg">
       <button
-       (click)="onDeposit() "
+        (click)="onDeposit()"
         class="block text-center cursor-pointer bg-app-primary-purple text-white border border-purple-700 w-full tracking-wide px-6 py-3 rounded-xl font-medium transition-colors duration-300 ease-out hover:bg-purple-700 hover:border-purple-800"
       >
         Déposer votre CV
@@ -40,10 +40,12 @@
   } @placeholder {
   <div></div>
   } @defer (on viewport) {
-  <ul
-    class="flex flex-col gap-8 mt-8 max-w-[600px] lg:hidden"
-  >
-    <li class="step max-w-[350px]" [class.show-up-animation]="isVisible"  style="--item-index: 0">
+  <ul class="flex flex-col gap-8 mt-8 max-w-[600px] lg:hidden">
+    <li
+      class="step max-w-[350px]"
+      [class.show-up-animation]="isVisible"
+      style="--item-index: 0"
+    >
       <div class="flex gap-4">
         <span>
           <svg
@@ -85,7 +87,11 @@
       </p>
     </li>
 
-    <li class=" step max-w-[350px] self-end" [class.show-up-animation]="isVisible" style="--item-index: 1">
+    <li
+      class="step max-w-[350px] self-end"
+      [class.show-up-animation]="isVisible"
+      style="--item-index: 1"
+    >
       <div class="flex flex-row-reverse gap-4">
         <span>
           <svg
@@ -128,7 +134,11 @@
       </p>
     </li>
 
-    <li class="step max-w-[350px]" [class.show-up-animation]="isVisible" style="--item-index: 2">
+    <li
+      class="step max-w-[350px]"
+      [class.show-up-animation]="isVisible"
+      style="--item-index: 2"
+    >
       <div class="flex gap-4">
         <span>
           <svg
@@ -169,7 +179,11 @@
         d'un entretien en visioconférence pour approfondir l'échange.
       </p>
     </li>
-    <li class="step max-w-[350px] self-end" [class.show-up-animation]="isVisible" style="--item-index: 3">
+    <li
+      class="step max-w-[350px] self-end"
+      [class.show-up-animation]="isVisible"
+      style="--item-index: 3"
+    >
       <div class="flex flex-row-reverse gap-4">
         <span>
           <svg
@@ -233,7 +247,7 @@
 
   <div class="sm:hidden mt-10 w-fit custom-650:w-full text-sm xl:text-lg">
     <a
-      href="/deposer-un-cv"
+      (click)="onDeposit()"
       class="block text-center bg-app-primary-purple text-white border border-purple-700 w-full tracking-wide px-6 py-3 rounded-xl font-medium transition-colors duration-300 ease-out hover:bg-purple-700 hover:border-purple-800"
     >
       Déposer votre CV

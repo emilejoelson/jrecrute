@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
 
 const languageSchema = new mongoose.Schema({
-  languageone: { type: String, required: true },
-  levelone: { type: String, required: true },
-  languagetwo: { type: String },
-  leveltwo: { type: String },
+  language: { type: String, required: true },
+  level: { type: String, required: true }
 });
 
 const experienceSchema = new mongoose.Schema({

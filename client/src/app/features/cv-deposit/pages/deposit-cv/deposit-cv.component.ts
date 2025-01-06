@@ -16,10 +16,8 @@ import { VerifyUploadedCvComponent } from './ui/verify-uploaded-cv/verify-upload
 import { StepOneComponent } from './ui/steps/step-one/step-one.component';
 import { StepTwoComponent } from './ui/steps/step-two/step-two.component';
 import { StepThreeComponent } from './ui/steps/step-three/step-three.component';
-import { select, Store } from '@ngrx/store';
+import {  Store } from '@ngrx/store';
 import { UserFormActions } from '../../store/actions/cv.actions';
-import { filter } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-deposit-cv',
@@ -49,7 +47,6 @@ export class DepositCvComponent implements OnInit {
     private fb: FormBuilder,
     private sanitizer: DomSanitizer,
     private store: Store,
-    private router: Router
   ) {}
 
   ngOnInit() {
@@ -90,10 +87,8 @@ export class DepositCvComponent implements OnInit {
 
   createLanguageFormGroup(): FormGroup {
     return this.fb.group({
-      languageone: ['', Validators.required],
-      levelone: ['', Validators.required],
-      languagetwo: ['', Validators.required],
-      leveltwo: ['', Validators.required],
+      language: ['', Validators.required],
+      level: ['', Validators.required],
     });
   }
 

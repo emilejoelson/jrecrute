@@ -1,5 +1,5 @@
 <div
-[formGroup]="formGroup"
+  [formGroup]="formGroup"
   class="relative md:rounded-lg custom-650:px-5 custom-650:pt-0 p-10 bg-[#fff] grid md:mt-10 md:mx-1/8 md:gap-[50px] md:grid-cols-[1fr_2fr]"
 >
   <div class="custom-650:hidden">
@@ -30,7 +30,6 @@
     }
   </div>
   <div class="rounded-lg bg-[#fff] flex flex-col">
-    <!-- Main content container with padding-bottom to prevent content overlapping with buttons -->
     <div class="flex-1 md:p-4">
       <p
         class="flex justify-center text-center custom-650:pt-0 p-4 mb-4 text-2xl font-bold text-gray-800"
@@ -39,65 +38,122 @@
       </p>
       <div>
         <div class="grid md:grid-cols-[2fr_1fr] gap-8">
-          <div class="flex flex-col gap-5">
+          <div formGroupName="formation" class="flex flex-col gap-5">
             <app-custom-select
               [id]="trainingField.id"
               [classSelect]="trainingField.classSelect"
               [classLabel]="trainingField.classLabel"
               [title]="trainingField.title"
               [options]="trainings"
-              [control]="formGroup.get(trainingField.id)"
               [formGroup]="formation"
+              [control]="formation.get('level')"
             />
-            <div class="grid md:grid-cols-2 gap-5 md:gap-8">
-              <app-custom-select
-                [id]="languageFieldOne.id"
-                [classSelect]="languageFieldOne.classSelect"
-                [classLabel]="languageFieldOne.classLabel"
-                [title]="languageFieldOne.title"
-                [options]="languages"
-                [control]="formGroup.get(languageFieldOne.id)"
-                [formGroup]="currentLanguages"
-              />
-              <app-custom-select
-                [id]="levelField01.id"
-                [classSelect]="levelField01.classSelect"
-                [classLabel]="levelField01.classLabel"
-                [title]="levelField01.title"
-                [options]="levelLanguage"
-                 [control]="formGroup.get(levelField01.id)"
-                 [formGroup]="currentLanguages"
-              />
+            <div formArrayName="languages" class="flex flex-col gap-5">
+              <!-- Language Entries -->
+              @for (control of languagesFormArray.controls; track $index) {
+              <div [formGroupName]="$index" class="relative">
+                <div class="grid md:grid-cols-2 gap-5 md:gap-8">
+                  <app-custom-select
+                    [id]="getFieldConfig($index, 'language').id"
+                    [classSelect]="
+                      getFieldConfig($index, 'language').classSelect
+                    "
+                    [classLabel]="getFieldConfig($index, 'language').classLabel"
+                    [title]="getFieldConfig($index, 'language').title"
+                    [options]="languages"
+                    [formGroup]="getLanguageGroup($index)"
+                    [control]="getLanguageGroup($index).get('language')"
+                  />
+                  <app-custom-select
+                    [id]="getFieldConfig($index, 'level').id"
+                    [classSelect]="getFieldConfig($index, 'level').classSelect"
+                    [classLabel]="getFieldConfig($index, 'level').classLabel"
+                    [title]="getFieldConfig($index, 'level').title"
+                    [options]="levelLanguage"
+                    [formGroup]="getLanguageGroup($index)"
+                    [control]="getLanguageGroup($index).get('level')"
+                  />
+                </div>
+              </div>
+              }
+
+              <!-- Action Buttons Container -->
+              <div class="grid grid-cols-1">
+                <div class="flex items-center justify-between ">
+                  @if (languagesFormArray.length < MAX_LANGUAGES) {
+                  <!-- Add Language Button -->
+                  <button
+                    type="button"
+                    (click)="addLanguage()"
+                    class="inline-flex items-center custom-650:text-[11px] justify-center gap-2 text-blue-500 hover:text-blue-700"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-5 w-5"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <span>Ajouter une langue</span>
+                  </button>
+                  } @if (languagesFormArray.length > 1) {
+                  <!-- Delete Language Button -->
+                  <button
+                    type="button"
+                    (click)="removeLanguage(languagesFormArray.length - 1)"
+                    class="inline-flex items-center custom-650:text-[11px] justify-center gap-2"
+                  >
+                    <!-- Desktop Delete Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="hidden md:block h-5 w-5 text-red-500 hover:text-red-700"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clip-rule="evenodd"
+                      />
+                    </svg>
+                    <!-- Mobile Delete Icon -->
+                    <div
+                      class="md:hidden inline-flex items-center justify-center w-5 h-5 bg-red-100 rounded-full text-red-500 hover:text-red-700"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="h-5 w-5"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </div>
+                    <span class="text-red-500">Supprimer une langue</span>
+                  </button>
+                  }
+                </div>
+              </div>
             </div>
-            <div class="grid md:grid-cols-2  gap-5 md:gap-8">
-              <app-custom-select
-                [id]="languageFieldTwo.id"
-                [classSelect]="languageFieldTwo.classSelect"
-                [classLabel]="languageFieldTwo.classLabel"
-                [title]="languageFieldTwo.title"
-                [options]="languages"
-                 [control]="formGroup.get(languageFieldTwo.id)"
-                 [formGroup]="currentLanguages"
-              />
-              <app-custom-select
-                [id]="levelField02.id"
-                [classSelect]="levelField02.classSelect"
-                [classLabel]="levelField02.classLabel"
-                [title]="levelField02.title"
-                [options]="levelLanguage"
-                [control]="formGroup.get(levelField02.id)"
-                [formGroup]="currentLanguages"
-              />
-            </div>
-             <app-custom-text-area
-             [id]="motivation.id"
-             [classTextarea]="motivation.classTextarea"
-             [classLabel]="motivation.classLabel"
-             [title]="motivation.title"
-             [rows]="motivation.rows"
-             [control]="formGroup.get(motivation.id)"
-             [formGroup]="formGroup"
-             />
+
+            <app-custom-text-area
+              [id]="motivation.id"
+              [classTextarea]="motivation.classTextarea"
+              [classLabel]="motivation.classLabel"
+              [title]="motivation.title"
+              [rows]="motivation.rows"
+              [formGroup]="formGroup"
+              [control]="formGroup.get('motivation')"
+            />
           </div>
           <div
             class="md:border-l-2 md:border-dashed md:p-3 md:border-[#f6f6f6]"
@@ -121,7 +177,6 @@
     <!-- Fixed button container at the bottom -->
     <div class="bg-white mt-5">
       <div class="flex justify-between items-center w-full md:px-6 py-4">
-        <!-- Back (Précédent) Button -->
         <button (click)="onPrevClick()" type="button" class="flex items-center">
           <svg
             class="w-4 h-4 mr-1 text-blue-400"
@@ -140,7 +195,6 @@
           <span class="text-blue-400 text-sm">Précédent</span>
         </button>
 
-        <!-- Validate Button -->
         <button
           type="submit"
           (click)="onValidateClick()"

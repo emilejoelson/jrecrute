@@ -45,8 +45,6 @@ const createUser = async (req, res) => {
       academicInfo,
     });
 
-    const savedUser = await newUser.save();
-
     await sendEmailToCompany({
       personalInfo,
       professionalInfo,

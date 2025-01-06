@@ -5,7 +5,6 @@ export interface User {
   academicInfo: IAcademicInfo;
 }
 
-// Personal information
 interface IPersonalInfo {
   civility: string;
   firstName: string;
@@ -14,16 +13,14 @@ interface IPersonalInfo {
   telephone: string;
 }
 
-// Professional information
 interface IProfessionalInfo {
   currentPosition: string;
   desiredPosition: string;
   enterprise: string;
   hasRemoteExperience: boolean;
-  experiences: Array<IExperience>;
+  experiences: IExperience[];
 }
 
-//Academin info
 interface IAcademicInfo {
   formation: IFormation;
   motivation: string;
@@ -31,15 +28,14 @@ interface IAcademicInfo {
 
 interface IFormation {
   level: string;
-  languages: Array<ILanguage>;
+  languages: ILanguage[];
 }
 
 interface ILanguage {
-  languageone: string;
-  levelone: string;
-  languagetwo: string;
-  leveltwo: string;
+  language: string;
+  level: string;
 }
+
 interface IExperience {
   position: string;
   company: string;
