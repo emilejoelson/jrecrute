@@ -1,4 +1,15 @@
-<div class="md:bg-pagesGradient">
+<div class="relative">
+  @if(!isMobile()){
+  <video
+    #videoPlayer
+    class="absolute top-0 left-0 w-full object-cover z-0"
+    autoplay
+    muted
+    (ended)="playNextVideo()"
+  >
+    <source [src]="currentVideo()" type="video/mp4" />
+  </video>
+  }
   <app-header />
   <main>
     <router-outlet />

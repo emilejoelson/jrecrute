@@ -1,6 +1,6 @@
 <header
   #headerElement
-  class="transition-colors duration-300 z-[999] sticky top-0 left-0 w-full flex items-center justify-between gap-2 px-app-secondary-padding xl:px-app-primary-padding min-h-[100px]"
+  class="transition-colors relative z-[9999] duration-300 z-[999] sticky top-0 left-0 w-full flex items-center justify-between gap-2 px-app-secondary-padding xl:px-app-primary-padding min-h-[100px]"
 >
   <div
     #progressBarElement
@@ -8,13 +8,16 @@
   ></div>
 
   <a class="cursor-pointer min-w-[143px]" href="/">
-    <div class="flex items-center gap-2">
+    <div #logoContainer class="flex items-center gap-2">
       <img
-        className=" w-8 h-8 object-contain"
+        #logoImage
+        className="w-8 h-8 object-contain"
         src="assets/icons/cc-logo.png"
         alt="Logo"
       />
-      <span class="text-2xl font-bold text-gradient">Recrutement</span>
+      <span class="md:text-2xl text-xl font-bold text-gradient"
+        >Recrutement</span
+      >
     </div>
   </a>
 
@@ -67,12 +70,13 @@
     >
       @for (linkEntry of navItems.links; track linkEntry){
       <li
+        #navElement
         (click)="
           linkEntry.behaviour === 'scroll'
             ? scrollToSection(linkEntry.sectionId!)
             : null
         "
-        class="cursor-pointer relative text-gray-600 hover:text-purple-600 font-medium text-lg transition-colors duration-300 ease-in-out has-[.link-active]:text-app-secondary-dark"
+        class="cursor-pointer relative custom-650:text-gray-600 hover:text-purple-600 font-medium text-lg transition-colors duration-300 ease-in-out has-[.link-active]:text-app-secondary-dark"
       >
         {{ linkEntry.name }}
       </li>
@@ -82,10 +86,11 @@
       >
         <div class="text-sm">
           <button
-          (click)="onDeposit()"
+            (click)="onDeposit()"
             class="block cursor-pointer text-center bg-app-primary-purple text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-all transform hover:scale-105 transition-colors ease-out duration-300 relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-inherit text-[#fff] z-10 group bg-app-primay-dark hover:bg-app-secondary-dark"
-            >{{ buttonEntry.name }}</button
           >
+            {{ buttonEntry.name }}
+          </button>
         </div>
       </div>
       }

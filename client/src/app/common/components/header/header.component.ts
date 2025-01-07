@@ -4,7 +4,9 @@ import {
   ElementRef,
   HostListener,
   inject,
+  QueryList,
   ViewChild,
+  ViewChildren,
 } from '@angular/core';
 import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { Router } from '@angular/router';
@@ -30,6 +32,10 @@ export class HeaderComponent implements AfterViewInit {
   @ViewChild('headerElement') headerElement!: ElementRef<HTMLElement>;
   @ViewChild('progressBarElement')
   progressBarElement!: ElementRef<HTMLDivElement>;
+  @ViewChildren('navElement') navElements!: QueryList<ElementRef<HTMLElement>>;
+  @ViewChild('logoImage') logoImage!: ElementRef<HTMLImageElement>;
+  @ViewChild('logoContainer') logoContainer!: ElementRef<HTMLDivElement>;
+
   isNavOpen = false;
   router = inject(Router);
 
@@ -108,12 +114,58 @@ export class HeaderComponent implements AfterViewInit {
     }
     const top = window.scrollY;
     if (top > 0) {
+      // Header background changes
       this.headerElement.nativeElement.style.background = 'white';
       this.headerElement.nativeElement.style.boxShadow =
         'rgba(17, 17, 26, 0.1) 0px 1px 0px';
+
+      // Reduce header height
+      this.headerElement.nativeElement.classList.remove('min-h-[100px]');
+      this.headerElement.nativeElement.classList.add('min-h-[70px]');
+
+      // Reduce logo size
+      // this.logoImage.nativeElement.classList.remove('w-9', 'h-9');
+      // this.logoImage.nativeElement.classList.add('w-8', 'h-8');
+
+      // Reduce logo text size
+      // this.logoContainer.nativeElement
+      //   .querySelector('span')
+      //   ?.classList.remove('text-2xl');
+      // this.logoContainer.nativeElement
+      //   .querySelector('span')
+      //   ?.classList.add('text-xl');
+
+      // Update all nav items to blue
+      this.navElements.forEach((navElement) => {
+        navElement.nativeElement.classList.remove('text-gray-100');
+        navElement.nativeElement.classList.add('text-gray-600');
+      });
     } else {
+      // Reset header background
       this.headerElement.nativeElement.style.background = 'transparent';
       this.headerElement.nativeElement.style.boxShadow = 'none';
+
+      // Reset header height
+      this.headerElement.nativeElement.classList.add('min-h-[100px]');
+      this.headerElement.nativeElement.classList.remove('min-h-[70px]');
+
+      // Reset logo size
+      // this.logoImage.nativeElement.classList.add('w-9', 'h-9');
+      // this.logoImage.nativeElement.classList.remove('w-8', 'h-8');
+
+      // Reset logo text size
+      // this.logoContainer.nativeElement
+      //   .querySelector('span')
+      //   ?.classList.add('text-2xl');
+      // this.logoContainer.nativeElement
+      //   .querySelector('span')
+      //   ?.classList.remove('text-xl');
+
+      // Reset nav items to gray
+      this.navElements.forEach((navElement) => {
+        navElement.nativeElement.classList.remove('text-gray-600');
+        navElement.nativeElement.classList.add('text-gray-100');
+      });
     }
   }
 
