@@ -61,7 +61,7 @@ export class StepThreeComponent implements OnInit {
 
   fb = inject(FormBuilder);
 
-  readonly MAX_LANGUAGES = 4;
+  readonly MAX_LANGUAGES = 5;
   readonly MIN_LANGUAGES = 1;
 
   languages = [
@@ -69,6 +69,7 @@ export class StepThreeComponent implements OnInit {
     { value: 'Anglais', label: 'Anglais' },
     { value: 'Allemand', label: 'Allemand' },
     { value: 'Espagnol', label: 'Espagnol' },
+    { value: 'Arabe', label: 'Arabe' },
   ];
 
   readonly levelLanguage = [

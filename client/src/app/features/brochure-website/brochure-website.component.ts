@@ -39,7 +39,7 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
   currentVideo = signal(this.videos[this.currentIndex]);
   private isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object,private router: Router) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private router: Router) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
@@ -55,15 +55,19 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
     }
-    this.router.events.pipe(
-      filter(event => event instanceof NavigationEnd),
-      takeUntil(this.destroy$)
-    ).subscribe((event) => {
-      if (event instanceof NavigationEnd) {
-        // Hide video on the CV deposit route
-        this.showVideo.set(!event.url.includes('deposer-un-cv'));
-      }
-    });
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((event) => {
+        if (event instanceof NavigationEnd) {
+          const hideVideoUrls = ['deposer-un-cv', 'mention-legal'];
+          this.showVideo.set(
+            !hideVideoUrls.some((url) => event.url.includes(url))
+          );
+        }
+      });
   }
 
   ngOnDestroy() {
