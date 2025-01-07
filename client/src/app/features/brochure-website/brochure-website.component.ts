@@ -11,8 +11,9 @@ import {
 } from '@angular/core';
 import { HeaderComponent } from '../../common/components/header/header.component';
 import { FooterComponent } from '../../common/components/footer/footer.component';
-import { RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-brochure-website',
@@ -25,6 +26,8 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 
   isMobile: WritableSignal<boolean> = signal(false); // Default value
+  showVideo = signal(true);
+  private destroy$ = new Subject<void>();
 
   videos = [
     '/assets/videos/video2.mp4',
@@ -36,7 +39,7 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
   currentVideo = signal(this.videos[this.currentIndex]);
   private isBrowser: boolean;
 
-  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) platformId: Object,private router: Router) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
@@ -52,11 +55,22 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
     }
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      takeUntil(this.destroy$)
+    ).subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        // Hide video on the CV deposit route
+        this.showVideo.set(!event.url.includes('deposer-un-cv'));
+      }
+    });
   }
 
   ngOnDestroy() {
     if (this.isBrowser) {
       window.removeEventListener('resize', this.handleResize);
+      this.destroy$.next();
+      this.destroy$.complete();
     }
   }
 

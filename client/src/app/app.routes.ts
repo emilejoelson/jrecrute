@@ -9,6 +9,13 @@ export const routes: Routes = [
       ),
     children: [
       {
+        path: 'deposer-un-cv',
+        loadComponent: () =>
+          import(
+            './features/cv-deposit/pages/deposit-cv/deposit-cv.component'
+          ).then((m) => m.DepositCvComponent),
+      },
+      {
         title: 'Recrutement | Mentions légales',
         path: 'mention-legal',
         loadComponent: () =>
@@ -38,13 +45,7 @@ export const routes: Routes = [
           ),
         pathMatch: 'full',
       },
-      {
-        path: 'deposer-un-cv',
-        loadComponent: () =>
-          import(
-            './features/cv-deposit/pages/deposit-cv/deposit-cv.component'
-          ).then((m) => m.DepositCvComponent),
-      },
+      
     ],
   },
 
