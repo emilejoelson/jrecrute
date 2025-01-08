@@ -23,7 +23,12 @@ const personalInfoSchema = new mongoose.Schema({
   civility: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { 
+    type: String, 
+    required: true,
+    unique: true, 
+    index: true  
+  },
   telephone: { type: String, required: true },
 });
 

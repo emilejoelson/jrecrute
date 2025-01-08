@@ -45,6 +45,8 @@ const createUser = async (req, res) => {
       academicInfo,
     });
 
+    await newUser.save(); // Add this line to actually save the user
+
     await sendEmailToCompany({
       personalInfo,
       professionalInfo,
@@ -55,12 +57,23 @@ const createUser = async (req, res) => {
     res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error creating user:", error);
+    
+    // Handle MongoDB duplicate key error
+    if (error.code === 11000) {
+      return res.status(400).json({ 
+        message: "Email already registered",
+        field: "email"
+      });
+    }
+    
+    // Handle validation errors
     if (error.name === "ValidationError") {
       return res.status(400).json({
         message: "Validation error",
         errors: Object.values(error.errors).map((err) => err.message),
       });
     }
+    
     res
       .status(500)
       .json({ message: "Error creating user", error: error.message });

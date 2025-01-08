@@ -1,14 +1,14 @@
 const express = require("express");
-const router = express.Router();
+const routerUser = express.Router();
 const userController = require("../controllers/UserController");
 const fileUpload = require("../utils/fileUpload");
 
 // API routes
-router.get("/api/getusers", userController.getUsers);
-router.post("/api/adduser", userController.createUser);
-router.post("/api/uploadfile", fileUpload, userController.uploadFile);
+routerUser.get("/api/getusers", userController.getUsers);
+routerUser.post("/api/adduser", userController.createUser);
+routerUser.post("/api/uploadfile", fileUpload, userController.uploadFile);
 // Add a route to get user's CV file
-router.get("/api/user/:id/cv", async (req, res) => {
+routerUser.get("/api/user/:id/cv", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (!user || !user.cvFile) {
@@ -20,4 +20,4 @@ router.get("/api/user/:id/cv", async (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = routerUser;

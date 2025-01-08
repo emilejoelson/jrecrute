@@ -11,9 +11,6 @@ export interface TServerBaseResponse<T> {
   data: T;
 }
 
-export interface SignupResult {
-  success: boolean;
+export interface Result {
   message: string;
-  accessToken?: string | null; 
-  token?: string | null;      
 }

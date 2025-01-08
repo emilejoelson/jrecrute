@@ -53,6 +53,9 @@ export class HeaderComponent implements AfterViewInit {
     ],
     buttons: [
       {
+        name: 'Client',
+      },
+      {
         name: 'Postuler maintenant',
       },
     ],
@@ -63,6 +66,13 @@ export class HeaderComponent implements AfterViewInit {
     this.router.navigate(['/deposer-un-cv']);
     window.scrollTo(0, 0);
   }
+
+  onClient() {
+    this.isNavOpen = false;
+    this.router.navigate(['/client']);
+    window.scrollTo(0, 0);
+  }
+
   ngAfterViewInit(): void {
     this.toggleHeaderBackground();
     this.updateProgressBar();

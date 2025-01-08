@@ -1,7 +1,13 @@
 const nodemailer = require("nodemailer");
 const path = require("path");
+require("dotenv").config();
 
-const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo, cvFile }) => {
+const sendEmailToCompany = async ({
+  personalInfo,
+  professionalInfo,
+  academicInfo,
+  cvFile,
+}) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     port: 465,
@@ -10,8 +16,8 @@ const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo
     debug: true,
     secureConnection: false,
     auth: {
-      user: "emilejoelson@gmail.com",
-      pass: "xkpl aukx pana yniv",
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
     tls: {
       rejectUnauthorized: false,
@@ -20,7 +26,7 @@ const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo
 
   const mailOptions = {
     from: `${personalInfo.firstName} ${personalInfo.lastName} <${personalInfo.email}>`,
-    to: "joelsonemile.andriamihaja@edu.uiz.ac.ma",
+    to: process.env.EMAIL_TO,
     subject: `Nouvelle candidature - ${personalInfo.firstName} ${personalInfo.lastName}`,
     html: `
       <html>
@@ -191,7 +197,9 @@ const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo
                 <div class="info-grid">
                   <div class="info-item">
                     <div class="info-label">Nom Complet</div>
-                    <div class="info-value">${personalInfo.firstName} ${personalInfo.lastName}</div>
+                    <div class="info-value">${personalInfo.firstName} ${
+      personalInfo.lastName
+    }</div>
                   </div>
                   
                   <div class="info-item">
@@ -201,23 +209,31 @@ const sendEmailToCompany = async ({ personalInfo, professionalInfo, academicInfo
                   
                   <div class="info-item">
                     <div class="info-label">Téléphone</div>
-                    <div class="info-value">${personalInfo.telephone || "Non fourni"}</div>
+                    <div class="info-value">${
+                      personalInfo.telephone || "Non fourni"
+                    }</div>
                   </div>
                   
                   <div class="info-item">
                     <div class="info-label">Poste Actuel</div>
-                    <div class="info-value">${professionalInfo.currentPosition}</div>
+                    <div class="info-value">${
+                      professionalInfo.currentPosition
+                    }</div>
                   </div>
                   
                   <div class="info-item">
                     <div class="info-label">Poste Recherché</div>
-                    <div class="info-value">${professionalInfo.desiredPosition}</div>
+                    <div class="info-value">${
+                      professionalInfo.desiredPosition
+                    }</div>
                   </div>
                   <div class="info-item">
                     <div class="info-label">Expérience en Télétravail</div>
-                    <div class="info-value">${professionalInfo.hasRemoteExperience ? 
-                      "J'ai déjà fait un télétravail" : 
-                      "Je n'ai pas encore fait un télétravail"}</div>
+                    <div class="info-value">${
+                      professionalInfo.hasRemoteExperience
+                        ? "J'ai déjà fait un télétravail"
+                        : "Je n'ai pas encore fait un télétravail"
+                    }</div>
                   </div>
                 </div>
               </div>

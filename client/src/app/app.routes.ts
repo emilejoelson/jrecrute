@@ -9,6 +9,15 @@ export const routes: Routes = [
       ),
     children: [
       {
+        title: 'Recrutement | client',
+        path: 'client',
+        loadComponent: () =>
+          import(
+            './features/recruitment/pages/recruitment-request/recruitment-request.component'
+          ).then((m) => m.RecruitmentRequestComponent),
+      },
+      {
+        title:'Recrutement | Dépot CV',
         path: 'deposer-un-cv',
         loadComponent: () =>
           import(
@@ -45,7 +54,6 @@ export const routes: Routes = [
           ),
         pathMatch: 'full',
       },
-      
     ],
   },
 

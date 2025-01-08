@@ -3,11 +3,6 @@ import { inject, Injectable, signal } from '@angular/core';
 import { delay, Observable, map, tap, catchError, finalize } from 'rxjs';
 import { FileUploadResponse, User, UserResponse } from '../models/user';
 
-import { ErrorHandlerService } from '../../../../core/services/error-handler.service';
-import {
-  TBaseResponse,
-  TServerBaseResponse,
-} from '../../../../shared/utils/definitions/response';
 import { environment } from '../../../../../environment/environment';
 
 @Injectable({

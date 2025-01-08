@@ -2,6 +2,7 @@
   "routes": {
     "/": {},
     "/attente-de-reponse": {},
+    "/client": {},
     "/deposer-un-cv": {},
     "/deposer-un-cv-avec-succes": {},
     "/mention-legal": {}

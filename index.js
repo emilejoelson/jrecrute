@@ -8,7 +8,8 @@ const path = require("path");
 
 // Local imports
 const db = require("./database/db.js");
-const rout = require("./routes/UserRouter.js");
+const routUser = require("./routes/UserRouter.js");
+const routRecruitmentRequest = require("./routes/RecruitmentRequestRouter.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -52,7 +53,8 @@ db()
   .catch((err) => console.error(err));
 
 // Routes
-app.use(rout);
+app.use(routUser);
+app.use(routRecruitmentRequest);
 
 // Socket.IO events
 io.on("connection", (socket) => {
