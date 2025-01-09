@@ -9,7 +9,8 @@ import {
   ViewChildren,
 } from '@angular/core';
 import { IconComponent } from '../../../shared/ui/icon/icon.component';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 type TNavLinks = {
   links: {
@@ -24,7 +25,7 @@ type TNavLinks = {
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -37,7 +38,15 @@ export class HeaderComponent implements AfterViewInit {
   @ViewChild('logoContainer') logoContainer!: ElementRef<HTMLDivElement>;
 
   isNavOpen = false;
-  router = inject(Router);
+  currentRoute: string = '';
+
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.url;
+      }
+    });
+  }
 
   navItems: TNavLinks = {
     links: [
@@ -199,4 +208,6 @@ export class HeaderComponent implements AfterViewInit {
   toggleNav() {
     this.isNavOpen = !this.isNavOpen;
   }
+
+  
 }

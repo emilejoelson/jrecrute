@@ -4,10 +4,8 @@ import { OurCustomersSectionComponent } from './ui/our-customers-section/our-cus
 import { JobOfferSectionComponent } from './ui/job-offer-section/job-offer-section.component';
 import { OurJobOfferScrollComponent } from './ui/our-job-offer-scroll/our-job-offer-scroll.component';
 import { HowItWorkSectionComponent } from './ui/how-it-work-section/how-it-work-section.component';
-import { WhyUsSectionComponent } from './ui/why-us-section/why-us-section.component';
 import { AdvantageSectionComponent } from './ui/advantage-section/advantage-section.component';
 import { FaqComponent } from './ui/faq/faq.component';
-import { StepThreeComponent } from '../../../cv-deposit/pages/deposit-cv/ui/steps/step-three/step-three.component';
 
 @Component({
   selector: 'app-home',

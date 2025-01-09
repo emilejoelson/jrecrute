@@ -40,5 +40,5 @@
 
 .show-up-animation {
   animation: showUp 1s ease-out forwards;
-  animation-delay: calc(var(--item-index) * 1s);
+  animation-delay: calc(var(--item-index) * 0.4s);
 }

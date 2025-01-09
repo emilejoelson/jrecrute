@@ -69,14 +69,18 @@
       class="flex items-start gap-x-12 gap-y-8 flex-col xl:flex-row xl:items-center"
     >
       @for (linkEntry of navItems.links; track linkEntry){
-      <li
+        <li
         #navElement
         (click)="
           linkEntry.behaviour === 'scroll'
             ? scrollToSection(linkEntry.sectionId!)
             : null
         "
-        class="cursor-pointer relative custom-650:text-gray-600 hover:text-purple-600 font-medium text-lg transition-colors duration-300 ease-in-out has-[.link-active]:text-app-secondary-dark"
+        [ngClass]="{
+          'text-gray-800': currentRoute === '/client' || currentRoute === '/deposer-un-cv',
+          'text-gray-600 custom-650:text-gray-600': !(currentRoute === '/client' || currentRoute === '/deposer-un-cv')
+        }"
+        class="cursor-pointer relative hover:text-purple-600 font-medium text-lg transition-colors duration-300 ease-in-out has-[.link-active]:text-app-secondary-dark"
       >
         {{ linkEntry.name }}
       </li>

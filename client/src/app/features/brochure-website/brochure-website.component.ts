@@ -84,13 +84,15 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       this.currentIndex = (this.currentIndex + 1) % this.videos.length;
       this.currentVideo.set(this.videos[this.currentIndex]);
-
+  
       setTimeout(() => {
         if (this.videoPlayer?.nativeElement) {
-          this.videoPlayer.nativeElement.load();
+          this.videoPlayer.nativeElement.load(); // Ensures video is ready before switching
           this.videoPlayer.nativeElement.play();
         }
-      }, 0);
+      }, 50); // Small delay to prevent flicker
     }
   }
+  
+  
 }
