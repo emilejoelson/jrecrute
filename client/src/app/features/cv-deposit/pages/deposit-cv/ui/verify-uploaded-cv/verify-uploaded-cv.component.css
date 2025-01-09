@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  .file-preview-container {
+    @apply bg-white rounded-lg shadow-lg w-full;
+  }
+}
+.shadow-box-action-buttons {
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(140, 82, 255, 0.4), 0 8px 12px rgba(203, 108, 230, 0.4), 0 12px 18px rgba(210, 171, 201, 0.3), 0 0 20px rgba(140, 82, 255, 0.6), 0 0 30px rgba(203, 108, 230, 0.5), 0 0 40px rgba(210, 171, 201, 0.4);
+}
+
+.animate-arrow {
+  animation: danceArrow 2s ease-in-out infinite;
+}
+
+@keyframes danceArrow {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-6px);
+  }
+  75% {
+    transform: translateX(6px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.animate-arrow:hover {
+  animation: none;
+  transform: translateX(0);
+}/*# sourceMappingURL=verify-uploaded-cv.component.css.map */

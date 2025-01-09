@@ -1,0 +1,125 @@
+<div class="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <!-- Header Section -->
+  <div class="text-center mb-16 max-w-4xl mx-auto">
+    <h1
+      class="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center"
+    >
+      Nos Tarifs et Packs de Recrutement
+    </h1>
+    <p class="text-xl text-gray-600">
+      Des solutions adaptées à tous vos besoins de recrutement
+    </p>
+  </div>
+
+  <!-- Pricing Cards Grid -->
+  <div
+    class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-0 px-4 sm:px-6 lg:px-8"
+  >
+    <!-- Standard Offer -->
+    <div
+      class="bg-gray-900 rounded-3xl lg:rounded-none lg:rounded-l-3xl p-8 h-auto"
+    >
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-white mb-2">💼 Offre Standard</h2>
+        <div class="flex items-baseline">
+          <span class="text-4xl font-bold text-white">1 490€</span>
+          <span class="ml-2 text-gray-400">/candidat placé</span>
+        </div>
+      </div>
+
+      <ul class="space-y-4">
+        <li *ngFor="let feature of standardFeatures" class="flex items-start">
+          <svg
+            class="h-6 w-6 text-purple-400 mr-2 mt-0.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+          <span class="text-gray-300">{{ feature }}</span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Advance Payment Offer - Popular -->
+    <div
+      class="bg-gray-900 p-8 relative border-2 border-purple-500 rounded-3xl h-auto lg:min-h-[120%] lg:-mt-8 shadow-xl z-10"
+    >
+      <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+        <span
+          class="bg-purple-500 text-white px-6 py-2 rounded-full text-sm font-semibold"
+        >
+          POPULAIRE
+        </span>
+      </div>
+      <div class="mb-6 pt-4">
+        <h2 class="text-2xl font-bold text-white mb-2 flex items-center">
+          <span class="mr-2">📦</span> Packs de recrutement
+        </h2>
+        <div class="space-y-8 mt-6">
+          <div class="flex flex-col gap-5">
+            <div *ngFor="let pack of recruitmentPacks">
+              <h3 class="text-xl flex justify-center text-white mb-2">
+                Pack {{ pack.candidates }} candidats
+              </h3>
+              <div class="flex items-baseline justify-center">
+                <span class="text-4xl font-bold text-white"
+                  >{{ pack.price }}€</span
+                >
+              </div>
+              <p class="text-gray-400 flex justify-center">
+                Soit {{ pack.pricePerCandidate }}€ par candidat
+              </p>
+              <p class="text-sm text-gray-500 flex justify-center">
+                (au lieu de 1 490€)
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pack Offers -->
+    <div
+      class="bg-gray-900 rounded-3xl lg:rounded-none lg:rounded-r-3xl p-8 h-auto"
+    >
+      <div class="mb-6">
+        <h2 class="text-2xl font-bold text-white mb-2">
+          🚀 Offre avec acompte
+        </h2>
+        <div class="flex items-baseline">
+          <span class="text-4xl font-bold text-white">447€</span>
+          <span class="ml-2 text-gray-400">/acompte initial</span>
+        </div>
+      </div>
+
+      <div class="text-gray-300 flex items-start">
+        <svg
+          class="h-6 w-6 text-purple-400 mr-2 mt-0.5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M5 13l4 4L19 7"
+          ></path>
+        </svg>
+        <span> Déduit des frais fixes si un candidat est recruté</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Note -->
+  <div class="text-center mt-6 text-sm text-gray-500">
+    <a href="#" class="text-purple-400 hover:text-purple-300 ml-1"> </a>
+  </div>
+</div>

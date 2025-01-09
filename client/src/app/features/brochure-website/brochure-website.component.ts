@@ -12,20 +12,20 @@ import {
 import { HeaderComponent } from '../../common/components/header/header.component';
 import { FooterComponent } from '../../common/components/footer/footer.component';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-brochure-website',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, RouterOutlet, FooterComponent],
+  imports: [HeaderComponent, FooterComponent, RouterOutlet, FooterComponent,CommonModule],
   templateUrl: './brochure-website.component.html',
   styleUrl: './brochure-website.component.scss',
 })
 export class BrochureWebsiteComponent implements OnInit, OnDestroy {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
 
-  isMobile: WritableSignal<boolean> = signal(false); // Default value
+  isMobile: WritableSignal<boolean> = signal(false);
   showVideo = signal(true);
   private destroy$ = new Subject<void>();
 
@@ -45,8 +45,9 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
 
   private handleResize = () => {
     if (this.isBrowser) {
-      this.isMobile.set(window.innerWidth < 650);
-      console.log('Is Mobile:', this.isMobile());
+      const width = window.innerWidth;
+      this.isMobile.set(width < 650);
+      console.log('Window width:', width, '| Is Mobile:', this.isMobile());
     }
   };
 
@@ -55,6 +56,7 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
     }
+
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
@@ -62,7 +64,7 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       )
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          const hideVideoUrls = ['deposer-un-cv', 'mention-legal','client'];
+          const hideVideoUrls = ['deposer-un-cv', 'mention-legal', 'client'];
           this.showVideo.set(
             !hideVideoUrls.some((url) => event.url.includes(url))
           );

@@ -5,7 +5,6 @@ import { UserService } from '../../data-access/services/user.service';
 import { UserFormActions } from '../actions/cv.actions';
 import { Router } from '@angular/router';
 
-// import img from '../../../../../assets/images/congratulation.png';
 import { Store } from '@ngrx/store';
 @Injectable()
 export class UserEffects {

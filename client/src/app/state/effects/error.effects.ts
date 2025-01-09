@@ -3,6 +3,7 @@ import { ToastService } from '../../core/services/toast.service';
 import { createEffect, ofType, Actions } from '@ngrx/effects';
 import { tap } from 'rxjs';
 import { UserFormActions } from '../../features/cv-deposit/store/actions/cv.actions';
+import { RecruitmentFormActions } from '../../features/recruitment/store/actions/recruitment.actions';
 import { ErrorAction } from '../../core/models/error.action';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorTranslationService } from '../../core/services/error-translation.service';
@@ -11,13 +12,15 @@ import { ErrorTranslationService } from '../../core/services/error-translation.s
 export class ErrorEffects {
   private toastService = inject(ToastService);
   private actions$ = inject(Actions);
-
   errorTransactionService = inject(ErrorTranslationService);
 
-  handleError$ = createEffect(
+  handleErrors$ = createEffect(
     () =>
       this.actions$.pipe(
-        ofType(UserFormActions.submitUserFormFailure),
+        ofType(
+          UserFormActions.submitUserFormFailure,
+          RecruitmentFormActions.submitRecruitmentFormFailure
+        ),
         tap((action: ErrorAction) => {
           const error = action.error?.error;
           let errorMessage: string | undefined;

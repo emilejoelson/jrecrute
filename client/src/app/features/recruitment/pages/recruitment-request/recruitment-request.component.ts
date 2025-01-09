@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { HeroSectionComponent } from './ui/hero-section/hero-section.component';
 import { ServiceSectionComponent } from './ui/service-section/service-section.component';
 import { StatSectionComponent } from './ui/stat-section/stat-section.component';
+import { PricingComponent } from './ui/pricing/pricing.component';
 
 @Component({
   selector: 'app-recruitment-request',
-  imports: [HeroSectionComponent,ServiceSectionComponent,StatSectionComponent],
+  imports: [HeroSectionComponent,ServiceSectionComponent,StatSectionComponent,PricingComponent],
   templateUrl: './recruitment-request.component.html',
   styleUrl: './recruitment-request.component.scss'
 })

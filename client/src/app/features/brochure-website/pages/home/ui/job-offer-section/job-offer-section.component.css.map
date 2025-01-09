@@ -1,10 +1,1 @@
-{
-  "version": 3,
-  "sources": [
-    "job-offer-section.component.scss",
-    "job-offer-section.component.css"
-  ],
-  "names": [],
-  "mappings": "AAAA;EACI,6CAAA;ACCJ;;ADEE;EACE;IACE,wBAAA;ECCJ;EDCE;IACE,2BAAA;ECCJ;EDCE;IACE,0BAAA;ECCJ;EDCE;IACE,0BAAA;ECCJ;AACF;ADEE;EACE,eAAA;EACA,wBAAA;ACAJ;;ADGE,oCAAA;AACF;EACE,UAAA;ACAF;;ADGA;EACE;IACE,UAAA;IACA,2BAAA;ECAF;EDEA;IACE,UAAA;IACA,wBAAA;ECAF;AACF;ADGA;EACE,sCAAA;EACA,6CAAA;ACDF",
-  "file": "job-offer-section.component.css"
-}
+{"version":3,"sources":["job-offer-section.component.scss","job-offer-section.component.css"],"names":[],"mappings":"AAAA;EACI,6CAAA;ACCJ;;ADEE;EACE;IACE,wBAAA;ECCJ;EDCE;IACE,2BAAA;ECCJ;EDCE;IACE,0BAAA;ECCJ;EDCE;IACE,0BAAA;ECCJ;AACF;ADEE;EACE,eAAA;EACA,wBAAA;ACAJ;;ADGE,oCAAA;AACF;EACE,UAAA;ACAF;;ADGA;EACE;IACE,UAAA;IACA,2BAAA;ECAF;EDEA;IACE,UAAA;IACA,wBAAA;ECAF;AACF;ADGA;EACE,sCAAA;EACA,6CAAA;ACDF","file":"job-offer-section.component.css"}

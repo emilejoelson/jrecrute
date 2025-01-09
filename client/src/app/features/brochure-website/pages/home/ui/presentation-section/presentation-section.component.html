@@ -15,21 +15,43 @@
           class="text-xl animate-fade-in md:bg-gray-900 md:p-5 md:rounded-xl md:text-gray-400 custom-650:text-center text-gray-600"
           style="animation-delay: 0.2s"
         >
-          Faites le choix de l'excellence et d’un futur prometteur. Postulez
+          Faites le choix de l'excellence et d’un avenir prometteur.
+          Rejoignez-nous
           <span class="font-bold italic underline">aujourd’hui</span> et ouvrez
-          la porte à de nouvelles perspectives professionnelles.
+          la porte à de nouvelles perspectives de carrière et de recrutement
         </p>
         <div
           style="animation-delay: 0.4s"
           class="apply-container animate-fade-in p-2 rounded-2xl"
         >
-          <div class="flex custom-650:flex-col gap-4">
-            <button
-              (click)="onDeposit()"
-              class="bg-app-primary-purple md:font-bold md:text-xl text-white px-8 py-4 rounded-xl hover:bg-purple-700 transform hover:scale-105 transition-all"
+          <div class="relative w-full sm:w-[450px] md:w-[550px] h-[60px]">
+            <div
+              class="relative w-full h-full bg-app-primary-purple rounded-xl shadow-inner shadow-gray-900/50 overflow-hidden"
             >
-              Postuler Maintenant
-            </button>
+              <!-- Sliding element -->
+              <div
+                class="absolute top-1 h-[52px] w-1/2 bg-app-primay-dark rounded-xl shadow-lg transition-all duration-500 ease-in-out"
+                [ngClass]="isPostuler ? 'left-1' : 'left-1/2'"
+              ></div>
+
+              <!-- Button text -->
+              <div class="absolute custom-650:flex  inset-0 flex">
+                <button
+                  (click)="setPostuler(true)"
+                  class="flex-1 flex items-center justify-center text-lg sm:text-xl font-bold px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl transition-all "
+                  [ngClass]="isPostuler ? 'text-white' : 'text-gray-200'"
+                >
+                  Postuler Maintenant
+                </button>
+                <button
+                  (click)="setPostuler(false)"
+                  class="flex-1 flex items-center justify-center text-lg sm:text-xl font-bold px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 rounded-xl transition-all "
+                  [ngClass]="!isPostuler ? 'text-white' : 'text-gray-200'"
+                >
+                  Trouver un candidat
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

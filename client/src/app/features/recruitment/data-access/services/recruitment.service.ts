@@ -3,10 +3,6 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '../../../../../environment/environment';
 import { RecruitmentRequest } from '../models/recruitment';
 import { Observable } from 'rxjs';
-import {
-  Result,
-  TBaseResponse,
-} from '../../../../shared/utils/definitions/response';
 
 @Injectable({
   providedIn: 'root',
@@ -17,8 +13,8 @@ export class RecruitmentService {
 
   public addRecruitmentRequest(
     recruitment: Partial<RecruitmentRequest>
-  ): Observable<TBaseResponse<Result>> {
-    return this.http.post<TBaseResponse<Result>>(
+  ): Observable<{ message: string; recruitment: RecruitmentRequest }> {
+    return this.http.post<{ message: string; recruitment: RecruitmentRequest }>(
       `${this.baseUrl}/addRecruitmentRequest`,
       recruitment
     );

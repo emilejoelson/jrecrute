@@ -31,14 +31,14 @@ export default {
   }
 ],
   assets: {
-    'index.csr.html': {size: 9392, hash: 'b442ee91203ad81e245ae5c78103ee2c0017f3dd823fc19c886a3a5bb59c1af0', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 7747, hash: 'dfa88141ab4aebdccb321dc524afcb1b88f59d1db7a1d3411b307ccf73c4f239', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'client/index.html': {size: 45109, hash: '389e369edbfaf86ea31527d1c313e378b6c7afeb262a38634ff4232f130f4ec1', text: () => import('./assets-chunks/client_index_html.mjs').then(m => m.default)},
-    'deposer-un-cv/index.html': {size: 33585, hash: '36f1a545fec603abec0bc0d920c850c3e8d081efde85464cff3385f8f860bb92', text: () => import('./assets-chunks/deposer-un-cv_index_html.mjs').then(m => m.default)},
-    'mention-legal/index.html': {size: 37414, hash: 'ec22efb4390a20d160536b578f90205615be01e276bf3cfe323554b85a1b07a7', text: () => import('./assets-chunks/mention-legal_index_html.mjs').then(m => m.default)},
-    'attente-de-reponse/index.html': {size: 33034, hash: '8b870edad0b4ab84ec45dac2e5d988c13bd6275ced4f90cf36d2ba5535a9d4d1', text: () => import('./assets-chunks/attente-de-reponse_index_html.mjs').then(m => m.default)},
-    'deposer-un-cv-avec-succes/index.html': {size: 31771, hash: '3d22bb7c006f1b0661290ee597907781622a9e07393a4e759d6f677aae28f85e', text: () => import('./assets-chunks/deposer-un-cv-avec-succes_index_html.mjs').then(m => m.default)},
-    'index.html': {size: 65329, hash: 'e03c89ca560b1f4cc2aec6ef19dbf282869709e93ea7afa399524d80673908de', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
-    'styles-QZWBPWGY.css': {size: 88375, hash: 'CagzNPIGM40', text: () => import('./assets-chunks/styles-QZWBPWGY_css.mjs').then(m => m.default)}
+    'index.csr.html': {size: 9443, hash: 'cb1782a5c6d16836c140557b6b68ae1b3b9d1bf6bf86fa093c3ca812ed6ce7b4', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 7798, hash: 'bc02f5c885cf26f1eb714779c5ef0d45cdfba6136bdf0c76765dd0e90d05c922', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'client/index.html': {size: 51461, hash: 'b7ae835e4bca87f973a74fc46058319e921a53dac0b771340a197ea11e7e31c6', text: () => import('./assets-chunks/client_index_html.mjs').then(m => m.default)},
+    'deposer-un-cv/index.html': {size: 33655, hash: '9a5198e155a0087a2d426fa550e0a847b5e124a5f62c58f90b84e396d9502c2a', text: () => import('./assets-chunks/deposer-un-cv_index_html.mjs').then(m => m.default)},
+    'index.html': {size: 66868, hash: '4ed0cc8ce3a94b649fb044cf05441fcb32e813f09a7b47f71c531f3e8c01b1cb', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
+    'attente-de-reponse/index.html': {size: 33104, hash: '723018314f6697a0e20a828a515a3eb757f269cc19472b4da641ef4f5e247582', text: () => import('./assets-chunks/attente-de-reponse_index_html.mjs').then(m => m.default)},
+    'mention-legal/index.html': {size: 37486, hash: 'a2a9b807c1439dba73809d4b07070d73e852123ed5a3b1cc70a8a947dc1f4644', text: () => import('./assets-chunks/mention-legal_index_html.mjs').then(m => m.default)},
+    'deposer-un-cv-avec-succes/index.html': {size: 31843, hash: 'b3b4a854b2386805653aad9f454d2719b10bf646458f840f9fc77c6dbe7acd47', text: () => import('./assets-chunks/deposer-un-cv-avec-succes_index_html.mjs').then(m => m.default)},
+    'styles-EDUSYTBE.css': {size: 90416, hash: 'Af32WouqCho', text: () => import('./assets-chunks/styles-EDUSYTBE_css.mjs').then(m => m.default)}
   },
 };
