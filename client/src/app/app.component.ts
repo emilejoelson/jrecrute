@@ -8,6 +8,7 @@ import { State } from './state/root.state';
 import { CommonModule } from '@angular/common';
 import { getIsUserSubmitting } from './features/cv-deposit/store/selectors/cv.selectors';
 import { getIsRecruitmentSubmitting } from './features/recruitment/store/selectors/recruitment.selectors';
+import { ScrollButtonComponent } from './shared/scroll-button/scroll-button.component';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ import { getIsRecruitmentSubmitting } from './features/recruitment/store/selecto
     ToastComponent,
     LoadingSpinnerComponent,
     CommonModule,
+    ScrollButtonComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

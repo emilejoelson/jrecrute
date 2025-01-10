@@ -69,7 +69,7 @@
       class="flex items-start gap-x-12 gap-y-8 flex-col xl:flex-row xl:items-center"
     >
       @for (linkEntry of navItems.links; track linkEntry){
-        <li
+      <li
         #navElement
         (click)="
           linkEntry.behaviour === 'scroll'
@@ -77,8 +77,15 @@
             : null
         "
         [ngClass]="{
-          'text-gray-800': currentRoute === '/client' || currentRoute === '/deposer-un-cv',
-          'text-gray-600 custom-650:text-gray-600': !(currentRoute === '/client' || currentRoute === '/deposer-un-cv')
+          'text-gray-800':
+            currentRoute === '/client' ||
+            currentRoute === '/mention-legal' ||
+            currentRoute === '/deposer-un-cv',
+          'text-gray-600 custom-650:text-gray-600': !(
+            currentRoute === '/client' ||
+            currentRoute === '/mention-legal' ||
+            currentRoute === '/deposer-un-cv'
+          )
         }"
         class="cursor-pointer relative hover:text-purple-600 font-medium text-lg transition-colors duration-300 ease-in-out has-[.link-active]:text-app-secondary-dark"
       >
@@ -92,14 +99,14 @@
           @if(buttonEntry.name !=='Client'){
           <button
             (click)="onDeposit()"
-            class="block cursor-pointer text-center text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-all transform hover:scale-105 transition-colors ease-out duration-300 relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-inherit text-[#fff] z-10 group bg-app-primay-dark "
+            class="block cursor-pointer text-center text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-all transform hover:scale-105 transition-colors ease-out duration-300 relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-inherit text-[#fff] z-10 group bg-app-primay-dark"
           >
             {{ buttonEntry.name }}
           </button>
           } @else {
           <button
             (click)="onClient()"
-            class="block cursor-pointer text-center bg-purple-700 text-white px-6 py-2 rounded-full transition-all transform hover:scale-105 transition-colors ease-out duration-300 relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-inherit text-[#fff] z-10 group hover:bg-app-primay-dark "
+            class="block cursor-pointer text-center bg-purple-700 text-white px-6 py-2 rounded-full transition-all transform hover:scale-105 transition-colors ease-out duration-300 relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-inherit text-[#fff] z-10 group hover:bg-app-primay-dark"
           >
             {{ buttonEntry.name }}
           </button>

@@ -20,7 +20,8 @@ type TNavLinks = {
 export class FooterComponent {
   @ViewChild('headerElement') headerElement!: ElementRef<HTMLElement>;
   router = inject(Router);
-  navItems: TNavLinks = {
+
+  navCandidates: TNavLinks = {
     links: [
       {
         name: 'Parcourir les offres',
@@ -45,13 +46,37 @@ export class FooterComponent {
     ],
   };
 
-  footerItems = {
-    connects: [
-      { name: 'À Propos' },
-      { name: 'Contact' },
-      { name: 'Politique de Confidentialité' },
-      { name: "Conditions d'Utilisation" },
+  navClients: TNavLinks = {
+    links: [
+      {
+        name: 'Découvrir notre offre',
+        sectionId: 'hero-section',
+        behaviour: 'scroll',
+      },
+      {
+        name: 'Analyser les statistiques',
+        sectionId: 'statistique',
+        behaviour: 'scroll',
+      },
+      {
+        name: 'Explorer nos services',
+        sectionId: 'services',
+        behaviour: 'scroll',
+      },
+      {
+        name: 'Consulter nos tarifs',
+        sectionId: 'pricing',
+        behaviour: 'scroll',
+      },
+      {
+        name: 'Définir une fiche de poste',
+        sectionId: 'fiche-poste',
+        behaviour: 'scroll',
+      },
     ],
+  };
+
+  footerItems = {
     socialMedia: [
       {
         name: 'Facebook',
@@ -71,26 +96,39 @@ export class FooterComponent {
       {
         name: 'Contact',
         icon: 'fa fa-envelope',
-        link: 'mailto:contact@consultcollab.com ',
+        link: 'mailto:contact@consultcollab.com',
       },
     ],
   };
 
-  scrollToSection(sectionId: string) {
-    // First check if we're on the home page
-    if (this.router.url !== '/') {
-      // If not, navigate to home and then scroll
-      this.router.navigate(['/']).then(() => {
-        // Wait for navigation and DOM update
-        setTimeout(() => {
-          this.performScroll(sectionId);
-        }, 100);
-      });
+  currentYear = new Date().getFullYear();
+
+  scrollToSection(sectionId: string, isClientSection: boolean = false) {
+    if (isClientSection) {
+      // Pour les sections client, naviguez d'abord vers la route client
+      if (this.router.url !== '/client') {
+        this.router.navigate(['/client']).then(() => {
+          setTimeout(() => {
+            this.performScroll(sectionId);
+          }, 100);
+        });
+      } else {
+        this.performScroll(sectionId);
+      }
     } else {
-      // If already on home page, scroll directly
-      this.performScroll(sectionId);
+      // Pour les sections candidat, gardez la logique existante
+      if (this.router.url !== '/') {
+        this.router.navigate(['/']).then(() => {
+          setTimeout(() => {
+            this.performScroll(sectionId);
+          }, 100);
+        });
+      } else {
+        this.performScroll(sectionId);
+      }
     }
   }
+
   private performScroll(sectionId: string) {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -104,8 +142,6 @@ export class FooterComponent {
       });
     }
   }
-
-  currentYear = new Date().getFullYear();
 
   onClickLegalNotice() {
     window.scroll(0, 0);

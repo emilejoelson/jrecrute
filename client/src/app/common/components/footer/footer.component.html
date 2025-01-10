@@ -1,29 +1,27 @@
-<footer  #headerElement class="bg-gray-800 text-white py-12">
+<footer #headerElement class="bg-gray-800 text-white py-12">
   <div class="container mx-auto px-6">
-    <div class="grid md:grid-cols-3 gap-8">
+    <div class="grid md:grid-cols-4 gap-8">
       <div class="custom-650:text-center">
         <div class="flex items-center gap-2 mb-6">
-          <span
-            ><img
-              className=" floating w-8 h-8 object-contain"
+          <span>
+            <img
+              className="floating w-8 h-8 object-contain"
               src="assets/icons/cc-logo.png"
               alt="Logo"
-          /></span>
+            />
+          </span>
           <span class="text-xl font-bold">Recrutement</span>
         </div>
         <p>Connectez-vous aux opportunités mondiales,</p>
         <p>MAXIMISEZ VOTRE POTENTIEL</p>
       </div>
+
       <div class="custom-650:text-center">
-        <h3 class="font-bold text-xl mb-4">Pour les Candidats</h3>
+        <h3 class="font-bold text-xl mb-4">Candidat</h3>
         <ul class="space-y-2 text-gray-400">
-          @for(jobseeker of navItems.links;track jobseeker){
+          @for(jobseeker of navCandidates.links;track jobseeker){
           <li
-            (click)="
-              jobseeker.behaviour === 'scroll'
-                ? scrollToSection(jobseeker.sectionId!)
-                : null
-            "
+            (click)="scrollToSection(jobseeker.sectionId)"
             class="hover:text-white cursor-pointer transition-colors"
           >
             {{ jobseeker.name }}
@@ -32,16 +30,20 @@
         </ul>
       </div>
 
-      <!-- <div class="custom-650:text-center">
-        <h3 class="font-bold text-xl mb-4">Connexion</h3>
+      <div class="custom-650:text-center">
+        <h3 class="font-bold text-xl mb-4">Client</h3>
         <ul class="space-y-2 text-gray-400">
-          @for(connect of footerItems.connects;track connect){
-          <li class="hover:text-white cursor-pointer transition-colors">
-            {{ connect.name }}
+          @for(client of navClients.links;track client){
+          <li
+            (click)="scrollToSection(client.sectionId, true)"
+            class="hover:text-white cursor-pointer transition-colors"
+          >
+            {{ client.name }}
           </li>
           }
         </ul>
-      </div> -->
+      </div>
+
       <div class="custom-650:text-center">
         <h3 class="font-bold text-xl mb-5">Suivez-nous</h3>
         <div class="flex justify-center text-gray-400 space-x-6">
@@ -57,8 +59,16 @@
         </div>
       </div>
     </div>
+
     <div class="border-t border-gray-700 mt-12 pt-8 text-center text-gray-400">
-      <p>  <span (click)="onClickLegalNotice()" class="hover:text-white cursor-pointer">Mentions légales</span> | &copy; {{ currentYear }} Consult Collab</p>
+      <p>
+        <span
+          (click)="onClickLegalNotice()"
+          class="hover:text-white cursor-pointer"
+          >Mentions légales</span
+        >
+        | &copy; {{ currentYear }} Consult Collab
+      </p>
     </div>
   </div>
 </footer>
