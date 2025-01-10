@@ -90,7 +90,7 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
           this.videoPlayer.nativeElement.load(); // Ensures video is ready before switching
           this.videoPlayer.nativeElement.play();
         }
-      }, 50); // Small delay to prevent flicker
+      }, 50); 
     }
   }
   

@@ -9,12 +9,12 @@ import { AbstractControl, ControlContainer, FormGroup, FormsModule, ReactiveForm
   styleUrl: './custom-input.component.scss',
 })
 export class CustomInputComponent implements OnInit {
-  @Input({ required: true }) formGroup!: FormGroup;
+  @Input() formGroup!: FormGroup;
   @Input({ required: true }) id: string = '';
   @Input({ required: true }) classInput: string = '';
   @Input({ required: true }) classLabel: string = '';
   @Input({ required: true }) title: string = '';
-
+  @Input() type :string = '';
   @Input() control?: AbstractControl | null;
 
   constructor(@Optional() private controlContainer: ControlContainer) {}
@@ -22,6 +22,16 @@ export class CustomInputComponent implements OnInit {
   ngOnInit() {
     if (this.controlContainer) {
       this.control = this.controlContainer.control?.get(this.id);
+    }
+  }
+  onNumberInput(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (this.type === 'number') {
+      const value = input.value;
+      const numValue = parseFloat(value);
+      if (!isNaN(numValue)) {
+        this.control?.setValue(numValue, { emitEvent: true });
+      }
     }
   }
 }

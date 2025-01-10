@@ -5,6 +5,7 @@ import { RecruitmentFormActions } from '../actions/recruitment.actions';
 export interface RecruitmentState {
   recruitment: Partial<RecruitmentRequest>;
   recruitments: RecruitmentRequest[];
+  submitting: boolean;
 }
 
 export const initialRecruitmentState: RecruitmentState = {
@@ -21,6 +22,7 @@ export const initialRecruitmentState: RecruitmentState = {
     urgency: '',
   },
   recruitments: [],
+  submitting: false,
 };
 
 export const recruitmentReducer = createReducer<RecruitmentState, Action>(
@@ -29,6 +31,7 @@ export const recruitmentReducer = createReducer<RecruitmentState, Action>(
     RecruitmentFormActions.submitRecruitmentForm,
     (state: RecruitmentState) => ({
       ...state,
+      submitting: true,
     })
   ),
   on(
@@ -36,12 +39,14 @@ export const recruitmentReducer = createReducer<RecruitmentState, Action>(
     (state: RecruitmentState, { recruitment }) => ({
       ...state,
       recruitments: [...state.recruitments, recruitment],
+      submitting: false,
     })
   ),
   on(
     RecruitmentFormActions.submitRecruitmentFormFailure,
     (state: RecruitmentState, { error }) => ({
       ...state,
+      submitting: false,
     })
   )
 );

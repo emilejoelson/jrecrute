@@ -6,9 +6,8 @@ import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { State } from './state/root.state';
 import { CommonModule } from '@angular/common';
-import { Congratulation } from './features/cv-deposit/data-access/models/congratulation';
-import { UserEffects } from './features/cv-deposit/store/effects/cv.effects';
-import { getIsSubmitting } from './features/cv-deposit/store/selectors/cv.selectors';
+import { getIsUserSubmitting } from './features/cv-deposit/store/selectors/cv.selectors';
+import { getIsRecruitmentSubmitting } from './features/recruitment/store/selectors/recruitment.selectors';
 
 @Component({
   selector: 'app-root',
@@ -23,11 +22,15 @@ import { getIsSubmitting } from './features/cv-deposit/store/selectors/cv.select
   styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit {
-  isSubmitting$!: Observable<boolean>;
+  isUserSubmitting$!: Observable<boolean>;
+  isRecruitmentSubmitting$!: Observable<boolean>;
 
   constructor(private store: Store<State>) {}
 
   ngOnInit() {
-    this.isSubmitting$ = this.store.pipe(select(getIsSubmitting));
+    this.isUserSubmitting$ = this.store.pipe(select(getIsUserSubmitting));
+    this.isRecruitmentSubmitting$ = this.store.pipe(
+      select(getIsRecruitmentSubmitting)
+    );
   }
 }

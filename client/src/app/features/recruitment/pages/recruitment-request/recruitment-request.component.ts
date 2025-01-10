@@ -3,10 +3,11 @@ import { HeroSectionComponent } from './ui/hero-section/hero-section.component';
 import { ServiceSectionComponent } from './ui/service-section/service-section.component';
 import { StatSectionComponent } from './ui/stat-section/stat-section.component';
 import { PricingComponent } from './ui/pricing/pricing.component';
+import { JobSheetComponent } from "./ui/job-sheet/job-sheet.component";
 
 @Component({
   selector: 'app-recruitment-request',
-  imports: [HeroSectionComponent,ServiceSectionComponent,StatSectionComponent,PricingComponent],
+  imports: [HeroSectionComponent, ServiceSectionComponent, StatSectionComponent, PricingComponent, JobSheetComponent],
   templateUrl: './recruitment-request.component.html',
   styleUrl: './recruitment-request.component.scss'
 })

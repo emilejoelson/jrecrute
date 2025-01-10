@@ -80,9 +80,9 @@ export class StepOneComponent {
   // },
   
   civilities = [
-    { value: 'mr', label: 'Monsieur' },
-    { value: 'mme', label: 'Madame' },
-    { value: 'mle', label: 'Mademoiselle' },
+    { value: 'Monsieur', label: 'Monsieur' },
+    { value: 'Madame', label: 'Madame' },
+    { value: 'Mademoiselle', label: 'Mademoiselle' },
   ];
 
   civilityField = {

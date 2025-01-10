@@ -14,7 +14,7 @@ export const getUsers = createSelector(
   (state: UserState) => state.users
 );
 
-export const getIsSubmitting = createSelector(
+export const getIsUserSubmitting = createSelector(
   selectRoot,
   (state: UserState) => state.submitting
 );

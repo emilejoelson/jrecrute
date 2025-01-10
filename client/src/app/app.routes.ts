@@ -17,7 +17,7 @@ export const routes: Routes = [
           ).then((m) => m.RecruitmentRequestComponent),
       },
       {
-        title:'Recrutement | Dépot CV',
+        title: 'Recrutement | Dépot CV',
         path: 'deposer-un-cv',
         loadComponent: () =>
           import(
@@ -33,6 +33,7 @@ export const routes: Routes = [
           ).then((m) => m.LegalNoticeComponent),
       },
       {
+        title: 'Loading ...',
         path: 'attente-de-reponse',
         loadComponent: () =>
           import('./shared/loading-spinner/loading-spinner.component').then(
@@ -40,11 +41,20 @@ export const routes: Routes = [
           ),
       },
       {
+        title: 'Depot | Succès',
         path: 'deposer-un-cv-avec-succes',
         loadComponent: () =>
           import(
             './shared/receive-popup-confirmation/receive-popup-confirmation.component'
           ).then((m) => m.ReceivePopupConfirmationComponent),
+      },
+      {
+        title: 'Fiche de poste | Succès',
+        path: 'fiche-de-poste-remplie-avec-succes',
+        loadComponent: () =>
+          import(
+            './shared/recruitment-popup-confirmation/recruitment-popup-confirmation.component'
+          ).then((m) => m.RecruitmentPopupConfirmationComponent),
       },
       {
         path: '',

@@ -9,6 +9,8 @@ export class ErrorTranslationService {
       "Cet email appartient déjà à quelqu'un d'autre ",
     'Invalid file type. Allowed types: PNG, JPG, JPEG, PDF':
       'Vous ne pouvez que de fichier de type: PNG, JPG, JPEG, PDF',
+    'The minimum budget must be less than the maximum budget':
+      'Le budget minimum doit être inférieur au budget maximum',
   };
 
   translateError(errorMessage: string): string {

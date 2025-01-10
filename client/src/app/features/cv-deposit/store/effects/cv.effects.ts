@@ -13,9 +13,7 @@ export class UserEffects {
   router = inject(Router);
   store = inject(Store);
 
-  isDepositConfirmationPopupOpen: WritableSignal<boolean> = signal(false);
-
-  submitUserForm$ = createEffect(() =>
+ submitUserForm$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserFormActions.submitUserForm),
       mergeMap(({ formData, userPayload }) =>
@@ -28,7 +26,6 @@ export class UserEffects {
 
             return this.userService.addUser(updatedUserPayload).pipe(
               map((response) => {
-                // Navigate after successful submission
                 return UserFormActions.submitUserFormSuccess({
                   user: response.user,
                 });
