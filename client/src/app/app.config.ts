@@ -10,12 +10,14 @@ import { provideRouter } from '@angular/router';
 
 import { storeConfig } from './state/state.config';
 import { environment } from '../environment/environment';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
+    provideAnimations(),
     storeConfig.provideStore, 
     storeConfig.provideEffects, 
     provideStoreDevtools({
