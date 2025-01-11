@@ -1,4 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ToastComponent } from './shared/ui/toast/toast.component';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
@@ -9,6 +15,7 @@ import { CommonModule } from '@angular/common';
 import { getIsUserSubmitting } from './features/cv-deposit/store/selectors/cv.selectors';
 import { getIsRecruitmentSubmitting } from './features/recruitment/store/selectors/recruitment.selectors';
 import { ScrollButtonComponent } from './shared/scroll-button/scroll-button.component';
+import { SocialMediaComponent } from './shared/social-media/social-media.component';
 
 @Component({
   selector: 'app-root',
@@ -18,12 +25,13 @@ import { ScrollButtonComponent } from './shared/scroll-button/scroll-button.comp
     ToastComponent,
     LoadingSpinnerComponent,
     CommonModule,
-    ScrollButtonComponent
+    ScrollButtonComponent,
+    SocialMediaComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   isUserSubmitting$!: Observable<boolean>;
   isRecruitmentSubmitting$!: Observable<boolean>;
 
@@ -34,5 +42,15 @@ export class AppComponent implements OnInit {
     this.isRecruitmentSubmitting$ = this.store.pipe(
       select(getIsRecruitmentSubmitting)
     );
+  }
+
+  ngAfterViewInit() {
+    setTimeout(() => {
+      document.getElementById('preloader')?.remove();
+      const appRoot = document.querySelector('app-root') as HTMLElement;
+      if (appRoot) {
+        appRoot.style.display = 'block';
+      }
+    }, 1500);
   }
 }

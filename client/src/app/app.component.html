@@ -1,8 +1,9 @@
-<app-toast></app-toast>
+<app-toast />
 <ng-container
   *ngIf="(isUserSubmitting$ | async) || (isRecruitmentSubmitting$ | async)"
 >
   <app-loading-spinner />
 </ng-container>
 <router-outlet></router-outlet>
-<app-scroll-button></app-scroll-button>
+<app-scroll-button />
+<!-- <app-social-media /> -->
