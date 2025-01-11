@@ -11,8 +11,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   styleUrl: './connection-status.component.scss',
   animations: [
     trigger('slideInOut', [
-      state('true', style({ opacity: 1, transform: 'translate(-50%, -50%)' })),
-      state('false', style({ opacity: 0, transform: 'translate(-50%, -60%)' })),
+      state('true', style({ opacity: 1, transform: 'translate(-50%, -50%) scale(1)' })),
+      state('false', style({ opacity: 0, transform: 'translate(-50%, -60%) scale(0.95)' })),
       transition('false => true', animate('300ms ease-out')),
       transition('true => false', animate('300ms ease-in'))
     ])
@@ -26,10 +26,16 @@ export class ConnectionStatusComponent implements OnInit, OnDestroy {
   showStatus: boolean = false;
   private subscription: Subscription = new Subscription();
 
-  constructor(private connectionService: ConnectionService) {}
+  constructor(private connectionService: ConnectionService) {
+    // Check connection status immediately on component creation
+    if (this.isBrowser) {
+      this.isOnline = navigator.onLine;
+    }
+  }
 
   ngOnInit(): void {
     if (this.isBrowser) {
+      // Subscribe to connection status changes
       this.subscription.add(
         this.connectionService.connectionStatus$.subscribe(
           (online: boolean) => {

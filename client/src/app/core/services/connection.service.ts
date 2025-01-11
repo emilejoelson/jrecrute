@@ -7,16 +7,32 @@ import { BehaviorSubject, fromEvent, map, merge, Observable } from 'rxjs';
 })
 export class ConnectionService {
   private platformId = inject(PLATFORM_ID);
-  private online$ = new BehaviorSubject<boolean>(true);
+  private online$ = new BehaviorSubject<boolean>(this.getInitialStatus());
   public connectionStatus$: Observable<boolean> = this.online$.asObservable();
+
+  private getInitialStatus(): boolean {
+    if (isPlatformBrowser(this.platformId)) {
+      return navigator.onLine;
+    }
+    return true;
+  }
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
-      this.online$.next(navigator.onLine);
+      // Set up browser-only event listeners
       merge(
         fromEvent(window, 'online').pipe(map(() => true)),
-        fromEvent(window, 'offline').pipe(map(() => false))
-      ).subscribe(this.online$);
+        fromEvent(window, 'offline').pipe(map(() => false)),
+        // Add DOMContentLoaded event to check status after page load
+        fromEvent(document, 'DOMContentLoaded').pipe(map(() => navigator.onLine))
+      ).subscribe(status => {
+        this.online$.next(status);
+      });
+
+      // Additional check on window load
+      window.addEventListener('load', () => {
+        this.online$.next(navigator.onLine);
+      });
     }
   }
 }

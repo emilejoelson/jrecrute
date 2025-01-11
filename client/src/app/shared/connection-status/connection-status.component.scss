@@ -10,11 +10,9 @@
   }
 
   .status-content {
-    background: rgba(52, 211, 153, 0.95);
-    backdrop-filter: blur(8px);
+    background: transparent;
     border-radius: 12px;
     padding: 16px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
     transition: all 0.3s ease;
   }
 
@@ -38,6 +36,7 @@
     height: 32px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
   }
 
   .check-icon, .warning-icon {
@@ -65,8 +64,19 @@
     border-top-color: white;
     border-radius: 50%;
     animation: spin 1s linear infinite;
+    flex-shrink: 0;
   }
 
   @keyframes spin {
     to { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 480px) {
+    .status-content {
+      padding: 12px;
+    }
+
+    .status-text {
+      font-size: 0.875rem;
+    }
   }
