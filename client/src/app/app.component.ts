@@ -18,6 +18,7 @@ import { getIsUserSubmitting } from './features/cv-deposit/store/selectors/cv.se
 import { getIsRecruitmentSubmitting } from './features/recruitment/store/selectors/recruitment.selectors';
 import { ScrollButtonComponent } from './shared/scroll-button/scroll-button.component';
 import { SocialMediaComponent } from './shared/social-media/social-media.component';
+import { ConnectionStatusComponent } from './shared/connection-status/connection-status.component';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,7 @@ import { SocialMediaComponent } from './shared/social-media/social-media.compone
     LoadingSpinnerComponent,
     CommonModule,
     ScrollButtonComponent,
+    ConnectionStatusComponent,
     SocialMediaComponent,
   ],
   templateUrl: './app.component.html',
