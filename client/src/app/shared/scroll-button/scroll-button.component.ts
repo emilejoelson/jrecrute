@@ -1,39 +1,53 @@
-import { CommonModule } from '@angular/common';
+// scroll-button.component.ts
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import {
   Component,
   HostListener,
   OnDestroy,
   OnInit,
   signal,
+  inject,
+  PLATFORM_ID,
 } from '@angular/core';
 
 @Component({
   selector: 'app-scroll-button',
+  standalone: true,
   imports: [CommonModule],
   templateUrl: './scroll-button.component.html',
   styleUrl: './scroll-button.component.scss',
 })
 export class ScrollButtonComponent implements OnInit, OnDestroy {
+  private platformId = inject(PLATFORM_ID);
   isAtTop = signal(true);
   private scrollInterval: any = null;
   private readonly SCROLL_DURATION = 500;
   private readonly FRAME_RATE = 60;
 
   ngOnInit() {
-    this.checkScrollPosition();
+    if (isPlatformBrowser(this.platformId)) {
+      this.checkScrollPosition();
+    }
   }
 
   @HostListener('window:scroll')
   onWindowScroll() {
-    this.checkScrollPosition();
+    if (isPlatformBrowser(this.platformId)) {
+      this.checkScrollPosition();
+    }
   }
 
   private checkScrollPosition() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    this.isAtTop.set(scrollTop === 0);
+    if (isPlatformBrowser(this.platformId)) {
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
+      this.isAtTop.set(scrollTop === 0);
+    }
   }
 
   toggleScroll() {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     if (this.scrollInterval) {
       this.stopScrolling();
       return;
@@ -46,6 +60,8 @@ export class ScrollButtonComponent implements OnInit, OnDestroy {
   }
 
   private smoothScroll(targetPosition: number) {
+    if (!isPlatformBrowser(this.platformId)) return;
+
     const startPosition =
       window.pageYOffset || document.documentElement.scrollTop;
     const distance = targetPosition - startPosition;
@@ -74,5 +90,10 @@ export class ScrollButtonComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.stopScrolling();
+  }
+
+  // Helper method for the template
+  isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
   }
 }
