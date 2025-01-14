@@ -35,15 +35,15 @@ export default {
   }
 ],
   assets: {
-    'index.csr.html': {size: 14196, hash: 'f4a292ad47260d4c5e4e91f0cf71110762eb2dc24114c8f6ba6bbfc5d5a2b711', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 12128, hash: '05e07ba3fe6f56dc5ea1b669c156b9aded1ddbeb1819a54182ddd76304bdbb55', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'index.html': {size: 76465, hash: 'f5792c7ac4e12695f40a12c31b5bb40e15d2b67477ad33ff1a986f381aabfb78', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
-    'client/index.html': {size: 72009, hash: 'e08b50aaed5330464e39f13b0e000d7556b4132934b252eccd0279eff3f32baf', text: () => import('./assets-chunks/client_index_html.mjs').then(m => m.default)},
-    'mention-legal/index.html': {size: 45599, hash: 'a76b5c8029558e75b7f935a3dd2e95b3b46a4069e00a4ace94f384862140a1c7', text: () => import('./assets-chunks/mention-legal_index_html.mjs').then(m => m.default)},
-    'attente-de-reponse/index.html': {size: 41509, hash: 'fb4171edccdc34e5ae70aafb87cc4249dc578357ef5e05502f01ef2b14bfefb2', text: () => import('./assets-chunks/attente-de-reponse_index_html.mjs').then(m => m.default)},
-    'deposer-un-cv/index.html': {size: 41956, hash: '8f24e1a0014b7f47da845d604760362203c0ebb224f2b6532829017f1703c394', text: () => import('./assets-chunks/deposer-un-cv_index_html.mjs').then(m => m.default)},
-    'fiche-de-poste-remplie-avec-succes/index.html': {size: 40205, hash: '5bd79ffd081b3e26f0143368406f4618055dc0ca338b623919982eb62d857093', text: () => import('./assets-chunks/fiche-de-poste-remplie-avec-succes_index_html.mjs').then(m => m.default)},
-    'deposer-un-cv-avec-succes/index.html': {size: 40168, hash: 'f253c89106680829aca425dc456534d0eed14c4e52f6e7208c9449a12cc9046f', text: () => import('./assets-chunks/deposer-un-cv-avec-succes_index_html.mjs').then(m => m.default)},
-    'styles-QNRC4PXG.css': {size: 92044, hash: 'oMUs1ot0QDw', text: () => import('./assets-chunks/styles-QNRC4PXG_css.mjs').then(m => m.default)}
+    'index.csr.html': {size: 14196, hash: 'f4f5b2312b6d5a98b3b944048e5bca74c0ddc8d4036e74893290389b3d082e6f', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 12128, hash: 'd069d3bb3473df6c00b7a8a69492b333401a90d6bb12cfbef9d22a5f821096ed', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'client/index.html': {size: 77113, hash: 'eef03ecb95175731498ede8ad08fce8ca3fbf1d9d5f05c011cbd4f06a202ecd6', text: () => import('./assets-chunks/client_index_html.mjs').then(m => m.default)},
+    'mention-legal/index.html': {size: 45599, hash: '40542449f5c268f735962068343d468d30d46571be48887427dcd5e3d94cc62c', text: () => import('./assets-chunks/mention-legal_index_html.mjs').then(m => m.default)},
+    'deposer-un-cv/index.html': {size: 41956, hash: '6862043dfb99cc22854a53db647b14a1254bc9067f23f1b5c4fc8fffd5649a2f', text: () => import('./assets-chunks/deposer-un-cv_index_html.mjs').then(m => m.default)},
+    'index.html': {size: 76467, hash: 'c3ad43e6cd5c2dc214d4a0426c0f05db89552890f84eaabcb5ffec5cc69adc36', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
+    'attente-de-reponse/index.html': {size: 41509, hash: 'df88f68ed55b6552f20abde346c79b871195d1e1f79a992db986b4cde3bbeb82', text: () => import('./assets-chunks/attente-de-reponse_index_html.mjs').then(m => m.default)},
+    'deposer-un-cv-avec-succes/index.html': {size: 40168, hash: 'ee4b3ace00d228fdba026d351895bf13ba3b5f4927a76f1b18d3e278c6de5be3', text: () => import('./assets-chunks/deposer-un-cv-avec-succes_index_html.mjs').then(m => m.default)},
+    'fiche-de-poste-remplie-avec-succes/index.html': {size: 40205, hash: 'd7d4230ba2d2d7f09b0ce6fb431cceb731ac28e749d2d2f150109ba02de1ae90', text: () => import('./assets-chunks/fiche-de-poste-remplie-avec-succes_index_html.mjs').then(m => m.default)},
+    'styles-UDBXXYD2.css': {size: 92573, hash: 'YAP0z+zZec8', text: () => import('./assets-chunks/styles-UDBXXYD2_css.mjs').then(m => m.default)}
   },
 };
