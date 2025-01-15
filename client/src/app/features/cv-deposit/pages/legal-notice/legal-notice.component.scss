@@ -1,9 +1,13 @@
-.gradient-bg {
-    background: linear-gradient(135deg, #f9f6ff 0%, #f3e8ff 100%);
+:host {
+    display: block;
+    background-color: #f9fafb;
+    min-height: 100vh;
+  }
+  ul.space-y-2 li {
+    list-style-type: none; /* Remove default bullets */
 }
-.card-hover {
-    transition: all 0.3s ease;
-}
-.card-hover:hover {
-    transform: translateY(-5px);
+
+ul.space-y-2 li::before {
+    content: "- ";
+    font-weight: bold;
 }
