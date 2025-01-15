@@ -1,12 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'app-legal-notice',
   imports: [CommonModule],
   templateUrl: './legal-notice.component.html',
-  styleUrl: './legal-notice.component.scss'
+  styleUrl: './legal-notice.component.scss',
 })
 export class LegalNoticeComponent {
   private expandedArticles: { [key: number]: boolean } = {};
@@ -29,7 +28,7 @@ export class LegalNoticeComponent {
       6: "Engagement de l'entreprise",
       7: 'Confidentialité et usage des données',
       8: 'Droit applicable',
-      9: 'Acceptation des CGV'
+      9: 'Acceptation des CGV',
     };
     return titles[index] || '';
   }
@@ -42,22 +41,23 @@ export class LegalNoticeComponent {
           <div class="space-y-2">
             <p class="font-medium">Le service inclut :</p>
             <ol class="list-decimal pl-6 space-y-3">
-              <li>Analyse des besoins : Identification des critères du poste et des compétences requises</li>
+              <li> <span class="font-bold underline">Analyse des besoins</span> : Identification des critères du poste et des compétences requises</li>
               <li>
-                Recherche ciblée et présélection :
+              <span class="font-bold underline">Recherche ciblée et présélection</span> :
                 <ul class="list-disc pl-6 mt-2 space-y-1">
                   <li>Recherche approfondie dans notre base de données internationale de freelances</li>
                   <li>Présélection et organisation d'un entretien anonyme via Google Meet sous 48 à 72 heures</li>
                 </ul>
               </li>
               <li>
-                Mise en relation :
+                <span class="font-bold underline">Mise en relation</span>
+                 :
                 <ul class="list-disc pl-6 mt-2 space-y-1">
                   <li>Présentation du freelance sélectionné pour validation par l'entreprise</li>
                   <li>Suivi initial après la mise en relation pour garantir la satisfaction</li>
                 </ul>
               </li>
-              <li>Garantie d'ajustement : Possibilité de remplacement gratuit dans les 15 jours</li>
+              <li> <span class="font-bold underline">Garantie d'ajustement</span>  : Possibilité de remplacement gratuit dans les 15 jours</li>
             </ol>
           </div>
         </div>
@@ -107,7 +107,7 @@ export class LegalNoticeComponent {
       `,
       9: `
         <p>L'acceptation du devis implique l'adhésion pleine et entière aux présentes conditions générales de vente</p>
-      `
+      `,
     };
     return contents[index] || '';
   }

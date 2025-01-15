@@ -35,15 +35,15 @@ export default {
   }
 ],
   assets: {
-    'index.csr.html': {size: 14196, hash: '70ad365d20cf825cc87b059b9f91b65cd585c12cd065cea970de06c6d0d876d8', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
-    'index.server.html': {size: 12128, hash: 'db0e12f5ecd0693aa50edf9927e7f54c5f5034e57d04b60facab053b43eb1c35', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
-    'index.html': {size: 76467, hash: '6c3f35341f626fd93976dea576c80f7cd4eaee7928211be71a7ac2db511fd6c3', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
-    'mention-legal/index.html': {size: 53244, hash: '844a4b7f57177d87f25f990346edfb578770d868873a3dbd8f6fa92278f19998', text: () => import('./assets-chunks/mention-legal_index_html.mjs').then(m => m.default)},
-    'client/index.html': {size: 77113, hash: 'bc9be50418b0bd1ecf2367a03ed1810964bdb88b9879718d61befee0831b61db', text: () => import('./assets-chunks/client_index_html.mjs').then(m => m.default)},
-    'attente-de-reponse/index.html': {size: 41509, hash: '40e7d1b632d0d19abefa102b4f78725c12f7e6de8ec74cddc2da64f25800ad70', text: () => import('./assets-chunks/attente-de-reponse_index_html.mjs').then(m => m.default)},
-    'deposer-un-cv-avec-succes/index.html': {size: 40168, hash: 'fc0f4e84727b57347df5b77def2592a78113028a4a9de50cd6f9d397605f4cc8', text: () => import('./assets-chunks/deposer-un-cv-avec-succes_index_html.mjs').then(m => m.default)},
-    'deposer-un-cv/index.html': {size: 41956, hash: 'f90d44ad8c474c9dc9e08b12f216b1ed07386a18bd1fd942337037ebdcf6141a', text: () => import('./assets-chunks/deposer-un-cv_index_html.mjs').then(m => m.default)},
-    'fiche-de-poste-remplie-avec-succes/index.html': {size: 40205, hash: '26d96267224d0797c0b20270b311ab456b073272ef80ab6c89baa95b7ad13b14', text: () => import('./assets-chunks/fiche-de-poste-remplie-avec-succes_index_html.mjs').then(m => m.default)},
-    'styles-2K6LPUR4.css': {size: 93826, hash: 'IqHTKNELiDI', text: () => import('./assets-chunks/styles-2K6LPUR4_css.mjs').then(m => m.default)}
+    'index.csr.html': {size: 14196, hash: 'aa8fd29517c71df380639f63123879e8c91d44efc856ba5f02f8eba45fc561a5', text: () => import('./assets-chunks/index_csr_html.mjs').then(m => m.default)},
+    'index.server.html': {size: 12128, hash: '67d7fb5ecad9d4a28f532f10810fa993ec67f1a8e6d0ac5a7ede3018f666e2e5', text: () => import('./assets-chunks/index_server_html.mjs').then(m => m.default)},
+    'index.html': {size: 76487, hash: 'd39d471ca35beb5400a4030749fbe6bde568f40cf25548805d4c4177b2957965', text: () => import('./assets-chunks/index_html.mjs').then(m => m.default)},
+    'deposer-un-cv/index.html': {size: 41956, hash: '85ce987ff5b038359c62e69fc3aec7e96e823041afd59076d5213664c5af5ebd', text: () => import('./assets-chunks/deposer-un-cv_index_html.mjs').then(m => m.default)},
+    'client/index.html': {size: 77113, hash: 'abcc610929343459ab72da2566ddc6211dde11ba1274aa3ef3626fa13efa04b5', text: () => import('./assets-chunks/client_index_html.mjs').then(m => m.default)},
+    'attente-de-reponse/index.html': {size: 41509, hash: '4493c81f7b8fe27ea7c3448b8315c52557a6314ea2500e33c40c72e635f3a448', text: () => import('./assets-chunks/attente-de-reponse_index_html.mjs').then(m => m.default)},
+    'mention-legal/index.html': {size: 54643, hash: '0a0d1d020ad7aa8c382092f478d375e3b6723e1c4cd0ffea26d02d553eb44537', text: () => import('./assets-chunks/mention-legal_index_html.mjs').then(m => m.default)},
+    'fiche-de-poste-remplie-avec-succes/index.html': {size: 40205, hash: '7fa1ff8c47873c5ad54b618a2349310514b370def0c3fb3777c2f27ca3a023c8', text: () => import('./assets-chunks/fiche-de-poste-remplie-avec-succes_index_html.mjs').then(m => m.default)},
+    'deposer-un-cv-avec-succes/index.html': {size: 40168, hash: '823164777771dd1e64ff0036e02ae1aa6e7b9db074a313d247f7489493ca4719', text: () => import('./assets-chunks/deposer-un-cv-avec-succes_index_html.mjs').then(m => m.default)},
+    'styles-LJ4PLVSV.css': {size: 94666, hash: 'qQzI5MrxyQA', text: () => import('./assets-chunks/styles-LJ4PLVSV_css.mjs').then(m => m.default)}
   },
 };
