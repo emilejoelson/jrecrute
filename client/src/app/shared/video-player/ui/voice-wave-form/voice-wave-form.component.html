@@ -1,0 +1,16 @@
+<div class="waveform-container w-full h-24 my-4">
+    <svg width="100%" height="100%" viewBox="0 0 800 100">
+      <g *ngFor="let bar of waveformBars; let i = index">
+        <rect
+          [attr.x]="i * 12"
+          [attr.y]="50 - (bar.height / 2)"
+          [attr.height]="bar.height"
+          width="8"
+          [attr.fill]="getGradientColor(i)"
+          [class.animate-bar]="isPlaying"
+          style="transform-origin: center;"
+          [style.animation-delay]="i * 0.05 + 's'"
+        />
+      </g>
+    </svg>
+  </div>

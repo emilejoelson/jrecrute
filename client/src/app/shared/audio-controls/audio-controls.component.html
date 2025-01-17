@@ -1,0 +1,45 @@
+<div class="fixed bottom-8 right-8 z-50 flex flex-col items-end space-y-4">
+    <div *ngIf="dialogLines.length > 0" class="bg-white rounded-lg shadow-xl w-96 max-h-[400px] overflow-y-auto p-4 space-y-4">
+      <div *ngFor="let line of dialogLines" class="transition-all duration-300" [class.opacity-50]="!line.active">
+        <div class="flex items-start space-x-3"
+             [class.justify-start]="line.speaker === 'voice1'"
+             [class.justify-end]="line.speaker === 'voice2'"
+             [class.justify-center]="line.speaker === 'both'">
+          <div *ngIf="line.speaker === 'voice1'" class="w-8 h-8 rounded-full bg-app-primary-purple flex items-center justify-center text-white">
+            1
+          </div>
+          <div class="max-w-[80%] rounded-lg p-3"
+               [class.bg-app-primary-purple]="line.speaker === 'voice1'"
+               [class.bg-gray-200]="line.speaker === 'voice2'"
+               [class.bg-gradient-to-r]="line.speaker === 'both'"
+               [class.from-app-primary-purple]="line.speaker === 'both'"
+               [class.to-gray-200]="line.speaker === 'both'"
+               [class.text-white]="line.speaker === 'voice1'"
+               [class.shadow-lg]="line.active">
+            <p [class.font-semibold]="line.active">{{ line.text }}</p>
+          </div>
+          <div *ngIf="line.speaker === 'voice2'" class="w-8 h-8 rounded-full bg-gray-600 flex items-center justify-center text-white">
+            2
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bg-app-primary-purple rounded-full shadow-lg p-4 flex items-center space-x-3">
+      <button (click)="togglePlay()" class="w-12 h-12 flex items-center justify-center bg-white rounded-full hover:bg-gray-100 transition-colors" [class.bg-gray-100]="isPlaying">
+        <span class="sr-only">{{isPlaying ? 'Pause' : 'Play'}}</span>
+        <svg *ngIf="!isPlaying" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-app-primary-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        <svg *ngIf="isPlaying" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-app-primary-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="6" y="4" width="4" height="16"/>
+          <rect x="14" y="4" width="4" height="16"/>
+        </svg>
+      </button>
+      <button (click)="stop()" class="w-12 h-12 flex items-center justify-center bg-white rounded-full hover:bg-gray-100 transition-colors">
+        <span class="sr-only">Stop</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-app-primary-purple" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="4" y="4" width="16" height="16"/>
+        </svg>
+      </button>
+    </div>
+  </div>

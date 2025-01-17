@@ -1,0 +1,51 @@
+<div class="fixed z-[9999999] inset-0 flex items-center justify-center md:items-start md:justify-end" *ngIf="isModalOpen">
+  <div class="w-full max-w-[450px] mx-4 md:mx-0 md:sticky md:top-24">
+    <div class="fixed inset-0 bg-black/60 backdrop-blur-sm md:hidden"></div>
+    
+    <div class="relative bg-gray-900/90 backdrop-blur-lg rounded-3xl shadow-2xl overflow-hidden transform transition-all duration-300">
+      <button class="absolute top-4 z-[999999999] right-4 w-10 h-10 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transform hover:scale-105 transition-all duration-200"
+        (click)="closeModalHandler()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" class="text-red-400" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M208.49,191.51a12,12,0,0,1-17,17L128,145,64.49,208.49a12,12,0,0,1-17-17L111,128,47.51,64.49a12,12,0,0,1,17-17L128,111l63.51-63.52a12,12,0,0,1,17,17L145,128Z"></path>
+        </svg>
+      </button>
+
+      <div class="relative h-2 w-full bg-gray-800/50">
+        <div class="absolute h-full bg-gradient-to-r from-violet-600 via-purple-500 to-pink-500 transition-all duration-300 ease-out"
+          [style.width]="(currentTime / totalDuration) * 100 + '%'">
+          <div class="absolute -right-1 -top-1 w-4 h-4 rounded-full bg-white shadow-lg shadow-purple-500/50"></div>
+        </div>
+      </div>
+
+      <div class="p-4 sm:p-6 md:p-8 relative">
+        <div class="space-y-2 mb-5 animate-[slideDown_0.5s_ease-out_forwards]">
+          <h3 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-violet-500 to-purple-400 bg-clip-text text-transparent">
+            {{ content.title }}
+          </h3>
+          <p class="text-sm sm:text-base text-gray-400">{{ content.subtitle }}</p>
+        </div>
+
+        <app-voice-wave-form [isPlaying]="isPlaying"></app-voice-wave-form>
+
+        <div class="flex justify-center gap-4 sm:gap-6">
+          <button (click)="togglePlay()"
+            class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 flex items-center justify-center transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg hover:shadow-purple-500/50">
+            <svg *ngIf="!isPlaying" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-10 sm:h-10 text-white" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M8 5v14l11-7z" />
+            </svg>
+            <svg *ngIf="isPlaying" xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-10 sm:h-10 text-white" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+            </svg>
+          </button>
+
+          <button (click)="stop()"
+            class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-gray-800 hover:bg-gray-700 flex items-center justify-center transform hover:scale-105 active:scale-95 transition-all duration-200 shadow-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 sm:w-10 sm:h-10 text-white" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M6 6h12v12H6z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
