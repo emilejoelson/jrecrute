@@ -29,8 +29,16 @@ export const routes: Routes = [
         path: 'mention-legal',
         loadComponent: () =>
           import(
-            './features/cv-deposit/pages/legal-notice/legal-notice.component'
+            './features/recruitment/pages/legal-notice/legal-notice.component'
           ).then((m) => m.LegalNoticeComponent),
+      },
+      {
+        title: 'Recrutement | CGV',
+        path: 'condition-general-de-vente',
+        loadComponent: () =>
+          import(
+            './features/recruitment/pages/sale-general-condition/sale-general-condition.component'
+          ).then((m) => m.SaleGeneralConditionComponent),
       },
       {
         title: 'Loading ...',

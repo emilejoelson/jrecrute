@@ -61,7 +61,7 @@
     </div>
 
     <div
-      class="border-t flex  justify-center border-gray-700 mt-12 pt-8 text-center text-gray-400"
+      class="border-t flex justify-center border-gray-700 mt-12 pt-8 text-center text-gray-400"
     >
       <p>
         <span
@@ -70,7 +70,15 @@
         >
           Mentions légales
         </span>
-        | &copy; {{ currentYear }} Consult Collab
+        <span class="mx-2">|</span>
+        <span
+          (click)="onClickCGV()"
+          class="hover:text-white font-bold cursor-pointer"
+        >
+          Conditions générales de ventes
+        </span>
+        <span class="mx-2">|</span>
+        <span>&copy; {{ currentYear }} Consult Collab</span>
       </p>
     </div>
   </div>

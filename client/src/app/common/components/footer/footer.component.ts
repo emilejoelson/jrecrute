@@ -147,4 +147,8 @@ export class FooterComponent {
     window.scroll(0, 0);
     this.router.navigate(['/mention-legal']);
   }
+  onClickCGV(){
+    window.scroll(0, 0);
+    this.router.navigate(['/condition-general-de-vente']);
+  }
 }

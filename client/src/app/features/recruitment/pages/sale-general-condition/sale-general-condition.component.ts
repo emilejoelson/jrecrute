@@ -2,12 +2,12 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-legal-notice',
+  selector: 'app-sale-general-condition',
   imports: [CommonModule],
-  templateUrl: './legal-notice.component.html',
-  styleUrl: './legal-notice.component.scss',
+  templateUrl: './sale-general-condition.component.html',
+  styleUrl: './sale-general-condition.component.scss'
 })
-export class LegalNoticeComponent {
+export class SaleGeneralConditionComponent {
   private expandedArticles: { [key: number]: boolean } = {};
 
   toggleArticle(index: number): void {
