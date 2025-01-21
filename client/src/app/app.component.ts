@@ -35,7 +35,6 @@ import { ConnectionStatusComponent } from './shared/connection-status/connection
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
-
 export class AppComponent implements OnInit, AfterViewInit {
   isUserSubmitting$!: Observable<boolean>;
   isRecruitmentSubmitting$!: Observable<boolean>;

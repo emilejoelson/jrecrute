@@ -35,10 +35,10 @@ export class VideoService {
 
   play() {
     if (!this.isBrowser || !this.audio) return;
-    
+
     this.audio.play();
     this.isPlaying.next(true);
-    
+
     this.audio.ontimeupdate = () => {
       this.currentTime.next(this.audio?.currentTime || 0);
     };
