@@ -19,6 +19,7 @@ import { getIsRecruitmentSubmitting } from './features/recruitment/store/selecto
 import { ScrollButtonComponent } from './shared/scroll-button/scroll-button.component';
 import { SocialMediaComponent } from './shared/social-media/social-media.component';
 import { ConnectionStatusComponent } from './shared/connection-status/connection-status.component';
+import { VideoService } from './core/services/video.service';
 
 @Component({
   selector: 'app-root',
@@ -41,7 +42,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   constructor(
     private store: Store<State>,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private videoService: VideoService
   ) {}
 
   ngOnInit() {
@@ -53,6 +55,8 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
+      this.videoService.autoplay();
+      
       setTimeout(() => {
         const preloader = document.getElementById('preloader');
         if (preloader) {

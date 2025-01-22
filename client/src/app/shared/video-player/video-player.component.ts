@@ -1,4 +1,10 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VideoContent, VideoService } from '../../core/services/video.service';
 import { Subscription } from 'rxjs';
@@ -28,10 +34,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.subscriptions.push(
       this.videoService.currentTime$.subscribe(
-        time => this.currentTime = time
+        (time) => (this.currentTime = time)
       ),
       this.videoService.isPlaying$.subscribe(
-        playing => this.isPlaying = playing
+        (playing) => (this.isPlaying = playing)
       )
     );
   }
@@ -40,7 +46,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
     if (this.isPlaying) {
       this.videoService.pause();
     } else {
-      this.videoService.play();
+      this.videoService.autoplay();
     }
   }
 
@@ -54,7 +60,7 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
     this.videoService.stop();
   }
 }

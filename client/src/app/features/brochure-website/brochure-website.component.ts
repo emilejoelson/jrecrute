@@ -14,7 +14,6 @@ import { FooterComponent } from '../../common/components/footer/footer.component
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { filter, Subject, takeUntil } from 'rxjs';
-import { VideoService } from '../../core/services/video.service';
 
 @Component({
   selector: 'app-brochure-website',
@@ -23,32 +22,27 @@ import { VideoService } from '../../core/services/video.service';
   templateUrl: './brochure-website.component.html',
   styleUrl: './brochure-website.component.scss',
 })
-
 export class BrochureWebsiteComponent implements OnInit, OnDestroy {
   @ViewChild('videoPlayer') videoPlayer!: ElementRef<HTMLVideoElement>;
- 
+
   isMobile: WritableSignal<boolean> = signal(false);
   showVideo = signal(true);
   private destroy$ = new Subject<void>();
- 
+
   videos = [
     '/assets/videos/video2.mp4',
     '/assets/videos/video1.mp4',
     '/assets/videos/video3.mp4',
   ];
- 
+
   currentIndex = 0;
   currentVideo = signal(this.videos[this.currentIndex]);
   private isBrowser: boolean;
- 
-  constructor(
-    @Inject(PLATFORM_ID) platformId: Object,
-    private router: Router,
-    private videoService: VideoService
-  ) {
+
+  constructor(@Inject(PLATFORM_ID) platformId: Object, private router: Router) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
- 
+
   private handleResize = () => {
     if (this.isBrowser) {
       const width = window.innerWidth;
@@ -56,17 +50,13 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       console.log('Window width:', width, '| Is Mobile:', this.isMobile());
     }
   };
- 
+
   ngOnInit() {
     if (this.isBrowser) {
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
-      
-      setTimeout(() => {
-        this.videoService.play();
-      }, 1000);
     }
- 
+
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
@@ -74,26 +64,22 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       )
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          const hideVideoUrls = ['deposer-un-cv', 'mention-legal', 'client', 'condition-general-de-vente'];
-          const shouldShowVideo = !hideVideoUrls.some((url) => event.url.includes(url));
-          this.showVideo.set(shouldShowVideo);
-          
-          if (!shouldShowVideo) {
-            this.videoService.stop();
-          }
+          const hideVideoUrls = ['deposer-un-cv', 'mention-legal', 'client','condition-general-de-vente'];
+          this.showVideo.set(
+            !hideVideoUrls.some((url) => event.url.includes(url))
+          );
         }
       });
   }
- 
+
   ngOnDestroy() {
     if (this.isBrowser) {
       window.removeEventListener('resize', this.handleResize);
-      this.videoService.stop();
       this.destroy$.next();
       this.destroy$.complete();
     }
   }
- 
+
   playNextVideo() {
     if (this.isBrowser) {
       this.currentIndex = (this.currentIndex + 1) % this.videos.length;
@@ -101,10 +87,12 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
   
       setTimeout(() => {
         if (this.videoPlayer?.nativeElement) {
-          this.videoPlayer.nativeElement.load();
+          this.videoPlayer.nativeElement.load(); // Ensures video is ready before switching
           this.videoPlayer.nativeElement.play();
         }
-      }, 50);
+      }, 50); 
     }
   }
- }
+  
+  
+}
