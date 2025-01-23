@@ -1,0 +1,313 @@
+<div *ngIf="jobOfferDetails" class="mx-20 my-10">
+  <div class="text-center mb-12 space-y-6">
+    <h1 class="text-5xl font-bold text-gray-700">
+      Devenez le {{ jobOfferDetails.title }} qui Façonne l'Avenir
+    </h1>
+    <div class="flex justify-center gap-4">
+      <div
+        class="px-4 py-2 bg-purple-100 rounded-full text-purple-600 font-medium"
+      >
+        Opportunité Exceptionnelle
+      </div>
+      <div
+        class="px-4 py-2 bg-indigo-100 rounded-full text-indigo-600 font-medium"
+      >
+        {{ jobOfferDetails.workType }}
+      </div>
+    </div>
+    <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Découvrez ci-dessous les informations générales concernant l'offre <span class="italic font-bold underline">{{jobOfferDetails.title}}</span>, incluant une description du poste, les principales responsabilités à assumer, ainsi que les compétences nécessaires pour exceller dans ce rôle.
+    </p>    
+  </div>
+
+  <div class="md:flex min-h-screen gap-10">
+    <div class="w-96 space-y-5">
+      <div class="space-y-2">
+        <div
+          class="group rounded-xl border border-gray-200 p-4 hover:border-purple-500 hover:shadow-lg transition-all duration-200 cursor-pointer"
+        >
+          <div class="flex justify-between items-start">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2">
+                <div
+                  class="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-700 font-semibold"
+                >
+                  CC
+                </div>
+                <h2 class="text-sm font-semibold text-gray-900">
+                  Consult Collab
+                </h2>
+              </div>
+              <h3 class="text-lg font-semibold text-gray-900">
+                {{ jobOfferDetails.title }}
+              </h3>
+              <p class="text-sm text-gray-600">
+                {{ jobOfferDetails.workType }}
+              </p>
+              <div class="flex items-center gap-2 mt-2">
+                <span
+                  class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800"
+                >
+                  {{ jobOfferDetails.salaryRange }}
+                </span>
+                <span class="text-sm text-gray-500">(Est. employeur)</span>
+              </div>
+            </div>
+            <button
+              class="group-hover:opacity-100 opacity-0 text-purple-600 hover:text-purple-800 transition-opacity"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <span class="text-sm text-gray-500"
+              >Publiée il y a moins de 24h</span
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="border rounded-xl border-purple-500">
+        <div class="bg-gray-50 rounded-xl p-4">
+          <h3 class="text-sm font-medium text-gray-700">
+            Améliorez votre recherche d'emploi
+          </h3>
+          <h4 class="text-base font-semibold text-gray-900 mt-2">
+            Salaire minimum souhaité
+          </h4>
+          <div class="space-y-3 mt-4">
+            <div class="relative">
+              <span class="absolute left-3 top-2.5 text-gray-500">€</span>
+              <input
+                type="text"
+                class="w-full pl-10 pr-4 py-3 rounded-xl border border-purple-200 
+                   focus:outline-none focus:ring-2 focus:ring-purple-400 
+                   transition-all duration-300 
+                   text-gray-800 placeholder-gray-400"
+                placeholder="Saisir le montant"
+              />
+            </div>
+            <select
+              class="w-full px-4 py-2.5 rounded-lg border border-gray-200 focus:border-purple-500 focus:ring-2 focus:ring-purple-100 transition-all duration-200"
+            >
+              <option>Mensuel</option>
+              <option>Annuel</option>
+            </select>
+            <div class="flex gap-3">
+              <button (click)="onGetBack()"
+                class="flex-1 px-4 py-2.5 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors duration-200"
+              >
+                Retour
+              </button>
+              <button
+              (click)="onContinue()"
+                class="flex-1 px-4 py-2.5 bg-white text-gray-700 border border-gray-200 font-medium rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              >
+                Continuer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="flex-1 bg-white border rounded-xl border-gray-200 overflow-y-auto relative"
+    >
+      <div class="max-w-3xl mx-auto p-8">
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <h1 class="text-3xl font-bold text-gray-900">
+              {{ jobOfferDetails.title }}
+            </h1>
+            <p class="text-lg text-gray-600 mt-1">
+              {{ jobOfferDetails.workType }}
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <button
+              class="p-2 text-gray-400 hover:text-purple-600 rounded-lg hover:bg-purple-50 transition-all duration-200"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                />
+              </svg>
+            </button>
+            <button
+            (click)="onContinue()"
+              class="inline-flex items-center px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors duration-200 gap-2"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Postuler facilement
+            </button>
+          </div>
+        </div>
+
+        <div class="p-6 shadow-sm">
+          <div class="flex items-center gap-4 mb-6">
+            <div
+              class="h-14 w-14 rounded-xl bg-gray-100 flex items-center justify-center text-gray-700 font-bold text-xl"
+            >
+              CC
+            </div>
+            <div>
+              <h2 class="text-xl font-semibold text-gray-900">
+                {{ jobOfferDetails.company }}
+              </h2>
+              <p class="text-gray-600">{{ jobOfferDetails.companyDomain }}</p>
+            </div>
+          </div>
+
+          <div class="relative content-container">
+            <div class="prose prose-purple max-w-none" [ngStyle]="contentStyle">
+              <h3 class="text-xl font-semibold text-gray-900">
+                Description du poste
+              </h3>
+              <p class="text-gray-700 mt-4">
+                {{ jobOfferDetails.description }}
+              </p>
+
+              <h3 class="text-xl font-semibold text-gray-900 mt-6">
+                Missions principales
+              </h3>
+              <ul class="list-disc pl-6 text-gray-700">
+                <li *ngFor="let mission of jobOfferDetails.mainMissions">
+                  {{ mission }}
+                </li>
+              </ul>
+
+              <h3 class="text-xl font-semibold text-gray-900 mt-6">
+                Compétences requises
+              </h3>
+              <ul class="list-disc pl-6 text-gray-700">
+                <li *ngFor="let skill of jobOfferDetails.requiredSkills">
+                  {{ skill }}
+                </li>
+              </ul>
+            </div>
+
+            <div *ngIf="!isExpanded" class="gradient-overlay"></div>
+
+            <button
+              (click)="toggleDescription()"
+              class="toggle-button flex items-center gap-2 text-emerald-600 hover:text-emerald-700 transition-colors duration-200 mx-auto mt-4"
+            >
+              <span>{{ getButtonText() }}</span>
+              <svg
+                class="w-5 h-5 transition-transform duration-200"
+                [class.transform]="true"
+                [class.rotate-180]="isExpanded"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="remuneration-section mt-8">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">
+              Rémunération
+            </h3>
+            <div class="bg-gray-50 rounded-xl p-6">
+              <div class="flex items-baseline gap-2">
+                <span class="text-2xl font-bold text-purple-600">{{
+                  jobOfferDetails.salaryRange
+                }}</span>
+                <span class="text-gray-600">/an (Est. employeur)</span>
+              </div>
+              <div class="text-gray-700 mt-2">
+                {{ jobOfferDetails.salaryMedian }}/an Médian
+              </div>
+              <div class="text-sm text-gray-600 mt-2">
+                {{ jobOfferDetails.workType }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="fixed-apply-button" [class.visible]="showFixedButton">
+          <div
+            class="flex items-center justify-end gap-3 p-4 bg-white shadow-top"
+          >
+            <button
+              class="p-2 text-gray-400 hover:text-purple-600 rounded-lg hover:bg-purple-50 transition-all duration-200"
+            >
+              <svg
+                class="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+                />
+              </svg>
+            </button>
+            <button
+            (click)="onContinue()"
+              class="inline-flex items-center px-6 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 transition-colors duration-200 gap-2"
+            >
+              <svg
+                class="h-5 w-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 4v16m8-8H4"
+                />
+              </svg>
+              Postuler facilement
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,6 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { routes } from './app.routes';
-import { provideClientHydration } from '@angular/platform-browser';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { provideHttpClient } from '@angular/common/http';
 import { provideRouter } from '@angular/router';
@@ -16,7 +15,6 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideClientHydration(),
     provideAnimations(),
     storeConfig.provideStore, 
     storeConfig.provideEffects, 

@@ -9,6 +9,14 @@ export const routes: Routes = [
       ),
     children: [
       {
+        title: 'Recrutement | details',
+        path: 'offre-d\'emploi/:slug',
+        loadComponent: () =>
+          import(
+            './features/job-offer-details/job-offer-details.component'
+          ).then((m) => m.JobOfferDetailsComponent),
+      },
+      {
         title: 'Recrutement | client',
         path: 'client',
         loadComponent: () =>

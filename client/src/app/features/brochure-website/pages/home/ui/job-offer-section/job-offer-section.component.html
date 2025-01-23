@@ -8,14 +8,14 @@
   <!-- job-offer-section.component.html -->
 <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
   <!-- First three offers -->
-  @for(offer of jobOffers.slice(0, 3);track offer; let i = $index){
+  @for(offer of jobOffers.slice(0, 3);track offer.slug; let i = $index){
     <div
       [attr.style]="'--item-index:' + i"
       [class.show-up-animation]="isVisible"
       class="job-offer bg-white border-2 hover:border-purple-500 rounded-lg shadow-lg p-6 flex items-center transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl"
     >
       <div
-        (click)="onDeposit()"
+        (click)="navigateToJobDetails(offer.slug)"
         class="flex-none w-16 h-16 cursor-pointer hover:bg-[#994E97] flex justify-center items-center mr-5 rounded-full bg-purple-600 text-white text-2xl font-bold"
       >
         <p class="animate-arrow">{{ offer.logo }}</p>
@@ -23,7 +23,7 @@
       <div class="flex-grow">
         <div class="font-bold text-lg text-gray-800">{{ offer.company }}</div>
         <h2 class="text-xl text-gray-900">{{ offer.title }}</h2>
-        <div class="text-gray-600">{{ offer.location }}</div>
+        <div class="text-gray-600"></div>
         <div class="text-gray-600">{{ offer.type }}</div>
         <div class="text-gray-500 text-sm mt-2">{{ offer.time }}</div>
       </div>
@@ -32,14 +32,14 @@
 
   <!-- Last two offers in centered container -->
   <div class="lg:col-span-3 flex justify-center gap-5 flex-wrap">
-    @for(offer of jobOffers.slice(3);track offer; let i = $index){
+    @for(offer of jobOffers.slice(3);track offer.slug; let i = $index){
       <div
         [attr.style]="'--item-index:' + (i + 3)"
         [class.show-up-animation]="isVisible"
         class="job-offer bg-white border-2 hover:border-purple-500 rounded-lg shadow-lg p-6 flex items-center transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-xl w-full sm:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.25rem)]"
       >
         <div
-          (click)="onDeposit()"
+          (click)="navigateToJobDetails(offer.slug)"
           class="flex-none w-16 h-16 cursor-pointer hover:bg-[#994E97] flex justify-center items-center mr-5 rounded-full bg-purple-600 text-white text-2xl font-bold"
         >
           <p class="animate-arrow">{{ offer.logo }}</p>
@@ -47,7 +47,7 @@
         <div class="flex-grow">
           <div class="font-bold text-lg text-gray-800">{{ offer.company }}</div>
           <h2 class="text-xl text-gray-900">{{ offer.title }}</h2>
-          <div class="text-gray-600">{{ offer.location }}</div>
+          <div class="text-gray-600"></div>
           <div class="text-gray-600">{{ offer.type }}</div>
           <div class="text-gray-500 text-sm mt-2">{{ offer.time }}</div>
         </div>

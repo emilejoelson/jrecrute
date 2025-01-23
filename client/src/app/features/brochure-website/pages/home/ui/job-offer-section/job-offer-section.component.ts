@@ -8,7 +8,15 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-
+ 
+interface JobOffer {
+  company : string;
+  title : string;
+  slug : string;
+  type : string;
+  time : string;
+  logo : string;
+}
 @Component({
   selector: 'app-job-offer-section',
   standalone: true,
@@ -17,11 +25,11 @@ import { Router } from '@angular/router';
 })
 export class JobOfferSectionComponent implements AfterViewInit {
   isVisible = false;
-  jobOffers = [
+  jobOffers:JobOffer[] = [
     {
       company: 'Consult Collab',
       title: 'Commercial',
-      location: '',
+      slug: 'commercial',
       type: 'Télétravail en temps plein',
       time: 'Publiée il y a moins de 24h',
       logo: '→',
@@ -29,7 +37,7 @@ export class JobOfferSectionComponent implements AfterViewInit {
     {
       company: 'Consult Collab',
       title: 'Secrétaire',
-      location: '',
+      slug: 'secretaire',
       type: 'Télétravail en temps plein',
       time: 'Publiée il y a moins de 24h',
       logo: '→',
@@ -37,7 +45,7 @@ export class JobOfferSectionComponent implements AfterViewInit {
     {
       company: 'Consult Collab',
       title: 'Développeur web',
-      location: '',
+      slug: 'developpeur-web',
       type: 'Télétravail en temps plein',
       time: 'Publiée il y a moins de 24h',
       logo: '→',
@@ -45,7 +53,7 @@ export class JobOfferSectionComponent implements AfterViewInit {
     {
       company: 'Consult Collab',
       title: 'Profil bilingue',
-      location: '',
+      slug: 'profil-bilingue',
       type: 'Télétravail en temps plein',
       time: 'Publiée il y a moins de 24h',
       logo: '→',
@@ -53,7 +61,7 @@ export class JobOfferSectionComponent implements AfterViewInit {
     {
       company: 'Consult Collab',
       title: 'Community Manager',
-      location: '',
+      slug: 'profil-bilingue',
       type: 'Télétravail en temps plein',
       time: 'Publiée il y a moins de 24h',
       logo: '→',
@@ -79,8 +87,9 @@ export class JobOfferSectionComponent implements AfterViewInit {
       observer.observe(this.elementRef.nativeElement);
     }
   }
-  onDeposit() {
-    this.router.navigate(['/deposer-un-cv']);
-    window.scrollTo(0, 0);
+  
+  navigateToJobDetails(slug: string) {
+    this.router.navigate(['/offre-d\'emploi', slug]);
+    window.scroll(0, 0);
   }
 }

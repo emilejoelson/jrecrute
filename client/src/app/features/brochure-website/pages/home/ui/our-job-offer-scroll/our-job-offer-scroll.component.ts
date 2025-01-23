@@ -8,22 +8,28 @@ import {
   QueryList,
   ViewChildren,
   WritableSignal,
+  inject,
   signal,
 } from '@angular/core';
 import { Subscription, interval } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 
+interface JobOffer {
+  title: string;
+  slug: string;
+}
 @Component({
   selector: 'app-our-job-offer-scroll',
   standalone: true,
   imports: [],
   templateUrl: './our-job-offer-scroll.component.html',
-  styleUrl: './our-job-offer-scroll.component.scss'
+  styleUrl: './our-job-offer-scroll.component.scss',
 })
-
 export class OurJobOfferScrollComponent implements AfterViewInit, OnDestroy {
   @ViewChildren('jobOfferListOne, jobOfferListTwo, jobOfferListThree')
   jobOfferLists!: QueryList<ElementRef<HTMLUListElement>>;
+  router = inject(Router);
 
   source = interval(100); // Faster scrolling for smoother animation
   intervalSubscription: Subscription | null = null;
@@ -32,12 +38,27 @@ export class OurJobOfferScrollComponent implements AfterViewInit, OnDestroy {
   initialTranslateXValue: WritableSignal<number> = signal(0);
   isIntervalPaused: WritableSignal<boolean> = signal(false);
 
-  jobOffers = [
-    'Commercial',
-    'Community Manager',
-    'Développeur Web',
-    'Sécretaire',
-    'Profil bilingue',
+  jobOffers: JobOffer[] = [
+    {
+      title: 'Commercial',
+      slug: 'commercial',
+    },
+    {
+      title: 'Community Manager',
+      slug: 'community-manager',
+    },
+    {
+      title: 'Développeur Web',
+      slug: 'developpeur-web',
+    },
+    {
+      title: 'Sécretaire',
+      slug: 'secretaire',
+    },
+    {
+      title: 'Profil bilingue',
+      slug: 'profil-bilingue',
+    },
   ];
 
   constructor(@Inject(PLATFORM_ID) platformId: object) {
@@ -100,5 +121,8 @@ export class OurJobOfferScrollComponent implements AfterViewInit, OnDestroy {
       this.intervalSubscription.unsubscribe();
     }
   }
+  navigateToJobDetails(slug: string) {
+    this.router.navigate(["/offre-d\'emploi", slug]);
+    window.scroll(0, 0);
+  }
 }
-

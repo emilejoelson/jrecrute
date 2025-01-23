@@ -14,11 +14,12 @@
       class="transition-transform ease-linear w-full flex justify-center items-stretch text-xl font-bold uppercase tracking-widest"
       [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
     >
-      @for (offer of jobOffers; track offer) {
+      @for (offer of jobOffers; track offer.slug) {
       <span
-        class="px-16 py-4 bg-purple-50 font-bold text-purple-700 text-center flex items-center shadow-md rounded-lg mx-2 hover:scale-110 transform transition duration-300"
+      (click)="navigateToJobDetails(offer.slug)"
+        class="px-16 py-4 bg-purple-50 font-bold text-purple-700 text-center flex items-center shadow-md rounded-lg mx-2 cursor-pointer hover:bg-app-primay-dark hover:text-white transform transition duration-300"
       >
-        {{ offer }}
+        {{ offer.title }}
       </span>
       <!-- Dash Oblique Separator -->
       <span class="text-3xl text-gray-400 mx-4 flex items-center">  </span>
@@ -31,11 +32,12 @@
       class="transition-transform ease-linear w-full flex justify-center items-stretch text-xl font-bold uppercase tracking-widest"
       [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
     >
-      @for (offer of jobOffers; track offer) {
+      @for (offer of jobOffers; track offer.slug) {
       <span
-        class="px-16 py-4 bg-purple-50 text-center text-purple-700 item flex items-center shadow-md rounded-lg mx-2 hover:scale-110 transform transition duration-300"
+      (click)="navigateToJobDetails(offer.slug)"
+        class="px-16 py-4 bg-purple-50 text-center text-purple-700 item flex items-center shadow-md rounded-lg mx-2  cursor-pointer hover:bg-app-primay-dark hover:text-white transform transition duration-300"
       >
-        {{ offer }}
+        {{ offer.title }}
       </span>
       <!-- Dash Oblique Separator -->
       <span class="text-3xl mx-4 flex text-gray-400 items-center">  </span>
@@ -48,14 +50,13 @@
       class="transition-transform ease-linear w-full flex justify-center items-stretch text-xl font-bold uppercase tracking-widest"
       [style.transform]="'translateX(' + initialTranslateXValue() + 'px)'"
     >
-      @for (offer of jobOffers; track offer) {
+      @for (offer of jobOffers; track offer.slug) {
       <span
-        class="px-16 py-4 bg-purple-50 text-center text-purple-700 flex items-center shadow-md rounded-lg mx-2 hover:scale-110 transform transition duration-300"
+      (click)="navigateToJobDetails(offer.slug)"
+        class="px-16 py-4 bg-purple-50 text-center text-purple-700 flex items-center shadow-md rounded-lg mx-2 cursor-pointer hover:bg-app-primay-dark hover:text-white transform transition duration-300"
       >
-        {{ offer }}
+        {{ offer.title }}
       </span>
-      <!-- Dash Oblique Separator -->
-      <span class="text-3xl mx-4 text-gray-400 flex items-center"> / </span>
       }
     </ul>
   </div>

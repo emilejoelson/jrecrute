@@ -64,7 +64,7 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       )
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          const hideVideoUrls = ['deposer-un-cv', 'mention-legal', 'client','condition-general-de-vente'];
+          const hideVideoUrls = ['deposer-un-cv', 'mention-legal', 'client','condition-general-de-vente','offre-d\'emploi'];
           this.showVideo.set(
             !hideVideoUrls.some((url) => event.url.includes(url))
           );
