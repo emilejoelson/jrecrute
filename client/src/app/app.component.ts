@@ -31,7 +31,6 @@ import { VideoService } from './core/services/video.service';
     CommonModule,
     ScrollButtonComponent,
     ConnectionStatusComponent,
-    SocialMediaComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
@@ -40,8 +39,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   isUserSubmitting$!: Observable<boolean>;
   isRecruitmentSubmitting$!: Observable<boolean>;
 
+  store = inject(Store<State>);
   constructor(
-    private store: Store<State>,
+    // private store: Store<State>,
     @Inject(PLATFORM_ID) private platformId: Object,
     private videoService: VideoService
   ) {}
@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      this.videoService.autoplay();
+      // this.videoService.autoplay();
       
       setTimeout(() => {
         const preloader = document.getElementById('preloader');

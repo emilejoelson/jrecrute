@@ -38,8 +38,8 @@ export class JobOfferDetailsComponent implements OnInit {
       company: 'Consult Collab',
       companyDomain: 'Services Commerciaux',
       workType: 'Télétravail en temps plein',
-      salaryRange: '45K€ - 60K€',
-      salaryMedian: '52.5K€',
+      salaryRange: '7.2K€ - 8.4K€',
+      salaryMedian: '7.8K€',
       description:
         "Le Commercial est chargé de développer le portefeuille clients de l'entreprise, d'augmenter les ventes et de fidéliser les clients existants. Il est responsable de la gestion des relations commerciales de bout en bout, de la prospection à la conclusion des contrats.",
       mainMissions: [
@@ -60,8 +60,8 @@ export class JobOfferDetailsComponent implements OnInit {
       company: 'Consult Collab',
       companyDomain: 'Support Administratif',
       workType: 'Télétravail en temps plein',
-      salaryRange: '35K€ - 45K€',
-      salaryMedian: '40K€',
+      salaryRange: '7.2K€ - 8.4K€',
+      salaryMedian: '7.8K€',
       description:
         "Le Secrétaire est chargé de la gestion administrative quotidienne de l'entreprise, incluant l'organisation des rendez-vous, la gestion des documents et la coordination des communications internes et externes.",
       mainMissions: [
@@ -82,8 +82,8 @@ export class JobOfferDetailsComponent implements OnInit {
       company: 'Consult Collab',
       companyDomain: 'Technologies',
       workType: 'Télétravail en temps plein',
-      salaryRange: '50K€ - 70K€',
-      salaryMedian: '60K€',
+      salaryRange: '7.2K€ - 8.4K€',
+      salaryMedian: '7.8K€',
       description:
         "Le Développeur Web est responsable de la conception, du développement et de la maintenance des sites web de l'entreprise ou de ses clients. Il travaille en collaboration avec d'autres équipes pour créer des expériences utilisateur optimales.",
       mainMissions: [
@@ -104,8 +104,8 @@ export class JobOfferDetailsComponent implements OnInit {
       company: 'Consult Collab',
       companyDomain: 'Marketing Digital',
       workType: 'Télétravail en temps plein',
-      salaryRange: '35K€ - 50K€',
-      salaryMedian: '42.5K€',
+      salaryRange: '7.2K€ - 8.4K€',
+      salaryMedian: '7.8K€',
       description:
         "Le Community Manager est chargé de gérer l'image de l'entreprise sur les réseaux sociaux. Il crée du contenu engageant, développe des communautés en ligne et assure une veille constante pour renforcer la notoriété et l'engagement.",
       mainMissions: [
@@ -125,8 +125,8 @@ export class JobOfferDetailsComponent implements OnInit {
       company: 'Consult Collab',
       companyDomain: 'Communication Internationale',
       workType: 'Télétravail en temps plein',
-      salaryRange: '40K€ - 55K€',
-      salaryMedian: '47.5K€',
+      salaryRange: '7.2K€ - 8.4K€',
+      salaryMedian: '7.8K€',
       description:
         "Les profils bilingues sont recherchés pour divers rôles nécessitant des compétences en communication dans plusieurs langues afin d'assurer des échanges fluides avec des clients ou des partenaires internationaux.",
       mainMissions: [

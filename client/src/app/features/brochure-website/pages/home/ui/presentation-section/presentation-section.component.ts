@@ -10,7 +10,7 @@ import { VideoPlayerComponent } from '../../../../../../shared/video-player/vide
 @Component({
   selector: 'app-presentation-section',
   standalone: true,
-  imports: [CommonModule, AudioControlsComponent, VideoPlayerComponent],
+  imports: [CommonModule,VideoPlayerComponent],
   templateUrl: './presentation-section.component.html',
   styleUrl: './presentation-section.component.scss',
 })

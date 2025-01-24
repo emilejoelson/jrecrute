@@ -35,3 +35,10 @@
     transform: translateY(0);
   }
 }
+
+@media (max-width: 768px) {
+  .fixed-apply-button {
+    position: static;
+    margin-top: 10px;
+  }
+}
