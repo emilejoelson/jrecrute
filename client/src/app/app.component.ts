@@ -41,7 +41,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   store = inject(Store<State>);
   constructor(
-    // private store: Store<State>,
     @Inject(PLATFORM_ID) private platformId: Object,
     private videoService: VideoService
   ) {}
@@ -55,7 +54,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      // this.videoService.autoplay();
+      this.videoService.autoplay();
       
       setTimeout(() => {
         const preloader = document.getElementById('preloader');
