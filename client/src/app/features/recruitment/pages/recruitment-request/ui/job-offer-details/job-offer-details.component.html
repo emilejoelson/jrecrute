@@ -1,0 +1,46 @@
+<div class="min-h-screen md:bg-pagesGradient py-12 px-5 sm:px-6 lg:px-8">
+  <div class="text-center mb-16 max-w-4xl mx-auto">
+    <h2
+      class="tracking-tight text-3xl text-[#2B2B2B] font-extrabold mb-4 flex items-center justify-center"
+    >
+      Types de Profils Disponibles
+    </h2>
+  </div>
+
+  <div class="mt-8 grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
+    @for(profile of jobProfiles.slice(0,3); track jobProfiles) {
+    <div
+      class="bg-[#F8F8FF] p-10 md:hover:bg-[#ECECFA] flex flex-col rounded-2xl md:shadow-lg items-center"
+    >
+      <div
+        [innerHTML]="profile.icon"
+        class="text-[#9775FA] text-4xl mb-4"
+      ></div>
+      <h3 class="text-2xl font-bold text-[#2B2B2B] uppercase text-center">
+        {{ profile.title }}
+      </h3>
+      <ul class="mt-4 space-y-4 text-[#6F6F6F]">
+        <li *ngFor="let desc of profile.description">{{ desc }}</li>
+      </ul>
+    </div>
+    }
+    <div class="lg:col-span-3 flex justify-center gap-10  flex-wrap">
+      @for(profile of jobProfiles.slice(3); track jobProfiles){
+      <div
+        class="bg-[#F8F8FF] p-10 md:hover:bg-[#ECECFA] flex flex-col rounded-2xl sm:w-[calc(50%-1.25rem)] w-full lg:w-[calc(33.333%-1.25rem)] md:shadow-lg items-center"
+      >
+        <div
+          [innerHTML]="profile.icon"
+          class="text-[#9775FA] text-4xl mb-4"
+        ></div>
+        <h3 class="text-2xl font-bold text-[#2B2B2B] uppercase text-center">
+          {{ profile.title }}
+        </h3>
+        <ul class="mt-4 space-y-4 text-[#6F6F6F]">
+          <li *ngFor="let desc of profile.description">{{ desc }}</li>
+        </ul>
+      </div>
+      }
+    </div>
+  </div>
+</div>

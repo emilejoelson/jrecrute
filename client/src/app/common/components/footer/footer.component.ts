@@ -69,6 +69,11 @@ export class FooterComponent {
         behaviour: 'scroll',
       },
       {
+        name: 'Parcourir les profils disponibles',
+        sectionId: 'fiche-poste-detail',
+        behaviour: 'scroll',
+      },
+      {
         name: 'Définir une fiche de poste',
         sectionId: 'fiche-poste',
         behaviour: 'scroll',
@@ -147,7 +152,7 @@ export class FooterComponent {
     window.scroll(0, 0);
     this.router.navigate(['/mention-legal']);
   }
-  onClickCGV(){
+  onClickCGV() {
     window.scroll(0, 0);
     this.router.navigate(['/condition-general-de-vente']);
   }
