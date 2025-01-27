@@ -9,8 +9,8 @@ const sendEmailToAdmin = async (recruitmentRequest) => {
     debug: true,
     secureConnection: false,
     auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
     tls: {
       rejectUnauthorized: false,
@@ -138,31 +138,43 @@ const sendEmailToAdmin = async (recruitmentRequest) => {
                 <div class="info-grid">
                   <div class="info-item">
                     <div class="info-label">Entreprise</div>
-                    <div class="info-value">${recruitmentRequest.companyName}</div>
+                    <div class="info-value">${
+                      recruitmentRequest.companyName
+                    }</div>
                   </div>
                   
                   <div class="info-item">
                     <div class="info-label">Email</div>
-                    <div class="info-value">${recruitmentRequest.contactEmail}</div>
+                    <div class="info-value">${
+                      recruitmentRequest.contactEmail
+                    }</div>
                   </div>
                   
                   <div class="info-item">
                     <div class="info-label">Téléphone</div>
-                    <div class="info-value">${recruitmentRequest.phoneNumber}</div>
+                    <div class="info-value">${
+                      recruitmentRequest.phoneNumber
+                    }</div>
                   </div>
                   
                   <div class="info-item">
                     <div class="info-label">Poste Recherché</div>
                     <div class="info-value">
                       ${recruitmentRequest.position}
-                      ${recruitmentRequest.otherPosition ? ` - ${recruitmentRequest.otherPosition}` : ''}
+                      ${
+                        recruitmentRequest.otherPosition
+                          ? ` - ${recruitmentRequest.otherPosition}`
+                          : ""
+                      }
                     </div>
                   </div>
                   
                   <div class="info-item">
                     <div class="info-label">Budget Mensuel</div>
                     <div class="info-value">
-                      ${recruitmentRequest.monthlyBudget.min} - ${recruitmentRequest.monthlyBudget.max} €
+                      ${recruitmentRequest.monthlyBudget.min} - ${
+      recruitmentRequest.monthlyBudget.max
+    } €
                     </div>
                   </div>
                   
@@ -170,8 +182,11 @@ const sendEmailToAdmin = async (recruitmentRequest) => {
                     <div class="info-label">Urgence</div>
                     <div class="info-value">
                       <div class="urgency-badge ${
-                        recruitmentRequest.urgency === 'Très urgent' ? 'urgent' :
-                        recruitmentRequest.urgency === 'Dans les 7 jours' ? 'soon' : 'normal'
+                        recruitmentRequest.urgency === "Très urgent"
+                          ? "urgent"
+                          : recruitmentRequest.urgency === "Dans les 7 jours"
+                          ? "soon"
+                          : "normal"
                       }">
                         ${recruitmentRequest.urgency}
                       </div>
@@ -187,13 +202,15 @@ const sendEmailToAdmin = async (recruitmentRequest) => {
               
               <div class="footer">
                 <p>&copy; ${new Date().getFullYear()} - Système de Recrutement</p>
-                <p>Cette demande a été soumise le ${new Date(recruitmentRequest.createdAt).toLocaleString('fr-FR')}</p>
+                <p>Cette demande a été soumise le ${new Date(
+                  recruitmentRequest.createdAt
+                ).toLocaleString("fr-FR")}</p>
               </div>
             </div>
           </div>
         </body>
       </html>
-    `
+    `,
   };
 
   return new Promise((resolve, reject) => {

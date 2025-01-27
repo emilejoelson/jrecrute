@@ -10,6 +10,13 @@ type TNavLinks = {
   }[];
 };
 
+export interface SocialMediaItem {
+  name: string;
+  icon: string;
+  link: string;
+  customClass: string;
+}
+
 @Component({
   selector: 'app-footer',
   standalone: true,
@@ -87,23 +94,27 @@ export class FooterComponent {
         name: 'Facebook',
         icon: 'fa fa-facebook',
         link: 'https://www.facebook.com/profile.php?id=61551056274954',
+        customClass: 'bg-blue-600 text-white border-blue-600'
       },
       {
         name: 'Instagram',
         icon: 'fa fa-instagram',
         link: 'https://www.instagram.com/consult.collab/',
+        customClass: 'bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 text-white border-pink-500'
       },
       {
         name: 'LinkedIn',
         icon: 'fa fa-linkedin',
         link: 'https://www.linkedin.com/company/consultcollab/?originalSubdomain=fr',
+        customClass: 'bg-blue-700 text-white border-blue-700'
       },
       {
         name: 'Contact',
         icon: 'fa fa-envelope',
         link: 'mailto:contact@consultcollab.com',
+        customClass: 'bg-red-600 text-white border-red-600'
       },
-    ],
+    ] as SocialMediaItem[],
   };
 
   currentYear = new Date().getFullYear();
