@@ -17,9 +17,9 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { getIsUserSubmitting } from './features/cv-deposit/store/selectors/cv.selectors';
 import { getIsRecruitmentSubmitting } from './features/recruitment/store/selectors/recruitment.selectors';
 import { ScrollButtonComponent } from './shared/scroll-button/scroll-button.component';
-import { SocialMediaComponent } from './shared/social-media/social-media.component';
 import { ConnectionStatusComponent } from './shared/connection-status/connection-status.component';
 import { VideoService } from './core/services/video.service';
+import { CookieConsentComponent } from './shared/cookie-consent/cookie-consent.component';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +31,7 @@ import { VideoService } from './core/services/video.service';
     CommonModule,
     ScrollButtonComponent,
     ConnectionStatusComponent,
+    CookieConsentComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

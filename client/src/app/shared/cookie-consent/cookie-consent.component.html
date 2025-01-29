@@ -1,0 +1,80 @@
+<!-- cookie-consent.component.html -->
+<div *ngIf="!(cookieService.consentStatus$ | async)" class="modal-container">
+    <div class="modal-overlay"></div>
+    
+    <div class="modal-content">
+      <!-- Header -->
+      <div class="modal-header">
+        <h2>Gérez vos préférences de cookies</h2>
+        <p class="subtitle">
+          Pour offrir les meilleures opportunités de recrutement et une expérience personnalisée
+        </p>
+      </div>
+  
+      <!-- Body -->
+      <div class="modal-body">
+        <p class="description">
+          Nous utilisons des cookies pour améliorer votre expérience de recherche d'emploi, personnaliser le contenu et les offres, et analyser notre trafic. Vous pouvez choisir d'accepter tous les cookies ou personnaliser vos préférences.
+        </p>
+  
+        <div class="preferences-section" [class.show-details]="showDetails">
+          <!-- Essential Cookies -->
+          <div class="cookie-option essential">
+            <div class="option-info">
+              <h3>Cookies essentiels</h3>
+              <p>Nécessaires au fonctionnement du site et à la sécurité de votre recherche d'emploi</p>
+            </div>
+            <div class="toggle-wrapper disabled">
+              <label class="switch">
+                <input type="checkbox" checked disabled>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+  
+          <!-- Analytics Cookies -->
+          <div class="cookie-option">
+            <div class="option-info">
+              <h3>Cookies analytiques</h3>
+              <p>Nous aident à améliorer nos services de recrutement</p>
+            </div>
+            <div class="toggle-wrapper">
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="preferences.analytics">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+  
+          <!-- Marketing Cookies -->
+          <div class="cookie-option">
+            <div class="option-info">
+              <h3>Cookies marketing</h3>
+              <p>Permettent de vous proposer des offres d'emploi pertinentes</p>
+            </div>
+            <div class="toggle-wrapper">
+              <label class="switch">
+                <input type="checkbox" [(ngModel)]="preferences.marketing">
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Footer -->
+      <div class="modal-footer">
+        <button class="btn-settings" (click)="showDetails = !showDetails">
+          {{ showDetails ? 'Masquer les détails' : 'Personnaliser' }}
+        </button>
+        <div class="main-actions">
+          <button class="btn-decline" (click)="declineAll()">
+            Refuser tout
+          </button>
+          <button class="btn-accept" (click)="acceptAll()">
+            Tout accepter
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
