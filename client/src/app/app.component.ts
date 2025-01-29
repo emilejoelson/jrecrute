@@ -55,7 +55,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       this.videoService.autoplay();
-      
+
       setTimeout(() => {
         const preloader = document.getElementById('preloader');
         if (preloader) {

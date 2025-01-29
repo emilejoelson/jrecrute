@@ -18,7 +18,6 @@ export class UploadCvComponent {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
       const file = inputElement.files[0];
-      console.log('Selected file in child component:', file); // Debugging here
       this.fileSelected.emit({ file });
     }
   }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { PresentationSectionComponent } from './ui/presentation-section/presentation-section.component';
-import { OurCustomersSectionComponent } from './ui/our-customers-section/our-customers-section.component';
 import { JobOfferSectionComponent } from './ui/job-offer-section/job-offer-section.component';
 import { OurJobOfferScrollComponent } from './ui/our-job-offer-scroll/our-job-offer-scroll.component';
 import { HowItWorkSectionComponent } from './ui/how-it-work-section/how-it-work-section.component';

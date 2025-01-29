@@ -28,7 +28,6 @@ export class VerifyUploadedCvComponent implements OnInit, OnDestroy {
 
   private handleResize = () => {
     this.isMobile.set(window.innerWidth < 650);
-    console.log('Is Mobile:', this.isMobile());
   };
 
   ngOnInit() {

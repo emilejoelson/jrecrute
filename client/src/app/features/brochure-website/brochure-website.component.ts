@@ -47,7 +47,6 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       const width = window.innerWidth;
       this.isMobile.set(width < 650);
-      console.log('Window width:', width, '| Is Mobile:', this.isMobile());
     }
   };
 
@@ -87,7 +86,7 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
   
       setTimeout(() => {
         if (this.videoPlayer?.nativeElement) {
-          this.videoPlayer.nativeElement.load(); // Ensures video is ready before switching
+          this.videoPlayer.nativeElement.load(); 
           this.videoPlayer.nativeElement.play();
         }
       }, 50); 
