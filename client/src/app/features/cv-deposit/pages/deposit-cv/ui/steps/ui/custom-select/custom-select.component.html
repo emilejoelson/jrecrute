@@ -2,7 +2,7 @@
   <select [id]="id" [formControlName]="id" [class]="classSelect" required>
     <option value="" disabled selected></option>
     @for(option of options; track option) {
-    <option [value]="option.value">{{ option.label }}</option>
+    <option [value]="option.value">{{ option.label | translate}}</option>
     }
   </select>
   <label [for]="id" class="absolute" [class]="classLabel">
@@ -25,6 +25,6 @@
     </svg>
   </div>
   @if(control?.touched && control?.errors?.['required']) {
-  <div class="text-red-500 text-sm mt-1">Ce champ est requis</div>
+  <div class="text-red-500 text-sm mt-1">{{'CV_DEPOSIT.REQUIRED_FIELD' | translate}}</div>
   }
 </div>

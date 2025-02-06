@@ -11,21 +11,27 @@ import {
 import { IconComponent } from '../../../shared/ui/icon/icon.component';
 import { NavigationEnd, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { TranslationService } from '../../../core/services/translation.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 type TNavLinks = {
   links: {
     name: string;
+    translationKey: string; // Add this
     sectionId: string;
     href?: string;
     behaviour: string;
   }[];
-  buttons: { name: string }[];
+  buttons: { 
+    name: string;
+    translationKey: string; // Add this
+  }[];
 };
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -39,33 +45,71 @@ export class HeaderComponent implements AfterViewInit {
 
   isNavOpen = false;
   currentRoute: string = '';
+  dropdownOpen: boolean = false;
 
-  constructor(private router: Router) {
+  toggleDropdown() {
+    this.dropdownOpen = !this.dropdownOpen;
+  }
+
+  currentLanguage: 'FR' | 'EN' = 'EN';
+
+  constructor(private router: Router,private translationService: TranslationService) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
       }
     });
+    this.currentLanguage = this.translationService.getCurrentLang() as 'FR' | 'EN';
+
+  }
+
+  switchLanguage(lang: 'FR' | 'EN') {
+    this.translationService.switchLanguage(lang);
+    this.currentLanguage = lang;
+    this.dropdownOpen = false;
   }
 
   navItems: TNavLinks = {
     links: [
-      { name: 'Offres', sectionId: 'offers-section', behaviour: 'scroll' },
-      { name: 'Etapes', sectionId: 'steps-section', behaviour: 'scroll' },
+      { 
+        name: 'Offres', 
+        translationKey: 'HEADER.OFFRES', 
+        sectionId: 'offers-section', 
+        behaviour: 'scroll' 
+      },
+      { 
+        name: 'Etapes', 
+        translationKey: 'HEADER.ETAPES', 
+        sectionId: 'steps-section', 
+        behaviour: 'scroll' 
+      },
       {
         name: 'Avantages',
+        translationKey: 'HEADER.AVANTAGES',
         sectionId: 'advantages-section',
         behaviour: 'scroll',
       },
-      { name: 'FAQ', sectionId: 'faq-section', behaviour: 'scroll' },
-      { name: 'Contact', sectionId: 'contact-section', behaviour: 'scroll' },
+      { 
+        name: 'FAQ', 
+        translationKey: 'HEADER.FAQ', 
+        sectionId: 'faq-section', 
+        behaviour: 'scroll' 
+      },
+      { 
+        name: 'Contact', 
+        translationKey: 'HEADER.CONTACT', 
+        sectionId: 'contact-section', 
+        behaviour: 'scroll' 
+      },
     ],
     buttons: [
       {
         name: 'Client',
+        translationKey: 'HEADER.CLIENT'
       },
       {
         name: 'Postuler maintenant',
+        translationKey: 'HEADER.POSTULER_MAINTENANT'
       },
     ],
   };

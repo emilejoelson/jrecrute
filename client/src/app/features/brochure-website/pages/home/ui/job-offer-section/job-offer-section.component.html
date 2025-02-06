@@ -2,7 +2,7 @@
   <h1
     class="text-center custom-650:text-3xl custom-650:mx-1/6 my-10 text-4xl font-bold text-gray-800"
   >
-    Ces offres peuvent vous intéresser
+    {{'JOB_OFFERS.TITLE' | translate}}
   </h1>
 
   <!-- job-offer-section.component.html -->
@@ -22,10 +22,10 @@
       </div>
       <div class="flex-grow">
         <div class="font-bold text-lg text-gray-800">{{ offer.company }}</div>
-        <h2 class="text-xl text-gray-900">{{ offer.title }}</h2>
+        <h2 class="text-xl text-gray-900">{{ offer.title | translate}}</h2>
         <div class="text-gray-600"></div>
-        <div class="text-gray-600">{{ offer.type }}</div>
-        <div class="text-gray-500 text-sm mt-2">{{ offer.time }}</div>
+        <div class="text-gray-600">{{ offer.type | translate }}</div>
+        <div class="text-gray-500 text-sm mt-2">{{ offer.time | translate}}</div>
       </div>
     </div>
   }
@@ -46,10 +46,10 @@
         </div>
         <div class="flex-grow">
           <div class="font-bold text-lg text-gray-800">{{ offer.company }}</div>
-          <h2 class="text-xl text-gray-900">{{ offer.title }}</h2>
+          <h2 class="text-xl text-gray-900">{{ offer.title | translate}}</h2>
           <div class="text-gray-600"></div>
-          <div class="text-gray-600">{{ offer.type }}</div>
-          <div class="text-gray-500 text-sm mt-2">{{ offer.time }}</div>
+          <div class="text-gray-600">{{ offer.type | translate }}</div>
+          <div class="text-gray-500 text-sm mt-2">{{ offer.time | translate }}</div>
         </div>
       </div>
     }

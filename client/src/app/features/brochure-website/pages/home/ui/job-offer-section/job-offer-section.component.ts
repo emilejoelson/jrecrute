@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
  
 interface JobOffer {
   company : string;
@@ -20,6 +21,7 @@ interface JobOffer {
 @Component({
   selector: 'app-job-offer-section',
   standalone: true,
+  imports: [TranslateModule],
   templateUrl: './job-offer-section.component.html',
   styleUrl: './job-offer-section.component.scss',
 })
@@ -28,42 +30,42 @@ export class JobOfferSectionComponent implements AfterViewInit {
   jobOffers:JobOffer[] = [
     {
       company: 'Consult Collab',
-      title: 'Commercial',
+      title: 'JOB_OFFERS.COMMERCIAL',
       slug: 'commercial',
-      type: 'Télétravail en temps plein',
-      time: 'Publiée il y a moins de 24h',
+      type: 'JOB_OFFERS.TYPE',
+      time: 'JOB_OFFERS.TIME',
       logo: '→',
     },
     {
       company: 'Consult Collab',
-      title: 'Secrétaire',
+      title: 'JOB_OFFERS.SECRETAIRE',
       slug: 'secretaire',
-      type: 'Télétravail en temps plein',
-      time: 'Publiée il y a moins de 24h',
+      type: 'JOB_OFFERS.TYPE',
+      time: 'JOB_OFFERS.TIME',
       logo: '→',
     },
     {
       company: 'Consult Collab',
-      title: 'Développeur web',
+      title: 'JOB_OFFERS.DEVELOPPEUR_WEB',
       slug: 'developpeur-web',
-      type: 'Télétravail en temps plein',
-      time: 'Publiée il y a moins de 24h',
+      type: 'JOB_OFFERS.TYPE',
+      time: 'JOB_OFFERS.TIME',
       logo: '→',
     },
     {
       company: 'Consult Collab',
-      title: 'Profil bilingue',
+      title: 'JOB_OFFERS.PROFIL_BILINGUE',
       slug: 'profil-bilingue',
-      type: 'Télétravail en temps plein',
-      time: 'Publiée il y a moins de 24h',
+      type: 'JOB_OFFERS.TYPE',
+      time: 'JOB_OFFERS.TIME',
       logo: '→',
     },
     {
       company: 'Consult Collab',
-      title: 'Community Manager',
-      slug: 'profil-bilingue',
-      type: 'Télétravail en temps plein',
-      time: 'Publiée il y a moins de 24h',
+      title: 'JOB_OFFERS.COMMUNITY_MANAGER',
+      slug: 'community-manager',
+      type: 'JOB_OFFERS.TYPE',
+      time: 'JOB_OFFERS.TIME',
       logo: '→',
     },
   ];

@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit, Optional } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-custom-input',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,TranslateModule,CommonModule],
   templateUrl: './custom-input.component.html',
   styleUrl: './custom-input.component.scss',
 })

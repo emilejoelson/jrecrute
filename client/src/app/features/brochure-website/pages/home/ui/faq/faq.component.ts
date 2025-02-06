@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, inject, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface FaqItem {
   question: string;
@@ -10,7 +11,7 @@ interface FaqItem {
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './faq.component.html',
   styleUrl: './faq.component.scss' // Added style for consistency
 })
@@ -23,23 +24,23 @@ export class FaqComponent implements AfterViewInit {
 
   faqItems: FaqItem[] = [
     {
-      question: 'Est-ce que je peux postuler à plusieurs offres en même temps ?',
-      answer: 'Oui, vous pouvez postuler à autant d\'offres que vous le souhaitez, tant que votre profil correspond aux exigences des postes.',
+      question: 'FAQ.FAQITEMS.0.QUESTION',
+      answer: 'FAQ.FAQITEMS.0.ANSWER',
       isOpen: false
     },
     {
-      question: 'Comment savoir si mon CV a été reçu ?',
-      answer: 'Après avoir soumis votre CV, vous serez dirigés vers une page qui confirme que votre candidature a bien été envoyée. Si nous avons besoin d\'informations supplémentaires, nous vous contacterons directement.',
+      question: 'FAQ.FAQITEMS.1.QUESTION',
+      answer: 'FAQ.FAQITEMS.1.ANSWER',
       isOpen: false
     },
     {
-      question: 'Que se passe-t-il après l\'entretien ?',
-      answer: 'Après l\'entretien, nous analysons les informations recueillies et vous informons rapidement de la suite donnée à votre candidature, en vous mettant en relation avec l\'entreprise si vous êtes retenu.',
+      question: 'FAQ.FAQITEMS.2.QUESTION',
+      answer: 'FAQ.FAQITEMS.2.ANSWER',
       isOpen: false
     },
     {
-      question: 'Que faire si je rencontre un problème technique lors de ma candidature ?',
-      answer: 'Si vous rencontrez des problèmes techniques, notre équipe support est disponible pour vous aider. Vous pouvez nous contacter via nos réseaux sociaux : Instagram et Facebook.',
+      question: 'FAQ.FAQITEMS.3.QUESTION',
+      answer: 'FAQ.FAQITEMS.3.ANSWER',
       isOpen: false
     }
   ];

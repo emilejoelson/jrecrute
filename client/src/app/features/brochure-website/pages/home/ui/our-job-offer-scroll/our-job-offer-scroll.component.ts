@@ -14,6 +14,7 @@ import {
 import { Subscription, interval } from 'rxjs';
 import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface JobOffer {
   title: string;
@@ -22,7 +23,7 @@ interface JobOffer {
 @Component({
   selector: 'app-our-job-offer-scroll',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './our-job-offer-scroll.component.html',
   styleUrl: './our-job-offer-scroll.component.scss',
 })
@@ -40,23 +41,23 @@ export class OurJobOfferScrollComponent implements AfterViewInit, OnDestroy {
 
   jobOffers: JobOffer[] = [
     {
-      title: 'Commercial',
+      title: 'JOB_OFFERS.COMMERCIAL',
       slug: 'commercial',
     },
     {
-      title: 'Community Manager',
+      title: 'JOB_OFFERS.COMMUNITY_MANAGER',
       slug: 'community-manager',
     },
     {
-      title: 'Développeur Web',
+      title: 'JOB_OFFERS.DEVELOPPEUR_WEB',
       slug: 'developpeur-web',
     },
     {
-      title: 'Sécretaire',
+      title: 'JOB_OFFERS.SECRETAIRE',
       slug: 'secretaire',
     },
     {
-      title: 'Profil bilingue',
+      title: 'JOB_OFFERS.PROFIL_BILINGUE',
       slug: 'profil-bilingue',
     },
   ];

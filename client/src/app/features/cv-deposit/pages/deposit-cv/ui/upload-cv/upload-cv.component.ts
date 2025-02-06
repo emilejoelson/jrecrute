@@ -1,12 +1,13 @@
 import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FileUploadEvent } from '../../../../data-access/models/file-upload';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @Component({
   selector: 'app-upload-cv',
   standalone:true,
-  imports:[ReactiveFormsModule],
+  imports:[ReactiveFormsModule,TranslateModule],
   templateUrl: './upload-cv.component.html',
   styleUrl: './upload-cv.component.scss'
 })

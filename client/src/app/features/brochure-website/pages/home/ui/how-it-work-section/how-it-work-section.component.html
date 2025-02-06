@@ -4,23 +4,21 @@
   <div class="p-6 bg-white rounded-lg">
     <!-- Titre principal -->
     <h1 class="text-2xl font-bold text-gray-800 sm:text-3xl lg:text-4xl">
-      Un processus de recrutement optimisé et transparent
+      {{'STEPS.TITLE' | translate}}
     </h1>
 
     <!-- Sous-titre -->
     <h2
       class="pt-4 pb-6 text-lg font-medium text-purple-500 lg:text-xl xl:pt-6 xl:pb-8"
     >
-      Un parcours structuré pour réussir !
+    {{'STEPS.SUBTITLE' | translate}}
     </h2>
 
     <!-- Paragraphe -->
     <p
       class="text-sm text-gray-600 leading-6 max-w-[600px] pb-8 lg:text-lg lg:leading-10 xl:pb-14"
     >
-      Nous avons élaboré une approche rigoureuse et performante pour vous
-      accompagner à chaque étape, en vous offrant toutes les garanties
-      nécessaires pour postuler avec confiance et détermination.
+    {{'STEPS.DESCRIPTION' | translate}}
     </p>
 
     <div class="w-fit absolute custom-650:hidden text-sm xl:text-lg">
@@ -28,14 +26,18 @@
         (click)="onDeposit()"
         class="block text-center cursor-pointer bg-app-primary-purple text-white border border-purple-700 w-full tracking-wide px-6 py-3 rounded-xl font-medium transition-colors duration-300 ease-out hover:bg-purple-700 hover:border-purple-800"
       >
-        Déposer votre CV
+      {{'STEPS.BUTTON' | translate}}
       </button>
     </div>
   </div>
 
   @defer (on viewport) {
   <div class="hidden lg:block lg:mt-[-150px] xl:mt-[-200px]">
-    <app-home-how-it-work-image />
+    @if(getCurrentLanguage() === 'FR'){
+      <app-home-how-it-work-image-fr />
+    }@else {
+      <app-home-how-it-work-image-en />
+    }
   </div>
   } @placeholder {
   <div></div>
@@ -78,12 +80,11 @@
         <h3
           class="font-bold text-app-primay-dark tracking-[1.25px] text-lg h-fit mt-auto"
         >
-          Remplissage du formulaire
+          {{'STEPS.STEPS_LIST.0.TITLE' | translate}}
         </h3>
       </div>
       <p class="mt-4 text-gray-800 text-normal text-sm leading-[28px]">
-        Il vous suffit de remplir le formulaire en ligne et de déposer votre CV,
-        une démarche rapide et sécurisée.
+        {{'STEPS.STEPS_LIST.0.DESCRIPTION' | translate}}
       </p>
     </li>
 
@@ -124,13 +125,11 @@
         <h3
           class="font-bold text-app-primay-dark tracking-[1.25px] text-lg h-fit mt-auto"
         >
-          Analyse du profil
+        {{'STEPS.STEPS_LIST.1.TITLE' | translate}}
         </h3>
       </div>
       <p class="mt-4 text-gray-800 text-normal text-sm leading-[28px]">
-        Nous examinons votre profil pour nous assurer de sa correspondance avec
-        le poste que vous avez choisi, en tenant compte de vos compétences et de
-        vos expériences.
+        {{'STEPS.STEPS_LIST.1.DESCRIPTION' | translate}}
       </p>
     </li>
 
@@ -171,12 +170,11 @@
         <h3
           class="font-bold text-app-primay-dark tracking-[1.25px] text-lg h-fit mt-auto"
         >
-          Entretien
+        {{'STEPS.STEPS_LIST.2.TITLE' | translate}}
         </h3>
       </div>
       <p class="mt-4 text-app-primay-dark text-normal text-sm leading-[28px]">
-        Un entretien téléphonique vous permettra de faire connaissance, suivi
-        d'un entretien en visioconférence pour approfondir l'échange.
+        {{'STEPS.STEPS_LIST.2.DESCRIPTION' | translate}}
       </p>
     </li>
     <li
@@ -232,12 +230,11 @@
         <h3
           class="font-bold text-app-primay-dark tracking-[1.25px] text-lg h-fit mt-auto"
         >
-          Validation et mise en relation
+        {{'STEPS.STEPS_LIST.3.TITLE' | translate}}
         </h3>
       </div>
       <p class="mt-4 text-gray-800 text-normal text-sm leading-[28px]">
-        Une fois le processus validé, nous vous mettons en relation avec
-        l'entreprise pour finaliser votre recrutement.
+        {{'STEPS.STEPS_LIST.3.DESCRIPTION' | translate}}
       </p>
     </li>
   </ul>
@@ -250,7 +247,7 @@
       (click)="onDeposit()"
       class="block text-center bg-app-primary-purple text-white border border-purple-700 w-full tracking-wide px-6 py-3 rounded-xl font-medium transition-colors duration-300 ease-out hover:bg-purple-700 hover:border-purple-800"
     >
-      Déposer votre CV
+    {{'STEPS.BUTTON' | translate}}
     </a>
   </div>
 </section>

@@ -1,0 +1,232 @@
+{
+  "APP_NAME": "Recruitment",
+  "HEADER": {
+    "OFFRES": "Offers",
+    "ETAPES": "Steps",
+    "AVANTAGES": "Advantages",
+    "FAQ": "FAQ",
+    "CONTACT": "Contact",
+    "CLIENT": "Client",
+    "POSTULER_MAINTENANT": "Apply now"
+  },
+  "HERO": {
+    "TITLE": {
+      "PART1": "Build",
+      "PART2": "your professional future",
+      "PART3": "now"
+    },
+    "SUBTITLE": {
+      "PART1": "Choose excellence and a promising future. Join us ",
+      "PART2": "today",
+      "PART3": " and open the door to new career and recruitment perspectives"
+    },
+    "CTA_VIDEO": "Learn More",
+    "BUTTONS": {
+      "POSTULER": "Apply Now",
+      "TROUVER_CANDIDAT": "Find a Candidate"
+    }
+  },
+  "JOB_OFFERS": {
+    "TITLE": "These offers may interest you",
+    "COMMERCIAL": "Commercial",
+    "COMMUNITY_MANAGER": "Community Manager",
+    "DEVELOPPEUR_WEB": "Web Developer",
+    "SECRETAIRE": "Secretary",
+    "PROFIL_BILINGUE": "Bilingual Profile",
+    "TYPE": "Full-time Remote Work",
+    "TIME": "Published less than 24h ago"
+  },
+  "STEPS": {
+    "TITLE": "An optimized and transparent recruitment process",
+    "SUBTITLE": "A structured path to success!",
+    "DESCRIPTION": "We have developed a rigorous and efficient approach to support you at every stage, offering you all the necessary guarantees to apply with confidence and determination.",
+    "BUTTON": "Submit your CV",
+    "STEPS_LIST": [
+      {
+        "TITLE": "Fill out the form",
+        "DESCRIPTION": "Simply fill out the form online and upload your CV, a quick and secure process."
+      },
+      {
+        "TITLE": "Profile analysis",
+        "DESCRIPTION": "We review your profile to ensure it matches the position you've chosen, taking into account your skills and experiences."
+      },
+      {
+        "TITLE": "Interview",
+        "DESCRIPTION": "A phone interview will allow us to get to know you, followed by a video interview to further discuss the exchange."
+      },
+      {
+        "TITLE": "Validation and connection",
+        "DESCRIPTION": "Once the process is validated, we will connect you with the company to finalize your recruitment."
+      }
+    ]
+  },
+  "ADVANTAGES": {
+    "TITLE_PART1": "Why choose",
+    "TITLE_PART2": "Recruitment?",
+    "ITEMS": {
+      "EXPERTISE": {
+        "TITLE": "Recognized expertise",
+        "DESCRIPTION": "With a specialization in the tech and recruitment sector, we understand the needs of companies and candidates to ensure a perfect match."
+      },
+      "SIMPLICITY": {
+        "TITLE": "Simplicity and speed",
+        "DESCRIPTION": "Our intuitive platform and streamlined process help save time while ensuring high-quality results."
+      },
+      "SUPPORT": {
+        "TITLE": "Personalized support",
+        "DESCRIPTION": "We are by your side at every step, offering advice and tailored guidance to maximize your chances of success."
+      }
+    }
+  },
+  "FAQ": {
+    "TITLE": "Frequently Asked Questions",
+    "SUBTITLE": "Find quick answers to your questions",
+    "FAQITEMS": [
+      {
+        "QUESTION": "Can I apply for multiple job offers at the same time?",
+        "ANSWER": "Yes, you can apply to as many job offers as you want, as long as your profile matches the job requirements."
+      },
+      {
+        "QUESTION": "How do I know if my CV has been received?",
+        "ANSWER": "After submitting your CV, you will be redirected to a confirmation page that ensures your application has been successfully sent. If we need additional information, we will contact you directly."
+      },
+      {
+        "QUESTION": "What happens after the interview?",
+        "ANSWER": "After the interview, we review the collected information and inform you promptly about the next steps, connecting you with the company if you are selected."
+      },
+      {
+        "QUESTION": "What should I do if I encounter a technical issue during my application?",
+        "ANSWER": "If you experience technical issues, our support team is available to assist you. You can contact us through our social media channels: Instagram and Facebook."
+      }
+    ]
+  },
+  "FOOTER": {
+    "TITLE": "Connect to global opportunities,",
+    "SUBTITLE": "MAXIMIZE YOUR POTENTIAL",
+    "LEGAL_NOTICE": "Legal Notice",
+    "TERMS_CONDITIONS": "Terms and Conditions of Sale",
+    "FOLLOW_US": "Follow us",
+    "NAV_CANDIDATE": {
+      "CANDIDATE": "Candidate",
+      "BROWSE_OFFERS": "Browse Offers",
+      "DISCOVER_STEPS": "Discover the Steps",
+      "LEARN_MORE_ADVANTAGES": "Learn More About the Advantages",
+      "ACCESS_FAQ": "Access the FAQ"
+    },
+    "NAV_CLIENT": {
+      "DISCOVER_OFFER": "Discover Our Offer",
+      "ANALYZE_STATISTICS": "Analyze Statistics",
+      "EXPLORE_SERVICES": "Explore Our Services",
+      "CHECK_PRICING": "Check Our Pricing",
+      "BROWSE_PROFILES": "Browse Available Profiles",
+      "DEFINE_JOB_DESCRIPTION": "Define a Job Description"
+    }
+  },
+  "CV_DEPOSIT": {
+    "TITLE": "I upload my CV",
+    "SUBTITLE": "Increase your chances of being contacted by hiring companies by submitting your CV",
+    "PREVIOUS": "Previous",
+    "NEXT": "Continue",
+    "SUBMIT": "Submit",
+    "REQUIRED_FIELD": "This field is required",
+    "INVALID_EMAIL": "Invalid email address",
+    "STEP_1": {
+      "TITLE": "Personal Information",
+      "CIVILITY": "Civility",
+      "CIVILITY_OPTIONS": {
+        "MRS": "Mrs.",
+        "MR": "Mr.",
+        "MISS": "Miss"
+      },
+      "LAST_NAME": "Last Name",
+      "FIRST_NAME": "First Name",
+      "EMAIL": "Email",
+      "PHONE": "Phone ",
+      "RECRUITMENT_ADVICE": {
+        "TITLE": "CC Recruitment Advice",
+        "CONTENT": "We recommend that you carefully fill in this information to facilitate your identification in relation to the position that interests you !"
+      }
+    },
+    "STEP_2": {
+      "TITLE": "Professional Information",
+      "JOB_TITLE": "Desired Position",
+      "CURRENT_POSITION": "Current Position",
+      "COMPANY": "Company",
+      "EXPERIENCE": "Your experience",
+      "START_DATE": {
+        "TITLE": "Start Date",
+        "MONTH": "Month",
+        "YEAR": "Year"
+      },
+      "END_DATE": {
+        "TITLE": "End Date",
+        "MONTH": "Month",
+        "YEAR": "Year"
+      },
+      "MONTHS": {
+        "JANUARY": "January",
+        "FEBRUARY": "February",
+        "MARCH": "March",
+        "APRIL": "April",
+        "MAY": "May",
+        "JUNE": "June",
+        "JULY": "July",
+        "AUGUST": "August",
+        "SEPTEMBER": "September",
+        "OCTOBER": "October",
+        "NOVEMBER": "November",
+        "DECEMBER": "December"
+      },
+      "REMOTE_WORK_QUESTION": "Have you ever worked remotely?",
+      "REMOTE_WORK_OPTIONS": {
+        "YES": "Yes",
+        "NO": "No"
+      },
+      "RECRUITMENT_ADVICE": {
+        "TITLE": "CC Recruitment Advice :",
+        "CONTENT": "We recommend that you accurately fill in the required professional information to facilitate the evaluation of your profile in relation to the targeted position."
+      }
+    },
+
+    "STEP_3": {
+      "TITLE": "Academic and Motivational Information",
+      "EDUCATION_LEVEL": "Education Level",
+      "EDUCATION_OPTIONS": [
+        "<High School",
+        "High School Diploma",
+        "1-Year Postgraduate",
+        "2-Year Postgraduate",
+        "Bachelor's Degree",
+        "Master's Degree",
+        "Post-Master's Degree",
+        "Doctorate and Above"
+      ],
+      "ADD_LANGUAGE": "Add a language",
+      "REMOVE_LANGUAGE": "Remove a language",
+      "MOTIVATION": "Your motivation",
+      "LANGUAGES": ["French", "English", "German", "Spanish", "Arabic"],
+      "LEVEL_LANGUAGE": [
+        "Advanced",
+        "Fluent",
+        "Very good",
+        "Intermediate",
+        "Good",
+        "Weak"
+      ],
+      "RECRUITMENT_ADVICE": {
+        "TITLE": "CC Recruitment Advice:",
+        "CONTENT": "Highlight your most relevant education. Stand out by adding a few words to introduce your profile to recruiters. Use keywords that will improve the visibility of your CV."
+      },
+      "VOCABULARY": {
+        "LANGUAGE": "language",
+        "LEVEL": "Level",
+        "ORDINAL": {
+          "FIRST": "st",
+          "SECOND": "nd",
+          "THIRD": "rd",
+          "OTHER": "th"
+        }
+      }
+    }
+  }
+}

@@ -34,7 +34,7 @@
       <p
         class="flex justify-center text-center custom-650:pt-0 p-4 mb-4 text-2xl font-bold text-gray-800"
       >
-        Information Académique et Motivationnelle
+        {{'CV_DEPOSIT.STEP_3.TITLE' | translate}}
       </p>
       <div>
         <div class="grid md:grid-cols-[2fr_1fr] gap-8">
@@ -43,7 +43,7 @@
               [id]="trainingField.id"
               [classSelect]="trainingField.classSelect"
               [classLabel]="trainingField.classLabel"
-              [title]="trainingField.title"
+              [title]="trainingField.title | translate"
               [options]="trainings"
               [formGroup]="formation"
               [control]="formation.get('level')"
@@ -59,7 +59,7 @@
                       getFieldConfig($index, 'language').classSelect
                     "
                     [classLabel]="getFieldConfig($index, 'language').classLabel"
-                    [title]="getFieldConfig($index, 'language').title"
+                    [title]="getFieldConfig($index, 'language').title | translate"
                     [options]="languages"
                     [formGroup]="getLanguageGroup($index)"
                     [control]="getLanguageGroup($index).get('language')"
@@ -68,7 +68,7 @@
                     [id]="getFieldConfig($index, 'level').id"
                     [classSelect]="getFieldConfig($index, 'level').classSelect"
                     [classLabel]="getFieldConfig($index, 'level').classLabel"
-                    [title]="getFieldConfig($index, 'level').title"
+                    [title]="getFieldConfig($index, 'level').title | translate"
                     [options]="levelLanguage"
                     [formGroup]="getLanguageGroup($index)"
                     [control]="getLanguageGroup($index).get('level')"
@@ -99,7 +99,7 @@
                         clip-rule="evenodd"
                       />
                     </svg>
-                    <span>Ajouter une langue</span>
+                    <span>{{'CV_DEPOSIT.STEP_3.ADD_LANGUAGE' | translate}}</span>
                   </button>
                   } @if (languagesFormArray.length > 1) {
                   <!-- Delete Language Button -->
@@ -138,7 +138,7 @@
                         />
                       </svg>
                     </div>
-                    <span class="text-red-500">Supprimer une langue</span>
+                    <span class="text-red-500">{{'CV_DEPOSIT.STEP_3.REMOVE_LANGUAGE' | translate}}</span>
                   </button>
                   }
                 </div>
@@ -149,7 +149,7 @@
               [id]="motivation.id"
               [classTextarea]="motivation.classTextarea"
               [classLabel]="motivation.classLabel"
-              [title]="motivation.title"
+              [title]="motivation.title | translate"
               [rows]="motivation.rows"
               [formGroup]="formGroup"
               [control]="formGroup.get('motivation')"
@@ -160,13 +160,10 @@
           >
             <div class="bg-gray-50 p-4 rounded-lg">
               <p class="font-semibold text-[14px] text-gray-800">
-                CC Recrutement conseille :
+                {{'CV_DEPOSIT.STEP_3.RECRUITMENT_ADVICE.TITLE' | translate}}
               </p>
               <p class="text-gray-600 text-[12px] mt-2">
-                Mettez votre formation la plus significative. Faites la
-                différence : ajoutez quelques mots pour présenter votre profil
-                aux recruteurs. Utilisez des mots-clés qui amélioreront la
-                visibilité de votre CV.
+                {{'CV_DEPOSIT.STEP_3.RECRUITMENT_ADVICE.CONTENT' | translate}}
               </p>
             </div>
           </div>
@@ -192,7 +189,7 @@
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          <span class="text-blue-400 text-sm">Précédent</span>
+          <span class="text-blue-400 text-sm">{{'CV_DEPOSIT.PREVIOUS' | translate}}</span>
         </button>
 
         <button
@@ -200,7 +197,7 @@
           (click)="onValidateClick()"
           class="bg-blue-400 hover:bg-app-primary-purple text-white custom-650:px-8 px-16 py-2 rounded-[4px] text-sm font-medium"
         >
-          Valider
+        {{'CV_DEPOSIT.SUBMIT' | translate}}
         </button>
       </div>
     </div>

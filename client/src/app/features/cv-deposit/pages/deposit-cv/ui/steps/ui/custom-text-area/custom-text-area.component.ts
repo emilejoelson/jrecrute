@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-custom-text-area',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,TranslateModule],
   templateUrl: './custom-text-area.component.html',
   styleUrl: './custom-text-area.component.scss'
 })

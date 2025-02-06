@@ -1,13 +1,18 @@
 import { AfterViewInit, Component, ElementRef, inject, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser, ViewportScroller } from '@angular/common';
-import { HomeHowItWorkImageComponent } from '../../../../../../../assets/svg/templates/home-how-it-work-image/home-how-it-work-image.component';
+import { HomeHowItWorkImageFrComponent } from '../../../../../../../assets/svg/templates/home-how-it-work-image-fr/home-how-it-work-image-fr.component';
 import { Router } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { HomeHowItWorkImageEnComponent } from '../../../../../../../assets/svg/templates/home-how-it-work-image-en/home-how-it-work-image-en.component';
+import { TranslationService } from '../../../../../../core/services/translation.service';
 
 @Component({
   selector: 'app-how-it-work-section',
   standalone: true,
   imports: [
-    HomeHowItWorkImageComponent,
+    HomeHowItWorkImageFrComponent,
+    HomeHowItWorkImageEnComponent,
+    TranslateModule
   ],
   templateUrl: './how-it-work-section.component.html',
   styleUrl: './how-it-work-section.component.scss',
@@ -17,9 +22,14 @@ export class HowItWorkSectionComponent implements AfterViewInit {
 router = inject(Router);
   elementRef = inject(ElementRef);
   isVisible = false;
+  translationService = inject(TranslationService);
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
+  getCurrentLanguage(): string {
+    return this.translationService.getCurrentLang();
+  }
+  
   scrollToAncherHandler(elementId: string) {
     return () => this.viewportScroller.scrollToAnchor(elementId);
   }

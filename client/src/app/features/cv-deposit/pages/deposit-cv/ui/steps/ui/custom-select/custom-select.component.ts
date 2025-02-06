@@ -1,9 +1,10 @@
 import { Component, Input, OnInit, Optional } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-custom-select',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,TranslateModule],
   templateUrl: './custom-select.component.html',
   styleUrl: './custom-select.component.scss',
 })

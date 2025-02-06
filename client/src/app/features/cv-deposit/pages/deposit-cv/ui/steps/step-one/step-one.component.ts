@@ -5,6 +5,7 @@ import { InputComponent } from '../../../../../../../common/components/input/inp
 import { CustomInputComponent } from '../ui/custom-input/custom-input.component';
 import { CustomSelectComponent } from '../ui/custom-select/custom-select.component';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-step-one',
@@ -12,7 +13,8 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   imports: [
     CustomInputComponent,
     CustomSelectComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TranslateModule
   ],
   templateUrl: './step-one.component.html',
   styleUrl: './step-one.component.scss',
@@ -42,7 +44,7 @@ export class StepOneComponent {
         'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel:
         'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-      title: 'Nom',
+      title: 'CV_DEPOSIT.STEP_1.LAST_NAME',
     },
     {
       id: 'lastName',
@@ -50,7 +52,7 @@ export class StepOneComponent {
         'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel:
         'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-      title: 'Prénom',
+      title: 'CV_DEPOSIT.STEP_1.FIRST_NAME',
     },
     {
       id: 'email',
@@ -66,23 +68,14 @@ export class StepOneComponent {
         'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel:
         'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-      title: 'Téléphone',
+      title: 'CV_DEPOSIT.STEP_1.PHONE',
     },
   ];
 
-  // {
-  //   id: 'telephone',
-  //   classInput:
-  //     'peer w-full p-3 border border-purple-300 rounded-lg focus:ring-4 focus:ring-purple-200 focus:outline-none focus:border-purple-500',
-  //   classLabel:
-  //     'left-3 -top-2.5 text-sm text-purple-500 bg-white px-1 transition-all duration-200 ease-in-out peer-placeholder-shown:top-3 peer-placeholder-shown:text-gray-400 peer-placeholder-shown:scale-100 peer-focus:-top-2.5 peer-focus:scale-100 peer-focus:text-purple-500',
-  //   title: 'Téléphone',
-  // },
-  
   civilities = [
-    { value: 'Monsieur', label: 'Monsieur' },
-    { value: 'Madame', label: 'Madame' },
-    { value: 'Mademoiselle', label: 'Mademoiselle' },
+    { value: 'Monsieur', label: 'CV_DEPOSIT.STEP_1.CIVILITY_OPTIONS.MR' },
+    { value: 'Madame', label: 'CV_DEPOSIT.STEP_1.CIVILITY_OPTIONS.MRS' },
+    { value: 'Mademoiselle', label: 'CV_DEPOSIT.STEP_1.CIVILITY_OPTIONS.MISS' },
   ];
 
   civilityField = {
@@ -91,7 +84,7 @@ export class StepOneComponent {
       'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel:
       'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Civilité',
+    title: 'CV_DEPOSIT.STEP_1.CIVILITY',
   };
 
 

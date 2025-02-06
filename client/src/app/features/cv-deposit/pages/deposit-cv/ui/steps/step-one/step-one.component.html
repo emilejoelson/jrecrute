@@ -35,7 +35,7 @@
       <p
         class="flex justify-center text-center custom-650:pt-0 p-4 mb-4 text-2xl font-bold text-gray-800"
       >
-        Information Personnel
+        {{'CV_DEPOSIT.STEP_1.TITLE' | translate }}
       </p>
       <div>
         <div class="grid md:grid-cols-[2fr_1fr] gap-8">
@@ -44,7 +44,7 @@
               [id]="civilityField.id"
               [classSelect]="civilityField.classSelect"
               [classLabel]="civilityField.classLabel"
-              [title]="civilityField.title"
+              [title]="civilityField.title | translate"
               [options]="civilities"
               [control]="formGroup.get(civilityField.id)"
               [formGroup]="formGroup"
@@ -54,7 +54,7 @@
               [id]="info.id"
               [classInput]="info.classInput"
               [classLabel]="info.classLabel"
-              [title]="info.title"
+              [title]="info.title | translate"
               [control]="formGroup.get(info.id)"
               [formGroup]="formGroup"
             />
@@ -65,12 +65,10 @@
           >
             <div class="bg-gray-50 p-4 rounded-lg">
               <p class="font-semibold text-[14px] text-gray-800">
-                CC Recrutement conseille :
+                {{'CV_DEPOSIT.STEP_1.RECRUITMENT_ADVICE.TITLE' | translate}} :
               </p>
               <p class="text-gray-600 text-[12px] mt-2">
-                Nous vous recommandons de remplir attentivement ces informations
-                pour faciliter votre identification en lien avec le poste qui
-                vous intéresse !
+                {{'CV_DEPOSIT.STEP_1.RECRUITMENT_ADVICE.CONTENT' | translate}}
               </p>
             </div>
           </div>
@@ -97,7 +95,7 @@
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          <span class="text-blue-400 text-sm">Précédent</span>
+          <span class="text-blue-400 text-sm"> {{'CV_DEPOSIT.PREVIOUS' | translate}}</span>
         </button>
 
         <!-- Validate Button -->
@@ -106,7 +104,7 @@
           (click)="onProceedClick()"
           class="bg-blue-400 hover:bg-app-primary-purple text-white custom-650:px-8 px-16 py-2 rounded-[4px] text-sm font-medium"
         >
-          Continuer
+        {{'CV_DEPOSIT.NEXT' | translate}}
         </button>
       </div>
     </div>

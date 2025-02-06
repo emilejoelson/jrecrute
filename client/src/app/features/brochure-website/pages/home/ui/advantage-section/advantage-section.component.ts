@@ -1,10 +1,11 @@
 import { AfterViewInit, Component, ElementRef, inject, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-advantage-section',
   standalone: true,
-  imports: [],
+  imports: [TranslateModule],
   templateUrl: './advantage-section.component.html',
   styleUrl: './advantage-section.component.scss'
 })

@@ -1,5 +1,6 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 type TNavLinks = {
   links: {
@@ -20,7 +21,7 @@ export interface SocialMediaItem {
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterModule],
+  imports: [RouterModule,TranslateModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
@@ -31,22 +32,22 @@ export class FooterComponent {
   navCandidates: TNavLinks = {
     links: [
       {
-        name: 'Parcourir les offres',
+        name: 'FOOTER.NAV_CANDIDATE.BROWSE_OFFERS',
         sectionId: 'offers-section',
         behaviour: 'scroll',
       },
       {
-        name: 'Découvrir les étapes',
+        name: 'FOOTER.NAV_CANDIDATE.DISCOVER_STEPS',
         sectionId: 'steps-section',
         behaviour: 'scroll',
       },
       {
-        name: 'En savoir plus sur les avantages',
+        name: 'FOOTER.NAV_CANDIDATE.LEARN_MORE_ADVANTAGES',
         sectionId: 'advantages-section',
         behaviour: 'scroll',
       },
       {
-        name: 'Accéder à la FAQ',
+        name: 'FOOTER.NAV_CANDIDATE.ACCESS_FAQ',
         sectionId: 'faq-section',
         behaviour: 'scroll',
       },
@@ -56,32 +57,32 @@ export class FooterComponent {
   navClients: TNavLinks = {
     links: [
       {
-        name: 'Découvrir notre offre',
+        name: 'FOOTER.NAV_CLIENT.DISCOVER_OFFER',
         sectionId: 'hero-section',
         behaviour: 'scroll',
       },
       {
-        name: 'Analyser les statistiques',
+        name: 'FOOTER.NAV_CLIENT.ANALYZE_STATISTICS',
         sectionId: 'statistique',
         behaviour: 'scroll',
       },
       {
-        name: 'Explorer nos services',
+        name: 'FOOTER.NAV_CLIENT.EXPLORE_SERVICES',
         sectionId: 'services',
         behaviour: 'scroll',
       },
       {
-        name: 'Consulter nos tarifs',
+        name: 'FOOTER.NAV_CLIENT.CHECK_PRICING',
         sectionId: 'pricing',
         behaviour: 'scroll',
       },
       {
-        name: 'Parcourir les profils disponibles',
+        name: 'FOOTER.NAV_CLIENT.BROWSE_PROFILES',
         sectionId: 'fiche-poste-detail',
         behaviour: 'scroll',
       },
       {
-        name: 'Définir une fiche de poste',
+        name: 'FOOTER.NAV_CLIENT.DEFINE_JOB_DESCRIPTION',
         sectionId: 'fiche-poste',
         behaviour: 'scroll',
       },

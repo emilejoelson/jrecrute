@@ -11,10 +11,12 @@
   <label [for]="id" class="absolute" [class]="classLabel">
     {{ title }} <span class="text-red-400">*</span>
   </label>
-  @if(control?.touched && control?.errors) {
-  <div class="text-red-500 text-sm mt-1">
-    @if(control?.errors?.['required']) { Ce champ est requis }
-    @if(control?.errors?.['email']) { Email invalide }
+  <div *ngIf="control?.touched && control?.errors" class="text-red-500 text-sm mt-1">
+    <span *ngIf="control?.errors?.['required']">
+      {{ 'CV_DEPOSIT.REQUIRED_FIELD' | translate }}
+    </span>
+    <span *ngIf="control?.errors?.['email']">
+      {{ 'CV_DEPOSIT.INVALID_EMAIL' | translate }}
+    </span>
   </div>
-  }
 </div>

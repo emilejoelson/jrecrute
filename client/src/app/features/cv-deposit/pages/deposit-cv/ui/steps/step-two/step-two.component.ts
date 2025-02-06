@@ -10,6 +10,7 @@ import {
 import { SafeResourceUrl } from '@angular/platform-browser';
 import { CustomInputComponent } from '../ui/custom-input/custom-input.component';
 import { CustomSelectComponent } from '../ui/custom-select/custom-select.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-step-two',
@@ -20,6 +21,7 @@ import { CustomSelectComponent } from '../ui/custom-select/custom-select.compone
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    TranslateModule
   ],
   templateUrl: './step-two.component.html',
   styleUrls: ['./step-two.component.scss'],
@@ -37,18 +39,18 @@ export class StepTwoComponent implements OnInit {
   hasWorkedRemotely: boolean | null = null;
 
   months = [
-    { value: '01', label: 'Janvier' },
-    { value: '02', label: 'Février' },
-    { value: '03', label: 'Mars' },
-    { value: '04', label: 'Avril' },
-    { value: '05', label: 'Mai' },
-    { value: '06', label: 'Juin' },
-    { value: '07', label: 'Juillet' },
-    { value: '08', label: 'Août' },
-    { value: '09', label: 'Septembre' },
-    { value: '10', label: 'Octobre' },
-    { value: '11', label: 'Novembre' },
-    { value: '12', label: 'Décembre' },
+    { value: '01', label: 'CV_DEPOSIT.STEP_2.MONTHS.JANUARY' },
+    { value: '02', label: 'CV_DEPOSIT.STEP_2.MONTHS.FEBRUARY' },
+    { value: '03', label: 'CV_DEPOSIT.STEP_2.MONTHS.MARCH' },
+    { value: '04', label: 'CV_DEPOSIT.STEP_2.MONTHS.APRIL' },
+    { value: '05', label: 'CV_DEPOSIT.STEP_2.MONTHS.MAY' },
+    { value: '06', label: 'CV_DEPOSIT.STEP_2.MONTHS.JUNE' },
+    { value: '07', label: 'CV_DEPOSIT.STEP_2.MONTHS.JULY' },
+    { value: '08', label: 'CV_DEPOSIT.STEP_2.MONTHS.AUGUST' },
+    { value: '09', label: 'CV_DEPOSIT.STEP_2.MONTHS.SEPTEMBER' },
+    { value: '10', label: 'CV_DEPOSIT.STEP_2.MONTHS.OCTOBER' },
+    { value: '11', label: 'CV_DEPOSIT.STEP_2.MONTHS.NOVEMBER' },
+    { value: '12', label: 'CV_DEPOSIT.STEP_2.MONTHS.DECEMBER' },
   ];
 
   years = Array.from({ length: 25 }, (_, i) => {
@@ -62,22 +64,22 @@ export class StepTwoComponent implements OnInit {
       classInput:
         'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-      title: 'Post occupé actuel',
+      title: 'CV_DEPOSIT.STEP_2.CURRENT_POSITION',
     },
     {
       id: 'enterprise',
       classInput:
         'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-      title: 'Entreprise',
+      title: 'CV_DEPOSIT.STEP_2.COMPANY',
     },
   ];
 
   postes = [
-    { value: 'Développeur web', label: 'Développeur web' },
-    { value: 'Community Manager', label: 'Community Manager' },
-    { value: 'Secrétaire', label: 'Secrétaire' },
-    { value: 'Profil bilingue', label: 'Profil bilingue' },
+    { value: 'Développeur web', label: 'JOB_OFFERS.DEVELOPPEUR_WEB' },
+    { value: 'Community Manager', label: 'JOB_OFFERS.COMMUNITY_MANAGER' },
+    { value: 'Secrétaire', label: 'JOB_OFFERS.SECRETAIRE' },
+    { value: 'Profil bilingue', label: 'JOB_OFFERS.PROFIL_BILINGUE' },
     { value: 'Commercial', label: 'Commercial' },
   ];
 
@@ -86,7 +88,7 @@ export class StepTwoComponent implements OnInit {
     classSelect:
       'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Poste recherché',
+    title: 'CV_DEPOSIT.STEP_2.JOB_TITLE',
   };
 
   startMonthField = {
@@ -94,7 +96,7 @@ export class StepTwoComponent implements OnInit {
     classSelect:
       'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Mois',
+    title: 'CV_DEPOSIT.STEP_2.START_DATE.MONTH',
   };
 
   startYearField = {
@@ -102,7 +104,7 @@ export class StepTwoComponent implements OnInit {
     classSelect:
       'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Année',
+    title: 'CV_DEPOSIT.STEP_2.START_DATE.YEAR',
   };
 
   endMonthField = {
@@ -110,7 +112,7 @@ export class StepTwoComponent implements OnInit {
     classSelect:
       'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Mois',
+    title: 'CV_DEPOSIT.STEP_2.END_DATE.MONTH',
   };
 
   endYearField = {
@@ -118,7 +120,7 @@ export class StepTwoComponent implements OnInit {
     classSelect:
       'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Année',
+    title: 'CV_DEPOSIT.STEP_2.END_DATE.YEAR',
   };
 
   ngOnInit() {

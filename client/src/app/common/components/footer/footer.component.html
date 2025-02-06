@@ -10,21 +10,21 @@
               alt="Logo"
             />
           </span>
-          <span class="text-xl font-bold">Recrutement</span>
+          <span class="text-xl font-bold">{{'APP_NAME' | translate}}</span>
         </div>
-        <p>Connectez-vous aux opportunités mondiales,</p>
-        <p>MAXIMISEZ VOTRE POTENTIEL</p>
+        <p>{{'FOOTER.TITLE' | translate}}</p>
+        <p>{{'FOOTER.SUBTITLE' | translate}}</p>
       </div>
 
       <div class="custom-650:text-center">
-        <h3 class="font-bold text-xl mb-4">Candidat</h3>
+        <h3 class="font-bold text-xl mb-4">{{'FOOTER.NAV_CANDIDATE.CANDIDATE' | translate}}</h3>
         <ul class="space-y-2 text-gray-400">
           @for(jobseeker of navCandidates.links;track jobseeker){
           <li
             (click)="scrollToSection(jobseeker.sectionId)"
             class="hover:text-white cursor-pointer transition-colors"
           >
-            {{ jobseeker.name }}
+            {{ jobseeker.name | translate}}
           </li>
           }
         </ul>
@@ -38,14 +38,14 @@
             (click)="scrollToSection(client.sectionId, true)"
             class="hover:text-white cursor-pointer transition-colors"
           >
-            {{ client.name }}
+            {{ client.name | translate}}
           </li>
           }
         </ul>
       </div>
 
       <div class="custom-650:text-center">
-        <h3 class="font-bold text-xl mb-5">Suivez-nous</h3>
+        <h3 class="font-bold text-xl mb-5">{{'FOOTER.FOLLOW_US' | translate}}</h3>
         <div class="flex justify-center text-gray-400 space-x-6">
           @for(social of footerItems.socialMedia;track social){
             <a
@@ -68,14 +68,14 @@
           (click)="onClickLegalNotice()"
           class="hover:text-white font-bold cursor-pointer"
         >
-          Mentions légales
+        {{'FOOTER.LEGAL_NOTICE' | translate}}
         </span>
         <span class="mx-2">|</span>
         <span
           (click)="onClickCGV()"
           class="hover:text-white font-bold cursor-pointer"
         >
-          Conditions générales de ventes
+        {{'FOOTER.TERMS_CONDITIONS' | translate}}
         </span>
         <span class="mx-2">|</span>
         <span>&copy; {{ currentYear }} Consult Collab</span>

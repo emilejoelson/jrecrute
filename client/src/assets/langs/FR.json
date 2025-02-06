@@ -1,0 +1,229 @@
+{
+  "APP_NAME": "Recrutement",
+  "HEADER": {
+    "OFFRES": "Offres",
+    "ETAPES": "Etapes",
+    "AVANTAGES": "Avantages",
+    "FAQ": "FAQ",
+    "CONTACT": "Contact",
+    "CLIENT": "Client",
+    "POSTULER_MAINTENANT": "Postuler maintenant"
+  },
+  "HERO": {
+    "TITLE": {
+      "PART1": "Construisez",
+      "PART2": "votre avenir professionnel",
+      "PART3": "dès maintenant"
+    },
+    "SUBTITLE": {
+      "PART1": "Faites le choix de l'excellence et d'un avenir prometteur. Rejoignez-nous ",
+      "PART2": "aujourd'hui",
+      "PART3": " et ouvrez la porte à de nouvelles perspectives de carrière et de recrutement"
+    },
+    "CTA_VIDEO": "En savoir plus",
+    "BUTTONS": {
+      "POSTULER": "Postuler Maintenant",
+      "TROUVER_CANDIDAT": "Trouver un candidat"
+    }
+  },
+  "JOB_OFFERS": {
+    "TITLE": "Ces offres peuvent vous intéresser",
+    "COMMERCIAL": "Commercial",
+    "COMMUNITY_MANAGER": "Community Manager",
+    "DEVELOPPEUR_WEB": "Développeur Web",
+    "SECRETAIRE": "Sécretaire",
+    "PROFIL_BILINGUE": "Profil bilingue",
+    "TYPE": "Télétravail en temps plein",
+    "TIME": "Publiée il y a moins de 24h"
+  },
+  "STEPS": {
+    "TITLE": "Un processus de recrutement optimisé et transparent",
+    "SUBTITLE": "Un parcours structuré pour réussir !",
+    "DESCRIPTION": "Nous avons élaboré une approche rigoureuse et performante pour vous accompagner à chaque étape, en vous offrant toutes les garanties nécessaires pour postuler avec confiance et détermination.",
+    "BUTTON": "Déposer votre CV",
+    "STEPS_LIST": [
+      {
+        "TITLE": "Remplissage du formulaire",
+        "DESCRIPTION": "Il vous suffit de remplir le formulaire en ligne et de déposer votre CV, une démarche rapide et sécurisée."
+      },
+      {
+        "TITLE": "Analyse du profil",
+        "DESCRIPTION": "Nous examinons votre profil pour nous assurer de sa correspondance avec le poste que vous avez choisi, en tenant compte de vos compétences et de vos expériences."
+      },
+      {
+        "TITLE": "Entretien",
+        "DESCRIPTION": "Un entretien téléphonique vous permettra de faire connaissance, suivi d'un entretien en visioconférence pour approfondir l'échange."
+      },
+      {
+        "TITLE": "Validation et mise en relation",
+        "DESCRIPTION": "Une fois le processus validé, nous vous mettons en relation avec l'entreprise pour finaliser votre recrutement."
+      }
+    ]
+  },
+  "ADVANTAGES": {
+    "TITLE_PART1": "Pourquoi choisir",
+    "TITLE_PART2": "Recrutement ?",
+    "ITEMS": {
+      "EXPERTISE": {
+        "TITLE": "Expertise reconnue",
+        "DESCRIPTION": "Avec une spécialisation dans le secteur tech et recrutement, nous comprenons les besoins des entreprises et des candidats pour garantir un matching parfait."
+      },
+      "SIMPLICITY": {
+        "TITLE": "Simplicité et rapidité",
+        "DESCRIPTION": "Notre plateforme intuitive et notre processus simplifié permettent de gagner du temps tout en assurant des résultats de qualité."
+      },
+      "SUPPORT": {
+        "TITLE": "Accompagnement personnalisé",
+        "DESCRIPTION": "Nous sommes à vos côtés à chaque étape, avec des conseils et un suivi adaptés à vos besoins pour maximiser vos chances de succès."
+      }
+    }
+  },
+  "FAQ": {
+    "TITLE": "Questions Fréquentes",
+    "SUBTITLE": "Trouvez rapidement les réponses à vos questions",
+    "FAQITEMS": [
+      {
+        "QUESTION": "Est-ce que je peux postuler à plusieurs offres en même temps ?",
+        "ANSWER": "Oui, vous pouvez postuler à autant d'offres que vous le souhaitez, tant que votre profil correspond aux exigences des postes."
+      },
+      {
+        "QUESTION": "Comment savoir si mon CV a été reçu ?",
+        "ANSWER": "Après avoir soumis votre CV, vous serez dirigés vers une page qui confirme que votre candidature a bien été envoyée. Si nous avons besoin d'informations supplémentaires, nous vous contacterons directement."
+      },
+      {
+        "QUESTION": "Que se passe-t-il après l'entretien ?",
+        "ANSWER": "Après l'entretien, nous analysons les informations recueillies et vous informons rapidement de la suite donnée à votre candidature, en vous mettant en relation avec l'entreprise si vous êtes retenu."
+      },
+      {
+        "QUESTION": "Que faire si je rencontre un problème technique lors de ma candidature ?",
+        "ANSWER": "Si vous rencontrez des problèmes techniques, notre équipe support est disponible pour vous aider. Vous pouvez nous contacter via nos réseaux sociaux : Instagram et Facebook."
+      }
+    ]
+  },
+  "FOOTER": {
+    "TITLE": "Connectez-vous aux opportunités mondiales,",
+    "SUBTITLE": "MAXIMISEZ VOTRE POTENTIEL",
+    "LEGAL_NOTICE": "Mentions légales",
+    "TERMS_CONDITIONS": "Conditions générales de ventes",
+    "FOLLOW_US": "Suivez-nous",
+    "NAV_CANDIDATE": {
+      "CANDIDATE": "Candidat",
+      "BROWSE_OFFERS": "Parcourir les offres",
+      "DISCOVER_STEPS": "Découvrir les étapes",
+      "LEARN_MORE_ADVANTAGES": "En savoir plus sur les avantages",
+      "ACCESS_FAQ": "Accéder à la FAQ"
+    },
+    "NAV_CLIENT": {
+      "DISCOVER_OFFER": "Découvrir notre offre",
+      "ANALYZE_STATISTICS": "Analyser les statistiques",
+      "EXPLORE_SERVICES": "Explorer nos services",
+      "CHECK_PRICING": "Consulter nos tarifs",
+      "BROWSE_PROFILES": "Parcourir les profils disponibles",
+      "DEFINE_JOB_DESCRIPTION": "Définir une fiche de poste"
+    }
+  },
+  "CV_DEPOSIT": {
+    "TITLE": "Je télécharge mon CV",
+    "SUBTITLE": "Augmentez vos chances d'être contacté par des entreprises qui recrutent en déposant votre CV",
+    "PREVIOUS": "Précédent",
+    "NEXT": "Continuer",
+    "SUBMIT": "Valider",
+    "REQUIRED_FIELD": "Ce champ est requis",
+    "INVALID_EMAIL": "L'adresse e-mail n'est pas valide",
+    "STEP_1": {
+      "TITLE": "Information Personnel",
+      "CIVILITY": "Civilité ",
+      "CIVILITY_OPTIONS": {
+        "MRS": "Madame",
+        "MR": "Monsieur",
+        "MISS": "Mademoiselle"
+      },
+      "LAST_NAME": "Nom ",
+      "FIRST_NAME": "Prénom",
+      "EMAIL": "Email",
+      "PHONE": "Téléphone",
+      "RECRUITMENT_ADVICE": {
+        "TITLE": "CC Recrutement conseille",
+        "CONTENT": "Nous vous recommandons de remplir attentivement ces informations pour faciliter votre identification en lien avec le poste qui vous intéresse !"
+      }
+    },
+    "STEP_2": {
+      "TITLE": "Information professionnelle",
+      "JOB_TITLE": "Poste recherché",
+      "CURRENT_POSITION": "Post occupé actuel",
+      "COMPANY": "Entreprise",
+      "EXPERIENCE": "Votre expérience",
+      "START_DATE": {
+        "TITLE": "Début",
+        "MONTH": "Mois",
+        "YEAR": "Année"
+      },
+      "END_DATE": {
+        "TITLE": "Fin",
+        "MONTH": "Mois",
+        "YEAR": "Année"
+      },
+      "MONTHS": {
+        "JANUARY": "Janvier",
+        "FEBRUARY": "Février",
+        "MARCH": "Mars",
+        "APRIL": "Avril",
+        "MAY": "Mai",
+        "JUNE": "Juin",
+        "JULY": "Juillet",
+        "AUGUST": "Août",
+        "SEPTEMBER": "Septembre",
+        "OCTOBER": "Octobre",
+        "NOVEMBER": "Novembre",
+        "DECEMBER": "Décembre"
+      },
+      "REMOTE_WORK_QUESTION": "Avez-vous déjà fait du télétravail ?",
+      "REMOTE_WORK_OPTIONS": {
+        "YES": "Oui",
+        "NO": "Non"
+      },
+      "RECRUITMENT_ADVICE": {
+        "TITLE": "CC Recrutement conseille :",
+        "CONTENT": "Nous vous recommandons de remplir avec précision les informations professionnelles requises afin de faciliter l’évaluation de votre profil en lien avec le poste visé."
+      }
+    },
+    "STEP_3": {
+      "TITLE": "Information Académique et Motivationnelle",
+      "EDUCATION_LEVEL": "Niveau de formation ",
+      "EDUCATION_OPTIONS": [
+        "<Bac",
+        "Bac",
+        "Bac+1",
+        "Bac+2",
+        "Bac+3",
+        "Bac+4",
+        "Bac+5",
+        "Bac+6 et plus"
+      ],
+      "ADD_LANGUAGE": "Ajouter une langue",
+      "REMOVE_LANGUAGE": "Supprimer une langue",
+      "MOTIVATION": "Votre motivation",
+      "LANGUAGES": ["Français", "Anglais", "Allemand", "Espagnol", "Arabe"],
+      "LEVEL_LANGUAGE": [
+        "Avancé",
+        "Courant",
+        "Très bien",
+        "Intermédiaire",
+        "Bien",
+        "Faible"
+      ],
+      "RECRUITMENT_ADVICE": {
+        "TITLE": "CC Recrutement conseille :",
+        "CONTENT": "Mettez votre formation la plus significative. Faites la différence : ajoutez quelques mots pour présenter votre profil aux recruteurs. Utilisez des mots-clés qui amélioreront la visibilité de votre CV."
+      },
+      "VOCABULARY": {
+        "LANGUAGE": "langue",
+        "LEVEL": "Niveau",
+        "ORDINAL": {
+          "FIRST": "ère",
+          "OTHER": "ème"
+        }
+      }
+    }
+  }
+}

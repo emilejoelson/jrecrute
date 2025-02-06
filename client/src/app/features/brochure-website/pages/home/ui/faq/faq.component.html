@@ -3,10 +3,10 @@
   <h1
     class="mb-10 text-center custom-650:text-3xl custom-650:mx-1/6 my-10 text-4xl font-bold text-gray-800"
   >
-    Questions Fréquentes
+    {{'FAQ.TITLE' | translate}}
   </h1>
   <div class="text-center mx-10 text-lg text-gray-500 mb-6">
-    Trouvez rapidement les réponses à vos questions
+    {{'FAQ.SUBTITLE' | translate}}
   </div>
 
   <div class="space-y-5 mt-2">
@@ -21,7 +21,7 @@
         (click)="toggleFaq(item)"
         class="flex justify-between items-center p-4 cursor-pointer hover:bg-gray-50"
       >
-        <span class="text-lg font-medium">{{ item.question }}</span>
+        <span class="text-lg font-medium">{{ item.question | translate  }}</span>
         <span
           [ngClass]="{ 'rotate-180': item.isOpen }"
           class="transform transition-transform duration-300"
@@ -43,7 +43,7 @@
       <!-- Answer -->
       <div *ngIf="item.isOpen" class="bg-gray-50 overflow-hidden">
         <div class="p-4 text-gray-600 leading-relaxed">
-          {{ item.answer }}
+          {{ item.answer | translate}}
         </div>
       </div>
     </div>

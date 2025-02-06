@@ -16,6 +16,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface FieldConfig {
   id: string;
@@ -46,6 +47,7 @@ interface AcademicForm {
     CustomSelectComponent,
     CustomTextAreaComponent,
     ReactiveFormsModule,
+    TranslateModule,
   ],
   templateUrl: './step-three.component.html',
   styleUrl: './step-three.component.scss',
@@ -55,41 +57,42 @@ export class StepThreeComponent implements OnInit {
   @Input() selectedFile: File | null = null;
   @Input() previewUrl: SafeResourceUrl | null = null;
   @Input() previewType: string = '';
-
+    
   @Output() prev = new EventEmitter<void>();
   @Output() validate = new EventEmitter<void>();
 
   fb = inject(FormBuilder);
+  translate = inject(TranslateService);
 
   readonly MAX_LANGUAGES = 5;
   readonly MIN_LANGUAGES = 1;
 
   languages = [
-    { value: 'Français', label: 'Français' },
-    { value: 'Anglais', label: 'Anglais' },
-    { value: 'Allemand', label: 'Allemand' },
-    { value: 'Espagnol', label: 'Espagnol' },
-    { value: 'Arabe', label: 'Arabe' },
+    { value: 'Français', label: 'CV_DEPOSIT.STEP_3.LANGUAGES.0' },
+    { value: 'Anglais', label: 'CV_DEPOSIT.STEP_3.LANGUAGES.1' },
+    { value: 'Allemand', label: 'CV_DEPOSIT.STEP_3.LANGUAGES.2' },
+    { value: 'Espagnol', label: 'CV_DEPOSIT.STEP_3.LANGUAGES.3' },
+    { value: 'Arabe', label: 'CV_DEPOSIT.STEP_3.LANGUAGES.4' },
   ];
 
   readonly levelLanguage = [
-    { value: 'Avancé', label: 'Avancé' },
-    { value: 'Courant', label: 'Courant' },
-    { value: 'Très bien', label: 'Très bien' },
-    { value: 'Intermédiaire', label: 'Intermédiaire' },
-    { value: 'Bien', label: 'Bien' },
-    { value: 'Faible', label: 'Faible' },
+    { value: 'Avancé', label: 'CV_DEPOSIT.STEP_3.LEVEL_LANGUAGE.0' },
+    { value: 'Courant', label: 'CV_DEPOSIT.STEP_3.LEVEL_LANGUAGE.1' },
+    { value: 'Très bien', label: 'CV_DEPOSIT.STEP_3.LEVEL_LANGUAGE.2' },
+    { value: 'Intermédiaire', label: 'CV_DEPOSIT.STEP_3.LEVEL_LANGUAGE.3' },
+    { value: 'Bien', label: 'CV_DEPOSIT.STEP_3.LEVEL_LANGUAGE.4' },
+    { value: 'Faible', label: 'CV_DEPOSIT.STEP_3.LEVEL_LANGUAGE.5' },
   ];
 
   readonly trainings = [
-    { value: '<Bac', label: '<Bac' },
-    { value: 'Bac', label: 'Bac' },
-    { value: 'Bac+1', label: 'Bac+1' },
-    { value: 'Bac+2', label: 'Bac+2' },
-    { value: 'Bac+3', label: 'Bac+3' },
-    { value: 'Bac+4', label: 'Bac+4' },
-    { value: 'Bac+5', label: 'Bac+5' },
-    { value: 'Bac+6 et plus', label: 'Bac+6 et plus' },
+    { value: '<Bac', label: 'CV_DEPOSIT.STEP_3.EDUCATION_OPTIONS.0' },
+    { value: 'Bac', label: 'CV_DEPOSIT.STEP_3.EDUCATION_OPTIONS.1' },
+    { value: 'Bac+1', label: 'CV_DEPOSIT.STEP_3.EDUCATION_OPTIONS.2' },
+    { value: 'Bac+2', label: 'CV_DEPOSIT.STEP_3.EDUCATION_OPTIONS.3' },
+    { value: 'Bac+3', label: 'CV_DEPOSIT.STEP_3.EDUCATION_OPTIONS.4' },
+    { value: 'Bac+4', label: 'CV_DEPOSIT.STEP_3.EDUCATION_OPTIONS.5' },
+    { value: 'Bac+5', label: 'CV_DEPOSIT.STEP_3.EDUCATION_OPTIONS.6' },
+    { value: 'Bac+6 et plus', label: 'CV_DEPOSIT.STEP_3.EDUCATION_OPTIONS.7' },
   ];
 
   trainingField = {
@@ -97,7 +100,7 @@ export class StepThreeComponent implements OnInit {
     classSelect:
       'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Niveau de formation',
+    title: 'CV_DEPOSIT.STEP_3.EDUCATION_LEVEL',
   };
 
   motivation = {
@@ -105,7 +108,7 @@ export class StepThreeComponent implements OnInit {
     classTextarea:
       'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-    title: 'Votre motivation',
+    title: 'CV_DEPOSIT.STEP_3.MOTIVATION',
     rows: 5,
   };
 
@@ -155,22 +158,51 @@ export class StepThreeComponent implements OnInit {
       level: ['', Validators.required],
     });
   }
-
   getFieldConfig(index: number, type: 'language' | 'level'): FieldConfig {
-    return {
-      id: type,
-      classSelect:
-        'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
-      classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
-      title:
-        type === 'language'
-          ? `${index + 1}${this.getOrdinalSuffix(index + 1)} langue`
-          : `Niveau ${index + 1}${this.getOrdinalSuffix(index + 1)} langue`,
-    };
+    const ordinalSuffix = this.getOrdinalSuffix(index + 1);
+    
+    if (type === 'language') {
+      return {
+        id: type,
+        classSelect: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+        classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
+        title: `${index + 1}${ordinalSuffix} ${this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.LANGUAGE')}`
+      };
+    } else {
+      return {
+        id: type,
+        classSelect: 'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
+        classLabel: 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1',
+        title: `${this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.LEVEL')} ${index + 1}${ordinalSuffix} ${this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.LANGUAGE')}`
+      };
+    }
   }
 
   private getOrdinalSuffix(num: number): string {
-    return num === 1 ? 'ère' : 'ème';
+    const currentLang = this.translate.currentLang;
+    
+    if (currentLang === 'FR') {
+      return num === 1
+        ? this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.ORDINAL.FIRST')
+        : this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.ORDINAL.OTHER');
+    } else {
+      
+      if (num >= 11 && num <= 13) {
+        return this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.ORDINAL.OTHER');
+      }
+      
+      const lastDigit = num % 10;
+      switch (lastDigit) {
+        case 1:
+          return this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.ORDINAL.FIRST');
+        case 2:
+          return this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.ORDINAL.SECOND');
+        case 3:
+          return this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.ORDINAL.THIRD');
+        default:
+          return this.translate.instant('CV_DEPOSIT.STEP_3.VOCABULARY.ORDINAL.OTHER');
+      }
+    }
   }
 
   onPrevClick() {
@@ -180,4 +212,5 @@ export class StepThreeComponent implements OnInit {
   onValidateClick() {
     this.validate.emit();
   }
+  // https://claude.ai/chat/055de2f1-758f-446a-8845-82783ad99e41
 }

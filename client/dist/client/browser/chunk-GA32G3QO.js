@@ -1,1 +1,0 @@
-import{w as r,x as t}from"./chunk-O7ITIDKT.js";var o=t({source:"Recruitment Form API",events:{"Submit recruitment form":r(),"Submit recruitment form success":r(),"Submit recruitment form failure":r()}});export{o as a};

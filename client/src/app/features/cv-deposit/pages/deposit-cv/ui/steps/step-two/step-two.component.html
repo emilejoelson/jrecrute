@@ -35,7 +35,7 @@
       <p
         class="flex justify-center text-center custom-650:pt-0 p-4 mb-4 text-2xl font-bold text-gray-800"
       >
-        Information professionnelle
+       {{'CV_DEPOSIT.STEP_2.TITLE' | translate}}
       </p>
       <div>
         <div class="grid md:grid-cols-[2fr_1fr] gap-8">
@@ -44,32 +44,32 @@
               [id]="postField.id"
               [classSelect]="postField.classSelect"
               [classLabel]="postField.classLabel"
-              [title]="postField.title"
+              [title]="postField.title | translate"
               [options]="postes"
               [formGroup]="formGroup"
             />
             <p class="flex justify-left text-xl font-semibold text-gray-800">
-              Votre experience
+              {{'CV_DEPOSIT.STEP_2.EXPERIENCE' | translate}}
             </p>
             @for(post of professionnalInformations;track post){
             <app-custom-input
               [id]="post.id"
               [classInput]="post.classInput"
               [classLabel]="post.classLabel"
-              [title]="post.title"
+              [title]="post.title | translate"
               [formGroup]="formGroup"
             />
             }
 
             <div class="grid md:grid-cols-2 gap-x-10">
               <div>
-                <p class="text-gray-800 mb-2">Début</p>
+                <p class="text-gray-800 mb-2">{{'CV_DEPOSIT.STEP_2.START_DATE.TITLE' | translate}}</p>
                 <div class="grid grid-cols-2 gap-x-3">
                   <app-custom-select
                     [id]="startMonthField.id"
                     [classSelect]="startMonthField.classSelect"
                     [classLabel]="startMonthField.classLabel"
-                    [title]="startMonthField.title"
+                    [title]="startMonthField.title | translate"
                     [options]="months"
                     [formGroup]="currentExperience"
                   />
@@ -77,7 +77,7 @@
                     [id]="startYearField.id"
                     [classSelect]="startYearField.classSelect"
                     [classLabel]="startYearField.classLabel"
-                    [title]="startYearField.title"
+                    [title]="startYearField.title | translate"
                     [options]="years"
                     [formGroup]="currentExperience"
                   />
@@ -86,13 +86,13 @@
 
               <!-- End Date -->
               <div>
-                <p class="text-gray-800 mb-2">Fin</p>
+                <p class="text-gray-800 mb-2">{{'CV_DEPOSIT.STEP_2.END_DATE.TITLE' | translate}}</p>
                 <div class="grid grid-cols-2 gap-x-4">
                   <app-custom-select
                     [id]="endMonthField.id"
                     [classSelect]="endMonthField.classSelect"
                     [classLabel]="endMonthField.classLabel"
-                    [title]="endMonthField.title"
+                    [title]="endMonthField.title | translate"
                     [options]="months"
                     [formGroup]="currentExperience"
                   />
@@ -100,27 +100,16 @@
                     [id]="endYearField.id"
                     [classSelect]="endYearField.classSelect"
                     [classLabel]="endYearField.classLabel"
-                    [title]="endYearField.title"
+                    [title]="endYearField.title | translate"
                     [options]="years"
                     [formGroup]="currentExperience"
                   />
                 </div>
               </div>
             </div>
-            <!-- <div class="flex items-center mt-2">
-              <input
-                type="checkbox"
-                id="currentPosition"
-                [(ngModel)]="isCurrentPosition"
-                class="custom-radio"
-              />
-              <label for="currentPosition" class="ml-2 text-sm text-gray-600">
-                Je suis toujours en poste.
-              </label>
-            </div> -->
             <div class="space-y-3">
               <p class="text-gray-700 font-medium">
-                Avez-vous déjà fait du télétravail ?
+                {{'CV_DEPOSIT.STEP_2.REMOTE_WORK_QUESTION' | translate}}
               </p>
               <div class="flex gap-6">
                 <!-- Yes option -->
@@ -135,7 +124,7 @@
                     formControlName="hasRemoteExperience"
                   />
                   <label for="remoteYes" class="ml-2 text-sm text-gray-600">
-                    Oui
+                    {{'CV_DEPOSIT.STEP_2.REMOTE_WORK_OPTIONS.YES' | translate}}
                   </label>
                 </div>
 
@@ -151,7 +140,7 @@
                     formControlName="hasRemoteExperience"
                   />
                   <label for="remoteNo" class="ml-2 text-sm text-gray-600">
-                    Non
+                    {{'CV_DEPOSIT.STEP_2.REMOTE_WORK_OPTIONS.NO' | translate}}
                   </label>
                 </div>
               </div>
@@ -162,12 +151,10 @@
           >
             <div class="bg-gray-50 p-4 rounded-lg">
               <p class="font-semibold text-[14px] text-gray-800">
-                CC Recrutement conseille :
+                {{'CV_DEPOSIT.STEP_2.RECRUITMENT_ADVICE.TITLE' | translate}}
               </p>
               <p class="text-gray-600 text-[12px] mt-2">
-                Nous vous recommandons de remplir avec précision les
-                informations professionnelles requises afin de faciliter
-                l'évaluation de votre profil en lien avec le poste visé.
+                {{'CV_DEPOSIT.STEP_2.RECRUITMENT_ADVICE.CONTENT' | translate}}
               </p>
             </div>
           </div>
@@ -194,7 +181,7 @@
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          <span class="text-blue-400 text-sm">Précédent</span>
+          <span class="text-blue-400 text-sm">{{'CV_DEPOSIT.PREVIOUS' | translate}}</span>
         </button>
 
         <!-- Validate Button -->
@@ -203,7 +190,7 @@
           (click)="onProceedClick()"
           class="bg-blue-400 text-white hover:bg-app-primary-purple custom-650:px-8 px-16 py-2 rounded-[4px] text-sm font-medium"
         >
-          Continuer
+        {{'CV_DEPOSIT.NEXT' | translate}}
         </button>
       </div>
     </div>

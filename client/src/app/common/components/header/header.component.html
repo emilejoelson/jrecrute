@@ -16,17 +16,72 @@
         alt="Logo"
       />
       <span class="md:text-2xl text-xl font-bold text-gradient"
-        >Recrutement</span
+        >{{'APP_NAME' | translate}}</span
       >
     </div>
   </a>
+
+  <div class="relative inline-flex mx-4">
+    <div>
+      <button 
+        (click)="toggleDropdown()" 
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-200 shadow-md hover:shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-300"
+      >
+        <div class="flex items-center space-x-1 p-1.5 bg-app-primay-dark rounded-full">
+          <span class="text-purple-800 bg-gray-100 p-2 rounded-full font-semibold text-sm uppercase tracking-wider">
+            {{ currentLanguage }}
+          </span>
+        </div>
+      </button>
+  
+      @if(dropdownOpen){
+        <div  
+        class="absolute z-50 origin-top-right right-0 mt-2 w-56 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none animate-fade-in-down"
+        (click)="$event.stopPropagation()"
+      >
+        <div class="py-1">
+          <button 
+            (click)="switchLanguage('FR')"
+            class="w-full flex items-center rounded-xl px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 transition-colors duration-200"
+            [ngClass]="{ 'bg-purple-100': currentLanguage === 'FR' }"
+          >
+            <img 
+              src="assets/flags/france.png" 
+              alt="Français" 
+              class="h-[10px] mr-5 rounded-full"
+            />
+            <span class="flex-grow text-left">Français</span>
+            <svg *ngIf="currentLanguage === 'FR'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+          </button>
+  
+          <button 
+            (click)="switchLanguage('EN')"
+            class="w-full flex items-center rounded-xl px-4 py-3 text-sm text-gray-700 hover:bg-purple-50 transition-colors duration-200"
+            [ngClass]="{ 'bg-purple-100': currentLanguage === 'EN' }"
+          >
+            <img 
+              src="assets/flags/united-kingdom.png" 
+              alt="English" 
+              class="h-[10px]  mr-5 rounded-full"
+            />
+            <span class="flex-grow text-left">English</span>
+            <svg *ngIf="currentLanguage === 'EN'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
 
   <button
     role="button"
     class="block transition-colors duration-300 ease-in-out text-app-primay-dark hover:text-app-secondary-dark xl:hidden"
     (click)="toggleNav()"
   >
-    <!-- close -->
     @if (isNavOpen) {
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +156,7 @@
         }"
         class="cursor-pointer relative hover:text-purple-600 font-medium text-lg transition-colors duration-300 ease-in-out has-[.link-active]:text-app-secondary-dark"
       >
-        {{ linkEntry.name }}
+        {{ linkEntry.translationKey | translate }}
       </li>
       } @for(buttonEntry of navItems.buttons;track buttonEntry){
       <div
@@ -113,14 +168,14 @@
             (click)="onDeposit()"
             class="block cursor-pointer text-center text-white px-6 py-2 rounded-full hover:bg-purple-700 transition-all transform hover:scale-105 transition-colors ease-out duration-300 relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-inherit text-[#fff] z-10 group bg-app-primay-dark"
           >
-            {{ buttonEntry.name }}
+            {{ buttonEntry.translationKey | translate }}
           </button>
           } @else {
           <button
             (click)="onClient()"
             class="block cursor-pointer text-center bg-purple-700 text-white px-6 py-2 rounded-full transition-all transform hover:scale-105 transition-colors ease-out duration-300 relative w-full tracking-[1.25px] px-[2em] py-[0.5em] rounded-[10px] font-medium text-inherit text-[#fff] z-10 group hover:bg-app-primay-dark"
           >
-            {{ buttonEntry.name }}
+            {{ buttonEntry.translationKey | translate }}
           </button>
           }
         </div>

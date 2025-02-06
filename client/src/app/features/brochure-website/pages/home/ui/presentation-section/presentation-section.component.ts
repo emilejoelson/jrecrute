@@ -6,11 +6,12 @@ import { CommonModule, ViewportScroller } from '@angular/common';
 import { Router } from '@angular/router';
 import { AudioControlsComponent } from '../../../../../../shared/audio-controls/audio-controls.component';
 import { VideoPlayerComponent } from '../../../../../../shared/video-player/video-player.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-presentation-section',
   standalone: true,
-  imports: [CommonModule,VideoPlayerComponent],
+  imports: [CommonModule,VideoPlayerComponent,TranslateModule],
   templateUrl: './presentation-section.component.html',
   styleUrl: './presentation-section.component.scss',
 })
