@@ -1,6 +1,7 @@
 import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 interface JobOfferDetails {
   title: string;
@@ -17,7 +18,7 @@ interface JobOfferDetails {
 @Component({
   selector: 'app-job-offer-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TranslateModule],
   templateUrl: './job-offer-details.component.html',
   styleUrl: './job-offer-details.component.scss',
 })
@@ -26,6 +27,8 @@ export class JobOfferDetailsComponent implements OnInit {
   isExpanded = false;
   showFixedButton = false;
   router = inject(Router);
+  translate = inject(TranslateService);
+
   contentStyle: { [key: string]: string } = {
     maxHeight: '300px',
     overflow: 'hidden',
@@ -34,116 +37,116 @@ export class JobOfferDetailsComponent implements OnInit {
 
   private jobOffers: { [key: string]: JobOfferDetails } = {
     commercial: {
-      title: 'Commercial',
+      title: 'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.TITLE',
       company: 'Consult Collab',
-      companyDomain: 'Services Commerciaux',
-      workType: 'Télétravail en temps plein',
+      companyDomain: 'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.COMPANY_DOMAIN',
+      workType: 'JOB_OFFER_DETAILS.TAGS.REMOTE_FULL_TIME',
       salaryRange: '7.2K€ - 8.4K€',
       salaryMedian: '7.8K€',
       description:
-        "Le Commercial est chargé de développer le portefeuille clients de l'entreprise, d'augmenter les ventes et de fidéliser les clients existants. Il est responsable de la gestion des relations commerciales de bout en bout, de la prospection à la conclusion des contrats.",
+        "JOB_OFFER_DETAILS.JOBS.COMMERCIAL.DESCRIPTION",
       mainMissions: [
-        'Identifier de nouveaux prospects et opportunités commerciales',
-        'Développer des stratégies de vente efficaces pour atteindre les objectifs fixés',
-        'Gérer les relations clients en assurant un suivi personnalisé',
-        'Négocier et conclure des contrats de vente',
-        'Collaborer avec les équipes internes pour assurer une bonne exécution des services',
+        'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.MAIN_MISSIONS.0',
+        'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.MAIN_MISSIONS.1',
+        'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.MAIN_MISSIONS.2',
+        'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.MAIN_MISSIONS.3',
+        'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.MAIN_MISSIONS.4',
       ],
       requiredSkills: [
-        'Excellentes compétences en communication et négociation',
-        "Sens de l'organisation et capacité à travailler sous pression",
-        'Maitrise des outils CRM et des techniques de prospection',
+        'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.REQUIRED_SKILLS.0',
+        "JOB_OFFER_DETAILS.JOBS.COMMERCIAL.REQUIRED_SKILLS.1",
+        'JOB_OFFER_DETAILS.JOBS.COMMERCIAL.REQUIRED_SKILLS.2',
       ],
     },
     secretaire: {
-      title: 'Secrétaire',
+      title: 'JOB_OFFER_DETAILS.JOBS.SECRETAIRE.TITLE',
       company: 'Consult Collab',
-      companyDomain: 'Support Administratif',
-      workType: 'Télétravail en temps plein',
+      companyDomain: 'JOB_OFFER_DETAILS.JOBS.SECRETAIRE.COMPANY_DOMAIN',
+      workType: 'JOB_OFFER_DETAILS.JOBS.SECRETAIRE.WORK_TYPE',
       salaryRange: '7.2K€ - 8.4K€',
       salaryMedian: '7.8K€',
       description:
-        "Le Secrétaire est chargé de la gestion administrative quotidienne de l'entreprise, incluant l'organisation des rendez-vous, la gestion des documents et la coordination des communications internes et externes.",
+        "JOB_OFFER_DETAILS.JOBS.SECRETAIRE.DESCRIPTION",
       mainMissions: [
-        'Gérer les appels téléphoniques, les courriels et le courrier',
-        'Planifier les rendez-vous et organiser les réunions',
-        'Rédiger et archiver des documents administratifs',
-        "Gérer l'accueil des visiteurs et le support logistique",
-        "Assister l'équipe dans diverses tâches administratives",
+        'JOB_OFFER_DETAILS.JOBS.SECRETAIRE.MAIN_MISSIONS.0',
+        'JOB_OFFER_DETAILS.JOBS.SECRETAIRE.MAIN_MISSIONS.1',
+        'JOB_OFFER_DETAILS.JOBS.SECRETAIRE.MAIN_MISSIONS.2',
+        "JOB_OFFER_DETAILS.JOBS.SECRETAIRE.MAIN_MISSIONS.3",
+        "JOB_OFFER_DETAILS.JOBS.SECRETAIRE.MAIN_MISSIONS.4",
       ],
       requiredSkills: [
-        'Excellente maîtrise des outils bureautiques (Word, Excel, PowerPoint)',
-        "Capacité d'organisation et de gestion du temps",
-        'Discrétion et sens de la confidentialité',
+        'JOB_OFFER_DETAILS.JOBS.SECRETAIRE.REQUIRED_SKILLS.0',
+        "JOB_OFFER_DETAILS.JOBS.SECRETAIRE.REQUIRED_SKILLS.1",
+        'JOB_OFFER_DETAILS.JOBS.SECRETAIRE.REQUIRED_SKILLS.2',
       ],
     },
     'developpeur-web': {
-      title: 'Développeur Web',
+      title: 'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.TITLE',
       company: 'Consult Collab',
-      companyDomain: 'Technologies',
-      workType: 'Télétravail en temps plein',
+      companyDomain: 'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.COMPANY_DOMAIN',
+      workType: 'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.WORK_TYPE',
       salaryRange: '7,2K€ - 8,4K€',
       salaryMedian: '7,8K€',
       description:
-        "Le Développeur Web est responsable de la conception, du développement et de la maintenance des sites web de l'entreprise ou de ses clients. Il travaille en collaboration avec d'autres équipes pour créer des expériences utilisateur optimales.",
+        "JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.DESCRIPTION",
       mainMissions: [
-        'Concevoir et développer des applications web responsives et performantes',
-        'Corriger les bugs et optimiser le code',
-        'Collaborer avec des designers pour intégrer des maquettes',
-        'Assurer la sécurité et la maintenance des sites',
-        'Rester à jour sur les nouvelles technologies et tendances',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.MAIN_MISSIONS.0',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.MAIN_MISSIONS.1',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.MAIN_MISSIONS.2',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.MAIN_MISSIONS.3',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.MAIN_MISSIONS.4',
       ],
       requiredSkills: [
-        'Maîtrise des langages de programmation frontend : HTML, CSS, JavaScript',
-        'Connaissance des frameworks frontend : React, Angular ou Vue.js',
-        'Compétences backend : maîtrise de Java, Python, PHP ou Node.js avec leurs frameworks respectifs (Spring Boot, Django/Flask, Laravel/Symfony ou Express.js)',
-        'Expérience avec des CMS (WordPress, Drupal, etc.)',
-        'Bonne compréhension des bases de données SQL (MySQL, PostgreSQL) ou NoSQL (MongoDB, Firebase)',
-        'Connaissance des outils de versionnement comme Git',
-        'Capacités en résolution de problèmes et en optimisation de code',
-        "Compréhension des concepts DevOps, notamment l'utilisation de Docker pour la containerisation des applications",
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.REQUIRED_SKILLS.0',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.REQUIRED_SKILLS.1',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.REQUIRED_SKILLS.2',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.REQUIRED_SKILLS.3',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.REQUIRED_SKILLS.4',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.REQUIRED_SKILLS.5',
+        'JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.REQUIRED_SKILLS.6',
+        "JOB_OFFER_DETAILS.JOBS.DEVELOPPEUR_WEB.REQUIRED_SKILLS.7",
       ],
     },
     'community-manager': {
       title: 'Community Manager',
       company: 'Consult Collab',
-      companyDomain: 'Marketing Digital',
-      workType: 'Télétravail en temps plein',
+      companyDomain: 'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.COMPANY_DOMAIN',
+      workType: 'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.WORK_TYPE',
       salaryRange: '7.2K€ - 8.4K€',
       salaryMedian: '7.8K€',
       description:
-        "Le Community Manager est chargé de gérer l'image de l'entreprise sur les réseaux sociaux. Il crée du contenu engageant, développe des communautés en ligne et assure une veille constante pour renforcer la notoriété et l'engagement.",
+        "JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.DESCRIPTION",
       mainMissions: [
-        'Développer et mettre en oeuvre une stratégie de contenu',
-        'Animer et modérer les communautés sur différentes plateformes',
-        'Rédiger des publications engageantes',
-        'Analyser les performances des campagnes et produire des rapports',
-        'Collaborer avec les équipes de marketing et de design',
+        'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.MAIN_MISSIONS.0',
+        'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.MAIN_MISSIONS.1',
+        'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.MAIN_MISSIONS.2',
+        'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.MAIN_MISSIONS.3',
+        'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.MAIN_MISSIONS.4',
       ],
       requiredSkills: [
-        'Maîtrise des outils de gestion de réseaux sociaux',
-        'Excellentes compétences rédactionnelles et créatives',
+        'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.REQUIRED_SKILLS.0',
+        'JOB_OFFER_DETAILS.JOBS.COMMUNITY_MANAGER.REQUIRED_SKILLS.1',
       ],
     },
     'profil-bilingue': {
-      title: 'Profil Bilingue',
+      title: 'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.TITLE',
       company: 'Consult Collab',
-      companyDomain: 'Communication Internationale',
-      workType: 'Télétravail en temps plein',
+      companyDomain: 'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.COMPANY_DOMAIN',
+      workType: 'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.WORK_TYPE',
       salaryRange: '7.2K€ - 8.4K€',
       salaryMedian: '7.8K€',
       description:
-        "Les profils bilingues sont recherchés pour divers rôles nécessitant des compétences en communication dans plusieurs langues afin d'assurer des échanges fluides avec des clients ou des partenaires internationaux.",
+        "JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.DESCRIPTION",
       mainMissions: [
-        'Communiquer efficacement en plusieurs langues',
-        'Traduire ou adapter des documents et contenus selon les besoins',
-        'Gérer les relations avec des clients ou partenaires multilingues',
-        'Participer à des projets nécessitant des compétences linguistiques spécialisées',
+        'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.MAIN_MISSIONS.0',
+        'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.MAIN_MISSIONS.1',
+        'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.MAIN_MISSIONS.2',
+        'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.MAIN_MISSIONS.3',
       ],
       requiredSkills: [
-        'Bilinguisme obligatoire (français et anglais, ou autres langues selon le poste)',
-        'Excellentes compétences en communication orale et écrite',
-        'Capacité à travailler dans des environnements multiculturels',
+        'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.REQUIRED_SKILLS.0',
+        'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.REQUIRED_SKILLS.1',
+        'JOB_OFFER_DETAILS.JOBS.PROFIL_BILINGUE.REQUIRED_SKILLS.2',
       ],
     },
   };
@@ -172,8 +175,10 @@ export class JobOfferDetailsComponent implements OnInit {
   }
 
   getButtonText(): string {
-    return this.isExpanded ? 'Voir moins' : 'Voir plus';
-  }
+  return this.isExpanded 
+    ? this.translate.instant('JOB_OFFER_DETAILS.BUTTONS.SHOW_LESS') 
+    : this.translate.instant('JOB_OFFER_DETAILS.BUTTONS.SHOW_MORE');
+}
 
   onGetBack() {
     this.router.navigate(['/']);

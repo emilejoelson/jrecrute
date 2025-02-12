@@ -5,34 +5,34 @@
     <p
       class="text-[34px] md:text-[36px] font-bold text-gray-900 mb-4 flex items-center justify-center"
     >
-      Nos Tarifs et Packs de Recrutement
+      {{"CLIENT.PRINCING.PRICING_PLANS.TITLE" | translate}}
     </p>
     <p class="text-xl text-gray-600">
-      Des solutions adaptées à tous vos besoins de recrutement
+      {{"CLIENT.PRINCING.PRICING_PLANS.SUBTITLE" | translate}}
     </p>
   </div>
 
   <!-- Interactive Pricing Calculator -->
   <div class="max-w-2xl mx-auto mb-16 bg-gray-900 rounded-3xl p-8 text-white">
-    <h2 class="text-3xl font-bold mb-6 text-center">Budget par tranche</h2>
+    <h2 class="text-3xl font-bold mb-6 text-center">{{"CLIENT.PRINCING.BUDGET_SECTION.TITLE" | translate}}</h2>
 
     <div class="space-y-6">
       <!-- Candidate Selection -->
       <div class="space-y-4">
         <label class="block text-lg font-medium">
-          Nombre de candidats: {{ selectedCandidates }}
+          {{"CLIENT.PRINCING.BUDGET_SECTION.CANDIDATE_COUNT" | translate}}: {{ selectedCandidates }}
           <span
             *ngIf="isPack"
             class="ml-2 bg-purple-500 custom-650:hidden text-white px-3 py-1 rounded-full text-sm"
           >
-            Pack {{ activePackSize }} activé
+            Pack {{ activePackSize }} {{"CLIENT.PRINCING.BUDGET_SECTION.PACK_ACTIVE" | translate}}
           </span>
         </label>
         <div
           *ngIf="isPack"
           class="ml-2 bg-purple-500 flex justify-center md:hidden text-white px-3 py-1 rounded-full text-sm"
         >
-          Pack {{ activePackSize }} activé
+          Pack {{ activePackSize }} {{"CLIENT.PRINCING.BUDGET_SECTION.PACK_ACTIVE" | translate}}
         </div>
         <div class="flex items-center space-x-4">
           <input
@@ -52,7 +52,7 @@
       <!-- Price Display -->
       <div class="bg-gray-800 rounded-xl p-6 space-y-4">
         <div class="flex justify-between items-baseline">
-          <span class="text-lg">Prix total:</span>
+          <span class="text-lg">{{"CLIENT.PRINCING.BUDGET_SECTION.TOTAL_PRICE" | translate}}:</span>
           <div class="text-right">
             <span class="text-3xl font-bold text-purple-400">
               {{ formatPrice(calculatedPrice) }}€
@@ -63,7 +63,7 @@
         <div
           class="flex justify-between items-baseline border-t border-gray-700 pt-4"
         >
-          <span class="text-gray-400">Prix par candidat:</span>
+          <span class="text-gray-400">{{"CLIENT.PRINCING.BUDGET_SECTION.PRICE_PER_CANDIDATE" | translate}}:</span>
           <span class="text-xl text-gray-400">
             {{ formatPrice(pricePerCandidate) }}€
           </span>
@@ -76,8 +76,8 @@
         class="bg-purple-500 bg-opacity-20 rounded-xl p-4 text-center"
       >
         <p class="text-purple-300">
-          🎉 Vous bénéficiez du tarif avantageux du pack
-          {{ activePackSize }} candidats!
+          {{"CLIENT.PRINCING.BUDGET_SECTION.DISCOUNT_MESSAGE.0" | translate}}
+          {{ activePackSize }} {{"CLIENT.PRINCING.BUDGET_SECTION.DISCOUNT_MESSAGE.1" | translate}}
         </p>
       </div>
     </div>
@@ -92,10 +92,10 @@
       class="bg-gray-900 rounded-3xl lg:rounded-none lg:rounded-l-3xl p-8 h-auto"
     >
       <div class="mb-6">
-        <h2 class="text-3xl font-bold text-white mb-3">💼 Offre Standard</h2>
+        <h2 class="text-3xl font-bold text-white mb-3">💼 {{"CLIENT.PRINCING.PRICING_OPTIONS.STANDARD_OFFER.TITLE" | translate}}</h2>
         <div class="flex items-baseline">
           <span class="text-4xl font-bold text-white">1 490€</span>
-          <span class="ml-2 text-gray-400">/candidat placé</span>
+          <span class="ml-2 text-gray-400">/{{"CLIENT.PRINCING.PRICING_OPTIONS.STANDARD_OFFER.PRICE" | translate}}</span>
         </div>
       </div>
 
@@ -114,7 +114,7 @@
               d="M5 13l4 4L19 7"
             ></path>
           </svg>
-          <span class="text-gray-300">{{ feature }}</span>
+          <span class="text-gray-300">{{ feature | translate }}</span>
         </li>
       </ul>
     </div>
@@ -127,7 +127,7 @@
         <span
           class="bg-purple-500 text-white px-6 py-2 rounded-full text-sm font-semibold"
         >
-          POPULAIRE
+        {{"CLIENT.PRINCING.PRICING_OPTIONS.RECRUITMENT_PACKS.POPULAR" | translate}}
         </span>
       </div>
       <div class="mb-6 pt-4">
@@ -135,14 +135,14 @@
           class="text-3xl font-bold text-white mb-3 flex custom-650:justify-center items-center"
         >
           <div class="text-center">
-            <span class="mr-2">📦</span> Packs de recrutement
+            <span class="mr-2">📦</span>  {{"CLIENT.PRINCING.PRICING_OPTIONS.RECRUITMENT_PACKS.TITLE" | translate}}
           </div>
         </h2>
         <div class="space-y-8 mt-6">
           <div class="flex flex-col gap-5">
             <div *ngFor="let pack of recruitmentPacks">
               <h3 class="text-xl flex justify-center text-white mb-2">
-                Pack {{ pack.candidates }} candidats
+                Pack {{ pack.candidates }} {{"CLIENT.PRINCING.BUDGET_SECTION.DISCOUNT_MESSAGE.1" | translate}}
               </h3>
               <div class="flex items-baseline justify-center">
                 <span class="text-4xl font-bold text-white"
@@ -150,10 +150,10 @@
                 >
               </div>
               <p class="text-gray-400 flex justify-center">
-                Soit {{ pack.pricePerCandidate }}€ par candidat
+                {{"CLIENT.PRINCING.PRICING_OPTIONS.RECRUITMENT_PACKS.PACK_5.PRICE_PER_CANDIDATE.0" | translate}} {{ pack.pricePerCandidate }}€ {{"CLIENT.PRINCING.PRICING_OPTIONS.RECRUITMENT_PACKS.PACK_5.PRICE_PER_CANDIDATE.1" | translate}}
               </p>
               <p class="text-sm text-gray-500 flex justify-center">
-                (au lieu de 1 490€)
+                ({{"CLIENT.PRINCING.PRICING_OPTIONS.RECRUITMENT_PACKS.PACK_5.INSTEAD" | translate}})
               </p>
             </div>
           </div>
@@ -167,11 +167,11 @@
     >
       <div class="mb-6">
         <h2 class="text-3xl font-bold text-white mb-3">
-          🚀 Offre avec acompte
+          🚀 {{"CLIENT.PRINCING.PRICING_OPTIONS.DEPOSIT_OFFER.TITLE" | translate}}
         </h2>
         <div class="flex items-baseline">
           <span class="text-4xl font-bold text-white">447€</span>
-          <span class="ml-2 text-gray-400">/acompte initial</span>
+          <span class="ml-2 text-gray-400">/{{"CLIENT.PRINCING.PRICING_OPTIONS.DEPOSIT_OFFER.PRICE" | translate}}</span>
         </div>
       </div>
 
@@ -189,7 +189,7 @@
             d="M5 13l4 4L19 7"
           ></path>
         </svg>
-        <span>Déduit des frais fixes si un candidat est recruté</span>
+        <span>{{"CLIENT.PRINCING.PRICING_OPTIONS.DEPOSIT_OFFER.FEATURES" | translate}}</span>
       </div>
     </div>
   </div>

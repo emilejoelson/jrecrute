@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-pricing',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule,TranslateModule],
   templateUrl: './pricing.component.html',
   styleUrl: './pricing.component.scss',
 })
@@ -17,10 +18,10 @@ export class PricingComponent {
   activePackSize: number | null = null;
 
   standardFeatures = [
-    'Analyse des besoins',
-    'Recherche ciblée',
-    'Présélection et organisation des entretiens',
-    'Suivi initial après la mise en relation'
+    'CLIENT.PRINCING.PRICING_OPTIONS.STANDARD_OFFER.FEATURES.0',
+    'CLIENT.PRINCING.PRICING_OPTIONS.STANDARD_OFFER.FEATURES.1',
+    'CLIENT.PRINCING.PRICING_OPTIONS.STANDARD_OFFER.FEATURES.2',
+    'CLIENT.PRINCING.PRICING_OPTIONS.STANDARD_OFFER.FEATURES.3'
   ];
 
   recruitmentPacks = [

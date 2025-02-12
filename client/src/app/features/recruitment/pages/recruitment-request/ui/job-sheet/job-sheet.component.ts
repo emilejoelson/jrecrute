@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 import { CustomRadioButtonComponent } from '../../../../../cv-deposit/pages/deposit-cv/ui/steps/ui/custom-radio-button/custom-radio-button.component';
 import { Store } from '@ngrx/store';
 import { RecruitmentFormActions } from '../../../../store/actions/recruitment.actions';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-job-sheet',
@@ -25,6 +26,7 @@ import { RecruitmentFormActions } from '../../../../store/actions/recruitment.ac
     CustomTextAreaComponent,
     CommonModule,
     CustomRadioButtonComponent,
+    TranslateModule
   ],
   templateUrl: './job-sheet.component.html',
   styleUrl: './job-sheet.component.scss',
@@ -62,7 +64,7 @@ export class JobSheetComponent implements OnInit, OnDestroy {
     {
       id: 'urgency',
       value: 'Très urgent',
-      title: 'Très urgent',
+      title: 'CLIENT.JOB_FORM.URGENT_OPTIONS.VERY_URGENT',
       classInput: 'sr-only peer',
       classLabel:
         'inline-flex items-center justify-center w-full p-2 md:py-4 text-center  border text-[12px] border-gray-200 rounded-lg cursor-pointer',
@@ -71,7 +73,7 @@ export class JobSheetComponent implements OnInit, OnDestroy {
     {
       id: 'urgency',
       value: 'Dans les 7 jours',
-      title: 'Dans les 7 jours',
+      title: 'CLIENT.JOB_FORM.URGENT_OPTIONS.WITHIN_7_DAYS',
       classInput: 'sr-only peer',
       classLabel:
         'inline-flex items-center justify-center w-full p-2 md:py-4 text-center  text-[12px]  border border-gray-200 rounded-lg cursor-pointer',
@@ -80,7 +82,7 @@ export class JobSheetComponent implements OnInit, OnDestroy {
     {
       id: 'urgency',
       value: 'Pas pressé',
-      title: 'Pas pressé',
+      title: 'CLIENT.JOB_FORM.URGENT_OPTIONS.NOT_URGENT',
       classInput: 'sr-only peer',
       classLabel:
         'inline-flex items-center  justify-center w-full p-2 md:py-4 text-center text-[12px]  border border-gray-200 rounded-lg cursor-pointer',
@@ -94,31 +96,31 @@ export class JobSheetComponent implements OnInit, OnDestroy {
       classInput:
         'peer w-full p-2 md:p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel: 'left-3 -top-2.5 text-sm text-[#362E75] bg-white px-1',
-      title: "Nom de l'entreprise",
+      title: "CLIENT.JOB_FORM.FIELDS.COMPANY_NAME",
     },
     {
       id: 'contactEmail',
       classInput:
         'peer w-full p-2 md:p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel: 'left-3 -top-2.5 text-sm text-[#362E75] bg-white px-1',
-      title: 'Email de contact',
+      title: 'CLIENT.JOB_FORM.FIELDS.CONTACT_EMAIL',
     },
     {
       id: 'phoneNumber',
       classInput:
         'peer w-full p-2 md:p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
       classLabel: 'left-3 -top-2.5 text-sm text-[#362E75] bg-white px-1',
-      title: 'Numéro de téléphone',
+      title: 'CLIENT.JOB_FORM.FIELDS.PHONE_NUMBER',
     },
   ];
 
   postes = [
-    { value: 'Développeur web', label: 'Développeur web' },
+    { value: 'Développeur web', label: 'JOB_OFFERS.DEVELOPPEUR_WEB' },
     { value: 'Community Manager', label: 'Community Manager' },
-    { value: 'Secrétaire', label: 'Secrétaire' },
-    { value: 'Profil bilingue', label: 'Profil bilingue' },
+    { value: 'Secrétaire', label: 'JOB_OFFERS.SECRETAIRE' },
+    { value: 'Profil bilingue', label: 'JOB_OFFERS.PROFIL_BILINGUE' },
     { value: 'Commercial', label: 'Commercial' },
-    { value: 'Autre', label: 'Autre' },
+    { value: 'Autre', label: 'JOB_OFFERS.OTHER' },
   ];
 
   postField = {
@@ -126,7 +128,7 @@ export class JobSheetComponent implements OnInit, OnDestroy {
     classSelect:
       'peer w-full p-2 md:p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-[#362E75] bg-white px-1',
-    title: 'Poste recherché',
+    title: 'CLIENT.JOB_FORM.FIELDS.POSITION',
   };
 
   customPositionField = {
@@ -134,7 +136,7 @@ export class JobSheetComponent implements OnInit, OnDestroy {
     classInput:
       'peer w-full p-2 md:p-4 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none pr-10', // Added pr-10 for button space
     classLabel: 'left-3 -top-2.5 text-sm text-[#362E75] bg-white px-1',
-    title: 'Précisez le poste',
+    title: 'CLIENT.JOB_FORM.FIELDS.SPECIFY_POSITION',
   };
 
   needsDescription = {
@@ -142,7 +144,7 @@ export class JobSheetComponent implements OnInit, OnDestroy {
     classTextarea:
       'peer w-full p-2 md:p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none',
     classLabel: 'left-3 -top-2.5 text-sm text-[#362E75] bg-white px-1',
-    title: 'Description des besoins',
+    title: 'CLIENT.JOB_FORM.FIELDS.DESCRIPTION',
     rows: 5,
   };
 

@@ -6,7 +6,7 @@
       <p
         class="flex justify-center text-center custom-650:pt-0 p-4 mb-8 text-3xl font-bold text-gray-800"
       >
-        Fiche de poste pour les clients
+        {{'CLIENT.JOB_FORM.TITLE' | translate}}
       </p>
       <form [formGroup]="jobSheetForm">
         <div class="grid md:grid-cols-[2fr_1fr] gap-[60px]">
@@ -16,7 +16,7 @@
               [id]="jobSheet.id"
               [classInput]="jobSheet.classInput"
               [classLabel]="jobSheet.classLabel"
-              [title]="jobSheet.title"
+              [title]="jobSheet.title | translate"
               [formGroup]="jobSheetForm"
             />
             } @if(!showCustomPosition) {
@@ -24,7 +24,7 @@
               [id]="postField.id"
               [classSelect]="postField.classSelect"
               [classLabel]="postField.classLabel"
-              [title]="postField.title"
+              [title]="postField.title | translate"
               [options]="postes"
               [formGroup]="jobSheetForm"
             />
@@ -35,7 +35,7 @@
                   [id]="customPositionField.id"
                   [classInput]="customPositionField.classInput"
                   [classLabel]="customPositionField.classLabel"
-                  [title]="customPositionField.title"
+                  [title]="customPositionField.title | translate"
                   [formGroup]="jobSheetForm"
                 />
               </div>
@@ -69,7 +69,7 @@
               [id]="needsDescription.id"
               [classTextarea]="needsDescription.classTextarea"
               [classLabel]="needsDescription.classLabel"
-              [title]="needsDescription.title"
+              [title]="needsDescription.title | translate"
               [rows]="needsDescription.rows"
               [formGroup]="jobSheetForm"
               [control]="jobSheetForm.get('needsDescription')"
@@ -78,19 +78,16 @@
           <div class="flex flex-col gap-10 md:gap-[65px]">
             <div class="bg-gray-50 p-4 rounded-lg">
               <p class="font-bold text-[14px] text-[#362E75]">
-                CC Recrutement conseille :
+                {{'CLIENT.JOB_FORM.CC_RECRUITMENT_ADVICE' | translate}} :
               </p>
               <p class="text-gray-600 text-[12px] mt-2">
-                Optimisez votre recrutement en fournissant des informations
-                précises sur votre entreprise et vos besoins. Nos experts vous
-                accompagnent pour trouver les meilleurs talents adaptés à votre
-                activité.
+                {{'CLIENT.JOB_FORM.CC_RECRUITMENT_DESCRIPTION' | translate}}
               </p>
             </div>
             <div class="flex flex-col gap-6">
               <div>
                 <h2 class="mb-3 ml-2 flex text-center font-bold">
-                  Budget mensuel <span class="text-red-400 ml-2">*</span>
+                  {{'CLIENT.JOB_FORM.FIELDS.BUDGET_MIN' | translate}} <span class="text-red-400 ml-2">*</span>
                 </h2>
                 <div
                   class="flex custom-650:flex-col gap-4"
@@ -105,7 +102,7 @@
                         [id]="monthlyBudget.id"
                         [classInput]="monthlyBudget.classInput"
                         [classLabel]="monthlyBudget.classLabel"
-                        [title]="monthlyBudget.title"
+                        [title]="monthlyBudget.title | translate"
                         [type]="monthlyBudget.type"
                         [formGroup]="monthlyBudgetGroup"
                       />
@@ -119,7 +116,7 @@
               </div>
               <div>
                 <h2 class="mb-3 ml-2 flex text-center font-bold">
-                  Urgence <span class="text-red-400 ml-2">*</span>
+                  {{'CLIENT.JOB_FORM.FIELDS.URGENCY' | translate}} <span class="text-red-400 ml-2">*</span>
                 </h2>
                 <div class="grid grid-cols-3 gap-2 w-full">
                   @for(option of urgencyOptions;track option){
@@ -127,10 +124,10 @@
                     [formGroup]="jobSheetForm"
                     [id]="option.id"
                     [value]="option.value"
-                    [title]="option.title"
+                    [title]="option.title | translate"
                     [classInput]="option.classInput"
                     [classLabel]="option.classLabel"
-                    [classOption]="option.classOption"
+                    [classOption]="option.classOption "
                     [isSelected]="isSelected(option.value)"
                     (onSelect)="onUrgencySelect(option.value)"
                   >
@@ -144,7 +141,7 @@
               class="w-full bg-blue-400 hover:bg-app-primary-purple text-white custom-650:px-8 px-16 py-2 md:py-4 rounded-lg font-medium"
             >
               <button type="submit" (click)="onSubmit()" class="w-full">
-                Envoyer
+                {{'CLIENT.JOB_FORM.BUTTON_SUBMIT' | translate}}
               </button>
             </div>
           </div>

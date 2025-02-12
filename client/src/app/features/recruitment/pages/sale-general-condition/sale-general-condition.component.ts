@@ -1,14 +1,23 @@
+// sale-general-condition.component.ts
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-sale-general-condition',
-  imports: [CommonModule],
+  standalone: true,
+  imports: [CommonModule, TranslateModule],
   templateUrl: './sale-general-condition.component.html',
   styleUrl: './sale-general-condition.component.scss'
 })
 export class SaleGeneralConditionComponent {
   private expandedArticles: { [key: number]: boolean } = {};
+
+  constructor(
+    private translate: TranslateService,
+    private sanitizer: DomSanitizer
+  ) {}
 
   toggleArticle(index: number): void {
     this.expandedArticles[index] = !this.expandedArticles[index];
@@ -20,94 +29,95 @@ export class SaleGeneralConditionComponent {
 
   getArticleTitle(index: number): string {
     const titles: { [key: number]: string } = {
-      1: 'Description du service',
-      2: 'Conditions financières',
-      3: 'Lancement de la prestation',
-      4: 'Facturation',
-      5: 'Garantie de remplacement',
-      6: "Engagement de l'entreprise",
-      7: 'Confidentialité et usage des données',
-      8: 'Droit applicable',
-      9: 'Acceptation des CGV',
+      1: 'SALE_GENERAL_CONDITION.ARTICLES.TITLES.1',
+      2: 'SALE_GENERAL_CONDITION.ARTICLES.TITLES.2',
+      3: 'SALE_GENERAL_CONDITION.ARTICLES.TITLES.3',
+      4: 'SALE_GENERAL_CONDITION.ARTICLES.TITLES.4',
+      5: 'SALE_GENERAL_CONDITION.ARTICLES.TITLES.5',
+      6: "SALE_GENERAL_CONDITION.ARTICLES.TITLES.6",
+      7: 'SALE_GENERAL_CONDITION.ARTICLES.TITLES.7',
+      8: 'SALE_GENERAL_CONDITION.ARTICLES.TITLES.8',
+      9: 'SALE_GENERAL_CONDITION.ARTICLES.TITLES.9',
     };
-    return titles[index] || '';
+    return this.translate.instant(titles[index] || '');
   }
 
-  getArticleContent(index: number): string {
+  getArticleContent(index: number): SafeHtml {
+    const templateContent = this.getContentTemplate(index);
+    const translatedContent = this.translate.instant(templateContent);
+    return this.sanitizer.bypassSecurityTrustHtml(translatedContent);
+  }
+
+  private getContentTemplate(index: number): string {
     const contents: { [key: number]: string } = {
       1: `
         <div class="space-y-4">
-          <p>Consult Collab Recrutement propose un service de mise en relation entre entreprises et freelances qualifiés, basés à l'étranger, disponibles pour un poste en télétravail à temps plein.</p>
+          <p>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.INTRO')}</p>
           <div class="space-y-2">
-            <p class="font-medium">Le service inclut :</p>
+            <p class="font-medium">${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.SERVICE_INCLUDES')}</p>
             <ol class="list-decimal pl-6 space-y-3">
-              <li> <span class="font-bold underline">Analyse des besoins</span> : Identification des critères du poste et des compétences requises</li>
+              <li><span class="font-bold underline">${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.1.TITLE')}</span>: ${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.1.CONTENT')}</li>
               <li>
-              <span class="font-bold underline">Recherche ciblée et présélection</span> :
+                <span class="font-bold underline">${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.2.TITLE')}</span>:
                 <ul class="list-disc pl-6 mt-2 space-y-1">
-                  <li>Recherche approfondie dans notre base de données internationale de freelances</li>
-                  <li>Présélection et organisation d'un entretien anonyme via Google Meet sous 48 à 72 heures</li>
+                  <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.2.SUBPOINTS.0')}</li>
+                  <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.2.SUBPOINTS.1')}</li>
                 </ul>
               </li>
               <li>
-                <span class="font-bold underline">Mise en relation</span>
-                 :
+                <span class="font-bold underline">${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.3.TITLE')}</span>:
                 <ul class="list-disc pl-6 mt-2 space-y-1">
-                  <li>Présentation du freelance sélectionné pour validation par l'entreprise</li>
-                  <li>Suivi initial après la mise en relation pour garantir la satisfaction</li>
+                  <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.3.SUBPOINTS.0')}</li>
+                  <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.3.SUBPOINTS.1')}</li>
                 </ul>
               </li>
-              <li> <span class="font-bold underline">Garantie d'ajustement</span>  : Possibilité de remplacement gratuit dans les 15 jours</li>
+              <li><span class="font-bold underline">${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.4.TITLE')}</span>: ${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.1.POINTS.4.CONTENT')}</li>
             </ol>
           </div>
         </div>
       `,
       2: `
         <ul class="space-y-2">
-          <li>Frais de service pour la mise en relation réussie : 1 490 €</li>
-          <li>Acompte pour le lancement de la recherche : 447 €</li>
-          <li>TVA non applicable (article 293 B du CGI)</li>
-          <li>Total : 1 490 €</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.2.0')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.2.1')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.2.2')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.2.3')}</li>
         </ul>
       `,
-      3: `
-        <p>Le service commence à réception de l'acompte de 447 €, accompagné de l'acceptation du devis signé.</p>
-      `,
+      3: `<p>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.3')}</p>`,
       4: `
         <ul class="space-y-2">
-          <li>Le paiement de l'acompte de 447 € est requis avant le démarrage de la recherche.</li>
-          <li>Une fois la mise en relation réussie confirmée, une facture finale de 1 043 € sera émise</li>
-          <li>Le contact du freelance sera communiqué uniquement après réception du paiement intégral.</li>
-          <li>Le règlement de la facture finale est exigé sous 7 jours suivant son émission.</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.4.0')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.4.1')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.4.2')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.4.3')}</li>
         </ul>
       `,
       5: `
         <ul class="space-y-2">
-          <li>Si le freelance ne répond pas aux attentes de l'entreprise dans les 15 jours suivant le démarrage, un remplacement gratuit sera proposé.</li>
-          <li>Aucun remboursement ne sera accordé</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.5.0')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.5.1')}</li>
         </ul>
       `,
       6: `
         <ul class="space-y-2">
-          <li>L'entreprise contractualise directement avec le freelance pour un montant de 700 € par mois, conformément à l'accord établi lors de la mise en relation.</li>
-          <li>Consult Collab Recrutement n'intervient pas dans le cadre du contrat entre l'entreprise et le freelance.</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.6.0')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.6.1')}</li>
         </ul>
       `,
       7: `
         <ul class="space-y-2">
-          <li>Les informations échangées dans le cadre de la prestation sont strictement confidentielles.</li>
-          <li>Consult Collab Recrutement s'engage à protéger les données personnelles conformément au Règlement Général sur la Protection des Données (RGPD).</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.7.0')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.7.1')}</li>
         </ul>
       `,
       8: `
         <ul class="space-y-2">
-          <li>Les présentes conditions générales de vente sont régies par le droit français.</li>
-          <li>Tout litige relatif à leur interprétation ou à leur exécution relève de la compétence des tribunaux français.</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.8.0')}</li>
+          <li>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.8.1')}</li>
         </ul>
       `,
-      9: `
-        <p>L'acceptation du devis implique l'adhésion pleine et entière aux présentes conditions générales de vente</p>
-      `,
+      9: `<p>${this.translate.instant('SALE_GENERAL_CONDITION.ARTICLES.CONTENTS.9')}</p>`,
     };
     return contents[index] || '';
   }

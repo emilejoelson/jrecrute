@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { TranslateModule } from '@ngx-translate/core';
 
 interface JobProfile {
   icon: SafeHtml;
@@ -10,7 +11,7 @@ interface JobProfile {
 
 @Component({
   selector: 'app-job-offer-details',
-  imports:[CommonModule],
+  imports:[CommonModule,TranslateModule],
   templateUrl: './job-offer-details.component.html',
   styleUrls: ['./job-offer-details.component.scss']
 })
@@ -29,12 +30,12 @@ export class JobOfferDetailsComponent implements OnInit{
             <path d="M20 8v6M23 11h-6"/>
           </svg>
         `),
-        title: 'Commerciaux',
+        title: 'CLIENT.JOB_PROFILES.0.TITLE',
         description: [
-          'Experts en négociation et en gestion de portefeuilles clients',
-          'Maîtrise des techniques de prospection et de closing pour maximiser les ventes',
-          'Capacité à analyser les besoins des clients et à proposer des solutions adaptées',
-          'Expérience en gestion de relations clients à long terme pour assurer leur fidélité'
+          'CLIENT.JOB_PROFILES.0.DESCRIPTION.0',
+          'CLIENT.JOB_PROFILES.0.DESCRIPTION.1',
+          'CLIENT.JOB_PROFILES.0.DESCRIPTION.2',
+          'CLIENT.JOB_PROFILES.0.DESCRIPTION.3'
         ]
       },
       {
@@ -44,11 +45,11 @@ export class JobOfferDetailsComponent implements OnInit{
             <circle cx="12" cy="13" r="4"/>
           </svg>
         `),
-        title: 'Community Managers',
+        title: 'CLIENT.JOB_PROFILES.1.TITLE',
         description: [
-          'Compétents en gestion de communautés en ligne sur plusieurs plateformes',
-          'Création de contenu engageant et adapté aux différentes audiences',
-          'Développement de stratégies digitales pour renforcer la visibilité et la notoriété des marques'
+          'CLIENT.JOB_PROFILES.1.DESCRIPTION.0',
+          'CLIENT.JOB_PROFILES.1.DESCRIPTION.1',
+          'CLIENT.JOB_PROFILES.1.DESCRIPTION.2'
         ]
       },
       {
@@ -58,11 +59,11 @@ export class JobOfferDetailsComponent implements OnInit{
             <path d="M22 4 12 14.01l-3-3"/>
           </svg>
         `),
-        title: 'Profils Bilingues',
+        title: 'CLIENT.JOB_PROFILES.2.TITLE',
         description: [
-          'Bilingues (anglais/français ou autres langues) pour gérer des communautés internationales',
-          'Compétence en gestion de projets dans des environnements diversifiés et internationaux',
-          'Aptitude à communiquer efficacement avec des clients et des équipes internationales'
+          'CLIENT.JOB_PROFILES.2.DESCRIPTION.0',
+          'CLIENT.JOB_PROFILES.2.DESCRIPTION.1',
+          'CLIENT.JOB_PROFILES.2.DESCRIPTION.2'
         ]
       },
       {
@@ -75,12 +76,12 @@ export class JobOfferDetailsComponent implements OnInit{
             <line x1="10" y1="9" x2="8" y2="9"/>
           </svg>
         `),
-        title: 'Secrétaires',
+        title: 'CLIENT.JOB_PROFILES.3.TITLE',
         description: [
-          'Organisation et gestion administrative efficace pour alléger vos tâches quotidiennes',
-          'Maîtrise des outils bureautiques et des logiciels spécialisés',
-          'Gestion des agendas, des déplacements professionnels et des réunions',
-          'Capacité à traiter les demandes urgentes avec réactivité et professionnalisme'
+          'CLIENT.JOB_PROFILES.3.DESCRIPTION.0',
+          'CLIENT.JOB_PROFILES.3.DESCRIPTION.1',
+          'CLIENT.JOB_PROFILES.3.DESCRIPTION.2',
+          'CLIENT.JOB_PROFILES.3.DESCRIPTION.3'
         ]
       },
       {
@@ -92,12 +93,12 @@ export class JobOfferDetailsComponent implements OnInit{
             <line x1="15" y1="21" x2="15" y2="9"/>
           </svg>
         `),
-        title: 'Développeurs Web',
+        title: 'CLIENT.JOB_PROFILES.4.TITLE',
         description: [
-          'Création de sites internet performants et optimisés',
-          'Expertise en développement front-end et back-end pour des projets sur mesure',
-          'Maintenance et mise à jour régulières pour garantir la sécurité et la performance',
-          'Connaissance des dernières tendances technologiques et des normes en matière de web design et SEO'
+          'CLIENT.JOB_PROFILES.4.DESCRIPTION.0',
+          'CLIENT.JOB_PROFILES.4.DESCRIPTION.1',
+          'CLIENT.JOB_PROFILES.4.DESCRIPTION.2',
+          'CLIENT.JOB_PROFILES.4.DESCRIPTION.3'
         ]
       }
     ];
