@@ -7,8 +7,9 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { VideoContent, VideoService } from '../../core/services/video.service';
-import { Subscription } from 'rxjs';
+import { Subscription, interval } from 'rxjs';
 import { VoiceWaveformComponent } from './ui/voice-wave-form/voice-wave-form.component';
+import { TranslationService } from '../../core/services/translation.service';
 
 @Component({
   selector: 'app-video-player',
@@ -19,15 +20,18 @@ import { VoiceWaveformComponent } from './ui/voice-wave-form/voice-wave-form.com
 })
 export class VideoPlayerComponent implements OnInit, OnDestroy {
   @Output() closeModal = new EventEmitter<void>();
-  content: VideoContent;
+  content: VideoContent['EN'] | VideoContent['FR'];
   isPlaying = false;
   currentTime = 0;
   totalDuration: number;
   isModalOpen = true;
   private subscriptions: Subscription[] = [];
 
-  constructor(private videoService: VideoService) {
-    this.content = this.videoService.content;
+  constructor(
+    private videoService: VideoService,
+    private translationService: TranslationService
+  ) {
+    this.content = this.videoService.getCurrentContent();
     this.totalDuration = this.videoService.getTotalDuration();
   }
 
@@ -38,7 +42,10 @@ export class VideoPlayerComponent implements OnInit, OnDestroy {
       ),
       this.videoService.isPlaying$.subscribe(
         (playing) => (this.isPlaying = playing)
-      )
+      ),
+      interval(1000).subscribe(() => {
+        this.content = this.videoService.getCurrentContent();
+      })
     );
   }
 

@@ -1,11 +1,21 @@
 import { Injectable, PLATFORM_ID, Inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import { TranslationService } from './translation.service';
+
+type Language = 'EN' | 'FR';
 
 export interface VideoContent {
-  title: string;
-  subtitle: string;
-  audioPath: string;
+  EN: {
+    title: string;
+    subtitle: string;
+    audioPath: string;
+  };
+  FR: {
+    title: string;
+    subtitle: string;
+    audioPath: string;
+  };
 }
 
 @Injectable({
@@ -16,79 +26,109 @@ export class VideoService {
   private currentTime = new BehaviorSubject<number>(0);
   private isPlaying = new BehaviorSubject<boolean>(false);
   private isBrowser: boolean;
-  private volumeInterval: any;
+  private currentLanguage: Language;
 
   currentTime$ = this.currentTime.asObservable();
   isPlaying$ = this.isPlaying.asObservable();
 
   content: VideoContent = {
-    title: 'Consult Collab',
-    subtitle: 'Votre partenaire pour maximiser votre potentiel',
-    audioPath: 'assets/audio/cc-recrute.mp3',
+    EN: {
+      title: 'Consult Collab',
+      subtitle: 'Your partner to maximize your potential',
+      audioPath: 'assets/audio/cc-recrute-english.mp3',
+    },
+    FR: {
+      title: 'Consult Collab',
+      subtitle: 'Votre partenaire pour maximiser votre potentiel',
+      audioPath: 'assets/audio/cc-recrute-french.mp3',
+    }
   };
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private translationService: TranslationService
+  ) {
     this.isBrowser = isPlatformBrowser(this.platformId);
+    this.currentLanguage = this.translationService.getCurrentLang() as Language;
+    
     if (this.isBrowser) {
       this.initAudio();
+      
+      setInterval(() => {
+        const newLanguage = this.translationService.getCurrentLang() as Language;
+        if (newLanguage !== this.currentLanguage) {
+          this.currentLanguage = newLanguage;
+          this.handleLanguageChange();
+        }
+      }, 1000);
     }
   }
 
-  private initAudio() {
-    this.audio = new Audio(this.content.audioPath);
+  private async initAudio() {
+    this.destroyAudio();
+
+    const audioPath = this.content[this.currentLanguage].audioPath;
+    this.audio = new Audio(audioPath);
     this.audio.preload = 'auto';
-    this.audio.volume = 0;
-    this.audio.muted = true;
+    this.audio.volume = 0.6;
+
+    try {
+      await this.audio.load();
+      this.setupAudioListeners();
+    } catch (error) {
+      console.error('Error loading audio:', error);
+    }
+  }
+
+  private destroyAudio() {
+    if (this.audio) {
+      this.audio.pause();
+      this.audio.src = '';
+      this.audio.removeAttribute('src');
+      this.audio.load();
+      this.audio = null;
+    }
+  }
+
+  private async handleLanguageChange() {
+    const wasPlaying = this.isPlaying.value;
+    const currentTimeValue = this.currentTime.value;
+    
+    await this.initAudio();
+    
+    if (this.audio) {
+      this.audio.currentTime = currentTimeValue;
+      if (wasPlaying) {
+        this.play();
+      }
+    }
+  }
+
+  getCurrentContent() {
+    return this.content[this.currentLanguage];
+  }
+
+  private async play() {
+    if (!this.isBrowser || !this.audio) return;
+
+    try {
+      await this.audio.play();
+      this.isPlaying.next(true);
+    } catch (error) {
+      console.error('Playback failed:', error);
+      setTimeout(() => this.play(), 1000);
+    }
   }
 
   async autoplay() {
     if (!this.isBrowser || !this.audio) return;
 
     try {
-      this.audio.muted = true;
-      await this.audio.play();
-
-      setTimeout(() => {
-        if (this.audio) {
-          this.audio.muted = false;
-          this.startVolumeFade();
-        }
-      }, 100);
-
-      this.isPlaying.next(true);
-      this.setupAudioListeners();
+      await this.play();
     } catch (error) {
       console.error('Autoplay failed:', error);
-      this.retryAutoplay();
+      setTimeout(() => this.autoplay(), 1000);
     }
-  }
-
-  private retryAutoplay() {
-    setTimeout(() => {
-      this.autoplay();
-    }, 1000);
-  }
-
-  private startVolumeFade() {
-    if (!this.audio) return;
-
-    let volume = 0.6;
-    this.audio.volume = volume;
-
-    if (this.volumeInterval) {
-      clearInterval(this.volumeInterval);
-    }
-
-    this.volumeInterval = setInterval(() => {
-      volume = Math.min(volume + 0.1, 1);
-      if (this.audio) {
-        this.audio.volume = volume;
-      }
-
-      if (volume >= 1) {
-        clearInterval(this.volumeInterval);
-      }
-    }, 200);
   }
 
   private setupAudioListeners() {
@@ -101,25 +141,24 @@ export class VideoService {
     this.audio.onended = () => {
       this.stop();
     };
+
+    this.audio.onerror = () => {
+      console.error('Audio error:', this.audio?.error);
+      this.stop();
+      setTimeout(() => this.play(), 1000);
+    };
   }
 
   pause() {
-    if (this.volumeInterval) {
-      clearInterval(this.volumeInterval);
-    }
     this.audio?.pause();
     this.isPlaying.next(false);
   }
 
   resume() {
-    this.audio?.play();
-    this.isPlaying.next(true);
+    this.play();
   }
 
   stop() {
-    if (this.volumeInterval) {
-      clearInterval(this.volumeInterval);
-    }
     if (this.audio) {
       this.audio.pause();
       this.audio.currentTime = 0;
@@ -130,5 +169,9 @@ export class VideoService {
 
   getTotalDuration(): number {
     return this.audio?.duration || 72;
+  }
+
+  ngOnDestroy() {
+    this.destroyAudio();
   }
 }

@@ -21,7 +21,7 @@
     </div>
   </a>
 
-  <div class="relative inline-flex mx-4">
+  <div class="md:relative inline-flex mx-4">
     <div>
       <button 
         (click)="toggleDropdown()" 
@@ -36,7 +36,7 @@
   
       @if(dropdownOpen){
         <div  
-        class="absolute z-50 origin-top-right right-0 mt-2 w-56 rounded-xl shadow-2xl bg-white ring-1 ring-black ring-opacity-5 focus:outline-none animate-fade-in-down"
+        class="absolute custom-650:w-screen custom-650:h-screen z-50 origin-top-right right-0 custom-650:pt-5 mt-2 w-56 md:rounded-xl md:shadow-2xl bg-white md:ring-1 ring-black ring-opacity-5 focus:outline-none animate-fade-in-down"
         (click)="$event.stopPropagation()"
       >
         <div class="py-1">
@@ -46,11 +46,11 @@
             [ngClass]="{ 'bg-purple-100': currentLanguage === 'FR' }"
           >
             <img 
-              src="assets/flags/france.png" 
+              src="/assets/flags/france.png" 
               alt="Français" 
               class="h-[10px] mr-5 rounded-full"
             />
-            <span class="flex-grow text-left">Français</span>
+            <span class="flex-grow text-left">{{'LANGUAGE.0' | translate}}</span>
             <svg *ngIf="currentLanguage === 'FR'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
@@ -62,11 +62,11 @@
             [ngClass]="{ 'bg-purple-100': currentLanguage === 'EN' }"
           >
             <img 
-              src="assets/flags/united-kingdom.png" 
+              src="/assets/flags/united-kingdom.png" 
               alt="English" 
               class="h-[10px]  mr-5 rounded-full"
             />
-            <span class="flex-grow text-left">English</span>
+            <span class="flex-grow text-left">{{'LANGUAGE.1' | translate}}</span>
             <svg *ngIf="currentLanguage === 'EN'" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-600" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
             </svg>
