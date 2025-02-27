@@ -1,4 +1,4 @@
-const { User } = require("../models/UserModel.js");
+const { User } = require("../models/UserModel");
 const sendEmailToCompany = require("../utils/MailService.js");
 const fs = require("fs");
 const path = require("path");
@@ -45,7 +45,7 @@ const createUser = async (req, res) => {
       academicInfo,
     });
 
-    await newUser.save(); // Add this line to actually save the user
+    await newUser.save();
 
     await sendEmailToCompany({
       personalInfo,
@@ -88,16 +88,17 @@ const getUsers = async (req, res) => {
 
     // Add optional filters
     if (req.query.desiredPosition) {
-      filter.desiredPosition = new RegExp(req.query.desiredPosition, "i");
+      filter["professionalInfo.desiredPosition"] = new RegExp(req.query.desiredPosition, "i");
     }
     if (req.query.desiredRegion) {
-      filter.desiredRegion = new RegExp(req.query.desiredRegion, "i");
+      filter["professionalInfo.desiredRegion"] = new RegExp(req.query.desiredRegion, "i");
     }
 
     const users = await User.find(filter)
+      .select("-password -refreshToken") // Exclude sensitive fields
       .skip((page - 1) * limit)
       .limit(limit)
-      .lean(); // Convert to plain JavaScript objects
+      .lean();
 
     const total = await User.countDocuments(filter);
 
@@ -117,28 +118,93 @@ const getUsers = async (req, res) => {
 };
 
 // Get user by ID
-// const getUserById = async (req, res) => {
-//   try {
-//     const user = await User.findById(req.params.id).select("-password");
+const getUserById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const user = await User.findById(id)
+      .select("-password -refreshToken") // Exclude sensitive fields
+      .populate("roles")
+      .lean();
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    res.status(200).json({
+      user
+    });
+  } catch (error) {
+    console.error("Error fetching user by ID:", error);
+    res.status(500).json({
+      message: "Error fetching user",
+      error: error.message,
+    });
+  }
+};
 
-//     if (!user) {
-//       return res.status(404).json({
-//         message: "User not found",
-//       });
-//     }
+// Update user profile
+const updateUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updateData = req.body;
+    
+    // Prevent updating sensitive fields
+    delete updateData.password;
+    delete updateData.refreshToken;
+    delete updateData.roles;
+    
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $set: updateData },
+      { new: true, runValidators: true }
+    ).select("-password -refreshToken");
+    
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    res.status(200).json({
+      message: "User updated successfully",
+      user: updatedUser
+    });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).json({
+      message: "Error updating user",
+      error: error.message,
+    });
+  }
+};
 
-//     res.json(user);
-//   } catch (error) {
-//     console.error("Error fetching user:", error);
-//     res.status(500).json({
-//       message: "Error fetching user",
-//       error: error.message,
-//     });
-//   }
-// };
+// Delete user
+const deleteUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    const deletedUser = await User.findByIdAndDelete(id);
+    
+    if (!deletedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    res.status(200).json({
+      message: "User deleted successfully"
+    });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).json({
+      message: "Error deleting user",
+      error: error.message,
+    });
+  }
+};
 
 module.exports = {
   uploadFile,
-  getUsers,
   createUser,
+  getUsers,
+  getUserById,
+  updateUser,
+  deleteUser
 };

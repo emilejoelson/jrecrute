@@ -5,11 +5,15 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const cors = require("cors");
 const path = require("path");
+const mongoose = require("mongoose");
 
 // Local imports
 const db = require("./database/db.js");
-const routUser = require("./routes/UserRouter.js");
+const userRoutes = require("./routes/UserRouter");
+const authRoutes = require("./routes/authRoutes");
+const roleRoutes = require("./routes/roleRoutes");
 const routRecruitmentRequest = require("./routes/RecruitmentRequestRouter.js");
+const { initializeRoles } = require("./controllers/RoleController");
 
 const app = express();
 const server = http.createServer(app);
@@ -24,10 +28,14 @@ app.use(express.json({ limit: "10mb" }));
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: false }));
 
+// Static file serving
+app.use("/uploads", express.static("uploads"));
 app.use(
   "/uploads/images",
   express.static(path.join(__dirname, "uploads", "images"))
 );
+
+// Session configuration
 app.use(
   session({
     secret: "my secret key",
@@ -40,6 +48,7 @@ app.use(
   })
 );
 
+// Custom middleware for local message handling and socket.io access
 app.use((req, res, next) => {
   res.locals.message = req.session.message;
   delete req.session.message;
@@ -49,11 +58,17 @@ app.use((req, res, next) => {
 
 // Database connection
 db()
-  .then(() => console.log("Connected to MongoDB !!"))
+  .then(() => {
+    console.log("Connected to MongoDB !!");
+    // Initialize roles after successful database connection
+    initializeRoles();
+  })
   .catch((err) => console.error(err));
 
 // Routes
-app.use(routUser);
+app.use(userRoutes); // User management routes
+app.use(authRoutes); // Authentication routes
+app.use(roleRoutes); // Role management routes
 app.use(routRecruitmentRequest);
 
 // Socket.IO events
