@@ -5,33 +5,60 @@
       <h1
         class="text-3xl font-bold custom-650:flex custom-650:text-center text-purple-600 mb-6"
       >
-        {{'LEGAL_NOTICE.TITLE' | translate}}
+        {{ "LEGAL_NOTICE.TITLE" | translate }}
       </h1>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div class="space-y-3">
-          <p><span class="font-bold">{{'LEGAL_NOTICE.FIELDS.COMPANY_NAME' | translate}}:</span> OUBERNI LOUBNA</p>
-          <p><span class="font-bold">{{'LEGAL_NOTICE.FIELDS.SIREN_NUMBER' | translate}}:</span> 830009296</p>
-          <p><span class="font-bold">{{'LEGAL_NOTICE.FIELDS.SIRET_NUMBER' | translate}}:</span> 83000929600021</p>
           <p>
-            <span class="font-bold">{{'LEGAL_NOTICE.FIELDS.VAT_NUMBER' | translate}}:</span>
+            <span class="font-bold"
+              >{{ "LEGAL_NOTICE.FIELDS.COMPANY_NAME" | translate }}:</span
+            >
+            OUBERNI LOUBNA
+          </p>
+          <!-- <p><span class="font-bold">{{'LEGAL_NOTICE.FIELDS.SIREN_NUMBER' | translate}}:</span> 830009296</p>
+          <p><span class="font-bold">{{'LEGAL_NOTICE.FIELDS.SIRET_NUMBER' | translate}}:</span> 83000929600021</p> -->
+          <p>
+            <span class="font-bold"
+              >{{ "LEGAL_NOTICE.FIELDS.VAT_NUMBER" | translate }}:</span
+            >
             FR70830009296
           </p>
-          <p><span class="font-bold">{{'LEGAL_NOTICE.FIELDS.REGISTRY' | translate}}:</span> RCS Nanterre</p>
+          <p>
+            <span class="font-bold"
+              >{{ "LEGAL_NOTICE.FIELDS.REGISTRY" | translate }}:</span
+            >
+            RCS Nanterre
+          </p>
         </div>
         <div class="space-y-3">
-          <p><span class="font-bold">{{'LEGAL_NOTICE.FIELDS.NAF_CODE' | translate}}:</span> 8220Z</p>
           <p>
-            <span class="font-bold">{{'LEGAL_NOTICE.FIELDS.LEGAL_FORM' | translate}}:</span> {{'LEGAL_NOTICE.FIELDS.ENTREPRENEUR' | translate}}
-          <p>
-            <span class="font-bold">{{'LEGAL_NOTICE.FIELDS.REGISTRATION_DATE' | translate}}:</span> 31/05/2017
+            <span class="font-bold"
+              >{{ "LEGAL_NOTICE.FIELDS.NAF_CODE" | translate }}:</span
+            >
+            8220Z
           </p>
           <p>
-            <span class="font-bold">{{'LEGAL_NOTICE.FIELDS.CITY' | translate}}:</span> Clichy
-            (Hauts-de-Seine)
+            <span class="font-bold"
+              >{{ "LEGAL_NOTICE.FIELDS.LEGAL_FORM" | translate }}:</span
+            >
+            {{ "LEGAL_NOTICE.FIELDS.ENTREPRENEUR" | translate }}
+          </p>
+
+          <p>
+            <span class="font-bold"
+              >{{ "LEGAL_NOTICE.FIELDS.REGISTRATION_DATE" | translate }}:</span
+            >
+            31/05/2017
+          </p>
+          <p>
+            <span class="font-bold"
+              >{{ "LEGAL_NOTICE.FIELDS.CITY" | translate }}:</span
+            >
+            <!-- Clichy (Hauts-de-Seine) -->
+            Boulevard Ben mahfoud Al Yaacoubi
           </p>
         </div>
       </div>
     </div>
-
   </div>
 </div>
