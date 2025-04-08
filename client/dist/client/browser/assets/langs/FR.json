@@ -1,9 +1,6 @@
 {
   "APP_NAME": "Recrutement",
-  "LANGUAGE":[
-    "Français",
-    "Anglais"
-  ],
+  "LANGUAGE": ["Français", "Anglais"],
   "HEADER": {
     "OFFRES": "Offres",
     "ETAPES": "Etapes",
@@ -37,8 +34,8 @@
     "DEVELOPPEUR_WEB": "Développeur Web",
     "SECRETAIRE": "Sécretaire",
     "PROFIL_BILINGUE": "Profil bilingue",
-    "OTHER":"Autre",
-    "TYPE": "Télétravail en temps plein",
+    "OTHER": "Autre",
+    "TYPE": "Télétravail à temps plein",
     "TIME": "Publiée il y a moins de 24h"
   },
   "STEPS": {
@@ -401,7 +398,7 @@
         "CONTACT_EMAIL": "Email de contact",
         "PHONE_NUMBER": "Numéro de téléphone",
         "POSITION": "Poste recherché",
-        "SPECIFY_POSITION":"Précisez le poste",
+        "SPECIFY_POSITION": "Précisez le poste",
         "DESCRIPTION": "Description des besoins",
         "BUDGET_MIN": "Budget mensuel",
         "URGENCY": "Urgence"
@@ -422,13 +419,16 @@
       "COMPANY_NAME": "Raison sociale",
       "SIREN_NUMBER": "Numéro Siren",
       "SIRET_NUMBER": "Numéro Siret",
+      "TAX_IDENT_NUMBER":"Identifiant fiscal",
+      "PROF_TAX_NUMBER":"Numéro de la taxe professionnelle",
+      "BUSINESS_ACTIVITY":"Activité exercée",
       "VAT_NUMBER": "TVA intracommunautaire",
       "REGISTRY": "Greffe",
       "NAF_CODE": "Code NAF / APE",
       "LEGAL_FORM": "Forme juridique",
       "REGISTRATION_DATE": "Date d'immatriculation",
       "CITY": "Commune d'implantation",
-      "ENTREPRENEUR":"Individual entrepreneur"
+      "ENTREPRENEUR": "Individual entrepreneur"
     }
   },
   "SALE_GENERAL_CONDITION": {
@@ -517,7 +517,7 @@
     "TITLE_SUFFIX": "qui Façonne l'Avenir",
     "TAGS": {
       "EXCEPTIONAL_OPPORTUNITY": "Opportunité Exceptionnelle",
-      "REMOTE_FULL_TIME": "Télétravail en temps plein"
+      "REMOTE_FULL_TIME": "Télétravail à temps plein"
     },
     "DESCRIPTION_INTRO": "Découvrez ci-dessous les informations générales concernant l'offre",
     "DESCRIPTION_DETAILS": "incluant une description du poste, les principales responsabilités à assumer, ainsi que les compétences nécessaires pour exceller dans ce rôle",
@@ -553,7 +553,7 @@
       "COMMERCIAL": {
         "TITLE": "Commercial",
         "COMPANY_DOMAIN": "Services Commerciaux",
-        "WORK_TYPE": "Télétravail en temps plein",
+        "WORK_TYPE": "Télétravail à temps plein",
         "DESCRIPTION": "Le Commercial est chargé de développer le portefeuille clients de l'entreprise, d'augmenter les ventes et de fidéliser les clients existants. Il est responsable de la gestion des relations commerciales de bout en bout, de la prospection à la conclusion des contrats.",
         "MAIN_MISSIONS": [
           "Identifier de nouveaux prospects et opportunités commerciales",
@@ -571,7 +571,7 @@
       "SECRETAIRE": {
         "TITLE": "Secrétaire",
         "COMPANY_DOMAIN": "Support Administratif",
-        "WORK_TYPE": "Télétravail en temps plein",
+        "WORK_TYPE": "Télétravail à temps plein",
         "DESCRIPTION": "Le Secrétaire est chargé de la gestion administrative quotidienne de l'entreprise, incluant l'organisation des rendez-vous, la gestion des documents et la coordination des communications internes et externes.",
         "MAIN_MISSIONS": [
           "Gérer les appels téléphoniques, les courriels et le courrier",
@@ -589,7 +589,7 @@
       "DEVELOPPEUR_WEB": {
         "TITLE": "Développeur Web",
         "COMPANY_DOMAIN": "Technologies",
-        "WORK_TYPE": "Télétravail en temps plein",
+        "WORK_TYPE": "Télétravail à temps plein",
         "DESCRIPTION": "Le Développeur Web est responsable de la conception, du développement et de la maintenance des sites web de l'entreprise ou de ses clients. Il travaille en collaboration avec d'autres équipes pour créer des expériences utilisateur optimales.",
         "MAIN_MISSIONS": [
           "Concevoir et développer des applications web responsives et performantes",
@@ -612,7 +612,7 @@
       "COMMUNITY_MANAGER": {
         "TITLE": "Community Manager",
         "COMPANY_DOMAIN": "Marketing Digital",
-        "WORK_TYPE": "Télétravail en temps plein",
+        "WORK_TYPE": "Télétravail à temps plein",
         "DESCRIPTION": "Le Community Manager est chargé de gérer l'image de l'entreprise sur les réseaux sociaux. Il crée du contenu engageant, développe des communautés en ligne et assure une veille constante pour renforcer la notoriété et l'engagement.",
         "MAIN_MISSIONS": [
           "Développer et mettre en oeuvre une stratégie de contenu",
@@ -629,7 +629,7 @@
       "PROFIL_BILINGUE": {
         "TITLE": "Profil Bilingue",
         "COMPANY_DOMAIN": "Communication Internationale",
-        "WORK_TYPE": "Télétravail en temps plein",
+        "WORK_TYPE": "Télétravail à temps plein",
         "DESCRIPTION": "Les profils bilingues sont recherchés pour divers rôles nécessitant des compétences en communication dans plusieurs langues afin d'assurer des échanges fluides avec des clients ou des partenaires internationaux.",
         "MAIN_MISSIONS": [
           "Communiquer efficacement en plusieurs langues",
@@ -643,9 +643,9 @@
           "Capacité à travailler dans des environnements multiculturels"
         ]
       },
-      "BUTTONS":{
-        "SHOW_LESS":"Voir moins",
-        "SHOW_MORE":"Voir plus"
+      "BUTTONS": {
+        "SHOW_LESS": "Voir moins",
+        "SHOW_MORE": "Voir plus"
       }
     }
   }
