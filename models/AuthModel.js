@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 
-// Schema for refresh tokens
 const refreshTokenSchema = new mongoose.Schema({
   token: {
     type: String,
@@ -40,6 +39,12 @@ const authSchema = new mongoose.Schema(
       ref: "users",
       required: true,
     },
+    // Instead of a single role, we'll have a roles array referencing the Role model
+    roles: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "role"
+    }],
+    // Keep the default role field for backward compatibility
     role: {
       type: String,
       enum: ["user", "admin"],

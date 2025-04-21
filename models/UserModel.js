@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const languageSchema = new mongoose.Schema({
   language: { type: String, required: true },
-  level: { type: String, required: true }
+  level: { type: String }
 });
 
 const experienceSchema = new mongoose.Schema({
@@ -15,7 +15,7 @@ const experienceSchema = new mongoose.Schema({
 });
 
 const formationSchema = new mongoose.Schema({
-  level: { type: String, required: true },
+  level: { type: String },
   languages: [languageSchema],
 });
 
@@ -34,8 +34,8 @@ const personalInfoSchema = new mongoose.Schema({
 
 // yearsOfExperience: { type: String, required: true },
 const professionalInfoSchema = new mongoose.Schema({
-  currentPosition: { type: String, required: true },
-  desiredPosition: { type: String, required: true },
+  currentPosition: { type: String },
+  desiredPosition: { type: String },
   enterprise: { type: String },
   hasRemoteExperience: { type: Boolean, default: false },
   experiences: [experienceSchema],
@@ -43,12 +43,12 @@ const professionalInfoSchema = new mongoose.Schema({
 
 const academicInfoSchema = new mongoose.Schema({
   formation: formationSchema,
-  motivation: { type: String, required: true },
+  motivation: { type: String },
 });
 
 const userSchema = new mongoose.Schema(
   {
-    cvFile: { type: String, required: true },
+    cvFile: { type: String },
     personalInfo: personalInfoSchema,
     professionalInfo: professionalInfoSchema,
     academicInfo: academicInfoSchema,

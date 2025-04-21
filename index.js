@@ -5,25 +5,23 @@ const bodyParser = require("body-parser");
 const session = require("express-session");
 const cors = require("cors");
 const path = require("path");
-
-// Local imports
+const cookieParser = require("cookie-parser");
 const db = require("./database/db.js");
 const routUser = require("./routes/UserRouter.js");
 const routRecruitmentRequest = require("./routes/RecruitmentRequestRouter.js");
+const routAuth = require("./routes/AuthRouter.js");
+const routRole = require("./routes/RoleRouter.js");
 
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Attach io to the app
 app.io = io;
-
-// Middleware
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(bodyParser.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: false }));
-
+app.use(cookieParser());
 app.use(
   "/uploads/images",
   express.static(path.join(__dirname, "uploads", "images"))
@@ -33,13 +31,9 @@ app.use(
     secret: "my secret key",
     saveUninitialized: true,
     resave: true,
-    cookie: {
-      sameSite: "None",
-      secure: false,
-    },
+    cookie: { sameSite: "None", secure: false },
   })
 );
-
 app.use((req, res, next) => {
   res.locals.message = req.session.message;
   delete req.session.message;
@@ -47,30 +41,25 @@ app.use((req, res, next) => {
   next();
 });
 
-// Database connection
 db()
   .then(() => console.log("Connected to MongoDB !!"))
   .catch((err) => console.error(err));
 
-// Routes
 app.use(routUser);
 app.use(routRecruitmentRequest);
+app.use(routAuth);
+app.use(routRole);
 
-// Socket.IO events
 io.on("connection", (socket) => {
   console.log("A client connected");
-
   socket.on("disconnect", () => {
     console.log("A client disconnected");
   });
-
   socket.on("notification", (data) => {
     console.log("Received notification:", data);
     io.emit("notification", data);
   });
 });
-
-// Handle production setup
 if (process.env.NODE_ENV === "production") {
   const staticPath = path.join(
     __dirname,
@@ -89,7 +78,7 @@ if (process.env.NODE_ENV === "production") {
       },
     })
   );
-
+  
   app.get("*", (req, res) => {
     res.sendFile(path.join(staticPath, "index.html"));
   });
@@ -98,11 +87,8 @@ if (process.env.NODE_ENV === "production") {
     res.send("API running");
   });
 }
-
-// Server setup
 const port = process.env.PORT || 4000;
 server.listen(port, () => {
   console.log(`Server running on port ${port}.`);
 });
-
 module.exports = app;

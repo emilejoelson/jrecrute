@@ -1,9 +1,17 @@
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const { Auth } = require("../models/AuthModel.js");
 const { User } = require("../models/UserModel.js");
+const {
+  generateTokens,
+  saveRefreshToken,
+  verifyRefreshToken,
+  revokeRefreshToken
+} = require('../services/TokenService');
+const {
+  setRefreshTokenCookie,
+  clearRefreshTokenCookie
+} = require('../services/CookieService');
 
-// Signup function
 const signup = async (req, res) => {
   try {
     const {
@@ -13,17 +21,15 @@ const signup = async (req, res) => {
       cvFile,
       personalInfo,
       professionalInfo,
-      academicInfo,
+      academicInfo
     } = req.body;
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       return res
         .status(400)
         .json({ message: "Passwords do not match", field: "confirmPassword" });
     }
 
-    // Check if user with this email already exists in Auth collection
     const existingAuth = await Auth.findOne({ email });
     if (existingAuth) {
       return res
@@ -31,50 +37,65 @@ const signup = async (req, res) => {
         .json({ message: "Email already registered", field: "email" });
     }
 
-    // Create new user record first
     const newUser = new User({
-      cvFile,
+      cvFile: cvFile || null, // Make cvFile optional and default to null
       personalInfo: {
-        ...personalInfo,
-        email, // Make sure email is consistent
+        civility: personalInfo.civility,
+        firstName: personalInfo.firstName,
+        lastName: personalInfo.lastName,
+        email: email,
+        telephone: personalInfo.telephone
       },
-      professionalInfo,
-      academicInfo,
+      // Only include minimal required fields for professional and academic info
+      professionalInfo: professionalInfo || {
+        currentPosition: "",
+        desiredPosition: "",
+        experiences: []
+      },
+      academicInfo: academicInfo || {
+        formation: {
+          level: "",
+          languages: []
+        },
+        motivation: ""
+      }
     });
 
-    // Save the user to get the user ID
     const savedUser = await newUser.save();
 
-    // Hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Create auth record
     const newAuth = new Auth({
       email,
       password: hashedPassword,
       userId: savedUser._id,
+      role: "user",
+      refreshTokens: []
     });
 
-    // Save auth record
     await newAuth.save();
 
-    // Generate JWT token
-    const token = jwt.sign(
-      { userId: savedUser._id, email, role: "user" },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    const { accessToken, refreshToken } = await generateTokens({
+      userId: savedUser._id,
+      email,
+      role: "user",
+      roles: [],
+    });
+
+    await saveRefreshToken(savedUser._id, refreshToken);
+
+    setRefreshTokenCookie(res, refreshToken);
 
     res.status(201).json({
       message: "User registered successfully",
-      token,
       userId: savedUser._id,
+      accessToken,
+      refreshToken
     });
   } catch (error) {
     console.error("Error during signup:", error);
 
-    // Handle MongoDB duplicate key error
     if (error.code === 11000) {
       return res.status(400).json({
         message: "Email already registered",
@@ -82,7 +103,6 @@ const signup = async (req, res) => {
       });
     }
 
-    // Handle validation errors
     if (error.name === "ValidationError") {
       return res.status(400).json({
         message: "Validation error",
@@ -97,41 +117,38 @@ const signup = async (req, res) => {
   }
 };
 
-// Login function
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-
-    // Find the auth record
-    const auth = await Auth.findOne({ email });
+    const auth = await Auth.findOne({ email }).populate('roles');
+    
     if (!auth) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-
-    // Check if password is correct
+    
     const isPasswordValid = await bcrypt.compare(password, auth.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    // Find the user record
-    const user = await User.findById(auth.userId);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
+    const { accessToken, refreshToken } = await generateTokens({
+      userId: auth.userId,
+      email: auth.email,
+      role: auth.role,
+      roles: auth.roles
+    });
 
-    // Generate JWT token
-    const token = jwt.sign(
-      { userId: user._id, email: auth.email, role: auth.role },
-      process.env.JWT_SECRET,
-      { expiresIn: "7d" }
-    );
+    await saveRefreshToken(auth.userId, refreshToken);
+
+    setRefreshTokenCookie(res, refreshToken);
 
     res.status(200).json({
       message: "Login successful",
-      token,
-      userId: user._id,
+      userId: auth.userId,
       role: auth.role,
+      roles: auth.roles.map(role => ({ id: role._id, name: role.name })),
+      accessToken,
+      refreshToken
     });
   } catch (error) {
     console.error("Error during login:", error);
@@ -142,68 +159,82 @@ const login = async (req, res) => {
   }
 };
 
-// Request password reset
-const requestPasswordReset = async (req, res) => {
+const refreshTokens = async (req, res) => {
   try {
-    const { email } = req.body;
-    
-    const auth = await Auth.findOne({ email });
-    if (!auth) {
-      // For security reasons, don't tell if email exists or not
-      return res.status(200).json({ 
-        message: "If your email is registered, you will receive a password reset link" 
-      });
+    const refreshToken = req.cookies.refreshToken;
+
+    if (!refreshToken) {
+      return res.status(401).json({ message: "Refresh token not found" });
     }
-    
-    // Generate a random token
-    const resetToken = crypto.randomBytes(32).toString('hex');
-    
-    // Set expiration (1 hour from now)
-    auth.resetPasswordToken = resetToken;
-    auth.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-    
-    await auth.save();
-    
-    // TODO: Send email with reset link
-    // You would need to implement an email service here
-    
-    res.status(200).json({ 
-      message: "If your email is registered, you will receive a password reset link" 
+
+    let decoded;
+    try {
+      decoded = verifyRefreshToken(refreshToken);
+    } catch (err) {
+      return res.status(401).json({ message: "Invalid or expired refresh token" });
+    }
+
+    const auth = await Auth.findOne({
+      userId: decoded.userId,
+      "refreshTokens.token": refreshToken,
+      "refreshTokens.isRevoked": false,
+      "refreshTokens.expires": { $gt: new Date() }
+    }).populate('roles');
+
+    if (!auth) {
+      return res.status(401).json({ message: "Refresh token invalid or revoked" });
+    }
+
+    await revokeRefreshToken(refreshToken);
+
+    const { accessToken, refreshToken: newRefreshToken } = await generateTokens({
+      userId: auth.userId,
+      email: auth.email,
+      role: auth.role,
+      roles: auth.roles
+    });
+
+    await saveRefreshToken(auth.userId, newRefreshToken);
+
+    setRefreshTokenCookie(res, newRefreshToken);
+
+    res.status(200).json({
+      accessToken,
+      refreshToken: newRefreshToken,
+      message: "Tokens refreshed successfully"
     });
   } catch (error) {
-    console.error("Error requesting password reset:", error);
+    console.error("Error refreshing tokens:", error);
     res.status(500).json({
-      message: "Error requesting password reset",
+      message: "Error refreshing tokens",
       error: error.message,
     });
   }
 };
 
-// Middleware to verify token (for protected routes)
-const verifyToken = (req, res, next) => {
+const logout = async (req, res) => {
   try {
-    // Get token from Authorization header
-    const token = req.headers.authorization?.split(' ')[1];
-    
-    if (!token) {
-      return res.status(401).json({ message: "No token provided" });
+    const refreshToken = req.cookies.refreshToken;
+
+    if (refreshToken) {
+      await revokeRefreshToken(refreshToken);
     }
-    
-    // Verify token
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    
-    // Add user data to request
-    req.user = decoded;
-    
-    next();
+
+    clearRefreshTokenCookie(res);
+
+    res.status(200).json({ message: "Logged out successfully" });
   } catch (error) {
-    return res.status(401).json({ message: "Invalid or expired token" });
+    console.error("Error during logout:", error);
+    res.status(500).json({
+      message: "Error during logout",
+      error: error.message,
+    });
   }
 };
 
 module.exports = {
   signup,
   login,
-  requestPasswordReset,
-  verifyToken
+  refreshTokens,
+  logout
 };
