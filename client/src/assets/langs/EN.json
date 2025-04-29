@@ -13,6 +13,16 @@
     "CLIENT": "Client",
     "POSTULER_MAINTENANT": "Apply now"
   },
+  "PROFILE": {
+    "SIGNUP": "Sign up",
+    "LOGIN": "Login",
+    "ACCOUNT": "Your Account",
+    "MY_PROFILE": "My Profile",
+    "SETTINGS": "Settings",
+    "LOGOUT": "Log Out",
+    "SECTION_PROFILE": "Profile",
+    "SECTION_AUTH": "Authentication"
+  },
   "HERO": {
     "TITLE": {
       "PART1": "Build",

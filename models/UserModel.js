@@ -49,6 +49,7 @@ const academicInfoSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema(
   {
     cvFile: { type: String },
+    profileImage: { type: String },
     personalInfo: personalInfoSchema,
     professionalInfo: professionalInfoSchema,
     academicInfo: academicInfoSchema,

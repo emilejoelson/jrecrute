@@ -22,13 +22,59 @@ const uploadFile = async (req, res) => {
   }
 };
 
+const uploadProfileImage = async (req, res) => {
+  try {
+    const file = req.file;
+    if (!file) {
+      return res.status(400).json({ message: "No image uploaded" });
+    }
+
+    const filePath = req.file.path;
+
+    // If a user ID is provided, update their profile image
+    if (req.body.userId) {
+      const user = await User.findById(req.body.userId);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      
+      // Delete the old profile image if it exists
+      if (user.profileImage) {
+        const oldImagePath = path.resolve(__dirname, "../", user.profileImage);
+        if (fs.existsSync(oldImagePath)) {
+          try {
+            fs.unlinkSync(oldImagePath);
+          } catch (err) {
+            console.error("Error deleting old profile image:", err);
+          }
+        }
+      }
+      
+      // Update the user's profile image
+      user.profileImage = filePath;
+      await user.save();
+    }
+
+    return res.status(200).json({
+      message: "Profile image uploaded successfully",
+      filePath: filePath,
+    });
+  } catch (error) {
+    console.error("Error uploading profile image:", error);
+    res.status(500).json({ message: "Error uploading profile image", error: error.message });
+  }
+};
+
 const createUser = async (req, res) => {
   try {
-    const { cvFile, personalInfo, professionalInfo, academicInfo } = req.body;
+    const { cvFile, profileImage, personalInfo, professionalInfo, academicInfo } = req.body;
 
-    const filePath = path.resolve(__dirname, "../", cvFile);
-    if (!fs.existsSync(filePath)) {
-      return res.status(400).json({ message: "CV file does not exist" });
+    // Check CV file existence
+    if (cvFile) {
+      const filePath = path.resolve(__dirname, "../", cvFile);
+      if (!fs.existsSync(filePath)) {
+        return res.status(400).json({ message: "CV file does not exist" });
+      }
     }
 
     const existingUser = await User.findOne({
@@ -40,21 +86,28 @@ const createUser = async (req, res) => {
 
     const newUser = new User({
       cvFile,
+      profileImage, // Add profileImage field
       personalInfo,
       professionalInfo,
       academicInfo,
     });
 
-    await newUser.save(); // Add this line to actually save the user
+    await newUser.save();
 
-    await sendEmailToCompany({
-      personalInfo,
-      professionalInfo,
-      academicInfo,
-      cvFile: filePath,
+    // Send email if CV file exists
+    if (cvFile) {
+      await sendEmailToCompany({
+        personalInfo,
+        professionalInfo,
+        academicInfo,
+        cvFile: path.resolve(__dirname, "../", cvFile),
+      });
+    }
+
+    res.status(201).json({ 
+      message: "User created successfully",
+      userId: newUser._id 
     });
-
-    res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error creating user:", error);
     
@@ -77,6 +130,44 @@ const createUser = async (req, res) => {
     res
       .status(500)
       .json({ message: "Error creating user", error: error.message });
+  }
+};
+
+const updateProfileImage = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const file = req.file;
+    
+    if (!file) {
+      return res.status(400).json({ message: "No image uploaded" });
+    }
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    // Delete the old profile image if it exists
+    if (user.profileImage) {
+      const oldImagePath = path.resolve(__dirname, "../", user.profileImage);
+      try {
+        await fs.promises.access(oldImagePath);
+        await fs.promises.unlink(oldImagePath);
+      } catch (err) {
+        console.error("Error deleting old profile image:", err);
+      }
+    }
+    
+    user.profileImage = file.path;
+    await user.save();
+
+    return res.status(200).json({
+      message: "Profile image updated successfully",
+      profileImage: user.profileImage
+    });
+  } catch (error) {
+    console.error("Error updating profile image:", error);
+    res.status(500).json({ message: "Error updating profile image", error: error.message });
   }
 };
 
@@ -120,4 +211,6 @@ module.exports = {
   uploadFile,
   getUsers,
   createUser,
+  uploadProfileImage,
+  updateProfileImage
 };

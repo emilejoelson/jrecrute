@@ -7,6 +7,7 @@ import { RecruitmentFormActions } from '../../features/recruitment/store/actions
 import { ErrorAction } from '../../core/models/error.action';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorTranslationService } from '../../core/services/error-translation.service';
+import { AuthActions } from '../../authentication/data-access/store/actions/auth.actions';
 
 @Injectable()
 export class ErrorEffects {
@@ -19,7 +20,7 @@ export class ErrorEffects {
       this.actions$.pipe(
         ofType(
           UserFormActions.submitUserFormFailure,
-          RecruitmentFormActions.submitRecruitmentFormFailure
+          RecruitmentFormActions.submitRecruitmentFormFailure,
         ),
         tap((action: ErrorAction) => {
           const error = action.error?.error;

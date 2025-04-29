@@ -23,6 +23,21 @@ export type TIconName =
   | 'ccIcon'
   | 'secretaireIcon'
   | 'developperWebIcon'
+  | 'navOpenIcon'
+  | 'navCloseIcon'
+  | 'chooseLangueIcon'
+  | 'closeLangueIcon'
+  | 'preferenceIcon'
+  | 'closeIcon'
+  | 'refreshSyncIcon'
+  | 'closeProfileIcon'
+  | 'myprofileIcon'
+  | 'profileAccountIcon'
+  | 'settingIcon'
+  | 'loginIcon'
+  | 'signupIcon'
+  | 'logoutIcon'
+  ;
 
 @Component({
   selector: 'app-icon',
@@ -2489,7 +2504,7 @@ export class IconComponent implements OnInit {
           </circle>
         </g>
       </svg>`,
-      secretaireIcon:`
+      secretaireIcon: `
 <svg  viewBox="0 0 276 157" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="276" height="157" fill="transparent"/>
 <g filter="url(#filter0_i_1_2)">
@@ -2509,7 +2524,7 @@ export class IconComponent implements OnInit {
 </defs>
 </svg>
 `,
-developperWebIcon:`
+      developperWebIcon: `
 <svg width="468"  viewBox="0 0 468 156" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect width="468"  fill="transparent"/>
 <g filter="url(#filter0_i_1_2)">
@@ -2528,7 +2543,207 @@ developperWebIcon:`
 </filter>
 </defs>
 </svg>
-`
+`,
+      navOpenIcon: `<svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18 18 6M6 6l12 12"
+        />
+      </svg>`,
+      navCloseIcon: `      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+        />
+      </svg>`,
+      chooseLangueIcon: `  <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5 text-purple-500 mr-2"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 5h12M9 3v4m1.048 7.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+              />
+            </svg>`,
+      closeLangueIcon: ` <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"
+              />
+            </svg>`,
+      preferenceIcon: `          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 text-yellow-400 mr-2 flex-shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>`,
+      closeIcon: `            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-3 w-3 mr-1"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>`,
+      refreshSyncIcon: `                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M17 10h3l-3-3-3 3h3"></path>
+                  <path d="M4 10h10"></path>
+                  <path d="M7 14H4l3 3 3-3H7"></path>
+                  <path d="M20 14H10"></path>
+                </svg>`,
+      closeProfileIcon: `                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>`,
+      myprofileIcon: `            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-[16px] w-[16px] mr-3 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>`,
+            profileAccountIcon:`            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-[16px] w-[16px] mr-3 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>`,
+            settingIcon:`            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-3 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>`,
+            loginIcon:`            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-3 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
+              />
+            </svg>`,
+            signupIcon:`            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-3 text-gray-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
+              />
+            </svg>`,
+            logoutIcon:`            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4 mr-3 text-red-400"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
+              />
+            </svg>`
     };
 
     return svgMap[iconName];

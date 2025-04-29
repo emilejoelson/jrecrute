@@ -1,3 +1,4 @@
+// TypeScript (header.component.ts)
 import {
   AfterViewInit,
   Component,
@@ -17,21 +18,21 @@ import { TranslateModule } from '@ngx-translate/core';
 type TNavLinks = {
   links: {
     name: string;
-    translationKey: string; // Add this
+    translationKey: string;
     sectionId: string;
     href?: string;
     behaviour: string;
   }[];
   buttons: { 
     name: string;
-    translationKey: string; // Add this
+    translationKey: string;
   }[];
 };
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule,TranslateModule],
+  imports: [CommonModule, TranslateModule, IconComponent],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
@@ -46,9 +47,44 @@ export class HeaderComponent implements AfterViewInit {
   isNavOpen = false;
   currentRoute: string = '';
   dropdownOpen: boolean = false;
+  dropdonwOpenSetting : boolean = false;
+  profileImageUrl: string = 'assets/profile/user-avatar.jpg';
+  userName: string = 'emilejoelson';
+  fullName: string = 'Joelson Emile ANDRIAMIHAJA'
+  isProfileMenuOpen: boolean = false;
+
+  // Add this method to your component class
+getInitials(fullName: string): string {
+  if (!fullName) return '';
+  
+  // Split the name by spaces
+  const nameParts = fullName.split(' ');
+  
+  // Map through each part and take the first character, then join them
+  return nameParts
+    .map(part => part.charAt(0).toUpperCase())
+    .join('');
+}
+
+toggleDropdownOpen() {
+  this.dropdonwOpenSetting = !this.dropdonwOpenSetting;
+  if(this.dropdonwOpenSetting){
+    this.isProfileMenuOpen = false;
+  }
+}
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
+    if (this.dropdownOpen) {
+      this.isProfileMenuOpen = false;
+    }
+  }
+
+  toggleProfileMenu() {
+    this.isProfileMenuOpen = !this.isProfileMenuOpen;
+    if (this.isProfileMenuOpen) {
+      this.dropdownOpen = false;
+    }
   }
 
   currentLanguage: 'FR' | 'EN' = 'EN';
@@ -60,7 +96,6 @@ export class HeaderComponent implements AfterViewInit {
       }
     });
     this.currentLanguage = this.translationService.getCurrentLang() as 'FR' | 'EN';
-
   }
 
   switchLanguage(lang: 'FR' | 'EN') {
@@ -114,12 +149,29 @@ export class HeaderComponent implements AfterViewInit {
     ],
   };
 
+  logout() {
+    console.log('Logging out...');
+    this.isProfileMenuOpen = false;
+  }
+
   onDeposit() {
     this.isNavOpen = false;
     this.router.navigate(['/deposer-un-cv']);
     window.scrollTo(0, 0);
   }
 
+  onSignup(){
+    this.isNavOpen = false;
+    this.router.navigate(['/inscription']);
+    window.scrollTo(0, 0);
+    this.toggleProfileMenu();
+  }
+  onLogin(){
+    this.isNavOpen = false;
+    this.router.navigate(['/connexion']);
+    window.scrollTo(0, 0);
+    this.toggleProfileMenu();
+  }
   onClient() {
     this.isNavOpen = false;
     this.router.navigate(['/client']);
@@ -132,21 +184,15 @@ export class HeaderComponent implements AfterViewInit {
   }
 
   scrollToSection(sectionId: string) {
-    // First check if we're on the home page
     if (this.router.url !== '/') {
-      // If not, navigate to home and then scroll
       this.router.navigate(['/']).then(() => {
-        // Wait for navigation and DOM update
         setTimeout(() => {
           this.performScroll(sectionId);
         }, 100);
       });
     } else {
-      // If already on home page, scroll directly
       this.performScroll(sectionId);
     }
-
-    // Close mobile nav if open
     this.isNavOpen = false;
   }
 
@@ -163,68 +209,48 @@ export class HeaderComponent implements AfterViewInit {
       });
     }
   }
-  //onScroll evenet to the window
+
   @HostListener('window:scroll')
   scrollHandler() {
     this.toggleHeaderBackground();
     this.updateProgressBar();
   }
 
-  //methods
+  @HostListener('document:click', ['$event'])
+  documentClick(event: MouseEvent): void {
+    if (this.isProfileMenuOpen && !event.target) {
+      this.isProfileMenuOpen = false;
+    }
+    
+    if (this.dropdownOpen && !event.target) {
+      this.dropdownOpen = false;
+    }
+  }
+
   toggleHeaderBackground() {
     if (typeof window === 'undefined') {
       return;
     }
     const top = window.scrollY;
     if (top > 0) {
-      // Header background changes
       this.headerElement.nativeElement.style.background = 'white';
       this.headerElement.nativeElement.style.boxShadow =
         'rgba(17, 17, 26, 0.1) 0px 1px 0px';
 
-      // Reduce header height
       this.headerElement.nativeElement.classList.remove('min-h-[100px]');
       this.headerElement.nativeElement.classList.add('min-h-[70px]');
 
-      // Reduce logo size
-      // this.logoImage.nativeElement.classList.remove('w-9', 'h-9');
-      // this.logoImage.nativeElement.classList.add('w-8', 'h-8');
-
-      // Reduce logo text size
-      // this.logoContainer.nativeElement
-      //   .querySelector('span')
-      //   ?.classList.remove('text-2xl');
-      // this.logoContainer.nativeElement
-      //   .querySelector('span')
-      //   ?.classList.add('text-xl');
-
-      // Update all nav items to blue
       this.navElements.forEach((navElement) => {
         navElement.nativeElement.classList.remove('text-gray-100');
         navElement.nativeElement.classList.add('text-gray-600');
       });
     } else {
-      // Reset header background
       this.headerElement.nativeElement.style.background = 'transparent';
       this.headerElement.nativeElement.style.boxShadow = 'none';
 
-      // Reset header height
       this.headerElement.nativeElement.classList.add('min-h-[100px]');
       this.headerElement.nativeElement.classList.remove('min-h-[70px]');
 
-      // Reset logo size
-      // this.logoImage.nativeElement.classList.add('w-9', 'h-9');
-      // this.logoImage.nativeElement.classList.remove('w-8', 'h-8');
-
-      // Reset logo text size
-      // this.logoContainer.nativeElement
-      //   .querySelector('span')
-      //   ?.classList.add('text-2xl');
-      // this.logoContainer.nativeElement
-      //   .querySelector('span')
-      //   ?.classList.remove('text-xl');
-
-      // Reset nav items to gray
       this.navElements.forEach((navElement) => {
         navElement.nativeElement.classList.remove('text-gray-600');
         navElement.nativeElement.classList.add('text-gray-100');
@@ -252,6 +278,4 @@ export class HeaderComponent implements AfterViewInit {
   toggleNav() {
     this.isNavOpen = !this.isNavOpen;
   }
-
-  
 }

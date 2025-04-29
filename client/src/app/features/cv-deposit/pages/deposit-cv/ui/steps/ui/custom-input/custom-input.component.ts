@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit, Optional } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Optional, Output } from '@angular/core';
 import { AbstractControl, ControlContainer, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -17,9 +17,15 @@ export class CustomInputComponent implements OnInit {
   @Input({ required: true }) title: string = '';
   @Input() type :string = '';
   @Input() control?: AbstractControl | null;
+  @Input() placeholder: string = '';
+  @Input() hasTogglePassword: boolean = false;
 
   constructor(@Optional() private controlContainer: ControlContainer) {}
-
+  @Output() togglePassword = new EventEmitter<void>();
+  
+  onTogglePassword(): void {
+    this.togglePassword.emit();
+  }
   ngOnInit() {
     if (this.controlContainer) {
       this.control = this.controlContainer.control?.get(this.id);

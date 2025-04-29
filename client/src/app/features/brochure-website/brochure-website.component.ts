@@ -18,7 +18,13 @@ import { filter, Subject, takeUntil } from 'rxjs';
 @Component({
   selector: 'app-brochure-website',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, RouterOutlet, FooterComponent,CommonModule],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    RouterOutlet,
+    FooterComponent,
+    CommonModule,
+  ],
   templateUrl: './brochure-website.component.html',
   styleUrl: './brochure-website.component.scss',
 })
@@ -38,6 +44,15 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
   currentIndex = 0;
   currentVideo = signal(this.videos[this.currentIndex]);
   private isBrowser: boolean;
+  private hideVideoUrls = [
+    '/deposer-un-cv',
+    '/mention-legal',
+    '/client',
+    '/condition-general-de-vente',
+    "/offre-d'emploi",
+    '/inscription',
+    '/connexion',
+  ];
 
   constructor(@Inject(PLATFORM_ID) platformId: Object, private router: Router) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -55,8 +70,13 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
+      
+      // Check current URL during initialization
+      this.showVideo.set(
+        !this.hideVideoUrls.some(url => this.router.url.includes(url))
+      );
     }
-
+  
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
@@ -64,14 +84,13 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       )
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          const hideVideoUrls = ['deposer-un-cv', 'mention-legal', 'client','condition-general-de-vente','offre-d\'emploi'];
           this.showVideo.set(
-            !hideVideoUrls.some((url) => event.url.includes(url))
+            !this.hideVideoUrls.some((url) => event.url.includes(url))
           );
         }
       });
   }
-
+  
   ngOnDestroy() {
     if (this.isBrowser) {
       window.removeEventListener('resize', this.handleResize);
@@ -84,15 +103,13 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       this.currentIndex = (this.currentIndex + 1) % this.videos.length;
       this.currentVideo.set(this.videos[this.currentIndex]);
-  
+
       setTimeout(() => {
         if (this.videoPlayer?.nativeElement) {
           this.videoPlayer.nativeElement.load(); // Ensures video is ready before switching
           this.videoPlayer.nativeElement.play();
         }
-      }, 50); 
+      }, 50);
     }
   }
-  
-  
 }

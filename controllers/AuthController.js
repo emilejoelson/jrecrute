@@ -12,13 +12,15 @@ const {
   clearRefreshTokenCookie
 } = require('../services/CookieService');
 
-const signup = async (req, res) => {
+
+const signup = async (req,res) => {
   try {
     const {
       email,
       password,
       confirmPassword,
       cvFile,
+      profileImage, // This will now be a URL/path string
       personalInfo,
       professionalInfo,
       academicInfo
@@ -37,8 +39,10 @@ const signup = async (req, res) => {
         .json({ message: "Email already registered", field: "email" });
     }
 
+    // Create the user with the profile image URL
     const newUser = new User({
-      cvFile: cvFile || null, // Make cvFile optional and default to null
+      cvFile: cvFile || null,
+      profileImage: profileImage || null, // Store the URL/path directly
       personalInfo: {
         civility: personalInfo.civility,
         firstName: personalInfo.firstName,
@@ -46,7 +50,6 @@ const signup = async (req, res) => {
         email: email,
         telephone: personalInfo.telephone
       },
-      // Only include minimal required fields for professional and academic info
       professionalInfo: professionalInfo || {
         currentPosition: "",
         desiredPosition: "",
@@ -116,7 +119,6 @@ const signup = async (req, res) => {
     });
   }
 };
-
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;

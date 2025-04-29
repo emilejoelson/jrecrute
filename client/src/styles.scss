@@ -10,10 +10,6 @@
   body {
     height: 100%;
   }
-  body {
-    font-family: "Roboto", sans-serif;
-    overflow-x: hidden;
-  }
   html {
     scroll-behavior: smooth;
   }
@@ -31,14 +27,7 @@
     scrollbar-width: none; /* Firefox */
   }
 }
-/* to hide recaptcha badge icon */
 
 .grecaptcha-badge {
   visibility: hidden !important;
 }
-
-/* When you hide the badge icon, Google wants you to reference their service on your form by adding this: */
-/**/
-/* This site is protected by reCAPTCHA and the Google */
-/*     <a href="https://policies.google.com/privacy">Privacy Policy</a> and */
-/*     <a href="https://policies.google.com/terms">Terms of Service</a> apply. */

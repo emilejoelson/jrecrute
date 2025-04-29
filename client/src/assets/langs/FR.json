@@ -10,6 +10,16 @@
     "CLIENT": "Client",
     "POSTULER_MAINTENANT": "Postuler maintenant"
   },
+  "PROFILE": {
+    "SIGNUP": "S'inscrire",
+    "LOGIN": "Se connecter",
+    "ACCOUNT": "Votre Compte",
+    "MY_PROFILE": "Mon Profil",
+    "SETTINGS": "Paramètres",
+    "LOGOUT": "Déconnexion",
+    "SECTION_PROFILE": "Profil",
+    "SECTION_AUTH": "Authentification"
+  },
   "HERO": {
     "TITLE": {
       "PART1": "Construisez",
@@ -409,7 +419,7 @@
         "NOT_URGENT": "Pas pressé"
       },
       "BUTTON_SUBMIT": "Envoyer",
-      "CC_RECRUITMENT_ADVICE": "CC Recrutement conseille :",
+      "CC_RECRUITMENT_ADVICE": "CC Recrutement conseille",
       "CC_RECRUITMENT_DESCRIPTION": "Optimisez votre recrutement en fournissant des informations précises sur votre entreprise et vos besoins. Nos experts vous accompagnent pour trouver les meilleurs talents adaptés à votre activité."
     }
   },

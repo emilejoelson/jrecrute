@@ -13,7 +13,7 @@ export class UserEffects {
   router = inject(Router);
   store = inject(Store);
 
- submitUserForm$ = createEffect(() =>
+  submitUserForm$ = createEffect(() =>
     this.actions$.pipe(
       ofType(UserFormActions.submitUserForm),
       mergeMap(({ formData, userPayload }) =>
