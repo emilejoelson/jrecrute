@@ -213,7 +213,31 @@ const refreshTokens = async (req, res) => {
     });
   }
 };
-
+const getProfile = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const user = await User.findById(userId);
+    
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    
+    const profileData = {
+      email: user.personalInfo.email,
+      profileImage: user.profileImage,
+      firstName: user.personalInfo.firstName,
+      lastName: user.personalInfo.lastName,
+    };
+    
+    return res.status(200).json(profileData);
+  } catch (error) {
+    console.error("Error retrieving user profile:", error);
+    return res.status(500).json({
+      message: "Error retrieving user profile",
+      error: error.message,
+    });
+  }
+};
 const logout = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
@@ -238,5 +262,6 @@ module.exports = {
   signup,
   login,
   refreshTokens,
-  logout
+  logout,
+  getProfile,
 };

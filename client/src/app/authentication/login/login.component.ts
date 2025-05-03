@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -10,6 +10,12 @@ import {
 import { Router } from '@angular/router';
 import { CustomInputComponent } from '../../features/cv-deposit/pages/deposit-cv/ui/steps/ui/custom-input/custom-input.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { Subscription } from 'rxjs';
+import { State } from '../../state/root.state';
+import { Store } from '@ngrx/store';
+import { selectError, selectIsAuthenticated, selectIsLoading } from '../data-access/store/selectors/auth.selectors';
+import { LoginRequest } from './data-access/models/login';
+import { AuthActions } from '../data-access/store/actions/auth.actions';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
   isSubmitting = false;
   isSuccess = false;
@@ -33,6 +39,8 @@ export class LoginComponent {
   commonInputClass =
     'peer w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-200 focus:outline-none focus:border-purple-500 appearance-none';
   commonLabelClass = 'left-3 -top-2.5 text-sm text-gray-600 bg-white px-1';
+  
+  private subscriptions: Subscription = new Subscription();
 
   formFields = {
     accountInfo: [
@@ -55,14 +63,37 @@ export class LoginComponent {
     ],
   };
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private store: Store<State>
+  ) {
     this.initForm();
+  }
+
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.store.select(selectIsLoading).subscribe(isLoading => {
+        this.isSubmitting = isLoading;
+      })
+    );
+
+    this.subscriptions.add(
+      this.store.select(selectIsAuthenticated).subscribe(isAuthenticated => {
+        this.isSuccess = isAuthenticated;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   onSignup() {
     this.router.navigate(['/inscription']);
     window.scrollTo(0, 0);
   }
+
   initForm(): void {
     const formConfig: { [key: string]: any } = {};
 
@@ -85,30 +116,13 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      this.isSubmitting = true;
-      this.loginError = null;
-
-      // Simulate API call
-      setTimeout(() => {
-        const email = this.loginForm.get('email')?.value;
-
-        // For demo purposes - show error for specific email
-        if (email === 'error@example.com') {
-          this.isSubmitting = false;
-          this.loginError = 'Identifiants incorrects. Veuillez réessayer.';
-          return;
-        }
-
-        this.isSubmitting = false;
-        this.isSuccess = true;
-
-        // Redirect after successful login
-        setTimeout(() => {
-          this.router.navigate(['/dashboard']);
-        }, 1000);
-      }, 1500);
+      const loginRequest: LoginRequest = {
+        email: this.loginForm.get('email')?.value,
+        password: this.loginForm.get('password')?.value
+      };
+      
+      this.store.dispatch(AuthActions.login(loginRequest));
     } else {
-      // Mark all fields as touched to trigger validation messages
       Object.keys(this.loginForm.controls).forEach((key) => {
         const control = this.loginForm.get(key);
         control?.markAsTouched();

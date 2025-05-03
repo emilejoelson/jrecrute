@@ -18,7 +18,6 @@ export class LoginService {
     private authService: AuthService
   ) {}
 
- 
   login(loginData: LoginRequest): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.API_URL}/auth/login`, loginData)
       .pipe(

@@ -1,4 +1,6 @@
 import { Routes } from '@angular/router';
+import { adminGuard } from './core/guards/admin.guard';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -98,12 +100,28 @@ export const routes: Routes = [
       },
     ],
   },
-
   {
-    path: '',
+    path: 'dashboard',
     loadComponent: () =>
-      import('./common/components/not-found/not-found.component').then(
-        (m) => m.NotFoundComponent
+      import('./features/dashboard/dashboard.component').then(
+        (m) => m.DashboardComponent
+      ),
+    canActivate: [adminGuard], 
+  },
+  {
+    path: 'profile',
+    loadComponent: () =>
+      import('./features/profile/profile.component').then(
+        (c) => c.ProfileComponent
+      ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'access-denied',
+    loadComponent: () =>
+      import('./core/components/access-denied.component').then(
+        (m) => m.AccessDeniedComponent
       ),
   },
+  { path: '**', redirectTo: '/connexion' },
 ];

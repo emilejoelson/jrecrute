@@ -21,6 +21,9 @@ export class ErrorEffects {
         ofType(
           UserFormActions.submitUserFormFailure,
           RecruitmentFormActions.submitRecruitmentFormFailure,
+          AuthActions.signupFailure,  // Added auth error actions
+          AuthActions.loginFailure,   // Added auth error actions
+          AuthActions.uploadProfileImageFailure // Added profile image upload error action
         ),
         tap((action: ErrorAction) => {
           const error = action.error?.error;

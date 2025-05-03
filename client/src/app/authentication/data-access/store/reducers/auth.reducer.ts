@@ -2,11 +2,11 @@
 import { createReducer, on } from '@ngrx/store';
 import { initialAuthState } from '../auth.state';
 import { AuthActions } from '../actions/auth.actions';
-
+import { User } from '../../../signup/data-access/models/user';
 
 export const authReducer = createReducer(
   initialAuthState,
-  
+
   // Signup
   on(AuthActions.signup, (state) => ({
     ...state,
@@ -14,7 +14,7 @@ export const authReducer = createReducer(
     error: null,
     isSignupSuccess: false,
   })),
-  
+
   on(AuthActions.signupSuccess, (state, { response }) => {
     return {
       ...state,
@@ -25,31 +25,31 @@ export const authReducer = createReducer(
         id: response.userId,
         email: '',
         role: response.role,
-        roles: response.roles
+        roles: response.roles,
       },
       error: null,
     };
   }),
-  
+
   on(AuthActions.signupFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
     isSignupSuccess: false,
   })),
-  
+
   on(AuthActions.resetSignupState, (state) => ({
     ...state,
     isSignupSuccess: false,
-    error: null
+    error: null,
   })),
-  
+
   // Login
   on(AuthActions.login, (state) => ({
     ...state,
     isLoading: true,
-    error: null
+    error: null,
   })),
-  
+
   on(AuthActions.loginSuccess, (state, { response }) => ({
     ...state,
     isLoading: false,
@@ -58,37 +58,58 @@ export const authReducer = createReducer(
       id: response.userId,
       email: '',
       role: response.role,
-      roles: response.roles
+      roles: response.roles,
     },
-    error: null
+    error: null,
   })),
-  
+
   on(AuthActions.loginFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
   })),
-  
+
   // Logout
   on(AuthActions.logout, () => ({
-    ...initialAuthState
+    ...initialAuthState,
   })),
-  
-  // Profile Image Upload
-  on(AuthActions.uploadProfileImage, (state) => ({
+  on(AuthActions.loadUserProfile, (state) => ({
     ...state,
     isLoading: true,
-    error: null
+    error: null,
   })),
-  
-  on(AuthActions.uploadProfileImageSuccess, (state, { filePath }) => ({
+
+  on(AuthActions.loadUserProfileSuccess, (state, { profile }) => ({
+    ...state,
+    profile,
+    isLoading: false,
+    error: null,
+  })),
+
+  on(AuthActions.loadUserProfileFailure, (state, { error }) => ({
     ...state,
     isLoading: false,
-    profileImagePath: filePath,
-    error: null
   })),
-  
-  on(AuthActions.uploadProfileImageFailure, (state, { error }) => ({
+  on(AuthActions.initializeAuth, (state) => ({
+    ...state,
+    isLoading: true,
+    error: null,
+  })),
+
+  on(AuthActions.initializeAuthSuccess, (state, { user, profile }) => ({
     ...state,
     isLoading: false,
+    isAuthenticated: true,
+    user,
+    profile,
+    error: null,
+  })),
+
+  on(AuthActions.initializeAuthFailure, (state, { error }) => ({
+    ...state,
+    isLoading: false,
+    isAuthenticated: false,
+    user: null,
+    profile: null,
+    error,
   }))
 );

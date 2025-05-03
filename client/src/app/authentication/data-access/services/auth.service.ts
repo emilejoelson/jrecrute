@@ -1,41 +1,45 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, throwError } from 'rxjs';
+
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators';
 import { TokenService } from './token.service';
 import { environment } from '../../../../environment/environment';
 import { User } from '../../signup/data-access/models/user';
-import { AuthResponse } from '../models/auth.response';
+import { AuthResponse, UserProfileResponse } from '../models/auth.response';
 import { RefreshTokenResponse } from '../../login/data-access/models/token';
+import { Store } from '@ngrx/store';
+import { selectUser } from '../store/selectors/auth.selectors';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private readonly API_URL = environment.apiUrl;
+  
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
   
-  constructor(
-    private http: HttpClient,
-    private tokenService: TokenService
-  ) {
-    this.initializeUser();
+  private http = inject(HttpClient);
+  private tokenService = inject(TokenService);
+  private store = inject(Store);
+  
+  constructor() {
+    this.store.select(selectUser).subscribe(user => {
+      if (user && user !== this.currentUserSubject.value) {
+        this.currentUserSubject.next(user);
+      }
+    });
   }
 
- 
-  private initializeUser() {
-    if (this.tokenService.hasToken() && !this.tokenService.isTokenExpired()) {
-      const payload = this.tokenService.getTokenPayload();
-      if (payload) {
-        this.currentUserSubject.next({
-          id: payload.userId,
-          email: payload.email,
-          role: payload.role,
-          roles: payload.roles
-        });
-      }
-    }
+  getUserProfile(): Observable<UserProfileResponse> {
+    return this.http.get<UserProfileResponse>(`${this.API_URL}/user/profile`)
+      .pipe(
+        catchError(error => {
+          console.error('Error fetching user profile:', error);
+          return throwError(() => error);
+        })
+      );
   }
 
   get currentUser(): User | null {
@@ -43,15 +47,23 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    return this.tokenService.hasToken() && !this.tokenService.isTokenExpired();
+    const hasToken = this.tokenService.hasToken();
+    const isExpired = this.tokenService.isTokenExpired();
+    return hasToken && !isExpired;
   }
 
   handleAuthentication(response: AuthResponse) {
     this.tokenService.setAccessToken(response.accessToken);
+    if (response.refreshToken) {
+      this.tokenService.setRefreshToken(response.refreshToken);
+    }
+
+    const payload = this.tokenService.getTokenPayload();
+    const email = payload?.email || '';
 
     const user: User = {
       id: response.userId,
-      email: this.tokenService.getTokenPayload().email,
+      email: email,
       role: response.role,
       roles: response.roles
     };
@@ -60,34 +72,62 @@ export class AuthService {
   }
 
   refreshToken(): Observable<boolean> {
-    return this.http.post<RefreshTokenResponse>(`${this.API_URL}/auth/refresh-token`, {})
+    const refreshToken = this.tokenService.getRefreshToken();
+    
+    if (!refreshToken) {
+      return of(false);
+    }
+    
+    console.log('Attempting to refresh token');
+    
+    return this.http.post<RefreshTokenResponse>(`${this.API_URL}/auth/refresh-token`, {
+      refreshToken: refreshToken
+    })
       .pipe(
         map(response => {
+          console.log('Token refreshed successfully');
           this.tokenService.setAccessToken(response.accessToken);
+          if (response.refreshToken) {
+            this.tokenService.setRefreshToken(response.refreshToken);
+          }
           return true;
         }),
         catchError(error => {
-          this.logout();
-          return throwError(() => error);
+          console.error('Token refresh failed:', error);
+          return of(false);
         })
       );
   }
 
   logout(): Observable<any> {
-    return this.http.post(`${this.API_URL}/auth/logout`, {}).pipe(
+    const refreshToken = this.tokenService.getRefreshToken();
+    
+    if (!refreshToken) {
+      this.clearLocalAuthData();
+      return of(null);
+    }
+    
+    return this.http.post(`${this.API_URL}/auth/logout`, {
+      refreshToken: refreshToken
+    }, {
+      withCredentials: true
+    }).pipe(
       tap(() => {
-        this.tokenService.removeAccessToken();
-        this.currentUserSubject.next(null);
+        this.clearLocalAuthData();
       }),
       catchError(error => {
-        this.tokenService.removeAccessToken();
-        this.currentUserSubject.next(null);
+        this.clearLocalAuthData();
         return throwError(() => error);
       })
     );
   }
 
- 
+  private clearLocalAuthData() {
+    console.log('Clearing auth data');
+    this.tokenService.clearTokens();
+    this.currentUserSubject.next(null);
+  }
+  
   hasRole(roleName: string): boolean {
     const user = this.currentUser;
     if (!user) return false;

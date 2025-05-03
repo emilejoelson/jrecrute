@@ -22,7 +22,7 @@ router.get("/api/roles/:roleId", verifyToken,isAdmin, getRoleById);
 router.put("/api/roles/:roleId", verifyToken, isAdmin, updateRole);
 router.delete("/api/role/:roleId", verifyToken, isAdmin, deleteRole);
 
-router.post("/api/role/assign-role-to-user", verifyToken,isAdmin,assignRoleToUser);
+router.post("/api/role/assign-role-to-user",assignRoleToUser);
 router.post("/api/role/remove-role-from-user", verifyToken, isAdmin, removeRoleFromUser);
 router.get("/api/role/get-user-role/:userId", verifyToken,isAdmin,getUserRoles);
 router.get("/api/role/users-by-role/:roleId", verifyToken, isAdmin, getUsersByRole);

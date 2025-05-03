@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   HostListener,
+  Inject,
   inject,
   QueryList,
   ViewChild,
@@ -14,6 +15,19 @@ import { NavigationEnd, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { TranslationService } from '../../../core/services/translation.service';
 import { TranslateModule } from '@ngx-translate/core';
+import { AuthActions } from '../../../authentication/data-access/store/actions/auth.actions';
+import { Store } from '@ngrx/store';
+import { State } from '../../../state/root.state';
+import {
+  selectFullName,
+  selectIsAuthenticated,
+  selectProfileImage,
+  selectUser,
+  selectUserEmail,
+  selectUserProfile,
+} from '../../../authentication/data-access/store/selectors/auth.selectors';
+import { combineLatest, map, Observable, Subject, takeUntil } from 'rxjs';
+import { User } from '../../../authentication/signup/data-access/models/user';
 
 type TNavLinks = {
   links: {
@@ -23,7 +37,7 @@ type TNavLinks = {
     href?: string;
     behaviour: string;
   }[];
-  buttons: { 
+  buttons: {
     name: string;
     translationKey: string;
   }[];
@@ -47,31 +61,32 @@ export class HeaderComponent implements AfterViewInit {
   isNavOpen = false;
   currentRoute: string = '';
   dropdownOpen: boolean = false;
-  dropdonwOpenSetting : boolean = false;
-  profileImageUrl: string = 'assets/profile/user-avatar.jpg';
-  userName: string = 'emilejoelson';
-  fullName: string = 'Joelson Emile ANDRIAMIHAJA'
+  dropdonwOpenSetting: boolean = false;
   isProfileMenuOpen: boolean = false;
 
-  // Add this method to your component class
-getInitials(fullName: string): string {
-  if (!fullName) return '';
-  
-  // Split the name by spaces
-  const nameParts = fullName.split(' ');
-  
-  // Map through each part and take the first character, then join them
-  return nameParts
-    .map(part => part.charAt(0).toUpperCase())
-    .join('');
-}
+  private destroy$ = new Subject<void>();
 
-toggleDropdownOpen() {
-  this.dropdonwOpenSetting = !this.dropdonwOpenSetting;
-  if(this.dropdonwOpenSetting){
-    this.isProfileMenuOpen = false;
+  // Authentication and profile related observables
+  isAuthenticated$: Observable<boolean>;
+  userProfile$: Observable<Partial<User> | null>;
+  profileImageUrl$: Observable<string>;
+  fullName$: Observable<string>;
+  userEmail$: Observable<string>;
+
+  getInitials(fullName: string | null): string {
+    if (!fullName) return '';
+
+    const nameParts = fullName.split(' ');
+
+    return nameParts.map((part) => part.charAt(0).toUpperCase()).join('');
   }
-}
+
+  toggleDropdownOpen() {
+    this.dropdonwOpenSetting = !this.dropdonwOpenSetting;
+    if (this.dropdonwOpenSetting) {
+      this.isProfileMenuOpen = false;
+    }
+  }
 
   toggleDropdown() {
     this.dropdownOpen = !this.dropdownOpen;
@@ -89,13 +104,77 @@ toggleDropdownOpen() {
 
   currentLanguage: 'FR' | 'EN' = 'EN';
 
-  constructor(private router: Router,private translationService: TranslationService) {
+  constructor(
+    private router: Router,
+    private translationService: TranslationService,
+    private store: Store<State>
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.url;
       }
     });
-    this.currentLanguage = this.translationService.getCurrentLang() as 'FR' | 'EN';
+    this.currentLanguage = this.translationService.getCurrentLang() as
+      | 'FR'
+      | 'EN';
+
+    // Subscribe to authentication state
+this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
+ // Original selectors - keep these
+this.userProfile$ = this.store.select(selectUserProfile);
+this.profileImageUrl$ = this.store.select(selectProfileImage);
+this.fullName$ = this.store.select(selectFullName);
+this.userEmail$ = this.store.select(selectUserEmail);
+
+// Add subscriptions for debugging
+this.userEmail$.pipe(
+  takeUntil(this.destroy$) // Assuming you have a destroy$ Subject for cleanup
+).subscribe(email => {
+  console.log('User Email Value:', email);
+});
+
+this.fullName$.pipe(
+  takeUntil(this.destroy$)
+).subscribe(name => {
+  console.log('Full Name Value:', name);
+});
+
+this.profileImageUrl$.pipe(
+  takeUntil(this.destroy$)
+).subscribe(imageUrl => {
+  console.log('Profile Image URL:', imageUrl);
+});
+
+this.userProfile$.pipe(
+  takeUntil(this.destroy$)
+).subscribe(profile => {
+  console.log('Complete User Profile:', profile);
+});
+
+// Alternative approach using combineLatest if you want to log everything together
+combineLatest([
+  this.userEmail$,
+  this.fullName$,
+  this.profileImageUrl$,
+  this.userProfile$
+]).pipe(
+  takeUntil(this.destroy$)
+).subscribe(([email, fullName, imageUrl, profile]) => {
+  console.log('--- User Data Debug ---');
+  console.log('Email:', email);
+  console.log('Name:', fullName);
+  console.log('Image:', imageUrl);
+  console.log('Profile:', profile);
+  console.log('---------------------');
+});
+
+    combineLatest([this.isAuthenticated$])
+      .pipe(map(([isAuthenticated]) => isAuthenticated))
+      .subscribe((isAuthenticated) => {
+        if (isAuthenticated) {
+          this.store.dispatch(AuthActions.loadUserProfile());
+        }
+      });
   }
 
   switchLanguage(lang: 'FR' | 'EN') {
@@ -106,17 +185,17 @@ toggleDropdownOpen() {
 
   navItems: TNavLinks = {
     links: [
-      { 
-        name: 'Offres', 
-        translationKey: 'HEADER.OFFRES', 
-        sectionId: 'offers-section', 
-        behaviour: 'scroll' 
+      {
+        name: 'Offres',
+        translationKey: 'HEADER.OFFRES',
+        sectionId: 'offers-section',
+        behaviour: 'scroll',
       },
-      { 
-        name: 'Etapes', 
-        translationKey: 'HEADER.ETAPES', 
-        sectionId: 'steps-section', 
-        behaviour: 'scroll' 
+      {
+        name: 'Etapes',
+        translationKey: 'HEADER.ETAPES',
+        sectionId: 'steps-section',
+        behaviour: 'scroll',
       },
       {
         name: 'Avantages',
@@ -124,33 +203,34 @@ toggleDropdownOpen() {
         sectionId: 'advantages-section',
         behaviour: 'scroll',
       },
-      { 
-        name: 'FAQ', 
-        translationKey: 'HEADER.FAQ', 
-        sectionId: 'faq-section', 
-        behaviour: 'scroll' 
+      {
+        name: 'FAQ',
+        translationKey: 'HEADER.FAQ',
+        sectionId: 'faq-section',
+        behaviour: 'scroll',
       },
-      { 
-        name: 'Contact', 
-        translationKey: 'HEADER.CONTACT', 
-        sectionId: 'contact-section', 
-        behaviour: 'scroll' 
+      {
+        name: 'Contact',
+        translationKey: 'HEADER.CONTACT',
+        sectionId: 'contact-section',
+        behaviour: 'scroll',
       },
     ],
     buttons: [
       {
         name: 'Client',
-        translationKey: 'HEADER.CLIENT'
+        translationKey: 'HEADER.CLIENT',
       },
       {
         name: 'Postuler maintenant',
-        translationKey: 'HEADER.POSTULER_MAINTENANT'
+        translationKey: 'HEADER.POSTULER_MAINTENANT',
       },
     ],
   };
 
   logout() {
     console.log('Logging out...');
+    this.store.dispatch(AuthActions.logout());
     this.isProfileMenuOpen = false;
   }
 
@@ -160,18 +240,20 @@ toggleDropdownOpen() {
     window.scrollTo(0, 0);
   }
 
-  onSignup(){
+  onSignup() {
     this.isNavOpen = false;
     this.router.navigate(['/inscription']);
     window.scrollTo(0, 0);
     this.toggleProfileMenu();
   }
-  onLogin(){
+
+  onLogin() {
     this.isNavOpen = false;
     this.router.navigate(['/connexion']);
     window.scrollTo(0, 0);
     this.toggleProfileMenu();
   }
+
   onClient() {
     this.isNavOpen = false;
     this.router.navigate(['/client']);
@@ -221,7 +303,7 @@ toggleDropdownOpen() {
     if (this.isProfileMenuOpen && !event.target) {
       this.isProfileMenuOpen = false;
     }
-    
+
     if (this.dropdownOpen && !event.target) {
       this.dropdownOpen = false;
     }

@@ -20,10 +20,14 @@
     </div>
   </a>
 
-  <nav class="overflow-auto transition-transform duration-300 ease-out bg-white absolute top-full p-app-secondary-padding left-0 h-screen w-full transform {{
+  <nav
+    class="overflow-auto transition-transform duration-300 ease-out bg-white absolute top-full p-app-secondary-padding left-0 h-screen w-full transform {{
       isNavOpen ? 'translate-y-0' : '-translate-y-[calc(100%+100px)]'
-    }} xl:relative xl:translate-y-0 xl:h-auto xl:w-auto xl:bg-transparent xl:p-0 xl:overflow-visible">
-    <ul class="flex items-start gap-x-12  md:items-center md:gap-6 gap-y-8 custom-650:flex-col">
+    }} xl:relative xl:translate-y-0 xl:h-auto xl:w-auto xl:bg-transparent xl:p-0 xl:overflow-visible"
+  >
+    <ul
+      class="flex items-start gap-x-12 md:items-center md:gap-6 gap-y-8 custom-650:flex-col"
+    >
       @for (linkEntry of navItems.links; track linkEntry){
       <li
         #navElement
@@ -39,11 +43,11 @@
             currentRoute === '/connexion' ||
             currentRoute === '/mention-legal' ||
             currentRoute === '/deposer-un-cv' ||
-            currentRoute === '/condition-general-de-vente'||
-            currentRoute === '/offre-d\'emploi/commercial'||
-            currentRoute === '/offre-d\'emploi/community-manager'||
-            currentRoute === '/offre-d\'emploi/developpeur-web'||
-            currentRoute === '/offre-d\'emploi/secretaire'||
+            currentRoute === '/condition-general-de-vente' ||
+            currentRoute === '/offre-d\'emploi/commercial' ||
+            currentRoute === '/offre-d\'emploi/community-manager' ||
+            currentRoute === '/offre-d\'emploi/developpeur-web' ||
+            currentRoute === '/offre-d\'emploi/secretaire' ||
             currentRoute === '/offre-d\'emploi/profil-bilingue',
           'text-gray-600 custom-650:text-gray-600': !(
             currentRoute === '/client' ||
@@ -52,10 +56,10 @@
             currentRoute === '/mention-legal' ||
             currentRoute === '/deposer-un-cv' ||
             currentRoute === '/condition-general-de-vente' ||
-            currentRoute === '/offre-d\'emploi/commercial'||
-            currentRoute === '/offre-d\'emploi/community-manager'||
-            currentRoute === '/offre-d\'emploi/developpeur-web'||
-            currentRoute === '/offre-d\'emploi/secretaire'||
+            currentRoute === '/offre-d\'emploi/commercial' ||
+            currentRoute === '/offre-d\'emploi/community-manager' ||
+            currentRoute === '/offre-d\'emploi/developpeur-web' ||
+            currentRoute === '/offre-d\'emploi/secretaire' ||
             currentRoute === '/offre-d\'emploi/profil-bilingue'
           )
         }"
@@ -63,30 +67,30 @@
       >
         {{ linkEntry.translationKey | translate }}
       </li>
-      }      @for(buttonEntry of navItems.buttons;track buttonEntry){
-        @if(buttonEntry.name !=='Client'){
-        <button
-          (click)="onDeposit()"
-          class="bg-purple-600 hover:bg-purple-700 text-white font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
-        >
-          {{ buttonEntry.translationKey | translate }}
-        </button>
-        } @else {
-        <button
-          (click)="onClient()"
-          class="bg-gray-700 hover:bg-gray-600 text-white text-md font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
-        >
-          {{ buttonEntry.translationKey | translate }}
-        </button>
-        } }
+      } @for(buttonEntry of navItems.buttons;track buttonEntry){
+      @if(buttonEntry.name !=='Client'){
+      <button
+        (click)="onDeposit()"
+        class="bg-purple-600 hover:bg-purple-700 text-white font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
+      >
+        {{ buttonEntry.translationKey | translate }}
+      </button>
+      } @else {
+      <button
+        (click)="onClient()"
+        class="bg-gray-700 hover:bg-gray-600 text-white text-md font-medium px-3 py-1.5 rounded-md transition-colors duration-200"
+      >
+        {{ buttonEntry.translationKey | translate }}
+      </button>
+      } }
     </ul>
     <div class="flex items-center gap-4 mt-10 md:hidden">
-      <div class="relative inline-flex border-gray-400  w-full border-t ">
+      <div class="relative inline-flex border-gray-400 w-full border-t">
         <button
           (click)="toggleDropdown()"
-          class="flex items-center  gap-2 p-1.5 rounded bg-gray-200 w-full text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200"
+          class="flex items-center gap-2 p-1.5 rounded bg-gray-200 w-full text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200"
         >
-          <div >
+          <div>
             <img
               *ngIf="currentLanguage === 'FR'"
               src="/assets/flags/france.png"
@@ -100,7 +104,9 @@
               class="h-[14px] rounded-full"
             />
           </div>
-          <span class="font-medium text-xs text-gray-700 ">{{ currentLanguage }}</span>
+          <span class="font-medium text-xs text-gray-700">{{
+            currentLanguage
+          }}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-4 w-4"
@@ -124,7 +130,7 @@
         (click)="toggleDropdown()"
         class="flex items-center custom-650:hidden gap-2 p-1.5 rounded text-gray-300 hover:text-white hover:bg-gray-700 transition-colors duration-200"
       >
-        <div >
+        <div>
           <img
             *ngIf="currentLanguage === 'FR'"
             src="/assets/flags/france.png"
@@ -253,14 +259,40 @@
     </div>
 
     <!-- Profile Menu -->
+    <!-- Profile Menu -->
     <div class="relative inline-flex">
+      <!-- Profile Button with Dynamic Content -->
       <button
         (click)="toggleProfileMenu()"
-        class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:ring-2 hover:ring-gray-600 transition-all duration-200"
+        class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 hover:ring-2 hover:ring-gray-600 transition-all duration-200 overflow-hidden"
       >
-        <span class="text-gray-300 text-sm font-medium">{{
-          getInitials(fullName)
-        }}</span>
+        <ng-container *ngIf="isAuthenticated$ | async; else defaultAvatar">
+          <!-- Show profile image if available -->
+          <img
+            *ngIf="
+              (profileImageUrl$ | async) &&
+              (profileImageUrl$ | async) !== 'assets/profile/user-avatar.jpg'
+            "
+            [src]="profileImageUrl$ | async"
+            alt="Profile"
+            class="w-full h-full object-cover"
+          />
+          <!-- Show initials if no profile image -->
+          <span
+            *ngIf="
+              !(profileImageUrl$ | async) ||
+              (profileImageUrl$ | async) === 'assets/profile/user-avatar.jpg'
+            "
+            class="text-gray-300 text-sm font-medium"
+          >
+            {{ getInitials(fullName$ | async) }}
+          </span>
+        </ng-container>
+        <ng-template #defaultAvatar>
+          <span class="text-gray-300 text-sm font-medium">
+            {{ getInitials(fullName$ | async) }}
+          </span>
+        </ng-template>
       </button>
 
       @if(isProfileMenuOpen){
@@ -273,16 +305,47 @@
           <div class="flex items-center justify-between gap-10">
             <!-- User Info -->
             <div class="flex items-center space-x-3">
+              <!-- Dynamic Profile Image/Initials -->
               <div
-                class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700"
+                class="flex items-center justify-center w-10 h-10 rounded-full bg-gray-700 overflow-hidden"
               >
-                <span class="text-gray-300 text-sm font-medium">{{
-                  getInitials(fullName)
-                }}</span>
+                <ng-container
+                  *ngIf="isAuthenticated$ | async; else defaultAvatarMenu"
+                >
+                  <!-- Show profile image if available -->
+                  <img
+                    *ngIf="
+                      (profileImageUrl$ | async) &&
+                      (profileImageUrl$ | async) !==
+                        'assets/profile/user-avatar.jpg'
+                    "
+                    [src]="profileImageUrl$ | async"
+                    alt="Profile"
+                    class="w-full h-full object-cover"
+                  />
+                  <!-- Show initials if no profile image -->
+                  <span
+                    *ngIf="
+                      !(profileImageUrl$ | async) ||
+                      (profileImageUrl$ | async) ===
+                        'assets/profile/user-avatar.jpg'
+                    "
+                    class="text-gray-300 text-sm font-medium"
+                  >
+                    {{ getInitials(fullName$ | async) }}
+                  </span>
+                </ng-container>
+                <ng-template #defaultAvatarMenu>
+                  <span class="text-gray-300 text-sm font-medium">
+                    {{ getInitials(fullName$ | async) }}
+                  </span>
+                </ng-template>
               </div>
               <div>
-                <p class="font-medium text-sm text-white">{{ userName }}</p>
-                <p class="text-xs text-gray-400">{{ fullName }}</p>
+                <p class="font-medium text-sm text-white">
+                  {{ userEmail$ | async }}
+                </p>
+                <p class="text-xs text-gray-400">{{ fullName$ | async }}</p>
               </div>
             </div>
 
@@ -310,56 +373,68 @@
               {{ "PROFILE.SECTION_PROFILE" | translate }}
             </h3>
           </div>
-          <a
-            href="/profile"
-            class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
-          >
-            <app-icon iconName="myprofileIcon" />
-            <span>{{ "PROFILE.MY_PROFILE" | translate }}</span>
-          </a>
-          <a
-            href="/account"
-            class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
-          >
-            <app-icon iconName="profileAccountIcon" />
-            <span>{{ "PROFILE.ACCOUNT" | translate }}</span>
-          </a>
 
-          <button  
-            class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+          <!-- Show these menu items only if authenticated -->
+          <ng-container
+            *ngIf="isAuthenticated$ | async; else unauthenticatedMenuItems"
           >
-            <app-icon iconName="settingIcon" />
-            <span>{{ "PROFILE.SETTINGS" | translate }}</span>
-          </button>
-
-          <div class="border-t border-gray-700 my-3"></div>
-          <div class="px-4 py-2">
-            <h3
-              class="text-xs font-semibold text-gray-400 uppercase tracking-wider"
+            <a
+              href="/profile"
+              class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
             >
-              {{ "PROFILE.SECTION_AUTH" | translate }}
-            </h3>
-          </div>
-          <button
-            (click)="onLogin()"
-            class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
-          >
-            <app-icon iconName="loginIcon" />
-            <span>{{ "PROFILE.LOGIN" | translate }}</span>
-          </button>
-          <button (click)="onSignup()"
-            class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
-          >
-            <app-icon iconName="signupIcon" />
-            <span>{{ "PROFILE.SIGNUP" | translate }}</span>
-          </button>
-          <button
-            (click)="logout()"
-            class="w-full flex items-center px-4 py-2 text-sm text-red-400 hover:bg-gray-700 transition-colors duration-200"
-          >
-            <app-icon iconName="logoutIcon" />
-            <span>{{ "PROFILE.LOGOUT" | translate }}</span>
-          </button>
+              <app-icon iconName="myprofileIcon" />
+              <span>{{ "PROFILE.MY_PROFILE" | translate }}</span>
+            </a>
+            <a
+              href="/account"
+              class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+            >
+              <app-icon iconName="profileAccountIcon" />
+              <span>{{ "PROFILE.ACCOUNT" | translate }}</span>
+            </a>
+
+            <button
+              class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+            >
+              <app-icon iconName="settingIcon" />
+              <span>{{ "PROFILE.SETTINGS" | translate }}</span>
+            </button>
+
+            <div class="border-t border-gray-700 my-3"></div>
+
+            <button
+              (click)="logout()"
+              class="w-full flex items-center px-4 py-2 text-sm text-red-400 hover:bg-gray-700 transition-colors duration-200"
+            >
+              <app-icon iconName="logoutIcon" />
+              <span>{{ "PROFILE.LOGOUT" | translate }}</span>
+            </button>
+          </ng-container>
+
+          <!-- Show these menu items if not authenticated -->
+          <ng-template #unauthenticatedMenuItems>
+            <div class="px-4 py-2">
+              <h3
+                class="text-xs font-semibold text-gray-400 uppercase tracking-wider"
+              >
+                {{ "PROFILE.SECTION_AUTH" | translate }}
+              </h3>
+            </div>
+            <button
+              (click)="onLogin()"
+              class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+            >
+              <app-icon iconName="loginIcon" />
+              <span>{{ "PROFILE.LOGIN" | translate }}</span>
+            </button>
+            <button
+              (click)="onSignup()"
+              class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+            >
+              <app-icon iconName="signupIcon" />
+              <span>{{ "PROFILE.SIGNUP" | translate }}</span>
+            </button>
+          </ng-template>
         </div>
       </div>
       }

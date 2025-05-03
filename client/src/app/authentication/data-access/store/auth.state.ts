@@ -1,4 +1,5 @@
 import { User } from '../../signup/data-access/models/user';
+import { UserProfileResponse } from '../models/auth.response';
 
 export interface AuthState {
   user: User | null;
@@ -6,6 +7,7 @@ export interface AuthState {
   error: string | null;
   isAuthenticated: boolean;
   isSignupSuccess: boolean;
+  profile: UserProfileResponse | null;
 }
 
 export const initialAuthState: AuthState = {
@@ -14,4 +16,5 @@ export const initialAuthState: AuthState = {
   error: null,
   isAuthenticated: false,
   isSignupSuccess: false,
+  profile:null,
 };
