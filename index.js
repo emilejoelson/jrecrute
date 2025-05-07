@@ -16,7 +16,6 @@ const routNewsletter = require("./routes/NewsletterRouter.js");
 const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
-
 app.io = io;
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
