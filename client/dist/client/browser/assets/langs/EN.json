@@ -1,9 +1,12 @@
 {
   "APP_NAME": "Recruitment",
-  "LANGUAGE":[
-    "French",
-    "English"
-  ],
+  "LANGUAGE": {
+    "TITLE": "Choose Language",
+    "DESCRIPTION": "Customize your experience with your preferred language",
+    "FRENCH": "French",
+    "ENGLISH": "English",
+    "CLOSE": "Close"
+  },
   "HEADER": {
     "OFFRES": "Offers",
     "ETAPES": "Steps",
@@ -22,6 +25,77 @@
     "LOGOUT": "Log Out",
     "SECTION_PROFILE": "Profile",
     "SECTION_AUTH": "Authentication"
+  },
+  "LOGIN": {
+    "LOGIN": "Login",
+    "TITLE": "Login",
+    "EMAIL_LABEL": "Email address",
+    "PASSWORD_LABEL": "Password",
+    "REMEMBER_ME": "Remember me",
+    "FORGOT_PASSWORD": "Forgot password?",
+    "BUTTON": "Log in",
+    "NO_ACCOUNT": "Don't have an account?",
+    "SIGN_UP": "Sign up",
+    "LOGIN_WITH_SUCCESS": "Login successful"
+  },
+  "SIGNUP": {
+    "TITLE": "Create your account",
+    "STEPS": {
+      "PERSONAL_INFO": "Personal information",
+      "ACCOUNT_VALIDATION": "Account validation",
+      "PROFILE_PICTURE": "Your profile picture"
+    },
+    "UPLOAD_PHOTO_PROMPT": "Add a professional photo to personalize your profile",
+    "ACCOUNT_INFO": "Account information",
+    "EMAIL": "Email address",
+    "CHANGE_IMAGE": "Change image",
+    "PASSWORD": "Password",
+    "CONFIRM_PASSWORD": "Confirm password",
+    "ACCEPTED_FORMATS": "Accepted formats: JPG, PNG, GIF",
+    "MAX_SIZE": "Maximum size: 5 MB",
+    "WHY_PHOTO": "Why a photo?",
+    "WHY_PHOTO_DESC": "A professional photo increases the visibility of your profile to recruiters and helps you stand out in your job search.",
+    "TERMS_CONDITIONS": "Terms of use",
+    "PASSWORD_MISMATCH": "Passwords do not match",
+    "ACCEPT_TERMS": ["I accept the", " General Terms of Use"],
+    "TERMS_NOTE": "By creating an account, you agree to our terms of use and privacy policy.",
+    "JOB_ALERTS_OPTIN": "I want to receive job offers matching my profile",
+    "JOB_ALERTS_NOTE": "We will only send offers relevant to your criteria.",
+    "NEWSLETTER_OPTIN": "I want to receive the newsletter and updates",
+    "NEWSLETTER_NOTE": "Stay informed about market trends and career tips.",
+    "ALREADY_HAVE_ACCOUNT": "Already have an account?",
+    "RECRUITMENT_TIP_TITLE": "CC Recruitment advice:",
+    "RECRUITMENT_TIP_1": "Optimize your recruitment by providing accurate information about your company and needs.",
+    "RECRUITMENT_TIP_2": "Our experts help you find the best talents suited to your business."
+  },
+  "NEWSLETTER": {
+    "TITLE": "Newsletter",
+    "SUBTITLE": "Receive our daily email full of ideas and news to collaborate better. Informed and inspired, for free.",
+    "LATEST_EDITION": "Latest Edition",
+    "LATEST_TITLE": "Ideas that collaborate",
+    "SUBSCRIBE_TITLE": "Subscribe",
+    "DESCRIPTION": "Welcome to Consult Collab. Every day, receive the latest in collaborative news, along with tips and inspiration to love what you do.",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "Email is required",
+    "SUBSCRIBE_BUTTON": "Subscribe",
+    "BACK": "Back",
+    "CONFIRMING": "Confirming your subscription...",
+    "CONFIRMED": "Your newsletter subscription has been confirmed. Thank you for subscribing!",
+    "SUCCESS": "Success!",
+    "RETURN_HOME": "Return to Home"
+  },
+  "CONGRATULATIONS": {
+    "TITLE": "Congratulations",
+    "MESSAGE": [
+      "Confirmation email sent",
+      "Your CV has been sent successfully",
+      "Your job description has been successfully submitted."
+    ],
+    "INVITATION": [
+      "Please check your inbox to complete the registration.",
+      "You will be contacted if your profile matches our expectations.",
+      "Our team will contact you to support your recruitment process."
+    ]
   },
   "HERO": {
     "TITLE": {
@@ -436,9 +510,9 @@
       "COMPANY_NAME": "Company Name",
       "SIREN_NUMBER": "Siren Number",
       "SIRET_NUMBER": "Siret Number",
-      "TAX_IDENT_NUMBER":"Tax Identification Number",
-      "PROF_TAX_NUMBER":"Professional Tax Number",
-      "BUSINESS_ACTIVITY":"Business activity",
+      "TAX_IDENT_NUMBER": "Tax Identification Number",
+      "PROF_TAX_NUMBER": "Professional Tax Number",
+      "BUSINESS_ACTIVITY": "Business activity",
       "VAT_NUMBER": "VAT Number",
       "REGISTRY": "Registry",
       "NAF_CODE": "NAF / APE Code",

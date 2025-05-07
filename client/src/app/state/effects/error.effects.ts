@@ -8,6 +8,7 @@ import { ErrorAction } from '../../core/models/error.action';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorTranslationService } from '../../core/services/error-translation.service';
 import { AuthActions } from '../../authentication/data-access/store/actions/auth.actions';
+import { NewsletterActions } from '../../features/newsletter/data-access/store/actions/newsletter.actions';
 
 @Injectable()
 export class ErrorEffects {
@@ -21,12 +22,13 @@ export class ErrorEffects {
         ofType(
           UserFormActions.submitUserFormFailure,
           RecruitmentFormActions.submitRecruitmentFormFailure,
-          AuthActions.signupFailure,  // Added auth error actions
-          AuthActions.loginFailure,   // Added auth error actions
-          AuthActions.uploadProfileImageFailure // Added profile image upload error action
+          AuthActions.signupFailure,
+          AuthActions.loginFailure,
+          AuthActions.uploadProfileImageFailure,
+          NewsletterActions.subscribeFailure,
         ),
         tap((action: ErrorAction) => {
-          const error = action.error?.error;
+          const error = action.error?.error ?? action.error;
           let errorMessage: string | undefined;
 
           if (typeof error === 'string') {

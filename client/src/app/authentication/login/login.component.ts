@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       {
         id: 'email',
         type: 'email',
-        title: 'Adresse email',
+        title: 'SIGNUP.EMAIL',
         classControl: this.commonInputClass,
         classLabel: this.commonLabelClass,
         placeholder: 'votre.email@exemple.com',
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       {
         id: 'password',
         type: 'password',
-        title: 'Mot de passe',
+        title: 'SIGNUP.PASSWORD',
         classControl: this.commonInputClass,
         classLabel: this.commonLabelClass,
         placeholder: 'Entrez votre mot de passe',

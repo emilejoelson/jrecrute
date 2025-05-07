@@ -1,6 +1,12 @@
 {
   "APP_NAME": "Recrutement",
-  "LANGUAGE": ["Français", "Anglais"],
+  "LANGUAGE": {
+    "TITLE": "Choisir la langue",
+    "DESCRIPTION": "Personnalisez votre expérience avec votre langue préférée",
+    "FRENCH": "Français",
+    "ENGLISH": "Anglais",
+    "CLOSE": "Fermer"
+  },
   "HEADER": {
     "OFFRES": "Offres",
     "ETAPES": "Etapes",
@@ -9,6 +15,77 @@
     "CONTACT": "Contact",
     "CLIENT": "Client",
     "POSTULER_MAINTENANT": "Postuler maintenant"
+  },
+  "LOGIN": {
+    "LOGIN": "Se connecter",
+    "TITLE": "Connexion",
+    "EMAIL_LABEL": "Adresse email",
+    "PASSWORD_LABEL": "Mot de passe",
+    "REMEMBER_ME": "Se souvenir de moi",
+    "FORGOT_PASSWORD": "Mot de passe oublié ?",
+    "BUTTON": "Se connecter",
+    "N O_ACCOUNT": "Vous n'avez pas de compte ?",
+    "SIGN_UP": "Inscrivez-vous",
+    "LOGIN_WITH_SUCCESS": "Login successful"
+  },
+  "SIGNUP": {
+    "TITLE": "Créer votre compte",
+    "STEPS": {
+      "PERSONAL_INFO": "Informations personnelles",
+      "ACCOUNT_VALIDATION": "Validation du compte",
+      "PROFILE_PICTURE": "Votre photo de profil"
+    },
+    "UPLOAD_PHOTO_PROMPT": "Ajoutez une photo professionnelle pour personnaliser votre profil",
+    "ACCOUNT_INFO": "Informations du compte",
+    "EMAIL": "Adresse email",
+    "PASSWORD": "Mot de passe",
+    "CHANGE_IMAGE": "Changer d'image",
+    "CONFIRM_PASSWORD": "Confirmer le mot de passe",
+    "ACCEPTED_FORMATS": "Formats acceptés: JPG, PNG, GIF",
+    "MAX_SIZE": "Taille maximale: 5 MB",
+    "WHY_PHOTO": "Pourquoi une photo?",
+    "PASSWORD_MISMATCH": "Les mots de passe ne correspondent pas",
+    "WHY_PHOTO_DESC": "Une photo professionnelle augmente la visibilité de votre profil auprès des recruteurs et vous permet de vous démarquer dans votre recherche d'emploi.",
+    "TERMS_CONDITIONS": "Conditions d'utilisation",
+    "ACCEPT_TERMS": ["J'accepte les", " Conditions générales d'utilisation"],
+    "TERMS_NOTE": "En créant un compte, vous acceptez nos conditions d'utilisation et notre politique de confidentialité.",
+    "JOB_ALERTS_OPTIN": "Je souhaite recevoir les offres d'emploi correspondant à mon profil",
+    "JOB_ALERTS_NOTE": "Nous vous enverrons uniquement les offres pertinentes selon vos critères.",
+    "NEWSLETTER_OPTIN": "Je souhaite recevoir la newsletter et les actualités",
+    "NEWSLETTER_NOTE": "Restez informé des tendances du marché et des conseils carrière.",
+    "ALREADY_HAVE_ACCOUNT": "Vous avez déjà un compte ?",
+    "RECRUITMENT_TIP_TITLE": "CC Recrutement conseille :",
+    "RECRUITMENT_TIP_1": "Optimisez votre recrutement en fournissant des informations précises sur votre entreprise et vos besoins.",
+    "RECRUITMENT_TIP_2": "Nos experts vous accompagnent pour trouver les meilleurs talents adaptés à votre activité."
+  },
+  "NEWSLETTER": {
+    "TITLE": "Newsletter",
+    "SUBTITLE": "Recevez chaque jour notre email rempli d'idées et d'actualités pour mieux collaborer. Informé et inspiré, gratuitement.",
+    "LATEST_EDITION": "DERNIÈRE ÉDITION",
+    "LATEST_TITLE": "Des idées qui collaborent",
+    "SUBSCRIBE_TITLE": "S'inscrire",
+    "DESCRIPTION": "Bienvenue chez Consult Collab. Chaque jour, recevez l'essentiel de l'actualité collaborative, accompagné de conseils et d'inspiration pour aimer ce que vous faites.",
+    "EMAIL": "Email",
+    "EMAIL_REQUIRED": "L'email est requis",
+    "SUBSCRIBE_BUTTON": "S'inscrire",
+    "BACK": "Retour",
+    "CONFIRMING": "Confirmation de votre inscription...",
+    "CONFIRMED": "Votre inscription à la newsletter a bien été confirmée. Merci pour votre abonnement !",
+    "SUCCESS": "Succès !",
+    "RETURN_HOME": "Retour à l'accueil"
+  },
+  "CONGRATULATIONS": {
+    "TITLE": "Félicitations",
+    "MESSAGE": [
+      "E-mail de confirmation envoyé",
+      "Votre cv a été envoyé avec succès",
+      "Votre fiche de poste a été soumise avec succès."
+    ],
+    "INVITATION": [
+      "Veuillez vérifier votre boîte de réception pour terminer l'inscription.",
+      "Vous serez contacté(e) si votre profil correspond à nos attentes.",
+      "Notre équipe vous contactera pour vous accompagner dans votre recrutement."
+    ]
   },
   "PROFILE": {
     "SIGNUP": "S'inscrire",
@@ -429,9 +506,9 @@
       "COMPANY_NAME": "Raison sociale",
       "SIREN_NUMBER": "Numéro Siren",
       "SIRET_NUMBER": "Numéro Siret",
-      "TAX_IDENT_NUMBER":"Identifiant fiscal",
-      "PROF_TAX_NUMBER":"Numéro de la taxe professionnelle",
-      "BUSINESS_ACTIVITY":"Activité exercée",
+      "TAX_IDENT_NUMBER": "Identifiant fiscal",
+      "PROF_TAX_NUMBER": "Numéro de la taxe professionnelle",
+      "BUSINESS_ACTIVITY": "Activité exercée",
       "VAT_NUMBER": "TVA intracommunautaire",
       "REGISTRY": "Greffe",
       "NAF_CODE": "Code NAF / APE",

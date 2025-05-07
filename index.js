@@ -11,6 +11,7 @@ const routUser = require("./routes/UserRouter.js");
 const routRecruitmentRequest = require("./routes/RecruitmentRequestRouter.js");
 const routAuth = require("./routes/AuthRouter.js");
 const routRole = require("./routes/RoleRouter.js");
+const routNewsletter = require("./routes/NewsletterRouter.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -49,6 +50,7 @@ app.use(routUser);
 app.use(routRecruitmentRequest);
 app.use(routAuth);
 app.use(routRole);
+app.use(routNewsletter);
 
 io.on("connection", (socket) => {
   console.log("A client connected");
@@ -78,7 +80,7 @@ if (process.env.NODE_ENV === "production") {
       },
     })
   );
-  
+
   app.get("*", (req, res) => {
     res.sendFile(path.join(staticPath, "index.html"));
   });

@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 export class RecruitmentEffects {
   actions$ = inject(Actions);
   recruitmentService = inject(RecruitmentService);
-  store = inject(Store);
   router = inject(Router);
   submitRecruitmentForm$ = createEffect(() =>
     this.actions$.pipe(

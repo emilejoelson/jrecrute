@@ -52,6 +52,8 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
     "/offre-d'emploi",
     '/inscription',
     '/connexion',
+    '/confirm-newsletter',
+    '/newsletter-subscription',
   ];
 
   constructor(@Inject(PLATFORM_ID) platformId: Object, private router: Router) {
@@ -70,13 +72,13 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
     if (this.isBrowser) {
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
-      
+
       // Check current URL during initialization
       this.showVideo.set(
-        !this.hideVideoUrls.some(url => this.router.url.includes(url))
+        !this.hideVideoUrls.some((url) => this.router.url.includes(url))
       );
     }
-  
+
     this.router.events
       .pipe(
         filter((event) => event instanceof NavigationEnd),
@@ -90,7 +92,7 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
         }
       });
   }
-  
+
   ngOnDestroy() {
     if (this.isBrowser) {
       window.removeEventListener('resize', this.handleResize);

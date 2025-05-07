@@ -91,12 +91,27 @@ export const routes: Routes = [
           ).then((m) => m.RecruitmentPopupConfirmationComponent),
       },
       {
+        title: 'Email de confirmation',
+        path: 'email-de-confirmation',
+        loadComponent: () =>
+          import(
+            './shared/subscription-popup-confirmation/subscription-popup-confirmation.component'
+          ).then((m) => m.SubscriptionPopupConfirmationComponent),
+      },
+      {
         path: '',
         loadComponent: () =>
           import('./features/brochure-website/pages/home/home.component').then(
             (m) => m.HomeComponent
           ),
         pathMatch: 'full',
+      },
+      {
+        path: 'confirm-newsletter',
+        loadComponent: () =>
+          import(
+            './features/newsletter/confirm-newsletter/confirm-newsletter.component'
+          ).then((m) => m.ConfirmNewsletterComponent),
       },
     ],
   },
@@ -106,7 +121,7 @@ export const routes: Routes = [
       import('./features/dashboard/dashboard.component').then(
         (m) => m.DashboardComponent
       ),
-    canActivate: [adminGuard], 
+    canActivate: [adminGuard],
   },
   {
     path: 'profile',

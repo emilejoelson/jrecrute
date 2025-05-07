@@ -111,7 +111,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       {
         id: 'email',
         type: 'email',
-        title: 'Adresse email',
+        title: 'SIGNUP.EMAIL',
         classControl: this.commonInputClass,
         classLabel: this.commonLabelClass,
         placeholder: 'votre.email@exemple.com',
@@ -119,7 +119,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       {
         id: 'password',
         type: 'password',
-        title: 'Mot de passe',
+        title: 'SIGNUP.PASSWORD',
         classControl: this.commonInputClass,
         classLabel: this.commonLabelClass,
         placeholder: 'Créez un mot de passe sécurisé',
@@ -127,7 +127,7 @@ export class SignupComponent implements OnInit, OnDestroy {
       {
         id: 'confirmPassword',
         type: 'password',
-        title: 'Confirmer le mot de passe',
+        title: 'SIGNUP.CONFIRM_PASSWORD',
         classControl: this.commonInputClass,
         classLabel: this.commonLabelClass,
         placeholder: 'Confirmez votre mot de passe',
@@ -137,26 +137,26 @@ export class SignupComponent implements OnInit, OnDestroy {
       {
         id: 'termsAccepted',
         type: 'checkbox',
-        label: "J'accepte les",
+        label: 'SIGNUP.ACCEPT_TERMS.0',
         hasLink: true,
-        linkText: "Conditions générales d'utilisation",
+        linkText: 'SIGNUP.ACCEPT_TERMS.1',
         description:
-          "En créant un compte, vous acceptez nos conditions d'utilisation et notre politique de confidentialité.",
+          "SIGNUP.TERMS_NOTE",
       },
       {
         id: 'jobOffersAccepted',
         type: 'checkbox',
         label:
-          "Je souhaite recevoir les offres d'emploi correspondant à mon profil",
+          'SIGNUP.JOB_ALERTS_OPTIN',
         description:
-          'Nous vous enverrons uniquement les offres pertinentes selon vos critères.',
+          'SIGNUP.JOB_ALERTS_NOTE',
       },
       {
         id: 'newsletterAccepted',
         type: 'checkbox',
-        label: 'Je souhaite recevoir la newsletter et les actualités',
+        label: 'SIGNUP.NEWSLETTER_OPTIN',
         description:
-          'Restez informé des tendances du marché et des conseils carrière.',
+          'SIGNUP.NEWSLETTER_NOTE',
       },
     ],
   };

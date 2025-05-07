@@ -37,7 +37,8 @@ export type TIconName =
   | 'loginIcon'
   | 'signupIcon'
   | 'logoutIcon'
-  ;
+  | 'newsletterIcon'
+  | 'downIcon';
 
 @Component({
   selector: 'app-icon',
@@ -2668,7 +2669,7 @@ export class IconComponent implements OnInit {
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
               />
             </svg>`,
-            profileAccountIcon:`            <svg
+      profileAccountIcon: `            <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-[16px] w-[16px] mr-3 text-gray-400"
               fill="none"
@@ -2682,7 +2683,7 @@ export class IconComponent implements OnInit {
                 d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>`,
-            settingIcon:`            <svg
+      settingIcon: `            <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4 w-4 mr-3 text-gray-400"
               fill="none"
@@ -2702,7 +2703,7 @@ export class IconComponent implements OnInit {
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
               />
             </svg>`,
-            loginIcon:`            <svg
+      loginIcon: `            <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4 w-4 mr-3 text-gray-400"
               fill="none"
@@ -2716,7 +2717,7 @@ export class IconComponent implements OnInit {
                 d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
               />
             </svg>`,
-            signupIcon:`            <svg
+      signupIcon: `            <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4 w-4 mr-3 text-gray-400"
               fill="none"
@@ -2730,7 +2731,7 @@ export class IconComponent implements OnInit {
                 d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"
               />
             </svg>`,
-            logoutIcon:`            <svg
+      logoutIcon: `            <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-4 w-4 mr-3 text-red-400"
               fill="none"
@@ -2743,7 +2744,32 @@ export class IconComponent implements OnInit {
                 stroke-width="2"
                 d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
               />
-            </svg>`
+            </svg>`,
+      newsletterIcon: `<svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 text-[#A855F7]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M22 2L11 13"></path>
+          <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+        </svg>`,
+      downIcon: `        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-4 w-4 text-gray-500"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>`,
     };
 
     return svgMap[iconName];
