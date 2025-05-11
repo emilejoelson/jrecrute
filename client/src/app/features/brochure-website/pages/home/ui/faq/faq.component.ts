@@ -11,15 +11,14 @@ interface FaqItem {
 @Component({
   selector: 'app-faq',
   standalone: true,
-  imports: [CommonModule,TranslateModule],
+  imports: [CommonModule, TranslateModule],
   templateUrl: './faq.component.html',
-  styleUrl: './faq.component.scss' // Added style for consistency
+  styleUrl: './faq.component.scss'
 })
 export class FaqComponent implements AfterViewInit {
   elementRef = inject(ElementRef);
   isVisible = false;
 
-  // Inject PLATFORM_ID to check environment
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   faqItems: FaqItem[] = [
@@ -46,7 +45,6 @@ export class FaqComponent implements AfterViewInit {
   ];
 
   toggleFaq(selectedItem: FaqItem): void {
-    // Close all other FAQ items except the selected one
     this.faqItems.forEach(item => {
       if (item !== selectedItem) {
         item.isOpen = false;
@@ -56,13 +54,11 @@ export class FaqComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    // Execute only in the browser
     if (isPlatformBrowser(this.platformId)) {
       const observer = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
             this.isVisible = true;
-            // Disconnect observer once animation is triggered
             observer.disconnect();
           }
         },

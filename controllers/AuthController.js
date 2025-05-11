@@ -5,15 +5,14 @@ const {
   generateTokens,
   saveRefreshToken,
   verifyRefreshToken,
-  revokeRefreshToken
-} = require('../services/TokenService');
+  revokeRefreshToken,
+} = require("../services/TokenService");
 const {
   setRefreshTokenCookie,
-  clearRefreshTokenCookie
-} = require('../services/CookieService');
+  clearRefreshTokenCookie,
+} = require("../services/CookieService");
 
-
-const signup = async (req,res) => {
+const signup = async (req, res) => {
   try {
     const {
       email,
@@ -23,7 +22,7 @@ const signup = async (req,res) => {
       profileImage, // This will now be a URL/path string
       personalInfo,
       professionalInfo,
-      academicInfo
+      academicInfo,
     } = req.body;
 
     if (password !== confirmPassword) {
@@ -48,20 +47,20 @@ const signup = async (req,res) => {
         firstName: personalInfo.firstName,
         lastName: personalInfo.lastName,
         email: email,
-        telephone: personalInfo.telephone
+        telephone: personalInfo.telephone,
       },
       professionalInfo: professionalInfo || {
         currentPosition: "",
         desiredPosition: "",
-        experiences: []
+        experiences: [],
       },
       academicInfo: academicInfo || {
         formation: {
           level: "",
-          languages: []
+          languages: [],
         },
-        motivation: ""
-      }
+        motivation: "",
+      },
     });
 
     const savedUser = await newUser.save();
@@ -74,7 +73,7 @@ const signup = async (req,res) => {
       password: hashedPassword,
       userId: savedUser._id,
       role: "user",
-      refreshTokens: []
+      refreshTokens: [],
     });
 
     await newAuth.save();
@@ -94,7 +93,7 @@ const signup = async (req,res) => {
       message: "User registered successfully",
       userId: savedUser._id,
       accessToken,
-      refreshToken
+      refreshToken,
     });
   } catch (error) {
     console.error("Error during signup:", error);
@@ -122,12 +121,12 @@ const signup = async (req,res) => {
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const auth = await Auth.findOne({ email }).populate('roles');
-    
+    const auth = await Auth.findOne({ email }).populate("roles");
+
     if (!auth) {
       return res.status(401).json({ message: "Invalid credentials" });
     }
-    
+
     const isPasswordValid = await bcrypt.compare(password, auth.password);
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid credentials" });
@@ -137,7 +136,7 @@ const login = async (req, res) => {
       userId: auth.userId,
       email: auth.email,
       role: auth.role,
-      roles: auth.roles
+      roles: auth.roles,
     });
 
     await saveRefreshToken(auth.userId, refreshToken);
@@ -148,9 +147,9 @@ const login = async (req, res) => {
       message: "Login successful",
       userId: auth.userId,
       role: auth.role,
-      roles: auth.roles.map(role => ({ id: role._id, name: role.name })),
+      roles: auth.roles.map((role) => ({ id: role._id, name: role.name })),
       accessToken,
-      refreshToken
+      refreshToken,
     });
   } catch (error) {
     console.error("Error during login:", error);
@@ -173,28 +172,34 @@ const refreshTokens = async (req, res) => {
     try {
       decoded = verifyRefreshToken(refreshToken);
     } catch (err) {
-      return res.status(401).json({ message: "Invalid or expired refresh token" });
+      return res
+        .status(401)
+        .json({ message: "Invalid or expired refresh token" });
     }
 
     const auth = await Auth.findOne({
       userId: decoded.userId,
       "refreshTokens.token": refreshToken,
       "refreshTokens.isRevoked": false,
-      "refreshTokens.expires": { $gt: new Date() }
-    }).populate('roles');
+      "refreshTokens.expires": { $gt: new Date() },
+    }).populate("roles");
 
     if (!auth) {
-      return res.status(401).json({ message: "Refresh token invalid or revoked" });
+      return res
+        .status(401)
+        .json({ message: "Refresh token invalid or revoked" });
     }
 
     await revokeRefreshToken(refreshToken);
 
-    const { accessToken, refreshToken: newRefreshToken } = await generateTokens({
-      userId: auth.userId,
-      email: auth.email,
-      role: auth.role,
-      roles: auth.roles
-    });
+    const { accessToken, refreshToken: newRefreshToken } = await generateTokens(
+      {
+        userId: auth.userId,
+        email: auth.email,
+        role: auth.role,
+        roles: auth.roles,
+      }
+    );
 
     await saveRefreshToken(auth.userId, newRefreshToken);
 
@@ -203,7 +208,7 @@ const refreshTokens = async (req, res) => {
     res.status(200).json({
       accessToken,
       refreshToken: newRefreshToken,
-      message: "Tokens refreshed successfully"
+      message: "Tokens refreshed successfully",
     });
   } catch (error) {
     console.error("Error refreshing tokens:", error);
@@ -217,18 +222,18 @@ const getProfile = async (req, res) => {
   try {
     const { userId } = req.user;
     const user = await User.findById(userId);
-    
+
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    
+
     const profileData = {
       email: user.personalInfo.email,
       profileImage: user.profileImage,
       firstName: user.personalInfo.firstName,
       lastName: user.personalInfo.lastName,
     };
-    
+
     return res.status(200).json(profileData);
   } catch (error) {
     console.error("Error retrieving user profile:", error);
@@ -257,11 +262,78 @@ const logout = async (req, res) => {
     });
   }
 };
+const changePassword = async (req, res) => {
+  try {
+    const { userId } = req.user;
+    const { current_password, new_password, confirm_password } = req.body;
 
+    if (new_password !== confirm_password) {
+      return res.status(400).json({
+        message: "New password and confirm password do not match",
+        field: "confirm_password",
+      });
+    }
+
+    const auth = await Auth.findOne({ userId });
+
+    if (!auth) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      current_password,
+      auth.password
+    );
+    if (!isPasswordValid) {
+      return res.status(401).json({
+        message: "Current password is incorrect",
+        field: "current_password",
+      });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(new_password, salt);
+
+    auth.password = hashedPassword;
+
+    auth.refreshTokens.forEach((token) => {
+      token.isRevoked = true;
+    });
+
+    await auth.save();
+
+    // Generate new tokens
+    const { accessToken, refreshToken } = await generateTokens({
+      userId: auth.userId,
+      email: auth.email,
+      role: auth.role,
+      roles: auth.roles || [],
+    });
+
+    // Save the new refresh token
+    await saveRefreshToken(auth.userId, refreshToken);
+
+    // Update cookie with new refresh token
+    setRefreshTokenCookie(res, refreshToken);
+
+    res.status(200).json({
+      message: "Password changed successfully",
+      accessToken,
+      refreshToken,
+    });
+  } catch (error) {
+    console.error("Error changing password:", error);
+    res.status(500).json({
+      message: "Error changing password",
+      error: error.message,
+    });
+  }
+};
 module.exports = {
   signup,
   login,
   refreshTokens,
   logout,
   getProfile,
+  changePassword,
 };

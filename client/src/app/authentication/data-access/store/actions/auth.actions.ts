@@ -4,7 +4,11 @@ import {
   emptyProps,
   props,
 } from '@ngrx/store';
-import { AuthResponse, UserProfileResponse } from '../../models/auth.response';
+import {
+  AuthResponse,
+  ChangePasswordPayload,
+  UserProfileResponse,
+} from '../../models/auth.response';
 import { SignupRequest } from '../../../signup/data-access/models/signup';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoginRequest } from '../../../login/data-access/models/login';
@@ -52,6 +56,15 @@ export const AuthActions = createActionGroup({
       user: User;
       profile: UserProfileResponse | null;
     }>(),
-    'Initialize Auth Failure': props<{ error: any }>(),
+    'Initialize Auth Failure': props<{  error: string;}>(),
+
+    'Change Password': props<{ payload: ChangePasswordPayload }>(),
+    'Change Password Success': props<{
+      message: string;
+      accessToken: string;
+      refreshToken: string;
+    }>(),
+    'Change Password Failure': props<{  error: { error: HttpErrorResponse | Error | string }; }>(),
+    'Reset Password State': emptyProps(),
   },
 });

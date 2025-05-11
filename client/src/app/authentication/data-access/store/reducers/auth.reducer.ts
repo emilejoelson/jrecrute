@@ -1,13 +1,12 @@
 // authentication/data-access/store/auth.reducer.ts
 import { createReducer, on } from '@ngrx/store';
-import { initialAuthState } from '../auth.state';
+import { initialAuthState, initialPasswordState } from '../auth.state';
 import { AuthActions } from '../actions/auth.actions';
 import { User } from '../../../signup/data-access/models/user';
 
 export const authReducer = createReducer(
   initialAuthState,
 
-  // Signup
   on(AuthActions.signup, (state) => ({
     ...state,
     isLoading: true,
@@ -110,6 +109,34 @@ export const authReducer = createReducer(
     isAuthenticated: false,
     user: null,
     profile: null,
-    error,
+  })),
+
+  on(AuthActions.changePasswordSuccess, (state, { message, accessToken, refreshToken }) => ({
+    ...state,
+    accessToken,
+    refreshToken,
+    password: {
+      ...state.password,
+      isChanging: false,
+      success: true,
+      message,
+      error: null
+    }
+  })),
+  
+  on(AuthActions.changePasswordFailure, (state, { error }) => ({
+    ...state,
+    password: {
+      ...state.password,
+      isChanging: false,
+      success: false,
+      message: null,
+      error
+    }
+  })),
+  
+  on(AuthActions.resetPasswordState, (state) => ({
+    ...state,
+    password: initialPasswordState
   }))
 );

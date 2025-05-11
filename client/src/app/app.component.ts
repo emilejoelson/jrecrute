@@ -47,7 +47,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
-    private videoService: VideoService
+     private videoService: VideoService
   ) {}
 
   ngOnInit() {
@@ -80,7 +80,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }, 3000);
 
-      await playAttempt;
+       await playAttempt;
     } catch (error) {
       console.error('Failed to initialize video:', error);
       this.removePreloader();
@@ -117,9 +117,9 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {}
 
   ngOnDestroy() {
-    // this.subscriptions.forEach(sub => sub.unsubscribe());
-    // if (isPlatformBrowser(this.platformId)) {
-    //   this.videoService.stop();
-    // }
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+    if (isPlatformBrowser(this.platformId)) {
+      this.videoService.stop();
+    }
   }
 }

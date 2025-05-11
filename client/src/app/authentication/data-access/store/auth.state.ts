@@ -8,7 +8,17 @@ export interface AuthState {
   isAuthenticated: boolean;
   isSignupSuccess: boolean;
   profile: UserProfileResponse | null;
+  accessToken: string | null;
+  refreshToken: string | null;
+  password?: PasswordState;
 }
+
+export const initialPasswordState: PasswordState = {
+  isChanging: false,
+  success: false,
+  message: null,
+  error: null,
+};
 
 export const initialAuthState: AuthState = {
   user: null,
@@ -16,5 +26,15 @@ export const initialAuthState: AuthState = {
   error: null,
   isAuthenticated: false,
   isSignupSuccess: false,
-  profile:null,
+  profile: null,
+  accessToken: localStorage.getItem('accessToken'),
+  refreshToken: localStorage.getItem('refreshToken'),
+  password: initialPasswordState,
 };
+
+export interface PasswordState {
+  isChanging: boolean;
+  success: boolean;
+  message: string | null;
+  error: any;
+}

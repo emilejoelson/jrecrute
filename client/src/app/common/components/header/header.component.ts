@@ -98,6 +98,7 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   @ViewChild('logoImage') logoImage!: ElementRef<HTMLImageElement>;
   @ViewChild('logoContainer') logoContainer!: ElementRef<HTMLDivElement>;
 
+  isPostuler = true;
   fb = inject(FormBuilder);
   isOnline: boolean = true;
   isNavOpen = false;
@@ -105,7 +106,6 @@ export class HeaderComponent implements AfterViewInit, OnInit {
   dropdownOpen: boolean = false;
   dropdownNewsOpen: boolean = false;
 
-  // Add the missing property for desktop menu dropdown
   showDesktopMenu: boolean = false;
 
   newsletterForm: FormGroup;
@@ -135,6 +135,29 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     const nameParts = fullName.split(' ');
 
     return nameParts.map((part) => part.charAt(0).toUpperCase()).join('');
+  }
+
+  onSettings() {
+    this.isNavOpen = false;
+    this.router.navigate(['/parametre/compte']);
+    window.scrollTo(0, 0);
+    this.toggleProfileMenu();
+  }
+  onProfile() {
+    this.isNavOpen = false;
+    this.router.navigate(['/profile']);
+    window.scrollTo(0, 0);
+    this.toggleProfileMenu();
+  }
+  setPostuler(value: boolean) {
+    if (this.isPostuler === value) {
+      if (value) {
+        this.onDeposit();
+      } else {
+        this.onClient();
+      }
+    }
+    this.isPostuler = value;
   }
 
   toggleDropdownNews() {
@@ -257,9 +280,9 @@ export class HeaderComponent implements AfterViewInit, OnInit {
         this.toggleDropdownNews();
       });
 
-      setInterval(() => {
-        this.isOnline = !this.isOnline;
-      }, 30000);
+    setInterval(() => {
+      this.isOnline = !this.isOnline;
+    }, 30000);
   }
 
   onNewsletterSubmit(): void {
@@ -336,6 +359,25 @@ export class HeaderComponent implements AfterViewInit, OnInit {
         svgIcon: `<svg class="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path>
                                     </svg>`,
+      },
+    {
+        name: 'Newsletter',
+        translationKey: 'Newsletter',
+        sectionId: 'newsletter-home',
+        behaviour: 'scroll',
+        svgIcon: `<svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5 text-[#A855F7]"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M22 2L11 13"></path>
+          <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+        </svg>`,
       },
     ],
     buttons: [
@@ -450,14 +492,14 @@ export class HeaderComponent implements AfterViewInit, OnInit {
       '/mention-legal',
       '/deposer-un-cv',
       '/condition-general-de-vente',
-      '/offre-d\'emploi/commercial',
-      '/offre-d\'emploi/community-manager',
-      '/offre-d\'emploi/developpeur-web',
-      '/offre-d\'emploi/secretaire',
-      '/offre-d\'emploi/profil-bilingue'
+      "/offre-d'emploi/commercial",
+      "/offre-d'emploi/community-manager",
+      "/offre-d'emploi/developpeur-web",
+      "/offre-d'emploi/secretaire",
+      "/offre-d'emploi/profil-bilingue",
     ].includes(route);
   }
-  
+
   toggleHeaderBackground() {
     if (typeof window === 'undefined') {
       return;

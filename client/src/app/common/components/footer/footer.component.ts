@@ -1,6 +1,19 @@
 import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { IconComponent } from '../../../shared/ui/icon/icon.component';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { State } from '../../../state/root.state';
+import {
+  selectSubscribeError,
+  selectSubscribeLoading,
+  selectSubscribeResponse,
+  selectSubscribeSuccess,
+} from '../../../features/newsletter/data-access/store/selectors/newsletter.selectors';
+import { NewsletterActions } from '../../../features/newsletter/data-access/store/actions/newsletter.actions';
+import { CommonModule } from '@angular/common';
 
 type TNavLinks = {
   links: {
@@ -21,13 +34,44 @@ export interface SocialMediaItem {
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [RouterModule,TranslateModule],
+  imports: [RouterModule, TranslateModule, IconComponent,CommonModule,ReactiveFormsModule],
   templateUrl: './footer.component.html',
   styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
   @ViewChild('headerElement') headerElement!: ElementRef<HTMLElement>;
   router = inject(Router);
+  newsletterForm!: FormGroup;
+  newsletterLoading$: Observable<boolean>;
+  newsletterSuccess$: Observable<boolean>;
+  newsletterError$: Observable<any>;
+  newsletterMessage$: Observable<any>;
+
+  constructor(private fb: FormBuilder, private store: Store<State>) {
+    this.newsletterForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+    });
+
+    this.newsletterLoading$ = this.store.select(selectSubscribeLoading);
+    this.newsletterSuccess$ = this.store.select(selectSubscribeSuccess);
+    this.newsletterError$ = this.store.select(selectSubscribeError);
+    this.newsletterMessage$ = this.store.select(selectSubscribeResponse);
+  }
+
+  onSubmit() {
+    if (this.newsletterForm.valid) {
+      const request = {
+        email: this.newsletterForm.value.email,
+      };
+      this.store.dispatch(NewsletterActions.subscribe({ request }));
+    } else {
+      this.newsletterForm.markAllAsTouched();
+    }
+  }
+  resetNewsletterForm(): void {
+    this.newsletterForm.reset();
+    this.store.dispatch(NewsletterActions.resetSubscribeStatus());
+  }
 
   navCandidates: TNavLinks = {
     links: [
@@ -95,25 +139,26 @@ export class FooterComponent {
         name: 'Facebook',
         icon: 'fa fa-facebook',
         link: 'https://www.facebook.com/profile.php?id=61551056274954',
-        customClass: 'bg-blue-600 text-white border-blue-600'
+        customClass: 'bg-blue-600 text-white border-blue-600',
       },
       {
         name: 'Instagram',
         icon: 'fa fa-instagram',
         link: 'https://www.instagram.com/consult.collab/',
-        customClass: 'bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 text-white border-pink-500'
+        customClass:
+          'bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600 text-white border-pink-500',
       },
       {
         name: 'LinkedIn',
         icon: 'fa fa-linkedin',
         link: 'https://www.linkedin.com/company/consultcollab/?originalSubdomain=fr',
-        customClass: 'bg-blue-700 text-white border-blue-700'
+        customClass: 'bg-blue-700 text-white border-blue-700',
       },
       {
         name: 'Contact',
         icon: 'fa fa-envelope',
         link: 'mailto:contact@consultcollab.com',
-        customClass: 'bg-red-600 text-white border-red-600'
+        customClass: 'bg-red-600 text-white border-red-600',
       },
     ] as SocialMediaItem[],
   };

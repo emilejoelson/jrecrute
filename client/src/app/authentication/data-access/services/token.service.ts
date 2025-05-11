@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TokenService {
   private readonly ACCESS_TOKEN_KEY = 'accessToken';
   private readonly REFRESH_TOKEN_KEY = 'refreshToken';
-  
+
   constructor() {}
 
   setAccessToken(token: string): void {
@@ -44,13 +44,13 @@ export class TokenService {
   isTokenExpired(): boolean {
     const token = this.getAccessToken();
     if (!token) return true;
-    
+
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
       const expiryTime = payload.exp * 1000;
-      
+
       // Add a 30-second buffer to avoid edge cases
-      return Date.now() >= (expiryTime - 30000);
+      return Date.now() >= expiryTime - 30000;
     } catch (e) {
       console.error('Error parsing token:', e);
       // Don't consider token expired on parsing error
@@ -62,7 +62,7 @@ export class TokenService {
   getTokenPayload(): any {
     const token = this.getAccessToken();
     if (!token) return null;
-    
+
     try {
       return JSON.parse(atob(token.split('.')[1]));
     } catch (e) {
@@ -75,21 +75,26 @@ export class TokenService {
   hasRole(role: string): boolean {
     const payload = this.getTokenPayload();
     if (!payload) return false;
-    
+
     // Check based on different possible role properties in the JWT
     if (payload.role && payload.role === role) {
       return true;
     }
-    
+
     if (payload.roles && Array.isArray(payload.roles)) {
       return payload.roles.includes(role);
     }
-    
+
     return false;
   }
 
   isAdmin(): boolean {
     return this.hasRole('admin');
+  }
+
+  updateTokens(accessToken: string, refreshToken: string): void {
+    localStorage.setItem(this.ACCESS_TOKEN_KEY, accessToken);
+    localStorage.setItem(this.REFRESH_TOKEN_KEY, refreshToken);
   }
 
   clearTokens(): void {

@@ -11,6 +11,22 @@ export const routes: Routes = [
       ),
     children: [
       {
+        title: 'Paramètre | Compte',
+        path: 'parametre/compte',
+        loadComponent: () =>
+          import('./features/settings/settings.component').then(
+            (m) => m.SettingsComponent
+          ),
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./features/profile/profile.component').then(
+            (c) => c.ProfileComponent
+          ),
+        canActivate: [authGuard],
+      },
+      {
         title: 'Connexion',
         path: 'connexion',
         loadComponent: () =>
@@ -123,14 +139,7 @@ export const routes: Routes = [
       ),
     canActivate: [adminGuard],
   },
-  {
-    path: 'profile',
-    loadComponent: () =>
-      import('./features/profile/profile.component').then(
-        (c) => c.ProfileComponent
-      ),
-    canActivate: [authGuard],
-  },
+
   {
     path: 'access-denied',
     loadComponent: () =>

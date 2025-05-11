@@ -54,6 +54,8 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
     '/connexion',
     '/confirm-newsletter',
     '/newsletter-subscription',
+    '/profile',
+    '/parametre/compte',
   ];
 
   constructor(@Inject(PLATFORM_ID) platformId: Object, private router: Router) {
@@ -73,7 +75,6 @@ export class BrochureWebsiteComponent implements OnInit, OnDestroy {
       this.handleResize();
       window.addEventListener('resize', this.handleResize);
 
-      // Check current URL during initialization
       this.showVideo.set(
         !this.hideVideoUrls.some((url) => this.router.url.includes(url))
       );

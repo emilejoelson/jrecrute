@@ -1,0 +1,1 @@
+import{r as s}from"./chunk-ZQEZGJWL.js";var t=e=>e.newsletter,c=s(t,e=>e.subscribeLoading),o=s(t,e=>e.subscribeSuccess),b=s(t,e=>e.subscribeError),i=s(t,e=>e.subscribeResponse);export{c as a,o as b,b as c,i as d};

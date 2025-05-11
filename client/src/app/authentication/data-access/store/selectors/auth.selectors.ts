@@ -75,3 +75,36 @@ export const selectUserEmail = createSelector(
   selectUserProfile,
   (profile) => profile?.email || 'myusername@example.com'
 );
+
+export const selectPasswordState = createSelector(
+  selectAuthState,
+  (state: AuthState) => state.password
+);
+
+export const selectIsChangingPassword = createSelector(
+  selectPasswordState,
+  (state) => state?.isChanging
+);
+
+export const selectPasswordChangeSuccess = createSelector(
+  selectPasswordState,
+  (state) => state?.success
+);
+
+export const selectPasswordChangeMessage = createSelector(
+  selectPasswordState,
+  (state) => state?.message
+);
+
+export const selectPasswordChangeError = createSelector(
+  selectPasswordState,
+  (state) => state?.error
+);
+
+export const selectAuthTokens = createSelector(
+  selectAuthState,
+  (state) => ({
+    accessToken: state.accessToken,
+    refreshToken: state.refreshToken
+  })
+);

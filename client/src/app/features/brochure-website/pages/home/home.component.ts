@@ -6,6 +6,7 @@ import { OurJobOfferScrollComponent } from './ui/our-job-offer-scroll/our-job-of
 import { HowItWorkSectionComponent } from './ui/how-it-work-section/how-it-work-section.component';
 import { AdvantageSectionComponent } from './ui/advantage-section/advantage-section.component';
 import { FaqComponent } from './ui/faq/faq.component';
+import { NewsletterHomeComponent } from './ui/newsletter-home/newsletter-home.component';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +18,9 @@ import { FaqComponent } from './ui/faq/faq.component';
     HowItWorkSectionComponent,
     AdvantageSectionComponent,
     FaqComponent,
+    NewsletterHomeComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {
-  
-}
+export class HomeComponent {}

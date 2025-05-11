@@ -1,1 +1,0 @@
-import{c as r,d as t}from"./chunk-DKQUP4ZW.js";var o=t({source:"Recruitment Form API",events:{"Submit recruitment form":r(),"Submit recruitment form success":r(),"Submit recruitment form failure":r()}});export{o as a};

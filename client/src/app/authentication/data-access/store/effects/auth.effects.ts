@@ -16,7 +16,8 @@ import { AuthService } from '../../services/auth.service';
 import { TokenService } from '../../services/token.service';
 import { LoginService } from '../../../login/data-access/login.service';
 import { User } from '../../../signup/data-access/models/user';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SettingsService } from '../../services/settings.services';
 @Injectable()
 export class AuthEffects {
   actions$ = inject(Actions);
@@ -24,14 +25,59 @@ export class AuthEffects {
   loginService = inject(LoginService);
   authService = inject(AuthService);
   tokenService = inject(TokenService);
-
+  snackBar = inject(MatSnackBar);
   router = inject(Router);
+  settingService = inject(SettingsService);
+  
+   changePassword$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.changePassword),
+      switchMap(({ payload }) =>
+        this.settingService.changePassword(payload).pipe(
+          map(response => {
+            // Update tokens in local storage
+            this.tokenService.updateTokens(response.accessToken, response.refreshToken);
+            
+            return AuthActions.changePasswordSuccess({
+              message: response.message,
+              accessToken: response.accessToken,
+              refreshToken: response.refreshToken
+            });
+          }),
+          catchError(error => {
+            let errorMessage = 'An error occurred while changing password';
+            
+            if (error.error && error.error.message) {
+              errorMessage = error.error.message;
+            }
+            
+            return of(AuthActions.changePasswordFailure({ error: error}));
+          })
+        )
+      )
+    )
+  );
+
+  changePasswordSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(AuthActions.changePasswordSuccess),
+      tap(({ message }) => {
+        this.snackBar.open(message, 'Close', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom'
+        });
+      })
+    ),
+    { dispatch: false }
+  );
+
+
 
   signup$ = createEffect(() =>
     this.actions$.pipe(
       ofType(AuthActions.signup),
       switchMap((payload) => {
-        // Process image if available
         if (payload.profileImage && payload.profileImage.includes('base64')) {
           // Convert base64 to file
           const base64 = payload.profileImage.split(',')[1];
@@ -273,7 +319,7 @@ export class AuthEffects {
                   } else {
                     return of(
                       AuthActions.initializeAuthFailure({
-                        error: 'Token refresh failed',
+                        error: error,
                       })
                     );
                   }

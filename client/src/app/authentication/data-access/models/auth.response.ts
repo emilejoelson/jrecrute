@@ -21,3 +21,15 @@ export interface UserProfileResponse {
   firstName: string;
   lastName: string;
 }
+
+export interface ChangePasswordPayload {
+  current_password: string;
+  new_password: string;
+  confirm_password: string;
+}
+
+export interface ChangePasswordResponse {
+  message: string;
+  accessToken: string;
+  refreshToken: string;
+}
