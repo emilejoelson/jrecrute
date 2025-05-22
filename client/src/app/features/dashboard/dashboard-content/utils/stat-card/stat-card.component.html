@@ -1,0 +1,19 @@
+<div class="stat-card">
+  <div class="icon-container">
+    <div [innerHTML]="safeIcon"></div>
+  </div>
+  <div class="stat-info">
+    <div class="stat-title">{{ title }}</div>
+    <div class="stat-value">{{ value }}</div>
+    <div
+      class="stat-change"
+      [ngClass]="{
+        positive: changeType === 'positive',
+        negative: changeType === 'negative'
+      }"
+    >
+      <div [innerHTML]="safeChangeIcon"></div>
+      {{ change }}
+    </div>
+  </div>
+</div>

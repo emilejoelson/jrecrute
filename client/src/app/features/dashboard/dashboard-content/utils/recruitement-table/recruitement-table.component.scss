@@ -1,0 +1,195 @@
+.card {
+      background-color: #2d3748;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-header {
+      padding: 20px;
+      border-bottom: 1px solid #374151;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #f9fafb;
+      margin: 0;
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .action-btn {
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background-color: #4a5568;
+      color: #e2e8f0;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .action-btn:hover {
+      background-color: #4a5568;
+    }
+    
+    .action-btn.primary {
+      background-color: #8a57de;
+      color: white;
+    }
+    
+    .action-btn.primary:hover {
+      background-color: #7c4dca;
+    }
+    
+    .table-container {
+      overflow-x: auto;
+    }
+    
+    .recruitment-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    .recruitment-table th, .recruitment-table td {
+      padding: 12px 20px;
+      text-align: left;
+    }
+    
+    .recruitment-table th {
+      color: #a0aec0;
+      font-weight: 500;
+      font-size: 14px;
+      border-bottom: 1px solid #374151;
+    }
+    
+    .recruitment-table td {
+      border-bottom: 1px solid #374151;
+      color: #e2e8f0;
+    }
+    
+    .candidate-info {
+      display: flex;
+      align-items: center;
+    }
+    
+    .candidate-img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 12px;
+    }
+    
+    .candidate-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .status-badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+    
+    .status-badge.pending {
+      background-color: rgba(236, 201, 75, 0.15);
+      color: #ecc94b;
+    }
+    
+    .status-badge.interview {
+      background-color: rgba(66, 153, 225, 0.15);
+      color: #4299e1;
+    }
+    
+    .status-badge.hired {
+      background-color: rgba(72, 187, 120, 0.15);
+      color: #48bb78;
+    }
+    
+    .status-badge.rejected {
+      background-color: rgba(245, 101, 101, 0.15);
+      color: #f56565;
+    }
+    
+    .actions {
+      display: flex;
+      gap: 8px;
+    }
+    
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background-color: #4a5568;
+      color: #a0aec0;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .icon-btn:hover {
+      background-color: #4a5568;
+      color: #f9fafb;
+    }
+    
+    .card-footer {
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #374151;
+    }
+    
+    .pagination-info {
+      color: #a0aec0;
+      font-size: 14px;
+    }
+    
+    .pagination {
+      display: flex;
+      gap: 5px;
+    }
+    
+    .pagination-btn {
+      width: 35px;
+      height: 35px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #4a5568;
+      color: #a0aec0;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .pagination-btn:hover {
+      background-color: #4a5568;
+      color: #f9fafb;
+    }
+    
+    .pagination-btn.active {
+      background-color: #8a57de;
+      color: white;
+    }
+    
+    .pagination-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }

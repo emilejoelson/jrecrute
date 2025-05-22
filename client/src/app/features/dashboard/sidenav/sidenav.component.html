@@ -1,0 +1,163 @@
+<nav class="sidenav" [class.collapsed]="isCollapsed">
+  <div class="nav-header">
+    @if(!isCollapsed){
+    <div class="nav-title">
+      <div class="title-main">
+        <span class="title-text">Admin Portal</span>
+        <div class="title-glow"></div>
+      </div>
+      <span class="title-subtitle">Management Dashboard</span>
+    </div>
+    }
+    <div class="hamburger-toggle" (click)="toggleSidebar()">
+      <div class="hamburger-lines" [class.active]="!isCollapsed">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-content">
+    <ul class="nav-list">
+      <ng-container *ngFor="let item of navItems; trackBy: trackByItemId">
+        <li
+          *ngIf="!item.isGroup"
+          [class.active]="item.active"
+          class="nav-item single-item"
+          (click)="setActiveItem(item)"
+        >
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="active-link"
+            [title]="isCollapsed ? item.label : ''"
+            class="nav-link"
+          >
+            <div class="nav-icon-wrapper">
+              <span class="nav-icon" [innerHTML]="item.safeIcon"></span>
+              <div class="icon-ripple"></div>
+            </div>
+            <div class="nav-content-wrapper" [class.hidden]="isCollapsed">
+              <span class="nav-label">{{ item.label }}</span>
+              <span class="nav-description" *ngIf="item.description">{{
+                item.description
+              }}</span>
+            </div>
+            <span *ngIf="item.badge && !isCollapsed" class="nav-badge">{{
+              item.badge > 999 ? "999+" : item.badge
+            }}</span>
+          </a>
+        </li>
+
+        <li
+          *ngIf="item.isGroup"
+          class="nav-group"
+          [class.expanded]="item.isExpanded"
+          [class.has-active-child]="hasActiveChild(item)"
+        >
+          <div
+            class="nav-group-header"
+            (click)="toggleGroup(item)"
+            [title]="isCollapsed ? item.label : ''"
+          >
+            <div class="nav-icon-wrapper">
+              <span class="nav-icon" [innerHTML]="item.safeIcon"></span>
+              <div class="icon-ripple"></div>
+            </div>
+            <div class="nav-content-wrapper" [class.hidden]="isCollapsed">
+              <span class="nav-label">{{ item.label }}</span>
+              <span class="nav-description" *ngIf="item.description">{{
+                item.description
+              }}</span>
+            </div>
+            <div class="nav-actions" [class.hidden]="isCollapsed">
+              <span *ngIf="item.badge" class="nav-badge group-badge">{{
+                item.badge > 999 ? "999+" : item.badge
+              }}</span>
+              <button
+                class="quick-add-btn"
+                (click)="onQuickAdd(item); $event.stopPropagation()"
+                title="Quick Add"
+              >
+                <span [innerHTML]="plusIcon"></span>
+              </button>
+              <span
+                class="nav-chevron"
+                [innerHTML]="
+                  item.isExpanded ? chevronDownIcon : chevronRightIcon
+                "
+              ></span>
+            </div>
+          </div>
+
+          <ul
+            *ngIf="item.children"
+            class="nav-sublist"
+            [class.expanded]="item.isExpanded && !isCollapsed"
+          >
+            <li
+              *ngFor="let child of item.children; trackBy: trackByItemId"
+              [class.active]="child.active"
+              class="nav-subitem"
+              (click)="setActiveItem(child)"
+            >
+              <a
+                [routerLink]="child.route"
+                routerLinkActive="active-link"
+                [title]="child.label"
+                class="nav-sublink"
+              >
+                <div class="nav-icon-wrapper">
+                  <span class="nav-icon" [innerHTML]="child.safeIcon"></span>
+                  <div class="icon-ripple"></div>
+                </div>
+                <span class="nav-label">{{ child.label }}</span>
+                <span *ngIf="child.badge" class="nav-badge sub-badge">{{
+                  child.badge > 999 ? "999+" : child.badge
+                }}</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ng-container>
+    </ul>
+  </div>
+
+  <div class="user-actions">
+    <div class="nav-item settings-item">
+      <a
+        (click)="onSettings()"
+        [title]="isCollapsed ? 'Settings' : ''"
+        class="nav-link"
+      >
+        <div class="nav-icon-wrapper">
+          <span class="nav-icon" [innerHTML]="settingsIcon"></span>
+          <div class="icon-ripple"></div>
+        </div>
+        <span class="nav-label" [class.hidden]="isCollapsed">Settings</span>
+      </a>
+    </div>
+    <div class="nav-item logout-item">
+      <a
+        (click)="logout()"
+        [title]="isCollapsed ? 'Logout' : ''"
+        class="nav-link"
+      >
+        <div class="nav-icon-wrapper">
+          <span class="nav-icon" [innerHTML]="logoutIcon"></span>
+          <div class="icon-ripple"></div>
+        </div>
+        <span class="nav-label" [class.hidden]="isCollapsed">Logout</span>
+      </a>
+    </div>
+    <div class="nav-item back-item">
+      <a (click)="back()" [title]="isCollapsed ? 'Back' : ''" class="nav-link">
+        <div class="nav-icon-wrapper">
+          <span class="nav-icon" [innerHTML]="backIcon"></span>
+          <div class="icon-ripple"></div>
+        </div>
+        <span class="nav-label" [class.hidden]="isCollapsed">Back</span>
+      </a>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Active Job Postings</h2>
+    <button class="action-btn rounded-md hover:bg-[#4a5568]">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="20"
+        width="20"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path
+          d="M12 8q-.825 0-1.412-.587Q10 6.825 10 6t.588-1.412Q11.175 4 12 4t1.413.588Q14 5.175 14 6t-.587 1.413Q12.825 8 12 8Zm0 6q-.825 0-1.412-.587Q10 12.825 10 12t.588-1.412Q11.175 10 12 10t1.413.588Q14 11.175 14 12t-.587 1.413Q12.825 14 12 14Zm0 6q-.825 0-1.412-.587Q10 18.825 10 18t.588-1.412Q11.175 16 12 16t1.413.588Q14 17.175 14 18t-.587 1.413Q12.825 20 12 20Z"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div class="card-content">
+    <div *ngFor="let job of activeJobs" class="job-item">
+      <div class="job-header">
+        <h3 class="job-title">{{ job.title }}</h3>
+        <span class="job-candidates">{{ job.candidates }} candidates</span>
+      </div>
+
+      <div class="progress-container">
+        <div class="progress-bar">
+          <div class="progress" [style.width.%]="job.progress"></div>
+        </div>
+        <span class="progress-text">{{ job.progress }}%</span>
+      </div>
+
+      <div class="job-footer">
+        <span class="days-left">{{ job.daysLeft }} days left</span>
+        <button class="view-btn">View Details</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer">
+    <button class="view-all-btn">
+      <span>View All Job Postings</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="20"
+        width="20"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path d="M10 17l5-5-5-5v10z" />
+      </svg>
+    </button>
+  </div>
+</div>

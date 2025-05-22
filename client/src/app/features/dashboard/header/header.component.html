@@ -1,0 +1,71 @@
+<header class="header">
+  <div class="logo-container">
+    <div class="logo">
+      <div class="flex items-center gap-2">
+        <img
+          #logoImage
+          class="w-10 h-10 object-contain"
+          src="assets/icons/cc-logo.png"
+          alt="Logo"
+        />
+      </div>
+    </div>
+    <div class="company-name">Consult Collab</div>
+  </div>
+
+  <div class="search-container">
+    <input type="text" placeholder="Search..." class="search-input" />
+    <button class="search-button">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <circle
+          cx="10"
+          cy="10"
+          r="7"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+
+        <line
+          x1="21"
+          y1="21"
+          x2="15.65"
+          y2="15.65"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
+    </button>
+  </div>
+
+  <div class="user-profile">
+    <div class="notifications">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="24"
+        width="24"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+      >
+        <path
+          d="M12 24q-.825 0-1.412-.587Q10 22.825 10 22h4q0 .825-.588 1.413Q12.825 24 12 24Zm-9-4v-2h2v-6q0-2.5 1.55-4.475Q8.1 5.55 10.5 5.1V4q0-.625.438-1.062Q11.375 2.5 12 2.5q.625 0 1.062.438Q13.5 3.375 13.5 4v1.1q2.4.45 3.95 2.425Q19 9.5 19 12v6h2v2Z"
+        />
+      </svg>
+      <span class="notification-badge">3</span>
+    </div>
+
+    <div class="user-info">
+      <span class="user-name">{{ fullName$ | async }}</span>
+      <span class="user-email"> {{ userEmail$ | async }}</span>
+    </div>
+    <div class="user-avatar">
+        @if( profileImageUrl$ | async){
+          <img [src]="profileImageUrl$ | async" />
+        }
+    </div>
+  </div>
+</header>

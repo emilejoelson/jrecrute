@@ -11,6 +11,25 @@ export class NewsletterEffects {
   actions$ = inject(Actions);
   newsletterService = inject(NewsletterService);
   router = inject(Router);
+
+  loadSubscribers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(NewsletterActions.loadSubscribers),
+      mergeMap(() =>
+        this.newsletterService.getAllSubscribers().pipe(
+          map((response) =>
+            NewsletterActions.loadSubscribersSuccess({
+              subscribers: response.subscribers,
+            })
+          ),
+          catchError((error) =>
+            of(NewsletterActions.loadSubscribersFailure({ error: { error } }))
+          )
+        )
+      )
+    )
+  );
+
   subscribe$ = createEffect(() =>
     this.actions$.pipe(
       ofType(NewsletterActions.subscribe),

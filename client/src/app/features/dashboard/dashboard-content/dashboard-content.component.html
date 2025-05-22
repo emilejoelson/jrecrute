@@ -1,0 +1,49 @@
+<div class="dashboard-content">
+  <h1 class="dashboard-title">Dashboard Overview</h1>
+  
+  <div class="stats-container">
+    <app-stat-card
+      [svgIcon]="usersSvg"
+      title="Total Users"
+      value="1,247"
+      change="+12.5%"
+      changeType="positive">
+    </app-stat-card>
+    
+    <app-stat-card
+      [svgIcon]="applicationsSvg"
+      title="Applications"
+      value="328"
+      change="+5.3%"
+      changeType="positive">
+    </app-stat-card>
+    
+    <app-stat-card
+      [svgIcon]="hiredSvg"
+      title="Hired"
+      value="87"
+      change="+18.7%"
+      changeType="positive">
+    </app-stat-card>
+    
+    <app-stat-card
+      [svgIcon]="newsletterSvg"
+      title="Newsletter Subs"
+      value="4,781"
+      change="-2.4%"
+      changeType="negative">
+    </app-stat-card>
+  </div>
+  
+  <div class="main-content">
+    <div class="main-left">
+      <app-recruitement-table></app-recruitement-table>
+      <app-newsletter-stat></app-newsletter-stat>
+    </div>
+    
+    <div class="main-right">
+      <app-active-applications></app-active-applications>
+      <app-recent-user></app-recent-user>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,148 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Recent Candidates</h2>
+    <div class="header-actions">
+      <button class="action-btn">
+        <!-- Filter Icon (SVG) -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M3 4h18v2H3V4zm4 7h10v2H7v-2zm4 7h2v2h-2v-2z" />
+        </svg>
+        Filter
+      </button>
+      <button class="action-btn primary">
+        <!-- Plus Icon (SVG) -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z" />
+        </svg>
+        Add Candidate
+      </button>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="recruitment-table">
+      <thead>
+        <tr>
+          <th>Candidate</th>
+          <th>Position</th>
+          <th>Applied Date</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let candidate of candidates">
+          <td class="candidate-info">
+            <div class="candidate-img">
+              <img [src]="candidate.profileImg" alt="Candidate" />
+            </div>
+            <div class="candidate-name">{{ candidate.name }}</div>
+          </td>
+          <td>{{ candidate.position }}</td>
+          <td>{{ candidate.date }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="candidate.status">
+              {{ candidate.status | titlecase }}
+            </span>
+          </td>
+          <td class="actions">
+            <button class="icon-btn" title="View" style="color: #007bff">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 5c-7.633 0-11 7-11 7s3.367 7 11 7 11-7 11-7-3.367-7-11-7zm0 12c-2.761 0-5-2.239-5-5s2.239-5 
+               5-5 5 2.239 5 5-2.239 5-5 5zm0-8a3 3 0 100 6 3 3 0 000-6z"
+                />
+              </svg>
+            </button>
+
+            <button class="icon-btn" title="Edit" style="color: #28a745">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 
+               1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 
+               1.84-1.82z"
+                />
+              </svg>
+            </button>
+
+            <button class="icon-btn" title="Delete" style="color: #dc3545">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M3 6h18v2H3V6zm2 3h14l-1.5 12.5a1 1 0 01-1 .5H7a1 1 0 01-1-.5L4 9zm5 
+               2v8h2v-8H9zm4 0v8h2v-8h-2z"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer">
+    <div class="pagination-info">Showing 1-5 of 28 candidates</div>
+    <div class="pagination">
+      <!-- Chevron Left -->
+      <button class="pagination-btn"  title="Previous">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6z" />
+        </svg>
+      </button>
+
+      <!-- Page Numbers -->
+      <button class="pagination-btn active">1</button>
+      <button class="pagination-btn">2</button>
+      <button class="pagination-btn">3</button>
+      <button class="pagination-btn">4</button>
+
+      <!-- Chevron Right -->
+      <button class="pagination-btn" title="Next">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="14"
+          height="14"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6z" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</div>

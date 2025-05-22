@@ -1,0 +1,174 @@
+.card {
+      background-color: #2d3748;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .card-header {
+      padding: 20px;
+      border-bottom: 1px solid #374151;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .card-title {
+      font-size: 18px;
+      font-weight: 500;
+      color: #f9fafb;
+      margin: 0;
+    }
+    
+    .action-btn {
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .card-content {
+      flex: 1;
+      padding: 10px 0;
+      overflow-y: auto;
+    }
+    
+    .user-item {
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #374151;
+    }
+    
+    .user-item:last-child {
+      border-bottom: none;
+    }
+    
+    .user-profile {
+      display: flex;
+      align-items: center;
+    }
+    
+    .user-avatar {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-right: 12px;
+    }
+    
+    .user-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .status-indicator {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid #2d3748;
+    }
+    
+    .status-indicator.online {
+      background-color: #48bb78;
+    }
+    
+    .status-indicator.offline {
+      background-color: #a0aec0;
+    }
+    
+    .status-indicator.away {
+      background-color: #ecc94b;
+    }
+    
+    .user-info {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .user-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: #f9fafb;
+    }
+    
+    .user-email {
+      font-size: 12px;
+      color: #a0aec0;
+    }
+    
+    .user-details {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    
+    .role-badge {
+      font-size: 12px;
+      padding: 4px 8px;
+      background-color: rgba(138, 87, 222, 0.1);
+      color: #8a57de;
+      border-radius: 20px;
+      margin-bottom: 5px;
+    }
+    
+    .last-active {
+      font-size: 12px;
+      color: #a0aec0;
+    }
+    
+    .icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #4a5568;
+      color: #a0aec0;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .icon-btn:hover {
+      background-color: #4a5568;
+      color: #f9fafb;
+    }
+    
+    .card-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #374151;
+    }
+    
+    .view-all-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #4a5568;
+      color: #f9fafb;
+      border: none;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .view-all-btn:hover {
+      background-color: #4a5568;
+    }

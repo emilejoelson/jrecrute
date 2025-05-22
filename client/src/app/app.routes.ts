@@ -138,6 +138,56 @@ export const routes: Routes = [
         (m) => m.DashboardComponent
       ),
     canActivate: [adminGuard],
+    children: [
+      {
+        title: 'manage-newsletter',
+        path: 'newsletter',
+        loadComponent: () =>
+          import(
+            './features/dashboard/dashboard-content/pages/manage-newsletter/manage-newsletter.component'
+          ).then((m) => m.ManageNewsletterComponent),
+      },
+      {
+        title: 'manage-subscriber',
+        path: 'subscribers',
+        loadComponent: () =>
+          import(
+            './features/dashboard/dashboard-content/pages/manage-subscriber/manage-subscriber.component'
+          ).then((m) => m.ManageSubscriberComponent),
+      },
+      {
+        title: 'newsletter-detail',
+        path: 'newsletter/:id',
+        loadComponent: () =>
+          import(
+            './features/dashboard/dashboard-content/pages/manage-newsletter/components/newsletter-detail/newsletter-detail.component'
+          ).then((m) => m.NewsletterDetailComponent),
+      },
+      {
+        title: '',
+        path: '',
+        loadComponent: () =>
+          import(
+            './features/dashboard/dashboard-content/dashboard-content.component'
+          ).then((m) => m.DashboardContentComponent),
+      },
+      {
+        title: 'manage-user',
+        path: 'users',
+        loadComponent: () =>
+          import(
+            './features/dashboard/dashboard-content/pages/manage-user/manage-user.component'
+          ).then((m) => m.ManageUserComponent),
+      },
+      {
+        title: 'manage-recruitement',
+        path: 'recruitment',
+        loadComponent: () =>
+          import(
+            './features/dashboard/dashboard-content/pages/recruitement/recruitement.component'
+          ).then((m) => m.RecruitementComponent),
+      },
+    ],
   },
 
   {

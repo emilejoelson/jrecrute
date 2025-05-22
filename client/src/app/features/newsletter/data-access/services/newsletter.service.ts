@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../../environment/environment';
-import { NewsletterConfirmationResponse, NewsletterSubscriptionRequest, NewsletterSubscriptionResponse, NewsletterUnsubscribeRequest, NewsletterUnsubscribeResponse } from '../models/newsletter';
+import { Newsletter, NewsletterConfirmationResponse, NewsletterSubscriptionRequest, NewsletterSubscriptionResponse, NewsletterUnsubscribeRequest, NewsletterUnsubscribeResponse } from '../models/newsletter';
 
 
 
@@ -13,6 +13,10 @@ export class NewsletterService {
   private apiUrl = environment.apiUrl;
   
   http = inject(HttpClient);
+  
+  getAllSubscribers(): Observable<{ subscribers: Newsletter[] }> {
+    return this.http.get<{ subscribers: Newsletter[] }>(`${this.apiUrl}/newsletter`);
+  }
   
   subscribe(request: NewsletterSubscriptionRequest): Observable<NewsletterSubscriptionResponse> {
     return this.http.post<NewsletterSubscriptionResponse>(`${this.apiUrl}/newsletter/subscribe`, request);

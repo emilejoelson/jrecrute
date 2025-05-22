@@ -1,0 +1,123 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">Newsletter Statistics</h2>
+    <div class="header-actions">
+      <div class="time-filter">
+        <button class="time-btn">Weekly</button>
+        <button class="time-btn active">Monthly</button>
+        <button class="time-btn">Yearly</button>
+      </div>
+      <button class="action-btn">
+        <i class="fas fa-download"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <div class="newsletter-stats">
+      <div class="stats-summary">
+        <div class="summary-item">
+          <div class="summary-value">4,781</div>
+          <div class="summary-label">Total Subscribers</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-value">25.4%</div>
+          <div class="summary-label">Avg. Open Rate</div>
+        </div>
+        <div class="summary-item">
+          <div class="summary-value">12.8%</div>
+          <div class="summary-label">Avg. Click Rate</div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <!-- Placeholder for the chart -->
+        <div class="chart-placeholder">
+          <svg viewBox="0 0 460 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background grid -->
+            <g class="grid">
+              <line x1="40" y1="20" x2="40" y2="180" />
+              <line x1="40" y1="180" x2="440" y2="180" />
+              <line x1="40" y1="60" x2="440" y2="60" />
+              <line x1="40" y1="100" x2="440" y2="100" />
+              <line x1="40" y1="140" x2="440" y2="140" />
+            </g>
+
+            <!-- Subscribers line -->
+            <path
+              class="subscribers-path"
+              d="M 40,140 L 120,120 L 200,80 L 280,65 L 360,40 L 440,50"
+            />
+
+            <!-- Open rate line -->
+            <path
+              class="open-path"
+              d="M 40,160 L 120,150 L 200,130 L 280,120 L 360,100 L 440,110"
+            />
+
+            <!-- Data points -->
+            <g class="data-points subscribers">
+              <circle cx="40" cy="140" r="4" />
+              <circle cx="120" cy="120" r="4" />
+              <circle cx="200" cy="80" r="4" />
+              <circle cx="280" cy="65" r="4" />
+              <circle cx="360" cy="40" r="4" />
+              <circle cx="440" cy="50" r="4" />
+            </g>
+
+            <g class="data-points open-rate">
+              <circle cx="40" cy="160" r="4" />
+              <circle cx="120" cy="150" r="4" />
+              <circle cx="200" cy="130" r="4" />
+              <circle cx="280" cy="120" r="4" />
+              <circle cx="360" cy="100" r="4" />
+              <circle cx="440" cy="110" r="4" />
+            </g>
+
+            <!-- X-axis labels -->
+            <g class="x-labels">
+              <text x="40" y="195">Jan</text>
+              <text x="120" y="195">Feb</text>
+              <text x="200" y="195">Mar</text>
+              <text x="280" y="195">Apr</text>
+              <text x="360" y="195">May</text>
+              <text x="440" y="195">Jun</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="chart-legend">
+        <div class="legend-item">
+          <div class="legend-color subscribers"></div>
+          <div class="legend-label">Subscribers</div>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color open-rate"></div>
+          <div class="legend-label">Open Rate</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="newsletter-table">
+      <thead>
+        <tr>
+          <th>Month</th>
+          <th>New Subscribers</th>
+          <th>Open Rate</th>
+          <th>Click Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of newsletterData">
+          <td>{{ item.month }}</td>
+          <td>{{ item.subscribers }}</td>
+          <td>{{ item.openRate }}%</td>
+          <td>{{ item.clickRate }}%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

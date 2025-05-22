@@ -1,15 +1,23 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import {  NewsletterSubscriptionRequest, NewsletterSubscriptionResponse } from '../../models/newsletter';
+import {
+  Newsletter,
+  NewsletterSubscriptionRequest,
+  NewsletterSubscriptionResponse,
+} from '../../models/newsletter';
 
 export const NewsletterActions = createActionGroup({
   source: 'Newsletter',
   events: {
-    'Subscribe': props<{ request: NewsletterSubscriptionRequest }>(),
+    Subscribe: props<{ request: NewsletterSubscriptionRequest }>(),
     'Subscribe Success': props<{ response: NewsletterSubscriptionResponse }>(),
     'Subscribe Failure': props<{
       error: { error: HttpErrorResponse | Error | string };
     }>(),
-    'Reset Subscribe Status': emptyProps()
-  }
+    'Reset Subscribe Status': emptyProps(),
+    
+    'Load Subscribers': emptyProps(),
+    'Load Subscribers Success': props<{ subscribers: Newsletter[] }>(),
+    'Load Subscribers Failure': props<{ error: { error: HttpErrorResponse | Error | string } }>(),
+  },
 });

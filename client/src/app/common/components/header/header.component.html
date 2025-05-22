@@ -163,35 +163,35 @@
       } }
 
       <div
-      class="w-full h-full bg-[#1F2937] rounded-xl shadow-inner shadow-gray-900/50 overflow-hidden relative"
-    >
-      <!-- Sliding background element -->
-      <div
-        class="absolute top-1 h-[52px] w-1/2 bg-purple-600  rounded-xl shadow-lg transition-all duration-500 ease-in-out"
-        [ngStyle]="{'left': isPostuler ? '1px' : 'calc(50% - 1px)'}"
-      ></div>
-      
-      <!-- Button container -->
-      <div class="grid grid-cols-2 w-full relative z-10">
-        <!-- Postuler button -->
-        <button
-          (click)="setPostuler(true)"
-          class="font-medium rounded-md transition-colors duration-200 custom-650:w-full custom-650:py-3"
-          [ngClass]="isPostuler ? 'text-gray-200' : 'text-gray-400'"
-        >
-          {{ navItems.buttons[0].translationKey | translate }}
-        </button>
+        class="w-full h-full bg-[#1F2937] rounded-xl shadow-inner shadow-gray-900/50 overflow-hidden relative"
+      >
+        <!-- Sliding background element -->
+        <div
+          class="absolute top-1 h-[52px] w-1/2 bg-purple-600 rounded-xl shadow-lg transition-all duration-500 ease-in-out"
+          [ngStyle]="{ left: isPostuler ? '1px' : 'calc(50% - 1px)' }"
+        ></div>
 
-        <!-- Client button -->
-        <button
-          (click)="setPostuler(false)"
-          class="text-md font-medium rounded-md transition-colors duration-200 custom-650:w-full custom-650:py-3"
-          [ngClass]="!isPostuler ? 'text-gray-200' : 'text-gray-400'"
-        >
-          {{ navItems.buttons[1].translationKey | translate }}
-        </button>
+        <!-- Button container -->
+        <div class="grid grid-cols-2 w-full relative z-10">
+          <!-- Postuler button -->
+          <button
+            (click)="setPostuler(true)"
+            class="font-medium rounded-md transition-colors duration-200 custom-650:w-full custom-650:py-3"
+            [ngClass]="isPostuler ? 'text-gray-200' : 'text-gray-400'"
+          >
+            {{ navItems.buttons[0].translationKey | translate }}
+          </button>
+
+          <!-- Client button -->
+          <button
+            (click)="setPostuler(false)"
+            class="text-md font-medium rounded-md transition-colors duration-200 custom-650:w-full custom-650:py-3"
+            [ngClass]="!isPostuler ? 'text-gray-200' : 'text-gray-400'"
+          >
+            {{ navItems.buttons[1].translationKey | translate }}
+          </button>
+        </div>
       </div>
-    </div>
     </ul>
 
     <!-- Mobile Language Selector (unchanged) -->
@@ -547,7 +547,7 @@
             *ngIf="isAuthenticated$ | async; else unauthenticatedMenuItems"
           >
             <button
-               (click)="onProfile()"
+              (click)="onProfile()"
               class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
             >
               <app-icon iconName="myprofileIcon" />
@@ -555,12 +555,22 @@
             </button>
 
             <button
-             (click)="onSettings()"
+              (click)="onSettings()"
               class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
             >
               <app-icon iconName="settingIcon" />
               <span>{{ "PROFILE.SETTINGS" | translate }}</span>
             </button>
+
+            @if(isAdmin$ | async){
+            <button
+            (click)="onAdmin()"
+              class="w-full flex items-center px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 transition-colors duration-200"
+            >
+              <app-icon iconName="loginIcon" />
+              <span> Admin </span>
+            </button>
+            }
 
             <div class="border-t border-gray-700 my-3"></div>
 

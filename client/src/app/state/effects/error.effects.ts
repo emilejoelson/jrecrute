@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorTranslationService } from '../../core/services/error-translation.service';
 import { AuthActions } from '../../authentication/data-access/store/actions/auth.actions';
 import { NewsletterActions } from '../../features/newsletter/data-access/store/actions/newsletter.actions';
+import { NewsletterContentActions } from '../../features/newsletter/data-access/store/actions/newsletter-content.actions';
 
 @Injectable()
 export class ErrorEffects {
@@ -26,6 +27,7 @@ export class ErrorEffects {
           AuthActions.loginFailure,
           AuthActions.uploadProfileImageFailure,
           NewsletterActions.subscribeFailure,
+          NewsletterContentActions.createNewsletterFailure,
         ),
         tap((action: ErrorAction) => {
           const error = action.error?.error ?? action.error;

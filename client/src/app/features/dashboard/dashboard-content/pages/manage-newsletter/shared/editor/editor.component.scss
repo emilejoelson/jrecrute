@@ -1,0 +1,289 @@
+// Modern Dark Theme Editor Styling
+$background-dark: #12161f;
+$background-medium: #1a202e;
+$background-light: #242c3d;
+$text-color: #e6eaf0;
+$text-muted: #9ba3b2;
+$accent-color: #4a7bff;
+$accent-hover: #5f8cff;
+$border-color: #2a3446;
+$button-hover: #2a3446;
+$divider-color: #2a3446;
+$shadow-color: rgba(0, 0, 0, 0.25);
+
+.editor-container {
+  display: flex;
+  flex-direction: column;
+  background-color: $background-medium;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px $shadow-color;
+  height: 100%;
+  min-height: 400px;
+  color: $text-color;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+  
+  // Editor Header with Toolbar
+  .editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: linear-gradient(to right, $background-dark, $background-medium);
+    border-bottom: 1px solid $border-color;
+    
+    .editor-controls {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+      
+      .format-select {
+        background-color: $background-light;
+        color: $text-color;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        padding: 6px 10px;
+        font-size: 14px;
+        height: 34px;
+        cursor: pointer;
+        outline: none;
+        transition: all 0.2s ease;
+        
+        &:hover, &:focus {
+          border-color: $accent-color;
+          box-shadow: 0 0 0 1px rgba($accent-color, 0.3);
+        }
+        
+        option {
+          background-color: $background-dark;
+          color: $text-color;
+        }
+      }
+      
+      .divider {
+        width: 1px;
+        height: 24px;
+        background-color: $divider-color;
+        margin: 0 8px;
+      }
+      
+      .toolbar-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 34px;
+        height: 34px;
+        border-radius: 4px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        color: $text-color;
+        
+        &:hover {
+          background-color: $button-hover;
+        }
+        
+        &:active {
+          transform: translateY(1px);
+        }
+        
+        svg {
+          fill: currentColor;
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+    
+    .html-toggle-btn {
+      background-color: $background-light;
+      color: $text-color;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      padding: 6px 12px;
+      font-size: 13px;
+      height: 34px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background-color: $button-hover;
+        border-color: $accent-color;
+      }
+      
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+  
+  // Editor Content Area
+  .editor-content-wrapper {
+    flex: 1;
+    position: relative;
+    overflow: auto;
+    background-color: $background-dark;
+    
+    .editor-content, .html-editor {
+      min-height: 100%;
+      padding: 16px;
+      outline: none;
+      color: $text-color;
+      font-size: 15px;
+      line-height: 1.6;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      
+      &:focus {
+        outline: none;
+      }
+      
+      &[placeholder]:empty:before {
+        content: attr(placeholder);
+        color: $text-muted;
+        font-style: italic;
+      }
+    }
+    
+    .html-editor {
+      background-color: $background-dark;
+      resize: none;
+      border: none;
+      font-family: 'Fira Code', 'Consolas', monospace;
+    }
+  }
+  
+  // Editor Footer with Word Count
+  .editor-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 8px 16px;
+    background-color: $background-dark;
+    border-top: 1px solid $border-color;
+    font-size: 12px;
+    color: $text-muted;
+    
+    .word-counter {
+      display: flex;
+      gap: 16px;
+    }
+  }
+}
+
+// RTL Support
+[dir="rtl"] {
+  .editor-content, .html-editor {
+    text-align: right;
+  }
+}
+
+// Additional styling for editor content
+.editor-content {
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.8em;
+    margin-bottom: 0.5em;
+    font-weight: 600;
+  }
+  
+  h1 { font-size: 1.8em; }
+  h2 { font-size: 1.5em; }
+  h3 { font-size: 1.3em; }
+  h4 { font-size: 1.2em; }
+  h5 { font-size: 1.1em; }
+  h6 { font-size: 1em; }
+  
+  p {
+    margin-bottom: 1em;
+  }
+  
+  ul, ol {
+    margin-left: 1.5em;
+    margin-bottom: 1em;
+  }
+  
+  blockquote {
+    border-left: 3px solid $accent-color;
+    padding-left: 1em;
+    margin-left: 0;
+    color: $text-muted;
+  }
+  
+  a {
+    color: $accent-color;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+    background-color: rgba($background-light, 0.5);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-size: 0.9em;
+  }
+  
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 1em;
+    
+    th, td {
+      border: 1px solid $border-color;
+      padding: 8px 12px;
+    }
+    
+    th {
+      background-color: $background-light;
+    }
+  }
+}
+
+// Custom utility classes
+.formatting-active {
+  background-color: rgba($accent-color, 0.2) !important;
+  color: $accent-color !important;
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .editor-header {
+    .editor-controls {
+      .divider {
+        margin: 0 4px;
+      }
+      
+      .toolbar-btn {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .editor-header {
+    flex-direction: column;
+    gap: 12px;
+    
+    .editor-controls {
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .html-toggle-btn {
+      width: 100%;
+    }
+  }
+}

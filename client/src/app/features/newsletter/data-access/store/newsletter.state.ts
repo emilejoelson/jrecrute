@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import {  NewsletterSubscriptionResponse } from "../models/newsletter";
+import {  Newsletter, NewsletterSubscriptionResponse } from "../models/newsletter";
 
 
 export interface NewsletterState {
@@ -7,4 +7,5 @@ export interface NewsletterState {
   subscribeSuccess: boolean;
   subscribeError: HttpErrorResponse | Error | string | null;
   subscribeResponse: NewsletterSubscriptionResponse | null;
+   subscribers: Newsletter[];
 }
