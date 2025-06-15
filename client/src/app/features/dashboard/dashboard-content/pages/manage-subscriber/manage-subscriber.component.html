@@ -8,25 +8,12 @@
     <div class="flex items-center justify-between">
       <div>
         <p class="text-sm font-medium text-gray-400">Total Subscribers</p>
-        <p
-          class="text-2xl font-bold text-white"
-          [innerHTML]="totalCount$ | async"
-        ></p>
+        <p class="text-2xl font-bold text-white">
+          {{ (totalCount$ | async) || 0 }}
+        </p>
       </div>
       <div class="p-3 bg-blue-500/20 rounded-lg">
-        <svg
-          class="w-6 h-6 text-blue-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-          ></path>
-        </svg>
+        <app-icon iconName="totalCountIcon" />
       </div>
     </div>
   </div>
@@ -35,25 +22,12 @@
     <div class="flex items-center justify-between">
       <div>
         <p class="text-sm font-medium text-gray-400">Confirmed</p>
-        <p
-          class="text-2xl font-bold text-green-400"
-          [innerHTML]="confirmedCount$ | async"
-        ></p>
+        <p class="text-2xl font-bold text-green-400">
+          {{ (confirmedCount$ | async) || 0 }}
+        </p>
       </div>
       <div class="p-3 bg-green-500/20 rounded-lg">
-        <svg
-          class="w-6 h-6 text-green-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
+        <app-icon iconName="confirmedIcon" />
       </div>
     </div>
   </div>
@@ -62,55 +36,30 @@
     <div class="flex items-center justify-between">
       <div>
         <p class="text-sm font-medium text-gray-400">Unconfirmed</p>
-        <p
-          class="text-2xl font-bold text-yellow-400"
-          [innerHTML]="unconfirmedCount$ | async"
-        ></p>
+        <p class="text-2xl font-bold text-yellow-400">
+          {{ (unconfirmedCount$ | async) || 0 }}
+        </p>
       </div>
       <div class="p-3 bg-yellow-500/20 rounded-lg">
-        <svg
-          class="w-6 h-6 text-yellow-400"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
+        <app-icon iconName="unconfirmedIcon" />
       </div>
     </div>
   </div>
 </div>
 
+<!-- Search and Filter Controls -->
 <div class="bg-slate-800 border border-slate-700 rounded-lg p-6 mb-6">
   <div
     class="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between"
   >
     <div class="relative flex-1 max-w-md">
-      <svg
-        class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-        ></path>
-      </svg>
+      <app-icon iconName="inputSearchIcon" />
       <input
         type="text"
         placeholder="Search subscribers..."
         class="w-full pl-10 pr-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
         (input)="onSearch($event)"
         [value]="searchTerm"
-        
       />
     </div>
 
@@ -152,6 +101,7 @@
   </div>
 </div>
 
+<!-- Loading State -->
 <div *ngIf="loading$ | async" class="flex items-center justify-center py-12">
   <div
     class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"
@@ -159,63 +109,88 @@
   <span class="ml-3 text-gray-400">Loading subscribers...</span>
 </div>
 
+<!-- Error State -->
 <div
   *ngIf="error$ | async as error"
   class="bg-red-500/20 border border-red-500/50 rounded-lg p-4 mb-6"
 >
   <div class="flex items-center">
-    <svg
-      class="w-5 h-5 text-red-400 mr-3"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-      ></path>
-    </svg>
+    <app-icon iconName="errorLoadingIcon" />
     <p class="text-red-300">Error loading subscribers: {{ error }}</p>
   </div>
 </div>
 
+<!-- Main Table -->
 <div
   *ngIf="!(loading$ | async) && !(error$ | async)"
   class="bg-slate-800 border border-slate-700 rounded-lg overflow-hidden"
 >
+  <!-- Table Controls -->
+  <div class="px-6 py-4 border-b border-slate-700 bg-slate-750">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <label class="text-sm text-gray-300">Show:</label>
+        <select
+          class="bg-slate-700 border border-slate-600 rounded-md px-3 py-1 text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200"
+          [value]="itemsPerPage"
+          (change)="onItemsPerPageChange($event)"
+        >
+          <option *ngFor="let option of itemsPerPageOptions" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+        <span class="text-sm text-gray-300">entries</span>
+      </div>
+      <div
+        *ngIf="paginationInfo$ | async as paginationInfo"
+        class="text-sm text-gray-300"
+      >
+        Showing {{ paginationInfo.startIndex }}-{{ paginationInfo.endIndex }} of
+        {{ paginationInfo.totalItems }} results
+      </div>
+    </div>
+  </div>
+
+  <!-- Table -->
+  <!-- Table -->
   <div class="overflow-x-auto">
     <table class="w-full">
       <thead class="bg-slate-700 border-b border-slate-600">
         <tr>
           <th
-            class="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-slate-600 transition-colors"
+            class="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-slate-600 transition-all duration-200"
             (click)="onSortChange('email')"
           >
             <div class="flex items-center space-x-1">
               <span>Email</span>
-              <span class="text-gray-400">{{ getSortIcon("email") }}</span>
+              <span
+                class="text-gray-400 transition-transform duration-200 hover:scale-110"
+                >{{ getSortIcon("email") }}</span
+              >
             </div>
           </th>
           <th
-            class="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-slate-600 transition-colors"
+            class="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-slate-600 transition-all duration-200"
             (click)="onSortChange('isConfirmed')"
           >
             <div class="flex items-center space-x-1">
               <span>Status</span>
-              <span class="text-gray-400">{{
-                getSortIcon("isConfirmed")
-              }}</span>
+              <span
+                class="text-gray-400 transition-transform duration-200 hover:scale-110"
+                >{{ getSortIcon("isConfirmed") }}</span
+              >
             </div>
           </th>
           <th
-            class="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-slate-600 transition-colors"
+            class="px-6 py-4 text-left text-xs font-medium text-gray-300 uppercase tracking-wider cursor-pointer hover:bg-slate-600 transition-all duration-200"
             (click)="onSortChange('createdAt')"
           >
             <div class="flex items-center space-x-1">
               <span>Subscribed</span>
-              <span class="text-gray-400">{{ getSortIcon("createdAt") }}</span>
+              <span
+                class="text-gray-400 transition-transform duration-200 hover:scale-110"
+                >{{ getSortIcon("createdAt") }}</span
+              >
             </div>
           </th>
           <th
@@ -226,103 +201,200 @@
         </tr>
       </thead>
       <tbody class="divide-y divide-slate-700">
-        <ng-container *ngIf="filteredSubscribers$ | async as filteredSubscribers">
-          <tr
-            *ngFor="let subscriber of filteredSubscribers; trackBy: trackByEmail"
-            class="hover:bg-slate-700/50 transition-colors"
-          >
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex items-center">
-                <div class="flex-shrink-0 h-10 w-10">
-                  <div
-                    class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center"
-                  >
-                    <span class="text-white text-sm font-medium">
-                      {{ subscriber.email.charAt(0).toUpperCase() }}
-                    </span>
-                  </div>
-                </div>
-                <div class="ml-4">
-                  <div class="text-sm font-medium text-white">
-                    {{ subscriber.email }}
-                  </div>
-                </div>
-              </div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <span
-                class="inline-flex px-2 py-1 text-xs font-semibold rounded-full"
-                [class]="
-                  subscriber.isConfirmed
-                    ? 'bg-green-500/20 text-green-400 border border-green-500/30'
-                    : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30'
-                "
-              >
-                {{ subscriber.isConfirmed ? "Confirmed" : "Pending" }}
-              </span>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
-              {{ formatDate(subscriber.createdAt) }}
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-              <div class="flex space-x-2">
-                <button
-                  class="text-blue-400 hover:text-blue-300 transition-colors"
+        <!-- Show data rows when we have subscribers -->
+        <tr
+          *ngFor="
+            let subscriber of paginatedSubscribers$ | async;
+            trackBy: trackByEmail;
+            let i = index
+          "
+          class="hover:bg-slate-700/50 transition-all duration-200 transform hover:scale-[1.02] hover:shadow-lg"
+          [style.animation-delay]="i * 50 + 'ms'"
+        >
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="flex-shrink-0 h-10 w-10">
+                <div
+                  class="h-10 w-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center shadow-lg transform transition-transform duration-200 hover:scale-110"
                 >
-                  <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"
-                    ></path>
-                  </svg>
-                </button>
-                <button class="text-red-400 hover:text-red-300 transition-colors">
-                  <svg
-                    class="w-4 h-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                    ></path>
-                  </svg>
-                </button>
+                  <span class="text-white text-sm font-medium">
+                    {{ subscriber.email.charAt(0).toUpperCase() }}
+                  </span>
+                </div>
               </div>
-            </td>
-          </tr>
-        </ng-container>
+              <div class="ml-4">
+                <div class="text-sm font-medium text-white">
+                  {{ subscriber.email }}
+                </div>
+              </div>
+            </div>
+          </td>
+
+          <td class="px-6 py-4 whitespace-nowrap">
+            <span
+              class="inline-flex px-2 py-1 text-xs font-semibold rounded-full transition-all duration-200 transform hover:scale-105"
+              [class]="
+                subscriber.isConfirmed
+                  ? 'bg-green-500/20 text-green-400 border border-green-500/30 shadow-green-500/20'
+                  : 'bg-yellow-500/20 text-yellow-400 border border-yellow-500/30 shadow-yellow-500/20'
+              "
+            >
+              {{ subscriber.isConfirmed ? "Confirmed" : "Pending" }}
+            </span>
+          </td>
+
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+            {{ formatDate(subscriber.createdAt) }}
+          </td>
+
+          <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+            <div class="flex space-x-2">
+              <button
+                class="text-blue-400 hover:text-blue-300 transition-all duration-200 transform hover:scale-110 p-1 rounded-md hover:bg-blue-500/20"
+              >
+                <app-icon iconName="iconEdit" />
+              </button>
+              <button
+                class="text-red-400 hover:text-red-300 transition-all duration-200 transform hover:scale-110 p-1 rounded-md hover:bg-red-500/20"
+              >
+                <app-icon iconName="iconDelete" />
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Show empty state row when no data -->
+        <tr *ngIf="hasNoSubscribers$ | async">
+          <td colspan="4" class="text-center py-12">
+            <app-icon iconName="emptyStateIcon" />
+            <h3 class="mt-2 text-sm font-medium text-gray-300">
+              No subscribers found
+            </h3>
+            <p class="mt-1 text-sm text-gray-400">
+              {{
+                searchTerm || filterType !== "all"
+                  ? "Try adjusting your search or filters."
+                  : "Get started by adding your first subscriber."
+              }}
+            </p>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
 
+  <!-- Pagination -->
   <div
-    *ngIf="hasNoSubscribers$ | async"
-    class="text-center py-12"
+    *ngIf="paginationInfo$ | async as paginationInfo"
+    class="px-6 py-4 border-t border-slate-700 bg-slate-750"
   >
-    <svg
-      class="mx-auto h-12 w-12 text-gray-400"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
-      ></path>
-    </svg>
+    <div class="flex items-center justify-between">
+      <!-- Mobile pagination info -->
+      <div class="flex-1 flex justify-between sm:hidden">
+        <button
+          [disabled]="paginationInfo.currentPage === 1"
+          (click)="onPreviousPage()"
+          class="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          [class]="
+            paginationInfo.currentPage === 1
+              ? 'bg-slate-700 text-gray-400'
+              : 'bg-slate-600 text-white hover:bg-slate-500 shadow-lg'
+          "
+        >
+          <app-icon iconName="previousButtonIcon" />
+          Previous
+        </button>
+        <button
+          [disabled]="paginationInfo.currentPage === paginationInfo.totalPages"
+          (click)="onNextPage()"
+          class="relative inline-flex items-center px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+          [class]="
+            paginationInfo.currentPage === paginationInfo.totalPages
+              ? 'bg-slate-700 text-gray-400'
+              : 'bg-slate-600 text-white hover:bg-slate-500 shadow-lg'
+          "
+        >
+          Next
+          <app-icon iconName="nextButtonIcon" />
+        </button>
+      </div>
+
+      <!-- Desktop pagination -->
+      <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div>
+          <p class="text-sm text-gray-300">
+            Showing
+            <span class="font-medium text-white">{{
+              paginationInfo.startIndex
+            }}</span>
+            to
+            <span class="font-medium text-white">{{
+              paginationInfo.endIndex
+            }}</span>
+            of
+            <span class="font-medium text-white">{{
+              paginationInfo.totalItems
+            }}</span>
+            results
+          </p>
+        </div>
+        <div>
+          <nav
+            class="relative z-0 inline-flex rounded-md shadow-lg"
+            aria-label="Pagination"
+          >
+            <!-- Previous button -->
+            <button
+              [disabled]="paginationInfo.currentPage === 1"
+              (click)="onPreviousPage()"
+              class="relative inline-flex items-center px-3 py-2 rounded-l-md text-sm font-medium transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              [class]="
+                paginationInfo.currentPage === 1
+                  ? 'bg-slate-700 text-gray-400 border border-slate-600'
+                  : 'bg-slate-600 text-white hover:bg-slate-500 border border-slate-500 hover:shadow-lg hover:shadow-blue-500/20'
+              "
+            >
+              <app-icon iconName="previousButtonIcon" />
+            </button>
+
+            <!-- Page numbers -->
+            <button
+              *ngFor="let page of getVisiblePages(paginationInfo.totalPages)"
+              (click)="onPageChange(page)"
+              class="relative inline-flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 transform hover:scale-105 border-t border-b"
+              [class]="
+                page === paginationInfo.currentPage
+                  ? 'bg-blue-600 text-white border-blue-500 shadow-lg shadow-blue-500/25 z-10'
+                  : 'bg-slate-600 text-gray-300 hover:bg-slate-500 hover:text-white border-slate-500 hover:shadow-lg hover:shadow-blue-500/10'
+              "
+            >
+              {{ page }}
+            </button>
+
+            <!-- Next button -->
+            <button
+              [disabled]="
+                paginationInfo.currentPage === paginationInfo.totalPages
+              "
+              (click)="onNextPage()"
+              class="relative inline-flex items-center px-3 py-2 rounded-r-md text-sm font-medium transition-all duration-200 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+              [class]="
+                paginationInfo.currentPage === paginationInfo.totalPages
+                  ? 'bg-slate-700 text-gray-400 border border-slate-600'
+                  : 'bg-slate-600 text-white hover:bg-slate-500 border border-slate-500 hover:shadow-lg hover:shadow-blue-500/20'
+              "
+            >
+              <app-icon iconName="nextButtonIcon" />
+            </button>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="hasNoSubscribers$ | async" class="text-center py-12">
+    <app-icon iconName="emptyStateIcon" />
     <h3 class="mt-2 text-sm font-medium text-gray-300">No subscribers found</h3>
     <p class="mt-1 text-sm text-gray-400">
       {{

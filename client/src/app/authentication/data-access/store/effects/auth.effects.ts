@@ -280,7 +280,7 @@ export class AuthEffects {
 
         // Create basic user from token
         const user: User = {
-          id: payload.userId || payload.sub,
+          _id: payload.userId || payload.sub,
           email: payload.email || '',
           role: payload.role || null,
           roles: payload.roles || [],

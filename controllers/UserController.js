@@ -37,7 +37,7 @@ const uploadProfileImage = async (req, res) => {
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
-      
+
       // Delete the old profile image if it exists
       if (user.profileImage) {
         const oldImagePath = path.resolve(__dirname, "../", user.profileImage);
@@ -49,7 +49,7 @@ const uploadProfileImage = async (req, res) => {
           }
         }
       }
-      
+
       // Update the user's profile image
       user.profileImage = filePath;
       await user.save();
@@ -61,13 +61,21 @@ const uploadProfileImage = async (req, res) => {
     });
   } catch (error) {
     console.error("Error uploading profile image:", error);
-    res.status(500).json({ message: "Error uploading profile image", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error uploading profile image", error: error.message });
   }
 };
 
 const createUser = async (req, res) => {
   try {
-    const { cvFile, profileImage, personalInfo, professionalInfo, academicInfo } = req.body;
+    const {
+      cvFile,
+      profileImage,
+      personalInfo,
+      professionalInfo,
+      academicInfo,
+    } = req.body;
 
     // Check CV file existence
     if (cvFile) {
@@ -104,21 +112,21 @@ const createUser = async (req, res) => {
       });
     }
 
-    res.status(201).json({ 
+    res.status(201).json({
       message: "User created successfully",
-      userId: newUser._id 
+      userId: newUser._id,
     });
   } catch (error) {
     console.error("Error creating user:", error);
-    
+
     // Handle MongoDB duplicate key error
     if (error.code === 11000) {
-      return res.status(400).json({ 
+      return res.status(400).json({
         message: "Email already registered",
-        field: "email"
+        field: "email",
       });
     }
-    
+
     // Handle validation errors
     if (error.name === "ValidationError") {
       return res.status(400).json({
@@ -126,7 +134,7 @@ const createUser = async (req, res) => {
         errors: Object.values(error.errors).map((err) => err.message),
       });
     }
-    
+
     res
       .status(500)
       .json({ message: "Error creating user", error: error.message });
@@ -137,7 +145,7 @@ const updateProfileImage = async (req, res) => {
   try {
     const { userId } = req.params;
     const file = req.file;
-    
+
     if (!file) {
       return res.status(400).json({ message: "No image uploaded" });
     }
@@ -146,7 +154,7 @@ const updateProfileImage = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    
+
     // Delete the old profile image if it exists
     if (user.profileImage) {
       const oldImagePath = path.resolve(__dirname, "../", user.profileImage);
@@ -157,17 +165,50 @@ const updateProfileImage = async (req, res) => {
         console.error("Error deleting old profile image:", err);
       }
     }
-    
+
     user.profileImage = file.path;
     await user.save();
 
     return res.status(200).json({
       message: "Profile image updated successfully",
-      profileImage: user.profileImage
+      profileImage: user.profileImage,
     });
   } catch (error) {
     console.error("Error updating profile image:", error);
-    res.status(500).json({ message: "Error updating profile image", error: error.message });
+    res
+      .status(500)
+      .json({ message: "Error updating profile image", error: error.message });
+  }
+};
+
+const getUsersWithCvNotNull = async (req, res) => {
+  try {
+    const filter = {
+      cvFile: { $ne: null },
+    };
+
+    // Add optional filters
+    if (req.query.desiredPosition) {
+      filter["professionalInfo.desiredPosition"] = new RegExp(
+        req.query.desiredPosition,
+        "i"
+      );
+    }
+    if (req.query.desiredRegion) {
+      filter.desiredRegion = new RegExp(req.query.desiredRegion, "i");
+    }
+
+    const users = await User.find(filter).lean(); // No pagination
+
+    res.json({
+      users,
+    });
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    res.status(500).json({
+      message: "Error fetching users",
+      error: error.message,
+    });
   }
 };
 
@@ -212,5 +253,6 @@ module.exports = {
   getUsers,
   createUser,
   uploadProfileImage,
-  updateProfileImage
+  updateProfileImage,
+  getUsersWithCvNotNull,
 };

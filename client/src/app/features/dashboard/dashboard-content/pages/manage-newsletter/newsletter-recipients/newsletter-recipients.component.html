@@ -1,0 +1,102 @@
+<div class="newsletter-recipients-container">
+  <h2>Newsletter Recipients Management - DEBUG</h2>
+  
+  <!-- Debug Information -->
+  <div class="debug-section">
+    <h3>Debug Info:</h3>
+    <p>Subscribers loading: {{ subscribersLoading$ | async }}</p>
+    <p>Subscribers error: {{ subscribersError$ | async }}</p>
+    <p>Users loading: {{ usersLoading$ | async }}</p>
+    <p>Users error: {{ usersError$ | async }}</p>
+    
+    <!-- Fixed count display -->
+    <p>Subscribers count: {{ (subscribers$ | async)?.length ?? 'loading...' }}</p>
+    <p>Users count: {{ (usersWithCv$ | async)?.length ?? 'loading...' }}</p>
+    
+    <!-- Raw data display for debugging -->
+    <pre>Subscribers data: {{ (subscribers$ | async) | json }}</pre>
+    <pre>Users data: {{ (usersWithCv$ | async) | json }}</pre>
+  </div>
+
+  <!-- Tab Navigation -->
+  <div class="tab-navigation">
+    <button 
+      class="tab-button"
+      [class.active]="activeTab === 'subscribers'"
+      (click)="activeTab = 'subscribers'">
+      Subscribers ({{ (subscribers$ | async)?.length || 0 }})
+    </button>
+    <button 
+      class="tab-button"
+      [class.active]="activeTab === 'users'"
+      (click)="activeTab = 'users'">
+      Users with CV ({{ (usersWithCv$ | async)?.length || 0 }})
+    </button>
+  </div>
+
+  <!-- Subscribers Tab -->
+  <div *ngIf="activeTab === 'subscribers'" class="tab-content">
+    <h3>Subscribers Tab</h3>
+    
+    <!-- Loading state -->
+    <div *ngIf="subscribersLoading$ | async">Loading subscribers...</div>
+    
+    <!-- Error state -->
+    <div *ngIf="subscribersError$ | async as error" class="error">
+      Error: {{ error }}
+    </div>
+    
+    <!-- Data display with proper null checking -->
+    <div *ngIf="!(subscribersLoading$ | async) && !(subscribersError$ | async)">
+      <ng-container *ngIf="subscribers$ | async as subscribers; else noSubscribers">
+        <ng-container *ngIf="subscribers.length > 0; else emptySubscribers">
+          <p>Subscribers found: {{ subscribers.length }}</p>
+          <ul>
+            <li *ngFor="let sub of subscribers; trackBy: trackBySubscriberId">
+              {{ sub.email }} - {{ sub.isConfirmed ? 'Confirmed' : 'Unconfirmed' }}
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #emptySubscribers>
+          <p>No subscribers found (empty array)</p>
+        </ng-template>
+      </ng-container>
+      <ng-template #noSubscribers>
+        <p>Subscribers data is null/undefined</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <!-- Users Tab -->
+  <div *ngIf="activeTab === 'users'" class="tab-content">
+    <h3>Users Tab</h3>
+    
+    <!-- Loading state -->
+    <div *ngIf="usersLoading$ | async">Loading users...</div>
+    
+    <!-- Error state -->
+    <div *ngIf="usersError$ | async as error" class="error">
+      Error: {{ error }}
+    </div>
+    
+    <!-- Data display with proper null checking -->
+    <div *ngIf="!(usersLoading$ | async) && !(usersError$ | async)">
+      <ng-container *ngIf="usersWithCv$ | async as users; else noUsers">
+        <ng-container *ngIf="users.length > 0; else emptyUsers">
+          <p>Users found: {{ users.length }}</p>
+          <ul>
+            <li *ngFor="let user of users; trackBy: trackByUserId">
+              {{ user.personalInfo.firstName }} {{ user.personalInfo.lastName }} - {{ user.personalInfo.email }}
+            </li>
+          </ul>
+        </ng-container>
+        <ng-template #emptyUsers>
+          <p>No users found (empty array)</p>
+        </ng-template>
+      </ng-container>
+      <ng-template #noUsers>
+        <p>Users data is null/undefined</p>
+      </ng-template>
+    </div>
+  </div>
+</div>

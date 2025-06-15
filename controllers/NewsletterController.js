@@ -138,8 +138,20 @@ const unsubscribe = async (req, res) => {
   }
 };
 
+const getAllSubscribers = async (req, res) => {
+  try {
+    const subscribers = await Newsletter.find();
+    res.status(200).json({ subscribers });
+  } catch (error) {
+    res.status(500).json({
+      message: "Error fetching subscribers",
+      error: error.message,
+    });
+  }
+};
 module.exports = {
   subscribe,
   confirmSubscription,
   unsubscribe,
+  getAllSubscribers,
 };

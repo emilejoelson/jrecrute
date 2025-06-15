@@ -62,3 +62,33 @@ export const selectUnconfirmedCount = createSelector(
   selectUnconfirmedSubscribers,
   (subscribers) => subscribers.length
 );
+
+export const selectAllSubscribersNewsletter = createSelector(
+  selectNewsletterState,
+  (state) => state.allSubscribers
+);
+
+export const selectSubscribersLoading = createSelector(
+  selectNewsletterState,
+  (state) => state.subscribersLoading
+);
+
+export const selectSubscribersError = createSelector(
+  selectNewsletterState,
+  (state) => state.subscribersError
+);
+
+export const selectUsersWithCv = createSelector(
+  selectNewsletterState,
+  (state) => state.usersWithCv
+);
+
+export const selectUsersLoading = createSelector(
+  selectNewsletterState,
+  (state) => state.usersLoading
+);
+
+export const selectUsersError = createSelector(
+  selectNewsletterState,
+  (state) => state.usersError
+);

@@ -45,12 +45,18 @@ export const NewsletterContentActions = createActionGroup({
     'Delete Newsletter Failure': props<{ error: {error: HttpErrorResponse | Error | string}}>(),
     'Reset Delete Status': emptyProps(),
     
-    // Send newsletter
-    'Send Newsletter': props<{ id: string }>(),
-    'Send Newsletter Success': props<{ response: SendNewsletterResponse }>(),
-    'Send Newsletter Failure': props<{ error: {error: HttpErrorResponse | Error | string} }>(),
-    'Reset Send Status': emptyProps(),
-    
+    // Send newsletter to selected subscribers
+    'Send Newsletter To Selected Subscribers': props<{ id: string; subscriberIds: string[] }>(),
+    'Send Newsletter To Selected Subscribers Success': props<{ response: SendNewsletterResponse }>(),
+    'Send Newsletter To Selected Subscribers Failure': props<{ error: {error: HttpErrorResponse | Error | string} }>(),
+    'Reset Send To Selected Subscribers Status': emptyProps(),
+
+    // Send newsletter to selected users with CV
+    'Send Newsletter To Selected Users With Cv': props<{ id: string; userIds: string[] }>(),
+    'Send Newsletter To Selected Users With Cv Success': props<{ response: SendNewsletterResponse }>(),
+    'Send Newsletter To Selected Users With Cv Failure': props<{ error: {error: HttpErrorResponse | Error | string} }>(),
+    'Reset Send To Selected Users With Cv Status': emptyProps(),
+        
     // Upload newsletter image
     'Upload Image': props<{ file: File }>(),
     'Upload Image Success': props<{ filePath: string }>(),

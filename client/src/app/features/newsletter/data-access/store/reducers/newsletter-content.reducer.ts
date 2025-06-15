@@ -40,6 +40,18 @@ export const initialNewsletterContentState: NewsletterContentState = {
   sendError: null,
   sendResults: null,
   
+  // Send to selected subscribers
+  sendToSelectedSubscribersLoading: false,
+  sendToSelectedSubscribersSuccess: false,
+  sendToSelectedSubscribersError: null,
+  sendToSelectedSubscribersResults: null,
+
+  // Send to selected users with CV
+  sendToSelectedUsersWithCvLoading: false,
+  sendToSelectedUsersWithCvSuccess: false,
+  sendToSelectedUsersWithCvError: null,
+  sendToSelectedUsersWithCvResults: null,
+
   // Image upload
   imageUploadLoading: false,
   imageUploadSuccess: false,
@@ -244,68 +256,130 @@ export const newsletterContentReducer = createReducer<
     })
   ),
 
-  // Send newsletter
   on(
-    NewsletterContentActions.sendNewsletter,
-    (state) => ({
-      ...state,
-      sendLoading: true,
-      sendSuccess: false,
-      sendResults: null,
-      sendError: null
-    })
-  ),
-  on(
-    NewsletterContentActions.sendNewsletterSuccess,
-    (state, { response }) => ({
-      ...state,
-      sendLoading: false,
-      sendSuccess: true,
-      sendResults: response.results,
-      sendError: null,
-      // Update the status in the selected newsletter if it exists
-      selectedNewsletter: state.selectedNewsletter 
+  NewsletterContentActions.sendNewsletterToSelectedSubscribers,
+  (state) => ({
+    ...state,
+    sendToSelectedSubscribersLoading: true,
+    sendToSelectedSubscribersSuccess: false,
+    sendToSelectedSubscribersResults: null,
+    sendToSelectedSubscribersError: null
+  })
+),
+on(
+  NewsletterContentActions.sendNewsletterToSelectedSubscribersSuccess,
+  (state, { response }) => ({
+    ...state,
+    sendToSelectedSubscribersLoading: false,
+    sendToSelectedSubscribersSuccess: true,
+    sendToSelectedSubscribersResults: response.results,
+    sendToSelectedSubscribersError: null,
+    // Update the status in the selected newsletter if it exists
+    selectedNewsletter: state.selectedNewsletter 
+      ? { 
+          ...state.selectedNewsletter, 
+          status: 'published', 
+          sentToSubscribers: true, 
+          publishDate: new Date(),
+          recipientCount: response.results.sent
+        } 
+      : null,
+    // Update the status in the newsletters list if it exists
+    newsletters: state.newsletters.map(n => 
+      n._id === state.selectedNewsletter?._id 
         ? { 
-            ...state.selectedNewsletter, 
+            ...n, 
             status: 'published', 
-            sentToSubscribers: true, 
+            sentToSubscribers: true,
             publishDate: new Date(),
             recipientCount: response.results.sent
           } 
-        : null,
-      // Update the status in the newsletters list if it exists
-      newsletters: state.newsletters.map(n => 
-        n._id === state.selectedNewsletter?._id 
-          ? { 
-              ...n, 
-              status: 'published', 
-              sentToSubscribers: true,
-              publishDate: new Date(),
-              recipientCount: response.results.sent
-            } 
-          : n
-      )
-    })
-  ),
-  on(
-    NewsletterContentActions.sendNewsletterFailure,
-    (state, { error }) => ({
-      ...state,
-      sendLoading: false,
-      sendSuccess: false,
-      sendError: error.error
-    })
-  ),
-  on(
-    NewsletterContentActions.resetSendStatus,
-    (state) => ({
-      ...state,
-      sendLoading: false,
-      sendSuccess: false,
-      sendResults: null,
-      sendError: null
-    })
-  ),
+        : n
+    )
+  })
+),
+on(
+  NewsletterContentActions.sendNewsletterToSelectedSubscribersFailure,
+  (state, { error }) => ({
+    ...state,
+    sendToSelectedSubscribersLoading: false,
+    sendToSelectedSubscribersSuccess: false,
+    sendToSelectedSubscribersError: error.error
+  })
+),
+on(
+  NewsletterContentActions.resetSendToSelectedSubscribersStatus,
+  (state) => ({
+    ...state,
+    sendToSelectedSubscribersLoading: false,
+    sendToSelectedSubscribersSuccess: false,
+    sendToSelectedSubscribersResults: null,
+    sendToSelectedSubscribersError: null
+  })
+),
+
+// Send newsletter to selected users with CV
+on(
+  NewsletterContentActions.sendNewsletterToSelectedUsersWithCv,
+  (state) => ({
+    ...state,
+    sendToSelectedUsersWithCvLoading: true,
+    sendToSelectedUsersWithCvSuccess: false,
+    sendToSelectedUsersWithCvResults: null,
+    sendToSelectedUsersWithCvError: null
+  })
+),
+on(
+  NewsletterContentActions.sendNewsletterToSelectedUsersWithCvSuccess,
+  (state, { response }) => ({
+    ...state,
+    sendToSelectedUsersWithCvLoading: false,
+    sendToSelectedUsersWithCvSuccess: true,
+    sendToSelectedUsersWithCvResults: response.results,
+    sendToSelectedUsersWithCvError: null,
+    // Update the status in the selected newsletter if it exists
+    selectedNewsletter: state.selectedNewsletter 
+      ? { 
+          ...state.selectedNewsletter, 
+          status: 'published', 
+          sentToSubscribers: true, 
+          publishDate: new Date(),
+          recipientCount: response.results.sent
+        } 
+      : null,
+    // Update the status in the newsletters list if it exists
+    newsletters: state.newsletters.map(n => 
+      n._id === state.selectedNewsletter?._id 
+        ? { 
+            ...n, 
+            status: 'published', 
+            sentToSubscribers: true,
+            publishDate: new Date(),
+            recipientCount: response.results.sent
+          } 
+        : n
+    )
+  })
+),
+on(
+  NewsletterContentActions.sendNewsletterToSelectedUsersWithCvFailure,
+  (state, { error }) => ({
+    ...state,
+    sendToSelectedUsersWithCvLoading: false,
+    sendToSelectedUsersWithCvSuccess: false,
+    sendToSelectedUsersWithCvError: error.error
+  })
+),
+on(
+  NewsletterContentActions.resetSendToSelectedUsersWithCvStatus,
+  (state) => ({
+    ...state,
+    sendToSelectedUsersWithCvLoading: false,
+    sendToSelectedUsersWithCvSuccess: false,
+    sendToSelectedUsersWithCvResults: null,
+    sendToSelectedUsersWithCvError: null
+  })
+),
 
   // Upload image
   on(

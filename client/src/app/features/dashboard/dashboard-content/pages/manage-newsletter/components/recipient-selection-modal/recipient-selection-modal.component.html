@@ -1,0 +1,619 @@
+@if(show){
+<app-modal (close)="onClose()" size="lg">
+  <ng-container header>
+    <div class="flex items-center text-purple-400">
+      <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24">
+        <path
+          d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+        />
+      </svg>
+      <h2 class="text-xl font-semibold">{{ stepTitle }}</h2>
+    </div>
+  </ng-container>
+
+  <ng-container body>
+    <div class="p-6">
+      <!-- Step 1: Select Recipient Type -->
+      @if(currentStep === 'select-type') {
+      <p class="text-gray-300 mb-8 text-lg">
+        Select who you want to send this newsletter to:
+      </p>
+
+      <div class="space-y-6">
+        <!-- Subscribers Option -->
+        <div
+          class="bg-gray-800 bg-opacity-50 backdrop-blur-sm border-2 border-gray-600 border-opacity-50 rounded-xl p-6 cursor-pointer hover:border-purple-400 hover:border-opacity-70 hover:shadow-lg transition-all duration-300 group transform"
+          [class.border-purple-400]="selectedRecipientType === 'subscribers'"
+          [class.bg-purple-900]="selectedRecipientType === 'subscribers'"
+          [class.bg-opacity-40]="selectedRecipientType === 'subscribers'"
+          [class.shadow-lg]="selectedRecipientType === 'subscribers'"
+          [class.shadow-purple-500]="selectedRecipientType === 'subscribers'"
+          [class.shadow-opacity-30]="selectedRecipientType === 'subscribers'"
+          (click)="onSelectRecipientType('subscribers')"
+        >
+          <div class="flex items-center">
+            <input
+              type="radio"
+              name="recipientType"
+              class="w-5 h-5 text-purple-600 bg-gray-700 border-gray-500 focus:ring-purple-500 focus:ring-2 focus:ring-offset-0"
+              [checked]="selectedRecipientType === 'subscribers'"
+              (click)="$event.stopPropagation()"
+            />
+            <div
+              class="bg-gradient-to-br from-purple-600 to-purple-700 p-4 rounded-xl group-hover:from-purple-500 group-hover:to-purple-600 transition-all duration-300 ml-6 shadow-lg"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                />
+              </svg>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Newsletter Subscribers
+              </h3>
+              <p class="text-gray-400 leading-relaxed">
+                Send to users who subscribed to your newsletter
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Users with CV Option -->
+        <div
+          class="bg-gray-800 bg-opacity-50 backdrop-blur-sm border-2 border-gray-600 border-opacity-50 rounded-xl p-6 cursor-pointer hover:border-blue-400 hover:border-opacity-70 hover:shadow-lg transition-all duration-300 group transform"
+          [class.border-blue-400]="selectedRecipientType === 'users'"
+          [class.bg-blue-900]="selectedRecipientType === 'users'"
+          [class.bg-opacity-40]="selectedRecipientType === 'users'"
+          [class.shadow-lg]="selectedRecipientType === 'users'"
+          [class.shadow-blue-500]="selectedRecipientType === 'users'"
+          [class.shadow-opacity-30]="selectedRecipientType === 'users'"
+          (click)="onSelectRecipientType('users')"
+        >
+          <div class="flex items-center">
+            <input
+              type="radio"
+              name="recipientType"
+              class="w-5 h-5 text-blue-600 bg-gray-700 border-gray-500 focus:ring-blue-500 focus:ring-2 focus:ring-offset-0"
+              [checked]="selectedRecipientType === 'users'"
+              (click)="$event.stopPropagation()"
+            />
+            <div
+              class="bg-gradient-to-br from-blue-600 to-blue-700 p-4 rounded-xl group-hover:from-blue-500 group-hover:to-blue-600 transition-all duration-300 ml-6 shadow-lg"
+            >
+              <svg
+                class="w-6 h-6 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zM4 18v-4h3v-3c0-.55.45-1 1-1h5c.55 0 1 .45 1 1v5h3v4H4z"
+                />
+              </svg>
+            </div>
+            <div class="ml-6">
+              <h3 class="text-xl font-semibold text-white mb-2">
+                Users with CV
+              </h3>
+              <p class="text-gray-400 leading-relaxed">
+                Send to registered users who have uploaded their CV
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-yellow-900 bg-opacity-30 backdrop-blur-sm border border-yellow-700 border-opacity-50 rounded-xl p-6 mt-8"
+      >
+        <div class="flex items-center mb-3">
+          <svg
+            class="w-5 h-5 text-yellow-400 mr-3"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z" />
+          </svg>
+          <span class="font-semibold text-yellow-400">Important Note</span>
+        </div>
+        <p class="text-gray-300 leading-relaxed">
+          Once sent, the newsletter cannot be recalled. Make sure you've
+          reviewed the content before proceeding.
+        </p>
+      </div>
+      }
+
+      <!-- Step 2: Select Individual Recipients -->
+      @if(currentStep === 'select-recipients') {
+      <div class="space-y-6">
+        <!-- Search and Filter Bar -->
+        <div
+          class="bg-gray-800 bg-opacity-40 backdrop-blur-sm p-6 rounded-xl border border-gray-600 border-opacity-30 space-y-4"
+        >
+          <!-- Search Input -->
+          <div class="relative">
+            <div
+              class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+            >
+              <svg
+                class="w-5 h-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="searchTerm"
+              (input)="onSearch()"
+              placeholder="Search by name or email..."
+              class="w-full pl-12 pr-12 py-3 bg-gray-700 bg-opacity-50 border border-gray-600 border-opacity-50 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200"
+            />
+            @if(searchTerm) {
+            <button
+              (click)="clearSearch()"
+              class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-white transition-colors"
+            >
+              <svg
+                class="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+            }
+          </div>
+
+          <!-- Filters Row -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+              <!-- Status Filter (for subscribers) -->
+              @if(selectedRecipientType === 'subscribers') {
+              <select
+                [(ngModel)]="statusFilter"
+                (change)="onFilterChange()"
+                class="bg-gray-700 bg-opacity-70 border border-gray-600 border-opacity-50 rounded-lg text-white text-sm px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              >
+                <option value="all">All Status</option>
+                <option value="confirmed">Confirmed Only</option>
+                <option value="unconfirmed">Unconfirmed Only</option>
+              </select>
+              }
+
+              <!-- Items per page -->
+              <select
+                [(ngModel)]="pageSize"
+                (change)="onPageSizeChange()"
+                class="bg-gray-700 bg-opacity-70 border border-gray-600 border-opacity-50 rounded-lg text-white text-sm px-4 py-2 focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+              >
+                <option value="10">10 per page</option>
+                <option value="20">20 per page</option>
+                <option value="50">50 per page</option>
+                <option value="100">100 per page</option>
+              </select>
+            </div>
+
+            <!-- Results count -->
+            <span
+              class="text-sm text-gray-400 bg-gray-700 bg-opacity-30 px-4 py-2 rounded-lg"
+            >
+              {{ filteredRecipients.length }} of {{ currentRecipients.length }}
+              {{
+                selectedRecipientType === "subscribers"
+                  ? "subscribers"
+                  : "users"
+              }}
+            </span>
+          </div>
+        </div>
+
+        <!-- Header with select all option -->
+        <div
+          class="flex items-center justify-between bg-gray-800 bg-opacity-40 backdrop-blur-sm p-5 rounded-xl border border-gray-600 border-opacity-30"
+        >
+          <div class="flex items-center space-x-4">
+            <input
+              type="checkbox"
+              class="w-5 h-5 text-purple-600 bg-gray-700 border-gray-600 rounded focus:ring-purple-500 focus:ring-2"
+              [checked]="allFilteredSelected"
+              [indeterminate]="isIndeterminate"
+              (change)="onSelectAllFiltered()"
+            />
+            <span class="text-sm font-medium text-gray-300">
+              Select All on Page ({{ selectedRecipientIds.length }} of
+              {{ currentRecipients.length }} total selected)
+            </span>
+          </div>
+          <div
+            class="text-sm text-gray-400 bg-gray-700 bg-opacity-40 px-3 py-1 rounded-lg"
+          >
+            Page {{ currentPage }} of {{ totalPages }}
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        @if(isCurrentlyLoading) {
+        <div class="flex items-center justify-center py-12">
+          <div
+            class="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-600"
+          ></div>
+          <span class="ml-4 text-gray-400 text-lg">Loading recipients...</span>
+        </div>
+        } @else {
+        <!-- Recipients list -->
+        @if(paginatedRecipients && paginatedRecipients.length > 0) {
+        <div class="space-y-3">
+          @for(recipient of paginatedRecipients; track recipient._id) {
+          <div
+            class="bg-gray-800 bg-opacity-40 backdrop-blur-sm border border-gray-600 border-opacity-30 rounded-xl p-5 hover:border-gray-500 hover:border-opacity-50 hover:shadow-lg transition-all duration-200 transform"
+          >
+            <div class="flex items-center space-x-4">
+              <input
+                type="checkbox"
+                class="w-5 h-5 text-purple-600 bg-gray-700 border-gray-600 rounded focus:ring-purple-500 focus:ring-2"
+                [checked]="isRecipientSelected(recipient._id)"
+                (change)="onRecipientToggle(recipient._id)"
+              />
+              <div class="flex-1">
+                <div class="flex items-center space-x-3 mb-2">
+                  <span class="text-base font-semibold text-white">
+                    {{ getRecipientDisplayName(recipient) }}
+                  </span>
+                  @if(selectedRecipientType === 'subscribers' &&
+                  isSubscriberConfirmed(recipient)) {
+                  <span
+                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-900 bg-opacity-50 text-green-400 border border-green-700 border-opacity-50 backdrop-blur-sm"
+                  >
+                    <svg
+                      class="w-3 h-3 mr-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+                      />
+                    </svg>
+                    Confirmed
+                  </span>
+                  } @else if(selectedRecipientType === 'subscribers') {
+                  <span
+                    class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-yellow-900 bg-opacity-50 text-yellow-400 border border-yellow-700 border-opacity-50 backdrop-blur-sm"
+                  >
+                    <svg
+                      class="w-3 h-3 mr-1"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                      />
+                    </svg>
+                    Pending
+                  </span>
+                  }
+                </div>
+                <p class="text-sm text-gray-400 mb-1 flex items-center">
+                  <svg
+                    class="w-4 h-4 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
+                    />
+                  </svg>
+                  {{ getRecipientEmail(recipient) }}
+                </p>
+                <p class="text-xs text-gray-500 flex items-center">
+                  <svg
+                    class="w-3 h-3 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Joined {{ recipient.createdAt | date : "short" }}
+                </p>
+              </div>
+            </div>
+          </div>
+          }
+        </div>
+
+        <!-- Pagination Controls -->
+        @if(totalPages > 1) {
+        <div
+          class="flex items-center justify-between bg-gray-800 bg-opacity-40 backdrop-blur-sm p-5 rounded-xl border border-gray-600 border-opacity-30 mt-6"
+        >
+          <div class="flex items-center space-x-3">
+            <button
+              (click)="goToPage(1)"
+              [disabled]="currentPage === 1"
+              class="px-4 py-2 bg-gray-700 bg-opacity-70 hover:bg-gray-600 hover:bg-opacity-70 text-white rounded-lg text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              First
+            </button>
+            <button
+              (click)="goToPage(currentPage - 1)"
+              [disabled]="currentPage === 1"
+              class="px-4 py-2 bg-gray-700 bg-opacity-70 hover:bg-gray-600 hover:bg-opacity-70 text-white rounded-lg text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Previous
+            </button>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            @for(page of getVisiblePages(); track page) { @if(page === '...') {
+            <span class="px-3 py-2 text-gray-400">...</span>
+            } @else {
+            <button
+              (click)="goToPage(+page)"
+              [class.bg-purple-600]="currentPage === +page"
+              [class.text-white]="currentPage === +page"
+              [class.shadow-lg]="currentPage === +page"
+              [class.bg-gray-700]="currentPage !== +page"
+              [class.bg-opacity-70]="currentPage !== +page"
+              [class.hover:bg-gray-600]="currentPage !== +page"
+              [class.hover:bg-opacity-70]="currentPage !== +page"
+              class="px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+            >
+              {{ page }}
+            </button>
+            } }
+          </div>
+
+          <div class="flex items-center space-x-3">
+            <button
+              (click)="goToPage(currentPage + 1)"
+              [disabled]="currentPage === totalPages"
+              class="px-4 py-2 bg-gray-700 bg-opacity-70 hover:bg-gray-600 hover:bg-opacity-70 text-white rounded-lg text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+            <button
+              (click)="goToPage(totalPages)"
+              [disabled]="currentPage === totalPages"
+              class="px-4 py-2 bg-gray-700 bg-opacity-70 hover:bg-gray-600 hover:bg-opacity-70 text-white rounded-lg text-sm font-medium transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Last
+            </button>
+          </div>
+        </div>
+        } } @else {
+        <!-- Empty state -->
+        <div
+          class="text-center py-12 bg-gray-800 bg-opacity-20 rounded-xl border border-gray-600 border-opacity-20"
+        >
+          @if(searchTerm || statusFilter !== 'all') {
+          <div class="text-6xl mb-6">🔍</div>
+          <h3 class="text-xl font-semibold text-gray-400 mb-3">
+            No results found
+          </h3>
+          <p class="text-gray-500 mb-6 leading-relaxed">
+            Try adjusting your search or filter criteria
+          </p>
+          <button
+            type="button"
+            class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all duration-200 transform"
+            (click)="clearFilters()"
+          >
+            Clear Filters
+          </button>
+          } @else {
+          <div class="text-6xl mb-6">📧</div>
+          <h3 class="text-xl font-semibold text-gray-400 mb-3">
+            No
+            {{
+              selectedRecipientType === "subscribers"
+                ? "subscribers"
+                : "users with CV"
+            }}
+            found
+          </h3>
+          <p class="text-gray-500 mb-6 leading-relaxed">
+            {{
+              selectedRecipientType === "subscribers"
+                ? "No one has subscribed to your newsletter yet."
+                : "No users have uploaded their CV yet."
+            }}
+          </p>
+          <button
+            type="button"
+            class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all duration-200 transform"
+            (click)="loadRecipients()"
+          >
+            Reload
+          </button>
+          }
+        </div>
+        } }
+
+        <!-- Selection summary -->
+        @if(selectedRecipientIds.length > 0) {
+        <div
+          class="bg-purple-900 bg-opacity-30 backdrop-blur-sm border border-purple-700 border-opacity-50 rounded-xl p-6"
+        >
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center">
+              <svg
+                class="w-5 h-5 text-purple-400 mr-3"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+              </svg>
+              <span class="font-semibold text-purple-400">Ready to Send</span>
+            </div>
+            <button
+              (click)="clearAllSelections()"
+              class="text-sm text-gray-400 hover:text-white underline transition-colors"
+            >
+              Clear All
+            </button>
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            Newsletter will be sent to {{ selectedRecipientIds.length }}
+            {{ selectedRecipientType === "subscribers" ? "subscriber" : "user"
+            }}{{ selectedRecipientIds.length !== 1 ? "s" : "" }}.
+          </p>
+        </div>
+        }
+      </div>
+      }
+    </div>
+  </ng-container>
+
+  <!-- Updated Send Newsletter Button in Footer Section -->
+  <ng-container footer>
+    <div
+      class="flex justify-between p-6 border-t border-gray-600 border-opacity-30"
+    >
+      <!-- Previous Button -->
+      @if(currentStep === 'select-recipients') {
+      <button
+        type="button"
+        (click)="onPrevious()"
+        [disabled]="isSendingNewsletter"
+        class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-all duration-200 flex items-center space-x-2 transform disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        <svg
+          class="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+        <span>Previous</span>
+      </button>
+      } @else {
+      <div></div>
+      }
+
+      <div class="flex space-x-4">
+        <!-- Cancel Button -->
+        <button
+          type="button"
+          (click)="onClose()"
+          [disabled]="isSendingNewsletter"
+          class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg font-medium transition-all duration-200 transform disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          Cancel
+        </button>
+
+        <!-- Next/Send Button -->
+        @if(currentStep === 'select-type') {
+        <button
+          type="button"
+          (click)="onNext()"
+          [disabled]="!canProceed"
+          class="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-all duration-200 disabled:opacity-50 flex items-center space-x-2 transform disabled:transform-none"
+        >
+          <span>Next</span>
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </button>
+        } @else {
+        <!-- UPDATED: Send Newsletter Button with Spinner -->
+        <button
+          type="button"
+          (click)="onSendNewsletter()"
+          [disabled]="!canSendNewsletter"
+          [class.opacity-90]="isSendingNewsletter"
+          class="px-6 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all duration-200 disabled:opacity-50 flex items-center space-x-2 transform disabled:transform-none shadow-lg disabled:cursor-not-allowed"
+        >
+          <!-- Conditional Spinner or Send Icon -->
+          @if(isSendingNewsletter) {
+          <div
+            class="animate-spin rounded-full h-4 w-4 border-b-2 border-white"
+          ></div>
+          } @else {
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"
+            />
+          </svg>
+          }
+
+          <span>{{ sendButtonText }}</span>
+        </button>
+        }
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Optional: Success Toast/Notification (add this inside the modal body if needed) -->
+  @if(isSendingNewsletter) {
+  <div
+    class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+  >
+    <div
+      class="bg-gray-800 rounded-xl p-6 max-w-sm mx-4 text-center border border-gray-600"
+    >
+      <div
+        class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4"
+      ></div>
+      <h3 class="text-lg font-semibold text-white mb-2">Sending Newsletter</h3>
+      <p class="text-gray-400">
+        Please wait while we send your newsletter to
+        {{ selectedRecipientIds.length }}
+        {{ selectedRecipientType === "subscribers" ? "subscriber" : "user"
+        }}{{ selectedRecipientIds.length !== 1 ? "s" : "" }}...
+      </p>
+    </div>
+  </div>
+  }
+</app-modal>
+}

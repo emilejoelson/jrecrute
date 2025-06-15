@@ -140,6 +140,14 @@ export const routes: Routes = [
     canActivate: [adminGuard],
     children: [
       {
+        title: 'Newsletter recipient',
+        path: 'newsletter-recipient',
+        loadComponent: () =>
+          import(
+            './features/dashboard/dashboard-content/pages/manage-newsletter/newsletter-recipients/newsletter-recipients.component'
+          ).then((m) => m.NewsletterRecipientsComponent),
+      },
+      {
         title: 'manage-newsletter',
         path: 'newsletter',
         loadComponent: () =>
@@ -154,6 +162,14 @@ export const routes: Routes = [
           import(
             './features/dashboard/dashboard-content/pages/manage-subscriber/manage-subscriber.component'
           ).then((m) => m.ManageSubscriberComponent),
+      },
+      {
+        title: 'manage-role',
+        path: 'roles',
+        loadComponent: () =>
+          import(
+            './features/dashboard/dashboard-content/pages/manage-role/manage-role.component'
+          ).then((m) => m.ManageRoleComponent),
       },
       {
         title: 'newsletter-detail',

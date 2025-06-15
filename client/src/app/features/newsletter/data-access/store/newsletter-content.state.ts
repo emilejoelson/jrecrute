@@ -44,6 +44,18 @@ export interface NewsletterContentState {
     failedEmails: string[];
   } | null;
   
+    // Send to selected subscribers
+  sendToSelectedSubscribersLoading: boolean;
+  sendToSelectedSubscribersSuccess: boolean;
+  sendToSelectedSubscribersError: HttpErrorResponse | Error | string | null;
+  sendToSelectedSubscribersResults: any | null;
+
+  // Send to selected users with CV
+  sendToSelectedUsersWithCvLoading: boolean;
+  sendToSelectedUsersWithCvSuccess: boolean;
+  sendToSelectedUsersWithCvError: HttpErrorResponse | Error | string | null;
+  sendToSelectedUsersWithCvResults: any | null;
+
   // Upload image
   imageUploadLoading: boolean;
   imageUploadSuccess: boolean;

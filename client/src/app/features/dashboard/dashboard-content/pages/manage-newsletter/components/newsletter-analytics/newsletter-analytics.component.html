@@ -1,0 +1,35 @@
+@if(analytics){
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+  <div class="bg-gray-800 rounded-lg p-4 flex flex-col">
+    <div class="flex items-center text-purple-400 mb-2">
+      <app-icon iconName="totalNewslettersIcon" />
+      <span class="text-sm">Total Newsletters</span>
+    </div>
+    <div class="text-2xl font-bold">{{ analytics.totalNewsletters }}</div>
+  </div>
+
+  <div class="bg-gray-800 rounded-lg p-4 flex flex-col">
+    <div class="flex items-center text-blue-400 mb-2">
+      <app-icon iconName="publishedNewsletterIcon" />
+      <span class="text-sm">Published</span>
+    </div>
+    <div class="text-2xl font-bold">{{ analytics.publishedNewsletters }}</div>
+  </div>
+
+  <div class="bg-gray-800 rounded-lg p-4 flex flex-col">
+    <div class="flex items-center text-yellow-400 mb-2">
+      <app-icon iconName="scheduledNewsletterIcon" />
+      <span class="text-sm">Scheduled</span>
+    </div>
+    <div class="text-2xl font-bold">{{ analytics.scheduledNewsletters }}</div>
+  </div>
+
+  <div class="bg-gray-800 rounded-lg p-4 flex flex-col">
+    <div class="flex items-center text-green-400 mb-2">
+      <app-icon iconName="subscribersIcon" />
+      <span class="text-sm">Subscribers</span>
+    </div>
+    <div class="text-2xl font-bold">{{ analytics.totalSubscribers }}</div>
+  </div>
+</div>
+}

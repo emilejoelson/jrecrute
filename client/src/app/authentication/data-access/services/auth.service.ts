@@ -62,7 +62,7 @@ export class AuthService {
     const email = payload?.email || '';
 
     const user: User = {
-      id: response.userId,
+      _id: response.userId,
       email: email,
       role: response.role,
       roles: response.roles

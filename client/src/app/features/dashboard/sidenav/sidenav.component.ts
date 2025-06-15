@@ -35,7 +35,7 @@ export class SidenavComponent implements OnInit {
   chevronDownIcon!: SafeHtml;
   chevronRightIcon!: SafeHtml;
   plusIcon!: SafeHtml;
-  
+
   private store = inject(Store<State>);
   private router = inject(Router);
 
@@ -52,7 +52,7 @@ export class SidenavComponent implements OnInit {
       route: '/dashboard',
       active: true,
       isGroup: false,
-      description: 'Main overview'
+      description: 'Main overview',
     },
     {
       id: 'communications',
@@ -72,7 +72,7 @@ export class SidenavComponent implements OnInit {
           label: 'Newsletter',
           route: '/dashboard/newsletter',
           active: false,
-          isGroup: false
+          isGroup: false,
         },
         {
           id: 'subscribers',
@@ -82,18 +82,18 @@ export class SidenavComponent implements OnInit {
           route: '/dashboard/subscribers',
           active: false,
           isGroup: false,
-          badge: 1247
+          badge: 1247,
         },
         {
           id: 'campaigns',
           svgIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"></path><path d="M8 17l4-4 4 4 6-6"></path></svg>`,
           safeIcon: null as unknown as SafeHtml,
           label: 'Campaigns',
-          // route: '/dashboard/campaigns',
+          // route: '/dashboard/newsletter-recipient',
           active: false,
-          isGroup: false
-        }
-      ]
+          isGroup: false,
+        },
+      ],
     },
     {
       id: 'management',
@@ -112,18 +112,18 @@ export class SidenavComponent implements OnInit {
           label: 'User Management',
           route: '/dashboard/users',
           active: false,
-          isGroup: false
+          isGroup: false,
         },
         {
           id: 'roles',
           svgIcon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12l2 2 4-4"></path><path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path><path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path><path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"></path><path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"></path></svg>`,
           safeIcon: null as unknown as SafeHtml,
           label: 'Roles & Permissions',
-          // route: '/dashboard/roles',
+          route: '/dashboard/roles',
           active: false,
-          isGroup: false
-        }
-      ]
+          isGroup: false,
+        },
+      ],
     },
     {
       id: 'recruitment',
@@ -143,7 +143,7 @@ export class SidenavComponent implements OnInit {
           label: 'Job Postings',
           // route: '/dashboard/recruitment',
           active: false,
-          isGroup: false
+          isGroup: false,
         },
         {
           id: 'applications',
@@ -153,7 +153,7 @@ export class SidenavComponent implements OnInit {
           // route: '/dashboard/applications',
           active: false,
           isGroup: false,
-          badge: 12
+          badge: 12,
         },
         {
           id: 'interviews',
@@ -162,9 +162,9 @@ export class SidenavComponent implements OnInit {
           label: 'Interviews',
           // route: '/dashboard/interviews',
           active: false,
-          isGroup: false
-        }
-      ]
+          isGroup: false,
+        },
+      ],
     },
     {
       id: 'analytics',
@@ -174,7 +174,7 @@ export class SidenavComponent implements OnInit {
       // route: '/statistics',
       active: false,
       isGroup: false,
-      description: 'Data insights'
+      description: 'Data insights',
     },
     {
       id: 'finance',
@@ -195,7 +195,7 @@ export class SidenavComponent implements OnInit {
           // route: '/dashboard/invoices',
           active: false,
           isGroup: false,
-          badge: 3
+          badge: 3,
         },
         {
           id: 'payments',
@@ -205,7 +205,7 @@ export class SidenavComponent implements OnInit {
           // route: '/dashboard/payments',
           active: false,
           isGroup: false,
-          badge: 2
+          badge: 2,
         },
         {
           id: 'budgets',
@@ -214,10 +214,10 @@ export class SidenavComponent implements OnInit {
           label: 'Budget Planning',
           // route: '/dashboard/budgets',
           active: false,
-          isGroup: false
-        }
-      ]
-    }
+          isGroup: false,
+        },
+      ],
+    },
   ];
 
   constructor(private sanitizer: DomSanitizer) {}
@@ -229,15 +229,15 @@ export class SidenavComponent implements OnInit {
 
   initActionIcons(): void {
     const settingsSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>`;
-    
+
     const logoutSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>`;
-    
+
     const hamburgerSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>`;
-    
+
     const backSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>`;
-    
+
     const chevronDownSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>`;
-    
+
     const chevronRightSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
 
     const plusSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>`;
@@ -246,8 +246,10 @@ export class SidenavComponent implements OnInit {
     this.logoutIcon = this.sanitizer.bypassSecurityTrustHtml(logoutSvg);
     this.hamburgerIcon = this.sanitizer.bypassSecurityTrustHtml(hamburgerSvg);
     this.backIcon = this.sanitizer.bypassSecurityTrustHtml(backSvg);
-    this.chevronDownIcon = this.sanitizer.bypassSecurityTrustHtml(chevronDownSvg);
-    this.chevronRightIcon = this.sanitizer.bypassSecurityTrustHtml(chevronRightSvg);
+    this.chevronDownIcon =
+      this.sanitizer.bypassSecurityTrustHtml(chevronDownSvg);
+    this.chevronRightIcon =
+      this.sanitizer.bypassSecurityTrustHtml(chevronRightSvg);
     this.plusIcon = this.sanitizer.bypassSecurityTrustHtml(plusSvg);
   }
 
@@ -283,7 +285,7 @@ export class SidenavComponent implements OnInit {
       this.toggleGroup(selectedItem);
     } else {
       this.setActiveRecursive(this.navItems, selectedItem);
-      
+
       const parent = this.findParentItem(this.navItems, selectedItem);
       if (parent) {
         parent.isExpanded = true;
@@ -322,7 +324,7 @@ export class SidenavComponent implements OnInit {
 
   toggleSidebar(): void {
     this.isCollapsed = !this.isCollapsed;
-    
+
     if (this.isCollapsed) {
       this.collapseAllGroups(this.navItems);
     }
@@ -331,7 +333,7 @@ export class SidenavComponent implements OnInit {
   }
 
   private collapseAllGroups(items: NavItem[]): void {
-    items.forEach(item => {
+    items.forEach((item) => {
       if (item.isGroup) {
         item.isExpanded = false;
       }
@@ -343,7 +345,9 @@ export class SidenavComponent implements OnInit {
 
   hasActiveChild(item: NavItem): boolean {
     if (!item.children) return false;
-    return item.children.some(child => child.active || this.hasActiveChild(child));
+    return item.children.some(
+      (child) => child.active || this.hasActiveChild(child)
+    );
   }
 
   onQuickAdd(item: NavItem) {

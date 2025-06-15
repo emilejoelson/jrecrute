@@ -167,6 +167,47 @@ export const selectAnalyticsError = createSelector(
   (state) => state.analyticsError
 );
 
+export const selectSendToSelectedSubscribersLoading = createSelector(
+  selectNewsletterContentState,
+  (state) => state.sendToSelectedSubscribersLoading
+);
+
+export const selectSendToSelectedSubscribersSuccess = createSelector(
+  selectNewsletterContentState,
+  (state) => state.sendToSelectedSubscribersSuccess
+);
+
+export const selectSendToSelectedSubscribersError = createSelector(
+  selectNewsletterContentState,
+  (state) => state.sendToSelectedSubscribersError
+);
+
+export const selectSendToSelectedSubscribersResults = createSelector(
+  selectNewsletterContentState,
+  (state) => state.sendToSelectedSubscribersResults
+);
+
+// Send to selected users with CV selectors
+export const selectSendToSelectedUsersWithCvLoading = createSelector(
+  selectNewsletterContentState,
+  (state) => state.sendToSelectedUsersWithCvLoading
+);
+
+export const selectSendToSelectedUsersWithCvSuccess = createSelector(
+  selectNewsletterContentState,
+  (state) => state.sendToSelectedUsersWithCvSuccess
+);
+
+export const selectSendToSelectedUsersWithCvError = createSelector(
+  selectNewsletterContentState,
+  (state) => state.sendToSelectedUsersWithCvError
+);
+
+export const selectSendToSelectedUsersWithCvResults = createSelector(
+  selectNewsletterContentState,
+  (state) => state.sendToSelectedUsersWithCvResults
+);
+
 // Combined loading selector
 export const selectIsLoading = createSelector(
   selectCreateLoading,
@@ -175,6 +216,8 @@ export const selectIsLoading = createSelector(
   selectUpdateLoading,
   selectDeleteLoading,
   selectSendLoading,
+  selectSendToSelectedSubscribersLoading,
+  selectSendToSelectedUsersWithCvLoading,
   selectImageUploadLoading,
   selectAnalyticsLoading,
   (
@@ -184,6 +227,8 @@ export const selectIsLoading = createSelector(
     updateLoading,
     deleteLoading,
     sendLoading,
+    sendToSelectedSubscribersLoading,
+    sendToSelectedUsersWithCvLoading,
     imageUploadLoading,
     analyticsLoading
   ) => 
@@ -193,9 +238,12 @@ export const selectIsLoading = createSelector(
     updateLoading || 
     deleteLoading || 
     sendLoading || 
+    sendToSelectedSubscribersLoading ||
+    sendToSelectedUsersWithCvLoading ||
     imageUploadLoading || 
     analyticsLoading
 );
+
 
 export const selectHasError = createSelector(
   selectCreateError,
@@ -204,6 +252,8 @@ export const selectHasError = createSelector(
   selectUpdateError,
   selectDeleteError,
   selectSendError,
+  selectSendToSelectedSubscribersError,
+  selectSendToSelectedUsersWithCvError,
   selectImageUploadError,
   selectAnalyticsError,
   (
@@ -213,6 +263,8 @@ export const selectHasError = createSelector(
     updateError,
     deleteError,
     sendError,
+    sendToSelectedSubscribersError,
+    sendToSelectedUsersWithCvError,
     imageUploadError,
     analyticsError
   ) => 
@@ -222,6 +274,8 @@ export const selectHasError = createSelector(
     updateError !== null || 
     deleteError !== null || 
     sendError !== null || 
+    sendToSelectedSubscribersError !== null ||
+    sendToSelectedUsersWithCvError !== null ||
     imageUploadError !== null || 
     analyticsError !== null
 );

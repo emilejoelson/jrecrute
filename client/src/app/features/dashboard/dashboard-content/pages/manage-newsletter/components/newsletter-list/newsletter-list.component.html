@@ -1,0 +1,39 @@
+@if(loading){
+<div class="flex justify-center items-center h-40">
+  <div
+    class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"
+  ></div>
+</div>
+} @if(error && !loading){
+<div
+  class="bg-red-900/30 border border-red-700 text-red-100 px-4 py-3 rounded mb-4"
+>
+  <p>There was an error loading newsletters. Please try again later.</p>
+</div>
+
+} @if(newsletters && newsletters.length === 0 && !loading && !error){
+<app-newsletter-empty-state (createNewsletter)="onCreate()" />
+}
+
+<!-- Newsletter List -->
+@if(newsletters && newsletters.length > 0 && !loading){
+<div class="grid grid-cols-1 gap-4">
+  @for(newsletter of newsletters; track newsletter){
+  <app-newsletter-card
+    [newsletter]="newsletter"
+    (select)="onSelect($event)"
+    (send)="onSend($event)"
+    (delete)="onDelete($event)"
+  />
+  }
+</div>
+}
+
+@if(pagination && pagination.pages > 1){
+<app-newsletter-pagination
+  [currentPage]="currentPage"
+  [totalPages]="pagination.pages"
+  (pageChange)="onPageChange($event)"
+/>
+}
+

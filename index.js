@@ -12,6 +12,7 @@ const routRecruitmentRequest = require("./routes/RecruitmentRequestRouter.js");
 const routAuth = require("./routes/AuthRouter.js");
 const routRole = require("./routes/RoleRouter.js");
 const routNewsletter = require("./routes/NewsletterRouter.js");
+const routNewsletterContent = require("./routes/NewsletterContentRouter.js");
 
 const app = express();
 const server = http.createServer(app);
@@ -50,6 +51,7 @@ app.use(routRecruitmentRequest);
 app.use(routAuth);
 app.use(routRole);
 app.use(routNewsletter);
+app.use(routNewsletterContent);
 
 io.on("connection", (socket) => {
   console.log("A client connected");

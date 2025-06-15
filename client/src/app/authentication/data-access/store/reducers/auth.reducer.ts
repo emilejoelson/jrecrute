@@ -21,7 +21,7 @@ export const authReducer = createReducer(
       isAuthenticated: true,
       isSignupSuccess: true,
       user: {
-        id: response.userId,
+        _id: response.userId,
         email: '',
         role: response.role,
         roles: response.roles,
@@ -54,7 +54,7 @@ export const authReducer = createReducer(
     isLoading: false,
     isAuthenticated: true,
     user: {
-      id: response.userId,
+      _id: response.userId,
       email: '',
       role: response.role,
       roles: response.roles,

@@ -220,21 +220,38 @@ export class NewsletterContentEffects {
   );
 
   // Send newsletter
-  sendNewsletter$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(NewsletterContentActions.sendNewsletter),
-      exhaustMap(({ id }) =>
-        this.newsletterContentService.sendNewsletter(id).pipe(
-          map((response) =>
-            NewsletterContentActions.sendNewsletterSuccess({ response })
-          ),
-          catchError((error) =>
-            of(NewsletterContentActions.sendNewsletterFailure({ error }))
-          )
+sendNewsletterToSelectedSubscribers$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(NewsletterContentActions.sendNewsletterToSelectedSubscribers),
+    exhaustMap(({ id, subscriberIds }) =>
+      this.newsletterContentService.sendNewsletterToSelectedSubscribers(id, subscriberIds).pipe(
+        map((response) =>
+          NewsletterContentActions.sendNewsletterToSelectedSubscribersSuccess({ response })
+        ),
+        catchError((error) =>
+          of(NewsletterContentActions.sendNewsletterToSelectedSubscribersFailure({ error }))
         )
       )
     )
-  );
+  )
+);
+
+// Send newsletter to selected users with CV
+sendNewsletterToSelectedUsersWithCv$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(NewsletterContentActions.sendNewsletterToSelectedUsersWithCv),
+    exhaustMap(({ id, userIds }) =>
+      this.newsletterContentService.sendNewsletterToSelectedUsersWithCv(id, userIds).pipe(
+        map((response) =>
+          NewsletterContentActions.sendNewsletterToSelectedUsersWithCvSuccess({ response })
+        ),
+        catchError((error) =>
+          of(NewsletterContentActions.sendNewsletterToSelectedUsersWithCvFailure({ error }))
+        )
+      )
+    )
+  )
+);
 
   // Upload image
   uploadImage$ = createEffect(() =>

@@ -13,6 +13,7 @@ import {
   SendNewsletterResponse,
   ImageUploadResponse,
 } from '../models/newsletter-content';
+import { Subscriber, User } from '../models/newsletter.types';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,14 @@ export class NewsletterContentService {
   private apiUrl = environment.apiUrl;
 
   http = inject(HttpClient);
+
+  getAllSubscribers(): Observable<{ subscribers: Subscriber[] }> {
+    return this.http.get<{ subscribers: Subscriber[] }>(`${this.apiUrl}/newsletter`);
+  }
+
+  getUsersWithCv(): Observable<{ users: User[] }> {
+    return this.http.get<{ users: User[] }>(`${this.apiUrl}/getusers-with-cv`);
+  }
 
   // Get all newsletters with optional pagination and status filtering
   getNewsletters(
@@ -89,14 +98,26 @@ export class NewsletterContentService {
     );
   }
 
-  // Send a newsletter to subscribers
-  sendNewsletter(id: string): Observable<SendNewsletterResponse> {
+  sendNewsletterToSelectedSubscribers(
+    id: string,
+    subscriberIds: string[]
+  ): Observable<SendNewsletterResponse> {
     return this.http.post<SendNewsletterResponse>(
       `${this.apiUrl}/newsletters/${id}/send`,
-      {}
+      { subscriberIds }
     );
   }
 
+  // Send newsletter to selected users with CV
+  sendNewsletterToSelectedUsersWithCv(
+    id: string,
+    userIds: string[]
+  ): Observable<SendNewsletterResponse> {
+    return this.http.post<SendNewsletterResponse>(
+      `${this.apiUrl}/newsletters/${id}/send-to-candidates`,
+      { userIds }
+    );
+  }
   // Update newsletter image
   updateNewsletterImage(
     id: string,

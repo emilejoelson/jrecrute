@@ -12,6 +12,60 @@ const {
   clearRefreshTokenCookie,
 } = require("../services/CookieService");
 
+const getAllAuths = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // Get total count for pagination info
+    const totalCount = await Auth.countDocuments();
+
+    // Fetch auth records with user data populated
+    const allAuths = await Auth.find()
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
+      .populate({
+        path: "userId",
+        model: "users",
+        select:
+          "personalInfo professionalInfo academicInfo profileImage cvFile", // Select specific fields you need
+      })
+      .populate({
+        path: "roles",
+        model: "role", // Make sure you have a Role model defined
+      })
+      .select("-password -refreshTokens -resetPasswordToken") // Exclude sensitive fields
+      .lean(); // For better performance if you don't need mongoose document methods
+
+    // Calculate pagination info
+    const totalPages = Math.ceil(totalCount / limit);
+    const startIndex = skip + 1;
+    const endIndex = Math.min(skip + limit, totalCount);
+
+    res.status(200).json({
+      success: true,
+      data: allAuths,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalItems: totalCount,
+        itemsPerPage: limit,
+        startIndex,
+        endIndex,
+      },
+    });
+  } catch (error) {
+    console.error("Error retrieving all auth records:", error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve authentication records",
+      error: error.message,
+    });
+  }
+};
+
 const signup = async (req, res) => {
   try {
     const {
@@ -41,7 +95,7 @@ const signup = async (req, res) => {
     // Create the user with the profile image URL
     const newUser = new User({
       cvFile: cvFile || null,
-      profileImage: profileImage || null, // Store the URL/path directly
+      profileImage: profileImage || null,
       personalInfo: {
         civility: personalInfo.civility,
         firstName: personalInfo.firstName,
@@ -118,6 +172,7 @@ const signup = async (req, res) => {
     });
   }
 };
+
 const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -233,7 +288,6 @@ const getProfile = async (req, res) => {
       firstName: user.personalInfo.firstName,
       lastName: user.personalInfo.lastName,
     };
-
     return res.status(200).json(profileData);
   } catch (error) {
     console.error("Error retrieving user profile:", error);
@@ -336,4 +390,5 @@ module.exports = {
   logout,
   getProfile,
   changePassword,
+  getAllAuths,
 };

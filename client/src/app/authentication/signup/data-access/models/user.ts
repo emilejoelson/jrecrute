@@ -2,7 +2,7 @@ import { Role } from '../../../data-access/models/auth.response';
 import { Experience, Language} from './signup';
 
 export interface User {
-  id: string;
+  _id: string;
   email: string;
   role?: string;
   roles?: Role[];

@@ -1,0 +1,57 @@
+<div
+  class="bg-gray-800 border border-gray-700 rounded-lg hover:border-purple-500 transition-colors cursor-pointer p-4"
+  (click)="onSelect()"
+>
+  <div class="flex justify-between items-start">
+    <div class="flex items-center">
+      <div
+        class="flex-shrink-0 h-12 w-12 rounded-md overflow-hidden bg-gray-700 mr-4"
+      >
+        @if(newsletter.image){
+        <img
+          [src]="newsletter.image"
+          alt="Newsletter cover"
+          class="h-full w-full object-cover"
+        />
+        } @else {
+        <div
+          class="h-full w-full flex items-center justify-center text-gray-500"
+        >
+          <app-icon iconName="defaultImageNewsletter"/>
+        </div>
+        }
+      </div>
+      <div>
+        <h3 class="text-lg font-medium">{{ newsletter.title }}</h3>
+        <p class="text-sm text-gray-400 mt-1 line-clamp-2">
+          {{ newsletter.description }}
+        </p>
+        <div class="flex items-center mt-2 space-x-4">
+          <span class="text-xs text-gray-500">{{
+            newsletter.createdAt | date
+          }}</span>
+          <span class="flex items-center text-xs">
+            <app-icon iconName="newsletterRecipientCountIcon" />
+            {{ newsletter.recipientCount || 0 }}
+          </span>
+          <app-newsletter-status-badge [status]="newsletter.status" />
+        </div>
+      </div>
+    </div>
+
+    <div class="flex space-x-2">
+      <button
+        (click)="onSend($event)"
+        class="text-gray-400 hover:text-blue-400 transition-colors"
+      >
+        <app-icon iconName="newsletterPublishedStatusIcon" />
+      </button>
+      <button
+        (click)="onDelete($event)"
+        class="text-gray-400 hover:text-red-400 transition-colors"
+      >
+        <app-icon iconName="deleteConfirmationIcon" />
+      </button>
+    </div>
+  </div>
+</div>
