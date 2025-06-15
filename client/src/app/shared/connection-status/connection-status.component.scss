@@ -1,0 +1,82 @@
+.status-container {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    width: 100%;
+    max-width: 400px;
+    padding: 0 16px;
+  }
+
+  .status-content {
+    background: transparent;
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .status-content.offline {
+    background: rgba(239, 68, 68, 0.95);
+  }
+
+  .status-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: white;
+  }
+
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
+  }
+
+  .check-icon, .warning-icon {
+    width: 24px;
+    height: 24px;
+    stroke: white;
+  }
+
+  .status-text {
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+  }
+
+  .offline-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  @media (max-width: 480px) {
+    .status-content {
+      padding: 12px;
+    }
+
+    .status-text {
+      font-size: 0.875rem;
+    }
+  }

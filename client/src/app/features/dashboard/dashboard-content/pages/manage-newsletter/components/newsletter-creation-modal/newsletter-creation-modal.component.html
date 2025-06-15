@@ -1,0 +1,336 @@
+@if(isVisible){
+<app-modal (close)="onClose()">
+  <ng-container header>
+    <h2 class="text-xl font-semibold">Create Newsletter</h2>
+  </ng-container>
+
+  <ng-container body>
+    <div class="space-y-6">
+      <form
+        [formGroup]="newsletterForm"
+        (ngSubmit)="onSubmit()"
+        class="space-y-6"
+      >
+        <!-- Progress Steps -->
+        <div class="mb-8">
+          <div class="relative">
+            <div class="flex justify-between mb-2">
+              <span class="text-xs font-medium text-purple-400"
+                >Basic Info</span
+              >
+              <span class="text-xs font-medium text-gray-400">Content</span>
+              <span class="text-xs font-medium text-gray-400">Preview</span>
+            </div>
+            <div class="overflow-hidden h-2 flex rounded-full bg-gray-700">
+              <div
+                class="bg-gradient-to-r from-purple-500 to-indigo-600 w-1/3 rounded-full shadow-lg transition-all duration-500 ease-in-out"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Two-column grid layout with glass effect -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Left column -->
+          <div
+            class="space-y-6 backdrop-blur-sm bg-gray-800/40 rounded-xl p-6 border border-gray-700/50 shadow-xl"
+          >
+            <!-- Title with floating label -->
+            <div class="relative">
+              <input
+                id="title"
+                formControlName="title"
+                type="text"
+                placeholder=" "
+                class="peer w-full px-4 py-3 bg-gray-800/70 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+              />
+              <label
+                for="title"
+                class="absolute left-4 -top-3 text-xs font-medium text-purple-400 bg-gray-800 px-2 transition-all duration-300"
+                >Newsletter Title*</label
+              >
+              @if(newsletterForm.get('title')?.invalid &&
+              newsletterForm.get('title')?.touched){
+              <div class="text-red-400 text-xs mt-1 flex items-center">
+                <app-icon iconName="warningTitleIcon" />
+                Title is required and must be less than 100 characters
+              </div>
+              }
+            </div>
+
+            <!-- Description with animated border -->
+            <div class="relative">
+              <textarea
+                id="description"
+                formControlName="description"
+                rows="4"
+                placeholder=" "
+                class="peer w-full px-4 py-3 bg-gray-800/70 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300 resize-none"
+              ></textarea>
+              <label
+                for="description"
+                class="absolute left-4 -top-3 text-xs font-medium text-purple-400 bg-gray-800 px-2 transition-all duration-300"
+                >Newsletter Description*</label
+              >
+
+              @if(newsletterForm.get('description')?.invalid &&
+              newsletterForm.get('description')?.touched){
+              <div class="text-red-400 text-xs mt-1 flex items-center">
+                <app-icon iconName="warningTitleIcon" />
+                Description is required and must be less than 500 characters
+              </div>
+              }
+
+              <div class="text-xs text-gray-400 mt-1 flex items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-3 w-3 mr-1"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                A compelling description will increase your newsletter's reach
+              </div>
+            </div>
+
+            <!-- Publish Frequency with custom select -->
+            <div class="relative">
+              <label
+                for="publishFrequency"
+                class="absolute left-4 -top-3 text-xs font-medium text-purple-400 bg-gray-800 px-2 z-10"
+                >Publish Frequency*</label
+              >
+              <div class="relative">
+                <select
+                  id="publishFrequency"
+                  formControlName="publishFrequency"
+                  class="appearance-none w-full px-4 py-3 bg-gray-800/70 border border-gray-600 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-300"
+                >
+                  @for(option of publishFrequencyOptions; track option){
+                  <option [value]="option.value">
+                    {{ option.label }}
+                  </option>
+                  }
+                </select>
+                <div
+                  class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-purple-400"
+                >
+                  <app-icon iconName="dropdownArrowIcon" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Status with modern toggle buttons -->
+            <div class="relative">
+              <label
+                class="absolute left-4 -top-3 text-xs font-medium text-purple-400 bg-gray-800 px-2 z-10"
+                >Status</label
+              >
+              <div
+                class="flex p-1 space-x-1 bg-gray-800/80 rounded-lg border border-gray-700/50 shadow-inner"
+              >
+                <label
+                  class="flex-1 flex items-center justify-center py-2 px-3 rounded-md cursor-pointer transition-all duration-300"
+                  [class.bg-gradient-to-r]="
+                    newsletterForm.get('status')?.value === 'draft'
+                  "
+                  [class.from-purple-600]="
+                    newsletterForm.get('status')?.value === 'draft'
+                  "
+                  [class.to-purple-700]="
+                    newsletterForm.get('status')?.value === 'draft'
+                  "
+                  [class.shadow-lg]="
+                    newsletterForm.get('status')?.value === 'draft'
+                  "
+                >
+                  <input
+                    type="radio"
+                    formControlName="status"
+                    value="draft"
+                    class="sr-only"
+                  />
+                  <app-icon iconName="draftIcon" />
+                  <span class="text-sm">Draft</span>
+                </label>
+                <label
+                  class="flex-1 flex items-center justify-center py-2 px-3 rounded-md cursor-pointer transition-all duration-300"
+                  [class.bg-gradient-to-r]="
+                    newsletterForm.get('status')?.value === 'scheduled'
+                  "
+                  [class.from-blue-600]="
+                    newsletterForm.get('status')?.value === 'scheduled'
+                  "
+                  [class.to-blue-700]="
+                    newsletterForm.get('status')?.value === 'scheduled'
+                  "
+                  [class.shadow-lg]="
+                    newsletterForm.get('status')?.value === 'scheduled'
+                  "
+                >
+                  <input
+                    type="radio"
+                    formControlName="status"
+                    value="scheduled"
+                    class="sr-only"
+                  />
+                  <app-icon iconName="scheduledIcon" />
+                  <span class="text-sm">Scheduled</span>
+                </label>
+                <label
+                  class="flex-1 flex items-center justify-center py-2 px-3 rounded-md cursor-pointer transition-all duration-300"
+                  [class.bg-gradient-to-r]="
+                    newsletterForm.get('status')?.value === 'published'
+                  "
+                  [class.from-green-600]="
+                    newsletterForm.get('status')?.value === 'published'
+                  "
+                  [class.to-green-700]="
+                    newsletterForm.get('status')?.value === 'published'
+                  "
+                  [class.shadow-lg]="
+                    newsletterForm.get('status')?.value === 'published'
+                  "
+                >
+                  <input
+                    type="radio"
+                    formControlName="status"
+                    value="published"
+                    class="sr-only"
+                  />
+                  <app-icon iconName="publishedIcon" />
+                  <span class="text-sm">Published</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right column -->
+          <div
+            class="space-y-6 backdrop-blur-sm bg-gray-800/40 rounded-xl p-6 border border-gray-700/50 shadow-xl"
+          >
+            <!-- Newsletter Image with preview and animations -->
+            <div class="relative">
+              <label
+                class="absolute left-4 -top-3 text-xs font-medium text-purple-400 bg-gray-800 px-2 z-10"
+                >Newsletter Image</label
+              >
+
+              <div
+                *ngIf="!imagePreview"
+                class="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-purple-500 transition-all duration-300 group relative overflow-hidden"
+                (click)="fileInput.click()"
+              >
+                <div
+                  class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 transform scale-0 group-hover:scale-100 transition-transform duration-500 rounded-lg"
+                ></div>
+
+                <app-icon iconName="imagePreviewIcon" />
+                <p
+                  class="mt-4 text-sm text-gray-300 group-hover:text-white transition-colors duration-300"
+                >
+                  Click to upload an image
+                </p>
+                <p
+                  class="text-xs text-gray-500 mt-1 group-hover:text-gray-300 transition-colors duration-300"
+                >
+                  Recommended size: 300x300 pixels
+                </p>
+                <p
+                  class="text-xs text-purple-400/70 mt-3 group-hover:text-purple-400 transition-colors duration-300"
+                >
+                  Supports JPG, PNG and GIF formats
+                </p>
+              </div>
+              @if(imagePreview){
+              <div class="relative rounded-lg overflow-hidden shadow-2xl group">
+                <img
+                  [src]="imagePreview"
+                  alt="Preview"
+                  class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div
+                  class="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                ></div>
+                <button
+                  type="button"
+                  (click)="removeImage()"
+                  class="absolute bottom-4 right-4 bg-gray-900/70 hover:bg-red-600 p-2 rounded-full transition-colors duration-300 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all"
+                >
+                  <app-icon iconName="removeImageIcon" />
+                </button>
+                <button
+                  type="button"
+                  (click)="fileInput.click()"
+                  class="absolute bottom-4 left-4 bg-gray-900/70 hover:bg-purple-600 p-2 rounded-full transition-colors duration-300 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all"
+                >
+                  <app-icon iconName="fileInputIcon" />
+                </button>
+              </div>
+              }
+
+              <input
+                #fileInput
+                type="file"
+                accept="image/*"
+                class="hidden"
+                (change)="onImageChange($event)"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Editor - full width below both columns -->
+        <div>
+          <label
+            for="content"
+            class="block text-sm font-medium text-gray-300 mb-1"
+            >Newsletter Content*</label
+          >
+          <app-editor
+            [initialContent]="newsletterForm.value.content"
+            (contentChange)="onEditorContentChange($event)"
+          ></app-editor>
+
+          @if(newsletterForm.get('content')?.invalid &&
+          newsletterForm.get('content')?.touched){
+          <div class="text-red-400 text-sm mt-1">Content is required</div>
+          }
+        </div>
+      </form>
+    </div>
+  </ng-container>
+
+  <ng-container footer>
+    <div class="flex justify-end space-x-3">
+      <button
+        type="button"
+        (click)="onClose()"
+        class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md text-sm font-medium transition-colors"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        (click)="onSubmit()"
+        [disabled]="newsletterForm.invalid || isLoading"
+        class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-md text-sm font-medium transition-colors flex items-center"
+        [class.opacity-50]="newsletterForm.invalid || isLoading"
+      >
+        @if(isLoading){
+        <span class="mr-2">
+          <app-icon iconName="saveNewsletterIcon" />
+        </span>
+        } Save Newsletter
+      </button>
+    </div>
+  </ng-container>
+</app-modal>
+}

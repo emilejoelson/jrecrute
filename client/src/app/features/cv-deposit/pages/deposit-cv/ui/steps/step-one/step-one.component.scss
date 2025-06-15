@@ -1,0 +1,62 @@
+.file-preview-container {
+  border-radius: 12px;
+  position: relative;
+  padding: 1rem;
+  margin: 1rem;
+  max-width: 100%;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+  background-color: #ffffff; /* Adds a background to ensure visibility */
+  box-shadow: inset 0 0 0 5px #f6f6f6; /* Moves outline inside the div */
+}
+
+/* Inner shadow effect */
+.file-preview-container::before {
+  content: "";
+  position: absolute;
+  border-radius: 10px;
+  inset: 5px; /* Moves the pseudo-element inside */
+  box-shadow: inset 0 0 0 10px #fafafa; /* Creates an inner outline effect */
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .file-preview-container {
+    padding: 0.75rem;
+    margin: 0.5rem;
+    box-shadow: inset 0 0 0 3px #f6f6f6; /* Adjusts inner outline */
+  }
+
+  .file-preview-container::before {
+    inset: 3px;
+    box-shadow: inset 0 0 0 6px #fafafa; /* Adjusts pseudo-element outline */
+  }
+}
+
+/* Responsive adjustments for very small screens */
+@media (max-width: 480px) {
+  .file-preview-container {
+    padding: 0.5rem;
+    margin: 0.25rem;
+    box-shadow: inset 0 0 0 2px #f6f6f6; /* Smaller inner outline */
+  }
+
+  .file-preview-container::before {
+    inset: 2px;
+    box-shadow: inset 0 0 0 4px #fafafa; /* Adjusts pseudo-element outline */
+  }
+}
+
+
+
+
+
+.shadow-box-action-buttons {
+    border-radius: 20px;
+    box-shadow: 
+      0 4px 6px rgba(140, 82, 255, 0.4),   
+      0 8px 12px rgba(203, 108, 230, 0.4),
+      0 12px 18px rgba(210, 171, 201, 0.3),
+      0 0 20px rgba(140, 82, 255, 0.6),
+      0 0 30px rgba(203, 108, 230, 0.5),
+      0 0 40px rgba(210, 171, 201, 0.4);
+  }

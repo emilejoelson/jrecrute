@@ -1,0 +1,78 @@
+:host {
+    display: block;
+    min-height: 100vh;
+    background-color: #0d1117;
+    color: #c9d1d9;
+  }
+  
+  // Custom scrollbar for the contribution graph
+  ::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #21262d;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #484f58;
+  }
+  
+  // Contribution graph tile animations
+  .grid div {
+    transition: all 0.2s ease;
+    
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+  
+  // Button and link hover effects
+  button {
+    transition: all 0.2s ease;
+    
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.3);
+    }
+  }
+  
+  // Profile image container
+  .rounded-full {
+    position: relative;
+    transition: transform 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.03);
+      
+      &::after {
+        content: "Change avatar";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px;
+        font-size: 14px;
+        text-align: center;
+      }
+    }
+  }
+  
+  // Repository card hover effects
+  .bg-gray-800 {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+  }

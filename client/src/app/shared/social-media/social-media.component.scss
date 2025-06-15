@@ -1,0 +1,11 @@
+.social-media {
+  position: fixed;
+  right: 0; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  height: auto; 
+  background-color: lightblue;
+  padding: 20px; 
+  border: 1px solid #ccc; 
+  z-index: 999999;
+}

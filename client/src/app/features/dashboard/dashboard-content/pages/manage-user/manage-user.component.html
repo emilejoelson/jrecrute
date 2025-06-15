@@ -1,0 +1,474 @@
+<div class="min-h-screen bg-slate-900 text-white p-6">
+  <!-- Header Section -->
+  <div class="mb-8">
+    <div class="flex items-center justify-between mb-6">
+      <div>
+        <h1 class="text-3xl font-bold text-white mb-2">User Management</h1>
+        <p class="text-slate-400">
+          Manage authenticated users and their permissions
+        </p>
+      </div>
+      <button
+        (click)="onAddUser()"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+      >
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+          ></path>
+        </svg>
+        Add New User
+      </button>
+    </div>
+
+    <!-- Stats Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div
+        class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 backdrop-blur-sm"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-slate-400 text-sm font-medium">Total Users</p>
+            <p
+              class="text-2xl font-bold text-white"
+              *ngIf="usersCount$ | async as count"
+            >
+              {{ count }}
+            </p>
+          </div>
+          <div class="bg-blue-500/10 p-3 rounded-lg">
+            <app-icon iconName="userTotalIcon" />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 backdrop-blur-sm"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-slate-400 text-sm font-medium">Active Users</p>
+            <p class="text-2xl font-bold text-green-400">--</p>
+          </div>
+          <div class="bg-green-500/10 p-3 rounded-lg">
+            <app-icon iconName="activeUserIcon" />
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 backdrop-blur-sm"
+      >
+        <div class="flex items-center justify-between">
+          <div>
+            <p class="text-slate-400 text-sm font-medium">Pending Users</p>
+            <p class="text-2xl font-bold text-yellow-400">--</p>
+          </div>
+          <div class="bg-yellow-500/10 p-3 rounded-lg">
+            <app-icon iconName="pendingUserIcon" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filters and Search -->
+  <div
+    class="bg-slate-800/50 border border-slate-700 rounded-xl p-6 mb-6 backdrop-blur-sm"
+  >
+    <div class="flex flex-col lg:flex-row gap-4 items-center justify-between">
+      <!-- Search - Fixed to work with reactive approach -->
+      <div class="relative flex-1 max-w-md">
+        <div
+          class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+        >
+          <app-icon iconName="inputSearchIcon" />
+        </div>
+        <input
+          (input)="onSearch($event)"
+          [value]="searchTerm"
+          type="text"
+          placeholder="Search by email or role..."
+          class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600 rounded-lg text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+        />
+
+        <!-- Search indicator -->
+        <div
+          class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+          *ngIf="loading$ | async"
+        >
+          <div
+            class="animate-spin rounded-full h-4 w-4 border-b-2 border-blue-500"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Status Filter -->
+      <div class="flex items-center gap-3">
+        <button
+          *ngFor="let status of statusOptions"
+          (click)="selectedStatus = status.value; onStatusChange()"
+          [class]="
+            selectedStatus === status.value
+              ? 'bg-blue-600 text-white'
+              : 'bg-slate-700/50 text-slate-300 hover:bg-slate-600/50'
+          "
+          class="px-4 py-2 rounded-lg font-medium transition-all duration-200 border border-slate-600"
+        >
+          {{ status.label }}
+        </button>
+      </div>
+
+      <!-- Items per page -->
+      <div class="flex items-center gap-2">
+        <span class="text-slate-400 text-sm">Show:</span>
+        <select
+          [(ngModel)]="itemsPerPage"
+          (change)="onItemsPerPageChange()"
+          class="bg-slate-700/50 border border-slate-600 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <option *ngFor="let option of itemsPerPageOptions" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+        <span class="text-slate-400 text-sm">entries</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div
+    *ngIf="loading$ | async"
+    class="bg-slate-800/50 border border-slate-700 rounded-xl p-12 text-center backdrop-blur-sm"
+  >
+    <div class="inline-flex items-center gap-3">
+      <div
+        class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"
+      ></div>
+      <span class="text-slate-300">Loading users...</span>
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div
+    *ngIf="error$ | async as error"
+    class="bg-red-500/10 border border-red-500/20 rounded-xl p-4 mb-6"
+  >
+    <div class="flex items-center gap-3">
+      <app-icon iconName="errorLoadingIcon" />
+      <span class="text-red-400"
+        >Error loading users: {{ error.message || error }}</span
+      >
+    </div>
+  </div>
+
+  <!-- Users Table -->
+  <div
+    class="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden backdrop-blur-sm"
+    *ngIf="!(loading$ | async)"
+  >
+    <!-- Table Header -->
+    <div class="bg-slate-700/30 px-6 py-4 border-b border-slate-600">
+      <div class="flex items-center justify-between">
+        <h3 class="text-lg font-semibold text-white">Authenticated Users</h3>
+        <div
+          class="text-sm text-slate-400"
+          *ngIf="pagination$ | async as pagination"
+        >
+          <span *ngIf="searchTerm?.trim(); else noSearchResults">
+            Search results: {{ pagination.totalItems }} found
+          </span>
+          <ng-template #noSearchResults>
+            Showing {{ pagination.startIndex + 1 }}-{{
+              Math.min(pagination.endIndex + 1, pagination.totalItems)
+            }}
+            of {{ pagination.totalItems }} results
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Content -->
+    <div class="overflow-x-auto">
+      <table class="w-full">
+        <thead class="bg-slate-700/20">
+          <tr>
+            <th
+              class="px-6 py-4 text-left text-xs font-medium text-slate-300 uppercase tracking-wider"
+            >
+              <div class="flex items-center gap-2">
+                User
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                  ></path>
+                </svg>
+              </div>
+            </th>
+            <th
+              class="px-6 py-4 text-left text-xs font-medium text-slate-300 uppercase tracking-wider"
+            >
+              <div class="flex items-center gap-2">
+                Status
+                <app-icon iconName="statusIcon" />
+              </div>
+            </th>
+            <th
+              class="px-6 py-4 text-left text-xs font-medium text-slate-300 uppercase tracking-wider"
+            >
+              <div class="flex items-center gap-2">
+                Roles
+                <app-icon iconName="roleIcon" />
+              </div>
+            </th>
+            <th
+              class="px-6 py-4 text-left text-xs font-medium text-slate-300 uppercase tracking-wider"
+            >
+              <div class="flex items-center gap-2">
+                Created At
+                <app-icon iconName="createAtIcon" />
+              </div>
+            </th>
+            <th
+              class="px-6 py-4 text-right text-xs font-medium text-slate-300 uppercase tracking-wider"
+            >
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-700/50">
+          <tr
+            *ngFor="let user of authUsers$ | async; trackBy: trackByUserId"
+            class="hover:bg-slate-700/20 transition-colors duration-200"
+          >
+            <!-- User Info -->
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex items-center gap-4">
+                <div class="flex-shrink-0">
+                  <div
+                    class="h-12 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-semibold text-lg"
+                  >
+                    {{ getUserInitials(user) }}
+                  </div>
+                </div>
+                <div>
+                  <div class="text-sm font-medium text-white">
+                    {{ getUserDisplayName(user) }}
+                  </div>
+                  <div class="text-sm text-slate-400">{{ user.email }}</div>
+                  <!-- Replace the telephone div with this copyable user ID section -->
+                  <div class="text-xs text-slate-500 flex items-center gap-2">
+                    <span>ID: {{ user?.userId?._id }}</span>
+                    <button
+                      (click)="copyUserId(user.userId._id, user._id)"
+                      [class]="getCopyButtonClass(user._id)"
+                      [title]="getCopyButtonTitle(user._id)"
+                    >
+                      <svg
+                        *ngIf="!isCopied(user._id)"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="transition-opacity duration-200"
+                      >
+                        <rect
+                          width="14"
+                          height="14"
+                          x="8"
+                          y="8"
+                          rx="2"
+                          ry="2"
+                        />
+                        <path
+                          d="m4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
+                        />
+                      </svg>
+
+                      <!-- Success Checkmark SVG Icon -->
+                      <svg
+                        *ngIf="isCopied(user._id)"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="transition-opacity duration-200"
+                      >
+                        <path d="M20 6L9 17l-5-5" />
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </td>
+
+            <!-- Status -->
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span
+                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium"
+                [class]="getStatusColor(true) + ' text-white'"
+              >
+                {{ getStatusText(true) }}
+              </span>
+            </td>
+
+            <!-- Roles -->
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="flex flex-wrap gap-1">
+                <span
+                  *ngFor="let role of user.roles; let last = last"
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-500/10 text-indigo-400 border border-indigo-500/20"
+                >
+                  {{ role.name }}
+                </span>
+                <span
+                  *ngIf="!user.roles || user.roles.length === 0"
+                  class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-500/10 text-slate-400 border border-slate-500/20"
+                >
+                  {{ user.role || "No Role" }}
+                </span>
+              </div>
+            </td>
+
+            <!-- Created At -->
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-300">
+              {{ formatDate(user.createdAt) }}
+            </td>
+
+            <!-- Actions -->
+            <td
+              class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium"
+            >
+              <div class="flex items-center justify-end gap-2">
+                <button
+                  (click)="onViewUser(user)"
+                  class="text-slate-400 hover:text-blue-400 transition-colors duration-200 p-2 hover:bg-slate-700/50 rounded-lg"
+                  title="View User"
+                >
+                  <app-icon iconName="viewIcon" />
+                </button>
+                <button
+                  (click)="onEditUser(user)"
+                  class="text-slate-400 hover:text-yellow-400 transition-colors duration-200 p-2 hover:bg-slate-700/50 rounded-lg"
+                  title="Edit User"
+                >
+                  <app-icon iconName="editIcon" />
+                </button>
+                <button
+                  (click)="onDeleteUser(user)"
+                  class="text-slate-400 hover:text-red-400 transition-colors duration-200 p-2 hover:bg-slate-700/50 rounded-lg"
+                  title="Delete User"
+                >
+                  <app-icon iconName="deleteIcon" />
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Empty State -->
+      <div *ngIf="(authUsers$ | async)?.length === 0" class="text-center py-12">
+        <app-icon iconName="emptyStateIcon" />
+        <h3 class="text-lg font-medium text-slate-300 mb-2">
+          <span *ngIf="searchTerm?.trim(); else noUsersFound">
+            No users found matching "{{ searchTerm }}"
+          </span>
+          <ng-template #noUsersFound> No users found </ng-template>
+        </h3>
+        <p class="text-slate-400">
+          <span *ngIf="searchTerm?.trim(); else getStarted">
+            Try adjusting your search terms or filters.
+          </span>
+          <ng-template #getStarted>
+            Get started by adding your first user.
+          </ng-template>
+        </p>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div
+      class="bg-slate-700/20 px-6 py-4 border-t border-slate-600"
+      *ngIf="pagination$ | async as pagination"
+    >
+      <div class="flex items-center justify-between">
+        <div class="text-sm text-slate-400">
+          Showing {{ pagination.startIndex + 1 }} to
+          {{ Math.min(pagination.endIndex + 1, pagination.totalItems) }} of
+          {{ pagination.totalItems }} results
+        </div>
+
+        <div class="flex items-center gap-2">
+          <!-- Previous Button -->
+          <button
+            (click)="onPageChange(currentPage - 1)"
+            [disabled]="currentPage <= 1"
+            [class]="
+              currentPage <= 1
+                ? 'text-slate-500 cursor-not-allowed'
+                : 'text-slate-300 hover:text-white hover:bg-slate-600/50'
+            "
+            class="px-3 py-2 rounded-lg transition-colors duration-200 disabled:opacity-50"
+          >
+            <app-icon iconName="previousButtonIcon" />
+          </button>
+
+          <!-- Page Numbers -->
+          <div class="flex items-center gap-1">
+            <button
+              *ngFor="let page of getPaginationPages(pagination)"
+              (click)="onPageChange(page)"
+              [class]="
+                page === currentPage
+                  ? 'bg-blue-600 text-white'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-600/50'
+              "
+              class="px-3 py-2 rounded-lg transition-colors duration-200 text-sm font-medium min-w-[40px]"
+            >
+              {{ page }}
+            </button>
+          </div>
+
+          <!-- Next Button -->
+          <button
+            (click)="onPageChange(currentPage + 1)"
+            [disabled]="currentPage >= pagination.totalPages"
+            [class]="
+              currentPage >= pagination.totalPages
+                ? 'text-slate-500 cursor-not-allowed'
+                : 'text-slate-300 hover:text-white hover:bg-slate-600/50'
+            "
+            class="px-3 py-2 rounded-lg transition-colors duration-200 disabled:opacity-50"
+          >
+            <app-icon iconName="nextButtonIcon" />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

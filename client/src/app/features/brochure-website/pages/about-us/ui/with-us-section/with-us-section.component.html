@@ -1,0 +1,70 @@
+<section class="relative p-app-secondary-padding xl:p-app-primary-padding">
+  <h1
+    class="font-bold text-app-primay-dark text-xl leading-[24px] sm:leading-[32px] sm:text-2xl lg:leading-[42px] lg:text-3xl xl:leading-[52px] xl:text-[44px]"
+  >
+    Avec Vendiiko, vous <br class="hidden lg:block" />
+
+    pouvez...
+  </h1>
+
+  @defer (on viewport) {
+    <ul
+      class="grid grid-cols-autoFit mt-8 gap-x-4 gap-y-8 sm:mt-12 sm:gap-x-8 sm:gap-y-20 lg:mt-14 lg:gap-x-12 lg:gap-y-32"
+    >
+      @for (card of cardsData; track card.id) {
+        <li
+          class="card flex flex-col gap-6 text-app-primay-dark text-center items-center sm:text-start sm:items-start"
+          style="--item-index:{{ $index }}"
+        >
+          <img
+            src="assets/svg/{{ card.icon }}"
+            alt="{{ card.title }}"
+            width="71"
+            height="79"
+            class="h-[50px] sm:h-[71px]"
+          />
+          <h4 class="font-bold text-lg sm:text-xl lg:text-[24px]">
+            {{ card.title }}
+          </h4>
+          <p
+            class="font-normal text-sm leading-[24px] sm:text-lg lg:text-xl lg:leading-[37px]"
+          >
+            {{ card.description }}
+          </p>
+        </li>
+      }
+    </ul>
+  } @placeholder {
+    <div></div>
+  }
+
+  <span class="absolute right-0 bottom-0 z-[-1] hidden lg:block">
+    <svg
+      width="271"
+      height="473"
+      viewBox="0 0 271 473"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M282.214 472.873C60.3037 329.218 13.4128 95.2199 0 0L78.2613 -0.000701718C89.7542 81.5901 142.344 285.107 334.5 409.5L282.214 472.873Z"
+        fill="url(#paint0_linear_629_7644)"
+      />
+      <defs>
+        <linearGradient
+          id="paint0_linear_629_7644"
+          x1="659.413"
+          y1="240.661"
+          x2="-282.977"
+          y2="640.817"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stop-color="#CDB9FD" />
+          <stop offset="1" stop-color="#FDFDFD" stop-opacity="0" />
+        </linearGradient>
+      </defs>
+    </svg>
+  </span>
+</section>

@@ -1,0 +1,48 @@
+<div class="md:faq-container max-w-3xl mx-auto py-12 px-4 sm:px-6">
+  <div class="text-center">
+    <h1 class="text-4xl font-extrabold  mb-6">
+      {{'FAQ.TITLE' | translate}}
+    </h1>
+    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+      {{'FAQ.SUBTITLE' | translate}}
+    </p>
+  </div>
+
+  <div class="mt-12 space-y-6">
+    @for(item of faqItems; track item; let i = $index) {
+    <div 
+      [attr.style]="'--item-index:' + i"
+      [class.show-up-animation]="isVisible"
+      class="faq-item rounded-xl overflow-hidden border border-purple-100 shadow-md hover:shadow-lg transition-all duration-300">
+      
+      <div 
+        (click)="toggleFaq(item)"
+        class="flex justify-between items-center p-5 bg-white cursor-pointer group hover:bg-purple-50 transition-colors duration-200">
+        
+        <h3 class="text-lg font-medium text-gray-800 group-hover:text-purple-700">
+          {{ item.question | translate }}
+        </h3>
+        
+        <div class="flex-shrink-0">
+          <div class="toggle-button" [class.expanded]="item.isOpen">
+            <div class="plus-minus-icon">
+              <span class="vertical" [class.hide]="item.isOpen"></span>
+              <span class="horizontal"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div 
+        class="answer-container transition-all duration-300 overflow-hidden"
+        [class.expanded]="item.isOpen" 
+        [class.collapsed]="!item.isOpen">
+        
+        <div class="p-5 bg-purple-50 text-gray-700 leading-relaxed">
+          <p>{{ item.answer | translate }}</p>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+</div>

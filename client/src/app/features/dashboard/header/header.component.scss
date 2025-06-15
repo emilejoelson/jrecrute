@@ -1,0 +1,127 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  height: 70px;
+  background-color: #1a2236;
+  border-bottom: 1px solid #2d3748;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.logo-circle {
+  width: 30px;
+  height: 30px;
+  border: 2px solid #8a57de;
+  border-radius: 50%;
+}
+
+.company-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background-color: #2d3748;
+  border-radius: 20px;
+  padding: 5px 15px;
+  width: 300px;
+}
+
+.search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.search-input::placeholder {
+  color: #a0aec0;
+}
+
+.search-button {
+  background: transparent;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+}
+
+.notifications {
+  position: relative;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #e53e3e;
+  color: white;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
+  text-align: right;
+}
+
+.user-name {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.user-email {
+  font-size: 12px;
+  color: #a0aec0;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.search-button svg {
+  width: 16px;
+  height: 16px;
+  color: #fff; /* or any desired color */
+}

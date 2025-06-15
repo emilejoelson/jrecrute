@@ -1,0 +1,13 @@
+.small-card,
+.big-card {
+  animation: fadeIn 0.6s calc(var(--card-index) * 0.6s) ease-out both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,242 @@
+/* cookie-consent.component.scss */
+.modal-container {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 999999;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+  
+  .modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 95%;
+  }
+  
+  .modal-header {
+    padding: 2rem 1.5rem;
+    background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+    color: white;
+    text-align: center;
+  
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+  
+    .subtitle {
+      font-size: 0.875rem;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+  }
+  
+  .modal-body {
+    padding: 1.5rem;
+  
+    .description {
+      color: #4b5563;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      font-size: 0.925rem;
+    }
+  }
+  
+  .preferences-section {
+    display: none;
+    
+    &.show-details {
+      display: block;
+      animation: fadeIn 0.3s ease-out;
+    }
+  }
+  
+  .cookie-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.75rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+  
+    &:hover:not(.essential) {
+      border-color: #9333ea;
+      background: #faf5ff;
+    }
+  
+    &.essential {
+      background: #f9fafb;
+    }
+  
+    .option-info {
+      flex: 1;
+      padding-right: 1rem;
+  
+      h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.375rem;
+      }
+  
+      p {
+        font-size: 0.875rem;
+        color: #6b7280;
+        line-height: 1.5;
+      }
+    }
+  }
+  
+  .modal-footer {
+    padding: 1.25rem 1.5rem;
+    background-color: #f9fafb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e5e7eb;
+  
+    @media (max-width: 640px) {
+      flex-direction: column;
+      gap: 1rem;
+      
+      .main-actions {
+        width: 100%;
+      }
+    }
+  }
+  
+  .main-actions {
+    display: flex;
+    gap: 0.75rem;
+  
+    @media (max-width: 640px) {
+      flex-direction: column;
+      
+      button {
+        width: 100%;
+      }
+    }
+  }
+  
+  .btn-settings {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  
+    &:hover {
+      background-color: #f9fafb;
+      color: #1f2937;
+    }
+  }
+  
+  .btn-decline {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    color: #4b5563;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  
+    &:hover {
+      background-color: #f9fafb;
+      color: #1f2937;
+    }
+  }
+  
+  .btn-accept {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.875rem;
+    color: white;
+    background-color: #9333ea;
+    border: none;
+    border-radius: 0.5rem;
+    transition: all 0.2s;
+  
+    &:hover {
+      background-color: #7e22ce;
+    }
+  }
+  
+  // Enhanced toggle switch styles
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 48px;
+    height: 24px;
+  
+    input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+  
+      &:checked + .slider {
+        background-color: #9333ea;
+      }
+  
+      &:checked + .slider:before {
+        transform: translateX(24px);
+      }
+  
+      &:disabled + .slider {
+        background-color: #e5e7eb;
+        cursor: not-allowed;
+      }
+    }
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background-color: #e5e7eb;
+    transition: 0.4s;
+    border-radius: 24px;
+  
+    &:before {
+      position: absolute;
+      content: "";
+      height: 20px;
+      width: 20px;
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

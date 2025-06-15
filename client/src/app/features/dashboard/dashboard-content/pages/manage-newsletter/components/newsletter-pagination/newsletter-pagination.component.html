@@ -1,0 +1,25 @@
+<div class="flex justify-center mt-6">
+      <nav class="flex items-center">
+        <button
+          [disabled]="currentPage === 1"
+          (click)="onPageChange(currentPage - 1)"
+          [class.opacity-50]="currentPage === 1"
+          class="px-3 py-1 rounded-md bg-gray-700 text-gray-300 mx-1"
+        >
+          <app-icon iconName="pageChangeIcon" />
+        </button>
+
+        <span class="text-sm text-gray-400 mx-2">
+          Page {{ currentPage }} of {{ totalPages }}
+        </span>
+
+        <button
+          [disabled]="currentPage === totalPages"
+          (click)="onPageChange(currentPage + 1)"
+          [class.opacity-50]="currentPage === totalPages"
+          class="px-3 py-1 rounded-md bg-gray-700 text-gray-300 mx-1"
+        >
+          <app-icon iconName="openPageChange01Icon" />
+        </button>
+      </nav>
+    </div>

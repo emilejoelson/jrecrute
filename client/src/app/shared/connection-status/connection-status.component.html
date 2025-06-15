@@ -1,0 +1,18 @@
+<div *ngIf="isBrowser" 
+         class="status-container"
+         [@slideInOut]="showStatus || !isOnline">
+      <div class="status-content" [ngClass]="{'offline': !isOnline, 'online': isOnline}">
+        <!-- Offline State -->
+        <div *ngIf="!isOnline" class="status-message offline-message">
+          <div class="icon-wrapper warning">
+            <svg class="warning-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path d="M12 8v5M12 16.5v.5M12 2L2 19h20L12 2z" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="offline-content">
+            <span class="status-text">Pas de connexion internet</span>
+            <div class="spinner"></div>
+          </div>
+        </div>
+      </div>
+    </div>

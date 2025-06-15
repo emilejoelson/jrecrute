@@ -1,0 +1,91 @@
+<section
+  class="grid gap-4 grid-cols-1 p-app-secondary-padding sm:gap-8 lg:grid-cols-3 lg:pb-[7rem] xl:pl-app-primary-padding xl:pt-app-primary-padding"
+>
+  <!-- left -->
+  <div class="lg:col-start-1 lg:col-end-2">
+    <h1
+      class="font-bold text-app-primay-dark text-xl leading-[24px] sm:leading-[32px] sm:text-2xl lg:leading-[42px] lg:text-3xl xl:leading-[52px] xl:text-[44px]"
+    >
+      Notre équipe
+    </h1>
+    <p
+      class="mt-4 text-sm font-normal text-app-primay-dark sm:mt-6 sm:text-lg lg:mt-12 lg:text-xl"
+    >
+      Rencontrez l'équipe dévouée derrière [Nom de votre plateforme], des
+      esprits innovants unis par la passion de révolutionner la gestion
+      d'entreprise et d'accompagner les entrepreneurs vers le succès
+    </p>
+    <ul
+      class="flex items-center justify-end gap-6 mt-8 sm:gap-12 sm:mt-12 lg:mt-16 lg:gap-20"
+    >
+      <li class="-rotate-180">
+        <button
+          class="rounded-full flex items-center justify-center bg-ourTeamButtonsGradiant transition-transform duration-300 ease-out origin-center hover:scale-110 active:scale-90 w-12 h-12 sm:w-14 sm:h-14"
+          (click)="onNavigate('left')"
+        >
+          <svg
+            width="16"
+            height="26"
+            viewBox="0 0 16 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 22.945L9.88934 13L0 3.055L3.04453 0L16 13L3.04453 26L0 22.945Z"
+              fill="#362E75"
+            />
+          </svg>
+        </button>
+      </li>
+
+      <li>
+        <button
+          class="rounded-full flex items-center justify-center bg-ourTeamButtonsGradiant transition-transform duration-300 ease-out origin-center hover:scale-110 active:scale-90 w-12 h-12 sm:w-14 sm:h-14"
+          (click)="onNavigate('right')"
+        >
+          <svg
+            width="16"
+            height="26"
+            viewBox="0 0 16 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 22.945L9.88934 13L0 3.055L3.04453 0L16 13L3.04453 26L0 22.945Z"
+              fill="#362E75"
+            />
+          </svg>
+        </button>
+      </li>
+    </ul>
+  </div>
+  <!-- right -->
+  <div class="overflow-hidden lg:col-start-2 lg:col-end-4">
+    <ul
+      #membersSlider
+      class="pl-6 py-6 members-slider flex w-full overflow-x-scroll"
+    >
+      @for (member of teamMembers; track member.id) {
+        <li
+          class="bg-white rounded-lg overflow-hidden min-w-[250px] mr-4 lg:min-w-[350px] lg:mr-8"
+          style="box-shadow: 0px 4px 20px 3px rgba(0, 0, 0, 0.12)"
+        >
+          <div>
+            <img
+              src="assets/images/{{ member.picture }}"
+              alt="{{ member.name }} photo"
+            />
+          </div>
+          <div class="px-3 py-6">
+            <h4 class="font-medium text-xl sm:text-2xl lg:text-3xl">
+              {{ member.name }}
+            </h4>
+            <p class="mt-2 font-normal text-lg sm:text-xl lg:text-2xl">
+              {{ member.role }}
+            </p>
+          </div>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

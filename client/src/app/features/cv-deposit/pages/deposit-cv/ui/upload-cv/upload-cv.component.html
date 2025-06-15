@@ -1,0 +1,47 @@
+<div class="grid mt-10 custom-650:mx-5 mx-1/8 gap-5 md:grid-cols-3" [formGroup]="formGroup">
+  <div class="mb-4">
+    <div class="flex items-center justify-center w-full">
+      <label
+        for="dropzone-file"
+        class="group flex flex-col space-y-8 hover:text-white hover:opacity-70 p-10 items-center justify-center w-full border-2 hover:bg-blue-400 hover:border-blue-400 border-purple-700 border-dashed rounded-lg cursor-pointer bg-purple-100"
+      >
+        <p class="mb-2 mt-3 text-sm">
+          <span
+            class="font-semibold text-[20px] text-center flex group-hover:text-white text-gray-800"
+          >
+            {{'CV_DEPOSIT.TITLE' | translate}}
+          </span>
+        </p>
+        <div class="flex flex-col items-center justify-center pt-5 pb-6">
+          <svg
+            class="w-20 h-20 mb-4 group-hover:text-white text-blue-300"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 20 16"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+            />
+          </svg>
+          <p class="text-xs group-hover:text-white text-gray-500">
+            PDF, PNG, JPG, JPEG
+          </p>
+        </div>
+        <input
+          id="dropzone-file"
+          type="file"
+          class="hidden"
+          accept=".pdf, .png, .jpg, .jpeg"
+          (change)="onFileChange($event)"
+          required
+        />
+      </label>
+    </div>
+  </div>
+
+</div>

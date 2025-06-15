@@ -1,0 +1,198 @@
+<div
+  [formGroup]="formGroup"
+  class="relative md:rounded-lg custom-650:pt-0 custom-650:px-5 p-10 bg-[#fff] grid md:mt-10 md:mx-1/8 md:gap-[50px] md:grid-cols-[1fr_2fr]"
+>
+  <div class="custom-650:hidden">
+    <!-- File Previews -->
+    @if(previewType === 'image') {
+    <div
+      class="aspect-w-16 aspect-h-9 overflow-hidden file-preview-container rounded-lg"
+    >
+      <img
+        [src]="previewUrl"
+        [alt]="selectedFile?.name"
+        class="h-full w-full object-contain"
+      />
+    </div>
+    }
+
+    <!-- PDF preview -->
+    @if(previewType === 'pdf') {
+    <div
+      class="h-[calc(100vh-350px)] file-preview-container sm:h-[calc(100vh-300px)] min-h-[300px] sm:min-h-[500px] w-full rounded-lg"
+    >
+      <embed
+        [src]="previewUrl"
+        type="application/pdf"
+        class="h-full w-full rounded-lg"
+      />
+    </div>
+    }
+  </div>
+  <div class="rounded-lg bg-[#fff] flex flex-col">
+    <!-- Main content container with padding-bottom to prevent content overlapping with buttons -->
+    <div class="flex-1 md:p-4">
+      <p
+        class="flex justify-center text-center custom-650:pt-0 p-4 mb-4 text-2xl font-bold text-gray-800"
+      >
+       {{'CV_DEPOSIT.STEP_2.TITLE' | translate}}
+      </p>
+      <div>
+        <div class="grid md:grid-cols-[2fr_1fr] gap-8">
+          <div class="flex flex-col gap-5">
+            <app-custom-select
+              [id]="postField.id"
+              [classSelect]="postField.classSelect"
+              [classLabel]="postField.classLabel"
+              [title]="postField.title | translate"
+              [options]="postes"
+              [formGroup]="formGroup"
+            />
+            <p class="flex justify-left text-xl font-semibold text-gray-800">
+              {{'CV_DEPOSIT.STEP_2.EXPERIENCE' | translate}}
+            </p>
+            @for(post of professionnalInformations;track post){
+            <app-custom-input
+              [id]="post.id"
+              [classInput]="post.classInput"
+              [classLabel]="post.classLabel"
+              [title]="post.title | translate"
+              [formGroup]="formGroup"
+            />
+            }
+
+            <div class="grid md:grid-cols-2 gap-x-10">
+              <div>
+                <p class="text-gray-800 mb-2">{{'CV_DEPOSIT.STEP_2.START_DATE.TITLE' | translate}}</p>
+                <div class="grid grid-cols-2 gap-x-3">
+                  <app-custom-select
+                    [id]="startMonthField.id"
+                    [classSelect]="startMonthField.classSelect"
+                    [classLabel]="startMonthField.classLabel"
+                    [title]="startMonthField.title | translate"
+                    [options]="months"
+                    [formGroup]="currentExperience"
+                  />
+                  <app-custom-select
+                    [id]="startYearField.id"
+                    [classSelect]="startYearField.classSelect"
+                    [classLabel]="startYearField.classLabel"
+                    [title]="startYearField.title | translate"
+                    [options]="years"
+                    [formGroup]="currentExperience"
+                  />
+                </div>
+              </div>
+
+              <!-- End Date -->
+              <div>
+                <p class="text-gray-800 mb-2">{{'CV_DEPOSIT.STEP_2.END_DATE.TITLE' | translate}}</p>
+                <div class="grid grid-cols-2 gap-x-4">
+                  <app-custom-select
+                    [id]="endMonthField.id"
+                    [classSelect]="endMonthField.classSelect"
+                    [classLabel]="endMonthField.classLabel"
+                    [title]="endMonthField.title | translate"
+                    [options]="months"
+                    [formGroup]="currentExperience"
+                  />
+                  <app-custom-select
+                    [id]="endYearField.id"
+                    [classSelect]="endYearField.classSelect"
+                    [classLabel]="endYearField.classLabel"
+                    [title]="endYearField.title | translate"
+                    [options]="years"
+                    [formGroup]="currentExperience"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="space-y-3">
+              <p class="text-gray-700 font-medium">
+                {{'CV_DEPOSIT.STEP_2.REMOTE_WORK_QUESTION' | translate}}
+              </p>
+              <div class="flex gap-6">
+                <!-- Yes option -->
+                <div class="flex items-center">
+                  <input
+                    type="radio"
+                    id="remoteYes"
+                    name="hasRemoteExperience"
+                    [value]="true"
+                    [(ngModel)]="hasWorkedRemotely"
+                    class="custom-radio"
+                    formControlName="hasRemoteExperience"
+                  />
+                  <label for="remoteYes" class="ml-2 text-sm text-gray-600">
+                    {{'CV_DEPOSIT.STEP_2.REMOTE_WORK_OPTIONS.YES' | translate}}
+                  </label>
+                </div>
+
+                <!-- No option -->
+                <div class="flex items-center">
+                  <input
+                    type="radio"
+                    id="remoteNo"
+                    name="hasRemoteExperience"
+                    [value]="false"
+                    [(ngModel)]="hasWorkedRemotely"
+                    class="custom-radio"
+                    formControlName="hasRemoteExperience"
+                  />
+                  <label for="remoteNo" class="ml-2 text-sm text-gray-600">
+                    {{'CV_DEPOSIT.STEP_2.REMOTE_WORK_OPTIONS.NO' | translate}}
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="md:border-l-2 md:border-dashed md:p-3 md:border-[#f6f6f6]"
+          >
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <p class="font-semibold text-[14px] text-gray-800">
+                {{'CV_DEPOSIT.STEP_2.RECRUITMENT_ADVICE.TITLE' | translate}}
+              </p>
+              <p class="text-gray-600 text-[12px] mt-2">
+                {{'CV_DEPOSIT.STEP_2.RECRUITMENT_ADVICE.CONTENT' | translate}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fixed button container at the bottom -->
+    <div class="bg-white mt-5">
+      <div class="flex justify-between items-center w-full md:px-6 py-4">
+        <!-- Back (Précédent) Button -->
+        <button (click)="onPrevClick()" type="button" class="flex items-center">
+          <svg
+            class="w-4 h-4 mr-1 text-blue-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          <span class="text-blue-400 text-sm">{{'CV_DEPOSIT.PREVIOUS' | translate}}</span>
+        </button>
+
+        <!-- Validate Button -->
+        <button
+          type="button"
+          (click)="onProceedClick()"
+          class="bg-blue-400 text-white hover:bg-app-primary-purple custom-650:px-8 px-16 py-2 rounded-[4px] text-sm font-medium"
+        >
+        {{'CV_DEPOSIT.NEXT' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

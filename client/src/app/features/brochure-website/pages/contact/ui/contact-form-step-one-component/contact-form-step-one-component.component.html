@@ -1,0 +1,64 @@
+<form
+  [formGroup]="stepOneFrom"
+  class="py-6 px-8 sm:px-12 sm:py-8"
+  (ngSubmit)="onSubmit()"
+>
+  <h2 class="font-semibold text-xl text-app-primay-dark sm:text-[26px]">
+    Parlez-nous de votre entreprise
+  </h2>
+  <p
+    class="font-medium mt-4 tracking-[1.25px] text-app-primay-dark text-sm sm:text-xl sm:mt-6"
+  >
+    Nous avons besoin de quelques informations.
+  </p>
+
+  <div class="flex flex-col mt-6 gap-6 sm:gap-8 lg:gap-12 sm:mt-8 lg:mt-12">
+    @for (field of fieldsData; track field.id) {
+      <div class="flex flex-col gap-2">
+        <label
+          for="{{ field.id }}"
+          class="font-medium text-[16px] text-app-primay-dark"
+          >{{ field.label }}
+          @if (field.isRequired) {
+            <sup class="text-[rgb(235,57,66)]">*</sup>
+          }
+        </label>
+        @if (field.name === "country") {
+          <app-countries-selector-input
+            [formGroup]="stepOneFrom"
+            [fieldData]="field"
+            [isFormSubmited]="isFormSubmited"
+            className="w-full border border-solid border-app-secondary-dark text-sm rounded-[4px] bg-[rgba(240,240,252,1)] p-3 outline-none text-app-primay-dark sm:p-5 sm:text-lg"
+          />
+        } @else {
+          <app-input
+            [fieldData]="field"
+            [formGroup]="stepOneFrom"
+            [isFormSubmited]="isFormSubmited"
+            className="w-full border border-solid border-app-secondary-dark text-sm rounded-[4px] bg-[rgba(240,240,252,1)] p-3 outline-none text-app-primay-dark sm:p-5 sm:text-lg"
+          />
+        }
+      </div>
+    }
+  </div>
+
+  <button
+    class="transition-colors duration-300 ease-out capitalize w-fit ml-auto px-5 py-2 rounded-3xl bg-app-primay-dark text-white font-medium text-[16px] flex items-center gap-2 hover:bg-app-secondary-dark mt-4 sm:mt-8 lg:mt-12"
+  >
+    continue
+    <span>
+      <svg
+        width="10"
+        height="10"
+        viewBox="0 0 10 10"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.6723 5.58831C7.99769 5.26292 7.99769 4.73448 7.6723 4.40909L3.50726 0.244045C3.18186 -0.0813484 2.65342 -0.0813484 2.32803 0.244045C2.00264 0.569439 2.00264 1.09788 2.32803 1.42327L5.90476 5L2.33063 8.57673C2.00524 8.90212 2.00524 9.43056 2.33063 9.75595C2.65603 10.0813 3.18447 10.0813 3.50986 9.75595L7.6749 5.59092L7.6723 5.58831Z"
+          fill="white"
+        />
+      </svg>
+    </span>
+  </button>
+</form>

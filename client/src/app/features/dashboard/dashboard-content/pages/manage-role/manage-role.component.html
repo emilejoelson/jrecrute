@@ -1,0 +1,690 @@
+<div class="min-h-screen bg-slate-900 text-gray-100">
+  <!-- Header Section -->
+  <div class="bg-slate-800 border-b border-slate-700 px-6 py-4">
+    <div class="flex items-center justify-between">
+      <div>
+        <h1 class="text-2xl font-semibold text-white">Role Management</h1>
+        <p class="text-gray-400 text-sm mt-1">
+          Manage user roles and permissions
+        </p>
+      </div>
+      <div class="flex items-center space-x-3">
+        <div class="bg-slate-700 px-3 py-1 rounded-full text-sm">
+          <span class="text-gray-300">Total Roles:</span>
+          <span class="text-purple-400 font-medium ml-1">{{
+            (rolesCount$ | async) || 0
+          }}</span>
+        </div>
+        <button
+          (click)="toggleCreateForm()"
+          class="bg-purple-600 hover:bg-purple-700 text-white flex px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
+          [disabled]="anyLoading$ | async"
+        >
+          New Role
+        </button>
+        <button
+          (click)="toggleAssignForm()"
+          class="bg-blue-600 hover:bg-blue-700 flex text-white px-4 py-2 rounded-lg transition-colors duration-200 font-medium"
+          [disabled]="anyLoading$ | async"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="mr-2"
+            viewBox="0 0 640 512"
+            fill="currentColor"
+            width="1em"
+            height="1em"
+          >
+            <path
+              d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm51.2 48h-17.8c-22.2 10.2-46.8 16-72.4 16s-50.2-5.8-72.4-16h-17.8C42.7 304 0 346.7 0 400v32c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-32c0-53.3-42.7-96-94.8-96H275.2zM616 208h-56v-56c0-13.3-10.7-24-24-24s-24 10.7-24 24v56h-56c-13.3 0-24 10.7-24 24s10.7 24 24 24h56v56c0 13.3 10.7 24 24 24s24-10.7 24-24v-56h56c13.3 0 24-10.7 24-24s-10.7-24-24-24z"
+            />
+          </svg>
+
+          Assign Role
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alert Messages -->
+  <div class="px-6 py-4" *ngIf="(error$ | async) || (successMessage$ | async)">
+    <!-- Error Alert -->
+    <div
+      *ngIf="error$ | async as error"
+      class="bg-red-900/50 border border-red-700 text-red-200 px-4 py-3 rounded-lg mb-4 flex items-center justify-between"
+    >
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="mr-3 text-red-400"
+          viewBox="0 0 576 512"
+          fill="currentColor"
+          width="1em"
+          height="1em"
+        >
+          <path
+            d="M569.5 440.6 327.4 40.6c-18.3-30.4-60.5-30.4-78.8 0L6.5 440.6C-12 471.6 10.9 512 48 512h480c37.1 0 60-40.4 41.5-71.4zM288 176c13.3 0 24 10.7 24 24v80c0 13.3-10.7 24-24 24s-24-10.7-24-24v-80c0-13.3 10.7-24 24-24zm0 208c-17.7 0-32-14.3-32-32s14.3-32 32-32 32 14.3 32 32-14.3 32-32 32z"
+          />
+        </svg>
+
+        <div>
+          <div class="font-medium">Error</div>
+          <div class="text-sm text-red-300">{{ error.message }}</div>
+        </div>
+      </div>
+      <button (click)="clearMessages()" class="text-red-400 hover:text-red-300">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 352 512"
+          fill="currentColor"
+          width="1em"
+          height="1em"
+        >
+          <path
+            d="M242.7 256L346.5 152.2c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L197.5 210.7 93.7 106.9c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L152.7 256 48.9 359.8c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L197.5 301.3l103.8 103.8c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L242.7 256z"
+          />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Success Alert -->
+    <div
+      *ngIf="successMessage$ | async as message"
+      class="bg-green-900/50 border border-green-700 text-green-200 px-4 py-3 rounded-lg mb-4 flex items-center justify-between"
+    >
+      <div class="flex items-center">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          fill="#4ade80"
+          width="24"
+          height="24"
+          style="margin-right: 0.75rem"
+          aria-hidden="true"
+        >
+          <path
+            d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zm-277.9 93.7l184-184c6.2-6.2 6.2-16.4 0-22.6l-22.6-22.6c-6.2-6.2-16.4-6.2-22.6 0L216 284.7l-70.1-70.1c-6.2-6.2-16.4-6.2-22.6 0l-22.6 22.6c-6.2 6.2-6.2 16.4 0 22.6l104 104c6.3 6.3 16.4 6.3 22.6 0z"
+          />
+        </svg>
+
+        <div>
+          <div class="font-medium">Success</div>
+          <div class="text-sm text-green-300">{{ message }}</div>
+        </div>
+      </div>
+      <button
+        (click)="clearMessages()"
+        class="text-green-400 hover:text-green-300"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 352 512"
+          fill="currentColor"
+          width="1em"
+          height="1em"
+        >
+          <path
+            d="M242.7 256L346.5 152.2c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L197.5 210.7 93.7 106.9c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L152.7 256 48.9 359.8c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L197.5 301.3l103.8 103.8c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L242.7 256z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="px-6 py-4">
+    <!-- Create Role Form -->
+    <div
+      *ngIf="showCreateForm"
+      class="bg-slate-800 rounded-lg border border-slate-700 p-6 mb-6"
+    >
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold text-white">Create New Role</h2>
+        <button
+          (click)="toggleCreateForm()"
+          class="text-gray-400 hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="text-lg"
+            viewBox="0 0 352 512"
+            fill="currentColor"
+            width="1em"
+            height="1em"
+          >
+            <path
+              d="M242.7 256L346.5 152.2c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L197.5 210.7 93.7 106.9c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L152.7 256 48.9 359.8c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L197.5 301.3l103.8 103.8c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L242.7 256z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <form
+        [formGroup]="createRoleForm"
+        (ngSubmit)="createRole()"
+        class="space-y-6"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Role Name -->
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2"
+              >Role Name *</label
+            >
+            <input
+              type="text"
+              formControlName="name"
+              placeholder="Enter role name"
+              class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            />
+            <div
+              *ngIf="getFieldError(createRoleForm, 'name')"
+              class="text-red-400 text-sm mt-1"
+            >
+              {{ getFieldError(createRoleForm, "name") }}
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2"
+              >Description</label
+            >
+            <input
+              type="text"
+              formControlName="description"
+              placeholder="Enter role description"
+              class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+            />
+            <div
+              *ngIf="getFieldError(createRoleForm, 'description')"
+              class="text-red-400 text-sm mt-1"
+            >
+              {{ getFieldError(createRoleForm, "description") }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Permissions -->
+        <div>
+          <label class="block text-sm font-medium text-gray-300 mb-3"
+            >Permissions *</label
+          >
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div
+              *ngFor="let permission of availablePermissions"
+              class="flex items-center"
+            >
+              <div class="relative">
+                <input
+                  type="checkbox"
+                  [id]="permission"
+                  [checked]="isPermissionSelected(permission)"
+                  (change)="togglePermission(permission)"
+                  class="sr-only"
+                />
+                <div
+                  (click)="togglePermission(permission)"
+                  [class]="
+                    isPermissionSelected(permission)
+                      ? 'bg-purple-600 border-purple-600'
+                      : 'bg-slate-700 border-slate-600'
+                  "
+                  class="w-5 h-5 border-2 rounded cursor-pointer flex items-center justify-center transition-colors duration-200"
+                >
+                <svg
+                  *ngIf="isPermissionSelected(permission)"
+                  class="text-white text-xs"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 6L9 17l-5-5"/>
+                </svg>
+                </div>
+              </div>
+              <label
+                [for]="permission"
+                class="ml-3 text-sm text-gray-300 cursor-pointer"
+              >
+                {{ permission.replace("_", " ") | titlecase }}
+              </label>
+            </div>
+          </div>
+          <div
+            *ngIf="getFieldError(createRoleForm, 'permissions')"
+            class="text-red-400 text-sm mt-2"
+          >
+            At least one permission is required
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div
+          class="flex items-center justify-end space-x-4 pt-4 border-t border-slate-700"
+        >
+          <button
+            type="button"
+            (click)="toggleCreateForm()"
+            class="px-6 py-2 text-gray-400 hover:text-gray-300 font-medium transition-colors duration-200"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            [disabled]="!isCreateFormValid || (creating$ | async)"
+            class="bg-purple-600 hover:bg-purple-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center"
+          >
+            <svg
+              *ngIf="creating$ | async"
+              class="mr-2 animate-spin"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12a9 9 0 11-6.219-8.56"/>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              fill="currentColor"
+              width="24"
+              height="24"
+              style="margin-right: 0.5rem"
+              aria-hidden="true"
+            >
+              <path
+                d="M432 256c0 13.3-10.7 24-24 24h-136v136c0 13.3-10.7 24-24 24h-32c-13.3 0-24-10.7-24-24V280H40c-13.3 0-24-10.7-24-24v-32c0-13.3 10.7-24 24-24h136V64c0-13.3 10.7-24 24-24h32c13.3 0 24 10.7 24 24v136h136c13.3 0 24 10.7 24 24v32z"
+              />
+            </svg>
+
+            {{ (creating$ | async) ? "Creating..." : "Create Role" }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Assign Role Form -->
+    <div
+      *ngIf="showAssignForm"
+      class="bg-slate-800 rounded-lg border border-slate-700 p-6 mb-6"
+    >
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold text-white">Assign Role to User</h2>
+        <button
+          (click)="toggleAssignForm()"
+          class="text-gray-400 hover:text-gray-300"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="text-lg"
+            viewBox="0 0 352 512"
+            fill="currentColor"
+            width="1em"
+            height="1em"
+          >
+            <path
+              d="M242.7 256L346.5 152.2c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L197.5 210.7 93.7 106.9c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L152.7 256 48.9 359.8c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L197.5 301.3l103.8 103.8c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L242.7 256z"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <form
+        [formGroup]="assignRoleForm"
+        (ngSubmit)="assignRole()"
+        class="space-y-6"
+      >
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- User ID -->
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2"
+              >User ID *</label
+            >
+            <input
+              type="text"
+              formControlName="userId"
+              placeholder="Enter user ID"
+              class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            />
+            <div
+              *ngIf="getFieldError(assignRoleForm, 'userId')"
+              class="text-red-400 text-sm mt-1"
+            >
+              {{ getFieldError(assignRoleForm, "userId") }}
+            </div>
+          </div>
+
+          <!-- Role Selection -->
+          <div>
+            <label class="block text-sm font-medium text-gray-300 mb-2"
+              >Select Role *</label
+            >
+            <select
+              formControlName="roleId"
+              class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            >
+              <option value="">Choose a role</option>
+              <option
+                *ngFor="
+                  let role of activeRoles$ | async;
+                  trackBy: trackByRoleId
+                "
+                [value]="role._id"
+              >
+                {{ role.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="getFieldError(assignRoleForm, 'roleId')"
+              class="text-red-400 text-sm mt-1"
+            >
+              {{ getFieldError(assignRoleForm, "roleId") }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div
+          class="flex items-center justify-end space-x-4 pt-4 border-t border-slate-700"
+        >
+          <button
+            type="button"
+            (click)="toggleAssignForm()"
+            class="px-6 py-2 text-gray-400 hover:text-gray-300 font-medium transition-colors duration-200"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            [disabled]="!isAssignFormValid || (assigning$ | async)"
+            class="bg-blue-600 hover:bg-blue-700 disabled:bg-slate-600 disabled:cursor-not-allowed text-white px-6 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center"
+          >
+            <svg
+              *ngIf="assigning$ | async"
+              class="mr-2 animate-spin"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12a9 9 0 11-6.219-8.56"/>
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 640 512"
+              fill="currentColor"
+              width="24"
+              height="24"
+              style="margin-right: 0.5rem"
+              aria-hidden="true"
+            >
+              <path
+                d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm89.6 32h-11.2c-22.2 10.6-46.7 16-72.4 16s-50.2-5.4-72.4-16h-11.2C60.3 288 0 348.3 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.1-60.3-134.4-134.4-134.4zM624 176v32c0 8.8-7.2 16-16 16h-48v48c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16v-48h-48c-8.8 0-16-7.2-16-16v-32c0-8.8 7.2-16 16-16h48v-48c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v48h48c8.8 0 16 7.2 16 16z"
+              />
+            </svg>
+
+            {{ (assigning$ | async) ? "Assigning..." : "Assign Role" }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Search and Filter -->
+    <div class="bg-slate-800 rounded-lg border border-slate-700 p-4 mb-6">
+      <div class="flex items-center space-x-4">
+        <div class="relative flex-1">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+            viewBox="0 0 512 512"
+            fill="currentColor"
+            width="1em"
+            height="1em"
+          >
+            <path
+              d="M505 442.7L405.3 343c28.4-34.9 45.7-79 45.7-127C451 103.5 349.5 2 225.5 2S0 103.5 0 225.5 101.5 449 225.5 449c48 0 92.1-17.3 127-45.7l99.7 99.7c4.5 4.5 10.6 7 17 7s12.5-2.5 17-7c9.4-9.4 9.4-24.6 0-34zM225.5 385c-88.1 0-159.5-71.4-159.5-159.5S137.4 66 225.5 66 385 137.4 385 225.5 313.6 385 225.5 385z"
+            />
+          </svg>
+
+          <input
+            type="text"
+            [(ngModel)]="searchTerm"
+            (input)="onSearchChange()"
+            placeholder="Search roles by name, description, or permissions..."
+            class="w-full bg-slate-700 border border-slate-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+          />
+        </div>
+        <button
+          (click)="loadRoles()"
+          [disabled]="loading$ | async"
+          class="bg-slate-700 hover:bg-slate-600 border border-slate-600 text-gray-300 px-4 py-3 rounded-lg transition-colors duration-200 flex items-center"
+        >
+          <ng-container *ngIf="loading$ | async; else refreshIcon">
+            <!-- Spinner SVG (animated) -->
+            <svg
+              class="mr-2 animate-spin h-5 w-5 text-gray-300"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+              />
+            </svg>
+          </ng-container>
+
+          <ng-template #refreshIcon>
+            <!-- Refresh SVG -->
+            <svg
+              class="mr-2 h-5 w-5 text-gray-300"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 512 512"
+              fill="currentColor"
+            >
+              <path
+                d="M500.33 93.7c-12.5-12.5-32.76-12.5-45.26 0l-34.01 34.01C384.03 78.72 315.25 48 240 48 119.03 48 20.13 143.65 16.1 263.53c-.64 18.39 14.45 33.68 32.85 33.68h.04c18.03 0 32.61-14.34 33.14-32.35C85.29 180.32 154.76 112 240 112c57.62 0 109.12 30.22 138.51 76.1l-39.18 39.18c-20.02 20.02-5.84 54.1 22.4 54.1H480c17.67 0 32-14.33 32-32V116.1c0-28.26-34.08-42.42-54.1-22.4l-34.01 34.01z"
+              />
+            </svg>
+          </ng-template>
+
+          Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- Roles List -->
+    <div
+      class="bg-slate-800 rounded-lg border border-slate-700 overflow-hidden"
+    >
+      <!-- Loading State -->
+      <div
+        *ngIf="loading$ | async"
+        class="flex items-center justify-center py-12"
+      >
+        <div class="flex items-center text-gray-400">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            style="margin-right: 0.75rem; width: 1.125rem; height: 1.125rem"
+            viewBox="0 0 512 512"
+            fill="currentColor"
+            class="spinner-spin"
+          >
+            <path
+              d="M304 48c0-26.5-21.5-48-48-48S208 21.5 208 48c0 26.5 21.5 48 48 48zm0 80c0-26.5-21.5-48-48-48S208 101.5 208 128c0 26.5 21.5 48 48 48zm0 80c0-26.5-21.5-48-48-48S208 181.5 208 208c0 26.5 21.5 48 48 48zm0 80c0-26.5-21.5-48-48-48S208 261.5 208 288c0 26.5 21.5 48 48 48z"
+            />
+          </svg>
+
+          <span>Loading roles...</span>
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      <div
+        *ngIf="!(loading$ | async) && filteredRoles.length === 0"
+        class="flex flex-col items-center justify-center py-12"
+      >
+        <app-icon iconName="emptyStateIcon" />
+        <h3 class="text-lg font-medium text-gray-400 mb-2">No roles found</h3>
+        <p class="text-gray-500 text-center max-w-md">
+          {{
+            searchTerm
+              ? "No roles match your search criteria. Try adjusting your search terms."
+              : "Get started by creating your first role."
+          }}
+        </p>
+      </div>
+
+      <!-- Roles Table -->
+      <div *ngIf="!(loading$ | async) && filteredRoles.length > 0">
+        <!-- Table Header -->
+        <div class="bg-slate-700 px-6 py-4 border-b border-slate-600">
+          <div
+            class="grid grid-cols-12 gap-4 text-sm font-medium text-gray-300"
+          >
+            <div class="col-span-3">Role Name</div>
+            <div class="col-span-4">Description</div>
+            <div class="col-span-3">Permissions</div>
+            <div class="col-span-1">Status</div>
+            <div class="col-span-1">Actions</div>
+          </div>
+        </div>
+
+        <!-- Table Body -->
+        <div class="divide-y divide-slate-700">
+          <div
+            *ngFor="let role of filteredRoles; trackBy: trackByRoleId"
+            class="px-6 py-4 hover:bg-slate-700/50 transition-colors duration-200"
+          >
+            <div class="grid grid-cols-12 gap-4 items-center">
+              <!-- Role Name -->
+              <div class="col-span-3">
+                <div class="font-medium text-white">{{ role.name }}</div>
+                <div class="text-xs text-gray-500 mt-1">ID: {{ role._id }}</div>
+              </div>
+
+              <!-- Description -->
+              <div class="col-span-4">
+                <div class="text-gray-300 text-sm">
+                  {{ role.description || "No description provided" }}
+                </div>
+              </div>
+
+              <!-- Permissions -->
+              <div class="col-span-3">
+                <div class="flex flex-wrap gap-1">
+                  <span
+                    *ngFor="let permission of role.permissions.slice(0, 3)"
+                    class="bg-purple-900/50 text-purple-300 text-xs px-2 py-1 rounded"
+                  >
+                    {{ permission.replace("_", " ") | titlecase }}
+                  </span>
+                  <span
+                    *ngIf="role.permissions.length > 3"
+                    class="bg-slate-600 text-gray-300 text-xs px-2 py-1 rounded"
+                  >
+                    +{{ role.permissions.length - 3 }} more
+                  </span>
+                </div>
+              </div>
+
+              <!-- Status -->
+              <div class="col-span-1">
+                <span
+                  [class]="
+                    role.isActive !== false
+                      ? 'bg-green-900/50 text-green-300 border-green-700'
+                      : 'bg-red-900/50 text-red-300 border-red-700'
+                  "
+                  class="px-2 py-1 text-xs rounded border"
+                >
+                  {{ role.isActive !== false ? "Active" : "Inactive" }}
+                </span>
+              </div>
+
+              <!-- Actions -->
+              <div class="col-span-1">
+                <div class="flex items-center space-x-2">
+                  <button
+                    (click)="loadRoleById(role._id!)"
+                    class="text-blue-400 hover:text-blue-300 transition-colors duration-200"
+                    title="View Details"
+                  >
+                    <app-icon iconName="viewIcon" />
+                  </button>
+                  <button
+                    (click)="selectRoleForAssign(role)"
+                    class="text-green-400 hover:text-green-300 transition-colors duration-200"
+                    title="Assign Role"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 640 512"
+                      fill="currentColor"
+                      width="36"
+                      height="36"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm89.6 32h-11.2c-22.2 10.6-46.7 16-72.4 16s-50.2-5.4-72.4-16h-11.2C60.3 288 0 348.3 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.1-60.3-134.4-134.4-134.4zM624 176v32c0 8.8-7.2 16-16 16h-48v48c0 8.8-7.2 16-16 16h-32c-8.8 0-16-7.2-16-16v-48h-48c-8.8 0-16-7.2-16-16v-32c0-8.8 7.2-16 16-16h48v-48c0-8.8 7.2-16 16-16h32c8.8 0 16 7.2 16 16v48h48c8.8 0 16 7.2 16 16z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Actions -->
+    <div class="flex items-center justify-between pt-6">
+      <div class="text-sm text-gray-400">
+        Showing {{ filteredRoles.length }} of
+        {{ (rolesCount$ | async) || 0 }} roles
+      </div>
+      <button
+        (click)="resetState()"
+        class="bg-slate-700 hover:bg-slate-600 border border-slate-600 text-gray-300 px-4 py-2 rounded-lg transition-colors duration-200 flex items-center"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          fill="currentColor"
+          width="24"
+          height="24"
+          style="margin-right: 0.5rem"
+          aria-hidden="true"
+        >
+          <path
+            d="M255.545 8c-66.269 0-127.496 33.573-163.37 87.259l-37.468-37.468C45.01 52.755 36.727 50.936 29.51 54.555c-7.217 3.62-11.725 11.81-11.725 20.604v128c0 12.15 14.41 19.474 23.78 10.103L79.558 134.87c27.057-27.058 64.54-42.288 102.237-42.288 77.408 0 140.28 62.873 140.28 140.28 0 10.69-1.02 21.34-3.034 31.616-3.02 15.42 18.78 20.87 21.8 5.45 2.62-13.38 3.94-27.18 3.94-41.07 0-97.047-79.03-176.077-176.078-176.077z"
+          />
+        </svg>
+        Reset All
+      </button>
+    </div>
+  </div>
+</div>

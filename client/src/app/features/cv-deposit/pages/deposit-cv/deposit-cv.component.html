@@ -1,0 +1,59 @@
+<div class="md:bg-bgUploadCv mb-8 bg-cover bg-center md:p-10">
+  <form [formGroup]="mainForm">
+    @if(currentStep === 1){
+      <app-cv-intro />
+    }
+
+    @if(selectedFile && previewType !== 'unknown') {
+      @if(currentStep === 1){
+        <app-verify-uploaded-cv
+          [selectedFile]="selectedFile"
+          [previewUrl]="previewUrl"
+          [previewType]="previewType"
+          (reupload)="reuploadFile()"
+          (proceed)="nextStep()"
+          [nameFile]="filename"
+        />
+      }
+
+      @if(currentStep === 2){
+        <app-step-one
+          [formGroup]="personalInfoGroup"
+          [selectedFile]="selectedFile"
+          [previewUrl]="previewUrl"
+          [previewType]="previewType"
+          (prev)="prevStep()"
+          (proceed)="nextStep()"
+        />
+      }
+
+      @if(currentStep === 3){
+        <app-step-two
+          [formGroup]="professionalInfoGroup"
+          [selectedFile]="selectedFile"
+          [previewUrl]="previewUrl"
+          [previewType]="previewType"
+          (prev)="prevStep()"
+          (proceed)="nextStep()"
+        />
+      }
+
+      @if(currentStep === 4){
+        <app-step-three
+          [formGroup]="academicInfoGroup"
+          [selectedFile]="selectedFile"
+          [previewUrl]="previewUrl"
+          [previewType]="previewType"
+          (prev)="prevStep()"
+          (validate)="onSubmit()"
+        />
+      }
+    } @else {
+      <app-upload-cv 
+        [formGroup]="uploadForm"
+        (fileSelected)="onFileSelected($event)" 
+      />
+    }
+  </form>
+</div>
+

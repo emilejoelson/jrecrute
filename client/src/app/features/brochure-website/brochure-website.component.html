@@ -1,0 +1,21 @@
+<div class="relative">
+  <ng-container *ngIf="showVideo()" class="custom-650:hidden">
+    <video
+      #videoPlayer
+      class="absolute top-0 left-0 w-full object-cover z-0"
+      autoplay
+      muted
+      (ended)="playNextVideo()"
+    >
+      <source [src]="currentVideo()" type="video/mp4" />
+    </video>
+  </ng-container>
+
+  <app-header></app-header>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+  <div id="contact-section">
+    <app-footer></app-footer>
+  </div>
+</div>

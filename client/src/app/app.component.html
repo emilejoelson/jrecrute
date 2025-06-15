@@ -1,0 +1,10 @@
+<app-toast />
+<ng-container
+  *ngIf="(isUserSubmitting$ | async) || (isRecruitmentSubmitting$ | async)"
+>
+  <app-loading-spinner />
+</ng-container>
+<router-outlet></router-outlet>
+<app-scroll-button />
+<app-connection-status />
+<app-cookie-consent/>

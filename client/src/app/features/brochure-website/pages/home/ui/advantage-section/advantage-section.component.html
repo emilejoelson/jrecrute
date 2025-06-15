@@ -1,0 +1,105 @@
+<section class="custom-650:mt-10 md:py-20 md:bg-purple-50">
+  <div class="container mx-auto px-6">
+    <div class="text-4xl flex justify-center font-bold mb-16">
+      <h2 class="flex gap-5 custom-650:flex-col">
+        <span class="text-center">{{'ADVANTAGES.TITLE_PART1' | translate}}</span>
+        <span class="text-center flex gap-5">
+          <span
+            ><img
+              className=" floating w-8 h-8 object-contain"
+              src="assets/icons/cc-logo.png"
+              alt="Logo"
+          /></span>
+          <span>{{'ADVANTAGES.TITLE_PART2' | translate}}</span>
+        </span>
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div
+        class="step custom-650:bg-purple-50 md:bg-white bg-opacity-80 backdrop-blur-sm border border-white border-opacity-30 glass-card p-8 rounded-2xl text-center"
+        [class.show-up-animation]="isVisible"
+        style="--item-index: 0"
+      >
+        <div
+          class="w-16 h-16 custom-650:bg-white md:bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-purple-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-4">{{'ADVANTAGES.ITEMS.EXPERTISE.TITLE' | translate}}</h3>
+        <p class="text-gray-600">
+          {{'ADVANTAGES.ITEMS.EXPERTISE.DESCRIPTION' | translate}}
+        </p>
+      </div>
+      <div
+        class="step custom-650:bg-purple-50 md:bg-white bg-opacity-80 backdrop-blur-sm border border-white border-opacity-30 p-8 rounded-2xl text-center"
+        [class.show-up-animation]="isVisible"
+        style="--item-index: 1"
+      >
+        <div
+          class="w-16 h-16 custom-650:bg-white md:bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-purple-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-4"> {{'ADVANTAGES.ITEMS.SIMPLICITY.TITLE' | translate}}</h3>
+        <p class="text-gray-600">
+          {{'ADVANTAGES.ITEMS.SIMPLICITY.DESCRIPTION' | translate}}
+        </p>
+      </div>
+
+      <div
+        class="step custom-650:bg-purple-50 md:bg-white bg-opacity-80 backdrop-blur-sm border border-white border-opacity-30 p-8 rounded-2xl text-center"
+        [class.show-up-animation]="isVisible"
+        style="--item-index: 2"
+      >
+        <div
+          class="w-16 h-16 custom-650:bg-white md:bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-6"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 text-purple-600"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M13 10V3L4 14h7v7l9-11h-7z"
+            />
+          </svg>
+        </div>
+        <h3 class="text-xl font-bold mb-4"> {{'ADVANTAGES.ITEMS.SUPPORT.TITLE' | translate}}</h3>
+        <p class="text-gray-600">
+          {{'ADVANTAGES.ITEMS.SUPPORT.DESCRIPTION' | translate}}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

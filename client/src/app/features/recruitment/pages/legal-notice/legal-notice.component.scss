@@ -1,0 +1,13 @@
+:host {
+    display: block;
+    background-color: #f9fafb;
+    min-height: 100vh;
+  }
+  ul.space-y-2 li {
+    list-style-type: none; /* Remove default bullets */
+}
+
+ul.space-y-2 li::before {
+    content: "- ";
+    font-weight: bold;
+}

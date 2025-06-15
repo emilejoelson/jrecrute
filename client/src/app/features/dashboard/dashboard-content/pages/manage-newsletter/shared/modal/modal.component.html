@@ -1,0 +1,23 @@
+<div class="fixed inset-0 z-50 flex items-center justify-center overflow-auto bg-gray-900 bg-opacity-90" (click)="onBackdropClick($event)">
+  <div #modalContent class="bg-gray-800 rounded-lg shadow-xl transform transition-all w-full mx-10 md:mx-20 max-h-[90vh] flex flex-col" 
+       (click)="stopPropagation($event)">
+    
+    <div class="border-b border-gray-700 px-4 py-3 flex items-center justify-between">
+      <ng-content select="[header]"></ng-content>
+      <button type="button" class="text-gray-400 hover:text-gray-300" (click)="closeModal()">
+        <span class="sr-only">Close</span>
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <div #modalBody class="p-4 overflow-auto flex-grow">
+      <ng-content select="[body]"></ng-content>
+    </div>
+
+    <div class="bg-gray-800 px-4 py-3 flex flex-row-reverse gap-2 border-t border-gray-700">
+      <ng-content select="[footer]"></ng-content>
+    </div>
+  </div>
+</div>

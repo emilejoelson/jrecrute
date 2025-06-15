@@ -1,0 +1,152 @@
+<div
+  class="relative custom-650:px-5 custom-650:pt-8 px-10 bg-[#fff] grid md:mt-10 md:mx-1/8 md:gap-[50px]"
+>
+  <div class="rounded-lg bg-[#fff] flex flex-col">
+    <div class="flex-1 md:p-4">
+      <p
+        class="flex justify-center text-center custom-650:pt-0 p-4 mb-8 text-3xl font-bold text-gray-800"
+      >
+        {{'CLIENT.JOB_FORM.TITLE' | translate}}
+      </p>
+      <form [formGroup]="jobSheetForm">
+        <div class="grid md:grid-cols-[2fr_1fr] gap-[60px]">
+          <div class="flex flex-col gap-5 md:gap-8">
+            @for(jobSheet of jobSheetInformations;track jobSheet) {
+            <app-custom-input
+              [id]="jobSheet.id"
+              [classInput]="jobSheet.classInput"
+              [classLabel]="jobSheet.classLabel"
+              [title]="jobSheet.title | translate"
+              [formGroup]="jobSheetForm"
+            />
+            } @if(!showCustomPosition) {
+            <app-custom-select
+              [id]="postField.id"
+              [classSelect]="postField.classSelect"
+              [classLabel]="postField.classLabel"
+              [title]="postField.title | translate"
+              [options]="postes"
+              [formGroup]="jobSheetForm"
+            />
+            } @else {
+            <div class="grid grid-cols-[7fr_1fr]">
+              <div class="bg-gray-100 rounded-tl-lg">
+                <app-custom-input
+                  [id]="customPositionField.id"
+                  [classInput]="customPositionField.classInput"
+                  [classLabel]="customPositionField.classLabel"
+                  [title]="customPositionField.title | translate"
+                  [formGroup]="jobSheetForm"
+                />
+              </div>
+              <div
+                class="bg-gray-100 rounded-r-lg flex items-center justify-center"
+              >
+                <button
+                  type="button"
+                  class="w-[20px] h-[20px] rounded-full text-red-500 hover:text-red-700 hover:bg-gray-100"
+                  (click)="backToSelect()"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            }
+            <app-custom-text-area
+              [id]="needsDescription.id"
+              [classTextarea]="needsDescription.classTextarea"
+              [classLabel]="needsDescription.classLabel"
+              [title]="needsDescription.title | translate"
+              [rows]="needsDescription.rows"
+              [formGroup]="jobSheetForm"
+              [control]="jobSheetForm.get('needsDescription')"
+            />
+          </div>
+          <div class="flex flex-col gap-10 md:gap-[65px]">
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <p class="font-bold text-[14px] text-[#362E75]">
+                {{'CLIENT.JOB_FORM.CC_RECRUITMENT_ADVICE' | translate}} :
+              </p>
+              <p class="text-gray-600 text-[12px] mt-2">
+                {{'CLIENT.JOB_FORM.CC_RECRUITMENT_DESCRIPTION' | translate}}
+              </p>
+            </div>
+            <div class="flex flex-col gap-6">
+              <div>
+                <h2 class="mb-3 ml-2 flex text-center font-bold">
+                  {{'CLIENT.JOB_FORM.FIELDS.BUDGET_MIN' | translate}} <span class="text-red-400 ml-2">*</span>
+                </h2>
+                <div
+                  class="flex custom-650:flex-col gap-4"
+                  *ngIf="monthlyBudgetGroup"
+                >
+                  @for(monthlyBudget of monthlyBudgets;track monthlyBudget){
+                  <div
+                    class="grid border bg-gray-100 rounded-lg p-[1px] grid-cols-[3fr_1fr]"
+                  >
+                    <div>
+                      <app-custom-input
+                        [id]="monthlyBudget.id"
+                        [classInput]="monthlyBudget.classInput"
+                        [classLabel]="monthlyBudget.classLabel"
+                        [title]="monthlyBudget.title | translate"
+                        [type]="monthlyBudget.type"
+                        [formGroup]="monthlyBudgetGroup"
+                      />
+                    </div>
+                    <div class="flex rounded-r-lg text-purple-600 font-bold items-center justify-center">
+                      €
+                    </div>
+                  </div>
+                  }
+                </div>
+              </div>
+              <div>
+                <h2 class="mb-3 ml-2 flex text-center font-bold">
+                  {{'CLIENT.JOB_FORM.FIELDS.URGENCY' | translate}} <span class="text-red-400 ml-2">*</span>
+                </h2>
+                <div class="grid grid-cols-3 gap-2 w-full">
+                  @for(option of urgencyOptions;track option){
+                  <app-custom-radio-button
+                    [formGroup]="jobSheetForm"
+                    [id]="option.id"
+                    [value]="option.value"
+                    [title]="option.title | translate"
+                    [classInput]="option.classInput"
+                    [classLabel]="option.classLabel"
+                    [classOption]="option.classOption "
+                    [isSelected]="isSelected(option.value)"
+                    (onSelect)="onUrgencySelect(option.value)"
+                  >
+                  </app-custom-radio-button>
+
+                  }
+                </div>
+              </div>
+            </div>
+            <div
+              class="w-full bg-blue-400 hover:bg-app-primary-purple text-white custom-650:px-8 px-16 py-2 md:py-4 rounded-lg font-medium"
+            >
+              <button type="submit" (click)="onSubmit()" class="w-full">
+                {{'CLIENT.JOB_FORM.BUTTON_SUBMIT' | translate}}
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

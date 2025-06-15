@@ -1,0 +1,16 @@
+.waveform-container {
+    background: transparent;
+  }
+  
+  .animate-bar {
+    animation: waveformAnimation 0.5s ease-in-out infinite;
+  }
+  
+  @keyframes waveformAnimation {
+    0%, 100% {
+      transform: scaleY(0.5);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }

@@ -1,0 +1,53 @@
+@if(show){
+<app-modal (close)="onClose()" size="sm">
+  <ng-container header>
+    <div class="flex items-center text-blue-400">
+      <app-icon iconName="sendNewsletterIcon" />
+      <h2 class="text-xl font-semibold">Send Newsletter</h2>
+    </div>
+  </ng-container>
+
+  <ng-container body>
+    <div class="p-2">
+      <p class="text-gray-300 mb-4">
+        Are you sure you want to send this newsletter to
+        {{ recipientTypeText }}? This action cannot be undone.
+      </p>
+
+      <div class="bg-blue-900/20 border border-blue-800/30 rounded-md p-4">
+        <div class="flex items-center">
+          <app-icon iconName="newsletterRecipientCountIcon" />
+          <span class="font-medium text-blue-400">Recipients</span>
+        </div>
+        <p class="text-sm text-gray-300 mt-2">
+          This newsletter will be sent to {{ recipientTypeText }}.
+        </p>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container footer>
+    <div class="flex justify-end space-x-3">
+      <button
+        type="button"
+        (click)="onClose()"
+        class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-md text-sm font-medium transition-colors"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        (click)="onConfirm()"
+        [disabled]="isLoading$ | async"
+        class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md text-sm font-medium transition-colors flex items-center"
+      >
+        @if(isLoading$ | async){
+        <span class="mr-2">
+          <app-icon iconName="deleteLoadingIcon" />
+        </span>
+        } Send Newsletter
+      </button>
+    </div>
+  </ng-container>
+</app-modal>
+}

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Recrutement</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Recrutement consult collab - Votre partenaire de confiance pour le recrutement professionnel"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://www.consultcollab-recrutement.com/"
+    />
+    <meta property="og:title" content="Recrutement consult collab" />
+    <meta
+      property="og:description"
+      content="Recrutement consult collab - Votre partenaire de confiance pour le recrutement professionnel"
+    />
+    <meta
+      property="og:image"
+      content="https://www.consultcollab-recrutement.com/assets/icons/cc-logo.png"
+    />
+    <meta property="og:image:width" content="630" />
+    <meta property="og:image:height" content="600" />
+    <meta property="og:site_name" content="Recrutement consult collab" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:url"
+      content="https://www.consultcollab-recrutement.com/"
+    />
+    <meta name="twitter:title" content="Recrutement consult collab" />
+    <meta
+      name="twitter:description"
+      content="Recrutement consult collab - Votre partenaire de confiance pour le recrutement professionnel"
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.consultcollab-recrutement.com/assets/icons/cc-logo.png"
+    />
+
+    <!-- WhatsApp -->
+    <meta
+      property="og:image:secure_url"
+      content="https://www.consultcollab-recrutement.com/assets/icons/cc-logo.png"
+    />
+
+    <!-- LinkedIn -->
+    <meta property="linkedin:owner" content="recrutement-consult-collab" />
+    <meta name="author" content="Recrutement consult collab" />
+
+    <!-- Pinterest -->
+    <meta name="pinterest-rich-pin" content="true" />
+
+    <!-- Pour les applications mobiles -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="Recrutement consult collab"
+    />
+
+    <!-- Favicons pour différentes plateformes -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="https://www.consultcollab-recrutement.com/assets/icons/cc-logo.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="https://www.consultcollab-recrutement.com/assets/icons/cc-logo.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="https://www.consultcollab-recrutement.com/assets/icons/cc-logo.png"
+    />
+
+    <!-- Manifest pour PWA -->
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #preloader {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        z-index: 9999;
+        overflow: hidden;
+      }
+
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        pointer-events: none;
+        animation: float 4s infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0) translateX(0);
+          opacity: 0;
+        }
+        50% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-100px) translateX(100px);
+          opacity: 0;
+        }
+      }
+
+      .loader-content {
+        position: relative;
+        z-index: 1;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        max-width: 90%;
+        margin: 0 auto;
+      }
+
+      @media screen and (max-width: 768px) {
+        .loader-content {
+          padding: 1.5rem;
+          border-radius: 15px;
+          max-width: 95%;
+        }
+      }
+
+      @media screen and (max-width: 480px) {
+        .loader-content {
+          padding: 1rem;
+          border-radius: 10px;
+          max-width: 100%;
+        }
+      }
+
+      .text-gradient {
+        background: linear-gradient(90deg, #fff 0%, #a74fa5 50%, #4a4a4a 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% auto;
+        animation: gradient 2s linear infinite;
+      }
+
+      @keyframes gradient {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      .pulse {
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.05);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    </style>
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+  <body class="font-['Nunito'] mat-typography">
+    <app-root style="display: none"></app-root>
+    <div id="preloader">
+      <div class="loader-content pulse">
+        <div class="flex items-center gap-2">
+          <span class="flex flex-col">
+            <span
+              class="md:text-3xl text-xl font-bold md:font-extrabold text-gradient"
+              >Consult Collab</span
+            >
+            <span
+              class="md:text-3xl text-xl font-bold md:font-extrabold text-gradient"
+              >Recrutement</span
+            >
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        function createParticle() {
+          const preloader = document.getElementById("preloader");
+          if (!preloader) return; // Exit if the element does not exist
+
+          const particle = document.createElement("div");
+          particle.className = "particle";
+
+          // Random size between 5 and 20 pixels
+          const size = Math.random() * 15 + 5;
+          particle.style.width = `${size}px`;
+          particle.style.height = `${size}px`;
+
+          // Random position
+          particle.style.left = `${Math.random() * 100}%`;
+          particle.style.top = `${Math.random() * 100}%`;
+
+          // Random animation duration
+          particle.style.animationDuration = `${Math.random() * 3 + 2}s`;
+
+          preloader.appendChild(particle);
+
+          // Remove particle after animation
+          setTimeout(() => {
+            particle.remove();
+          }, 4000);
+        }
+
+        // Create particles at intervals
+        setInterval(createParticle, 200);
+
+        // Create initial batch of particles
+        for (let i = 0; i < 20; i++) {
+          createParticle();
+        }
+      });
+    </script>
+  </body>
+</html>
